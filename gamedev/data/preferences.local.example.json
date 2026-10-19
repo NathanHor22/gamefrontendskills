@@ -1,0 +1,12 @@
+{
+  "personal_reference_sites": [
+    "https://your-portfolio.example/"
+  ],
+  "title_resolutions": {
+    "my blue persona reference": "persona-3-reload"
+  },
+  "preferred_references": [
+    "persona-3-reload",
+    "papers-please"
+  ]
+}

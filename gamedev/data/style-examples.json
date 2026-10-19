@@ -1,0 +1,47 @@
+{
+  "reviewed_on": "2026-10-19",
+  "purpose": "Optional credited examples of authored website geometry and scene interaction. These do not define the installing user’s identity or taste.",
+  "authorship": "Nathan Hor supplied these sites as examples of his own work. Website source code and artwork are not included.",
+  "sites": [
+    {
+      "id": "nathanhor-portfolio",
+      "url": "https://nathanhor.com/",
+      "evidence": "Selected live browser views and navigation; no complete frame measurement or current-deployment audit.",
+      "visually_observed": [
+        "A beige equipment chassis, portrait display, physical key rail, lamps, labels, and ruled typography form one hardware metaphor.",
+        "The Projects label is visible outside the left edge of its navigation key. An intermediate section change shows upper/lower shutter fields covering the content, followed by the project directory.",
+        "Run Diagnostic replaces the portrait display with a Snake diagnostic. Exiting shows a video-memory reconstruction state before the portrait returns."
+      ],
+      "transferable_principles": [
+        "Make anatomy, text, state indicators, and transitions belong to one material story.",
+        "Let a component affect space outside its resting silhouette.",
+        "Choreograph the handoff between sections, including what conceals the content swap.",
+        "Use a physical metaphor as behavior, not a texture pasted over conventional components."
+      ],
+      "research_limits": [
+        "Only selected live states were inspected.",
+        "Exact timings, full hover/exit curves, keyboard, touch and reduced-motion behavior are not established by these notes."
+      ]
+    },
+    {
+      "id": "quipus-spatial-product",
+      "url": "https://quipus-sales-rep-assistant.vercel.app/",
+      "evidence": "Selected live browser views and navigation; no complete frame measurement or current-deployment audit.",
+      "visually_observed": [
+        "A pale isometric city serves as the composition. Red pointers and detached labels identify locations; the product is part of that scene.",
+        "Selecting Introducing Quipus opens a device view with a left information panel, a large device model, and labels connected to hardware features.",
+        "Selecting Touchscreen changes its label to red, changes the selected control state, and replaces the panel's feature description. Back to city returns to the isometric overview."
+      ],
+      "transferable_principles": [
+        "Treat the scene as a navigable product world, with components attached to meaningful places.",
+        "Coordinate object, selector, text, and context in response to one action.",
+        "Use pointer geometry and leader lines to connect controls to their subject.",
+        "Carry a distinctive visual logic through overview, detail, and return states."
+      ],
+      "research_limits": [
+        "Only selected live states were inspected.",
+        "Exact timings, full hover/exit curves, keyboard, touch and reduced-motion behavior are not established by these notes."
+      ]
+    }
+  ]
+}

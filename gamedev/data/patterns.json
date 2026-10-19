@@ -1,0 +1,786 @@
+[
+  {
+    "kind": "pattern",
+    "id": "detached-ink-comet",
+    "title": "Detached ink comet",
+    "tags": [
+      "button",
+      "overflow",
+      "hover",
+      "ink",
+      "detached-selector",
+      "persona-reload",
+      "original-proposal"
+    ],
+    "proposal": "Original design proposal, not a claim of observed game or reference-site behavior. Set an action word on an irregular ink slice. Intent launches a separate hand-drawn arrow beyond the left edge, unfurls an unequal tail, and countershifts the word. Departure reels the tail in before folding the arrow beneath the ink. Give the word, arrow and tail independent timing.",
+    "fits": [
+      "portfolio primary action"
+    ],
+    "implementation": "Use live text and independent noninteractive SVG layers inside an overflow-visible wrapper. Preserve a stable padded hit area and reserve exterior art space.",
+    "motion_spec": {
+      "states": [
+        "authored resting drawing",
+        "intent entrance",
+        "held intent drawing",
+        "authored exit",
+        "settled or actual selected state"
+      ],
+      "enter_sequence": "Tail draws in 65 ms; arrow travels 22 px outward and rotates from -16 to 3 degrees over 150 ms; arrow settles to -2 degrees and word countershifts 2 px by 210 ms.",
+      "exit_sequence": "Tail contracts in 75 ms; arrow folds under its mask over 125 ms; word returns only after the arrow disappears.",
+      "interruption": "Retarget current per-layer transforms, mask progress and drawing lengths. Do not queue entrances. Actual focus, selection, checked, pending and result state override temporary hover; direct input takes effect immediately.",
+      "keyboard": "Show the full intent composition on focus plus an independent visible focus mark. Keep native control behavior; implement matching tabs, radio, range or modal-panel keys and focus management where applicable.",
+      "touch": "Use an expressive static resting silhouette with visible labels and generous stable targets. One tap activates or selects; never require a preview tap. Direct dragging remains immediate for range inputs.",
+      "reduced_motion": "Use authored static resting, focused and selected/result drawings without travel, stagger, recoil or rotation. Preserve the irregular silhouette, detached outside artwork, print layers and other defining art rather than replacing the control with a generic rectangle."
+    }
+  },
+  {
+    "kind": "pattern",
+    "id": "cut-paper-jaw",
+    "title": "Cut-paper jaw",
+    "tags": [
+      "button",
+      "paper",
+      "overflow",
+      "shape",
+      "hover",
+      "original-proposal"
+    ],
+    "proposal": "Original design proposal, not a claim of observed game or reference-site behavior. Construct the action from two mismatched paper teeth around a readable word. Intent sends the upper plate northeast and lower southwest, revealing a zigzag seam and a torn fragment outside one corner. Press closes the teeth onto an offset print shadow.",
+    "fits": [
+      "music event action"
+    ],
+    "implementation": "Draw original SVG plates, keep live text level, and retain a stable hit region independent of the split shapes.",
+    "motion_spec": {
+      "states": [
+        "authored resting drawing",
+        "intent entrance",
+        "held intent drawing",
+        "authored exit",
+        "settled or actual selected state"
+      ],
+      "enter_sequence": "Separate plates with unequal 10 px and 7 px travel over 130 ms; reveal torn fragment at 70 ms; word settles at 165 ms.",
+      "exit_sequence": "Fragment tucks inward in 55 ms; lower plate closes in 100 ms and upper plate lands 25 ms later.",
+      "interruption": "Retarget current per-layer transforms, mask progress and drawing lengths. Do not queue entrances. Actual focus, selection, checked, pending and result state override temporary hover; direct input takes effect immediately.",
+      "keyboard": "Show the full intent composition on focus plus an independent visible focus mark. Keep native control behavior; implement matching tabs, radio, range or modal-panel keys and focus management where applicable.",
+      "touch": "Use an expressive static resting silhouette with visible labels and generous stable targets. One tap activates or selects; never require a preview tap. Direct dragging remains immediate for range inputs.",
+      "reduced_motion": "Use authored static resting, focused and selected/result drawings without travel, stagger, recoil or rotation. Preserve the irregular silhouette, detached outside artwork, print layers and other defining art rather than replacing the control with a generic rectangle."
+    }
+  },
+  {
+    "kind": "pattern",
+    "id": "typographic-slipstream-link",
+    "title": "Typographic slipstream link",
+    "tags": [
+      "type-choreography",
+      "navigation",
+      "overflow",
+      "hover",
+      "original-proposal"
+    ],
+    "proposal": "Original design proposal, not a claim of observed game or reference-site behavior. A condensed front word remains readable while an outline echo shears beyond its trailing edge and a hand-drawn strike passes behind it. First and final visual letters take different beats. Departure erases the echo from its far end before retracting the strike, giving the word authored punctuation.",
+    "fits": [
+      "large portfolio index"
+    ],
+    "implementation": "Keep one semantic label; mark visual letter and word duplicates aria-hidden. Never scramble the actual accessible text. Measure the full echo envelope using the loaded font.",
+    "motion_spec": {
+      "states": [
+        "authored resting drawing",
+        "intent entrance",
+        "held intent drawing",
+        "authored exit",
+        "settled or actual selected state"
+      ],
+      "enter_sequence": "Outline echo shifts 12 px and shears over 120 ms; visual letters stagger by 12 ms; strike draws behind word from 45–155 ms.",
+      "exit_sequence": "Mask echo inward from its far end over 90 ms, retract strike over 70 ms, and settle visual letter offsets last over 45 ms.",
+      "interruption": "Retarget current per-layer transforms, mask progress and drawing lengths. Do not queue entrances. Actual focus, selection, checked, pending and result state override temporary hover; direct input takes effect immediately.",
+      "keyboard": "Show the full intent composition on focus plus an independent visible focus mark. Keep native control behavior; implement matching tabs, radio, range or modal-panel keys and focus management where applicable.",
+      "touch": "Use an expressive static resting silhouette with visible labels and generous stable targets. One tap activates or selects; never require a preview tap. Direct dragging remains immediate for range inputs.",
+      "reduced_motion": "Use authored static resting, focused and selected/result drawings without travel, stagger, recoil or rotation. Preserve the irregular silhouette, detached outside artwork, print layers and other defining art rather than replacing the control with a generic rectangle."
+    }
+  },
+  {
+    "kind": "pattern",
+    "id": "satellite-caption-rig",
+    "title": "Satellite caption rig",
+    "tags": [
+      "button",
+      "overflow",
+      "detached-selector",
+      "annotation",
+      "nearby-context",
+      "original-proposal"
+    ],
+    "proposal": "Original design proposal, not a claim of observed game or reference-site behavior. Attach a short action to a detached caption through an elbowed leader. Intent unfolds an asymmetric outside flag, pulls the leader taut, then lands a small phrase at its endpoint. Departure packs away the caption before folding the rig. The main word remains a complete action label.",
+    "fits": [
+      "case-study links"
+    ],
+    "implementation": "Draw the rig in reserved margins and keep essential explanation in normal visible text. Reposition the rig inward near viewport edges without making it a tooltip rectangle.",
+    "motion_spec": {
+      "states": [
+        "authored resting drawing",
+        "intent entrance",
+        "held intent drawing",
+        "authored exit",
+        "settled or actual selected state"
+      ],
+      "enter_sequence": "Flag opens in 70 ms; elbow extends over 115 ms; caption reveals through a directional mask from 90–170 ms.",
+      "exit_sequence": "Caption masks shut in 65 ms; elbow folds over 95 ms; flag hinges inward during the final 45 ms.",
+      "interruption": "Retarget current per-layer transforms, mask progress and drawing lengths. Do not queue entrances. Actual focus, selection, checked, pending and result state override temporary hover; direct input takes effect immediately.",
+      "keyboard": "Show the full intent composition on focus plus an independent visible focus mark. Keep native control behavior; implement matching tabs, radio, range or modal-panel keys and focus management where applicable.",
+      "touch": "Use an expressive static resting silhouette with visible labels and generous stable targets. One tap activates or selects; never require a preview tap. Direct dragging remains immediate for range inputs.",
+      "reduced_motion": "Use authored static resting, focused and selected/result drawings without travel, stagger, recoil or rotation. Preserve the irregular silhouette, detached outside artwork, print layers and other defining art rather than replacing the control with a generic rectangle."
+    }
+  },
+  {
+    "kind": "pattern",
+    "id": "slanted-tab-fan",
+    "title": "Slanted tab fan",
+    "tags": [
+      "tabs",
+      "slanted",
+      "overflow",
+      "selection",
+      "nearby-context",
+      "persona-reload",
+      "original-proposal"
+    ],
+    "proposal": "Original design proposal, not a claim of observed game or reference-site behavior. Arrange related panels as slanted paper tabs with unequal corners. Selection projects a long edge beyond the rail, sends a contrasting undersheet behind it, and turns a nearby chapter numeral toward the tab. Hover only loosens a candidate corner; selected art persists after pointer departure.",
+    "fits": [
+      "portfolio disciplines"
+    ],
+    "implementation": "Use actual tabs only for related panels, otherwise links. Keep linear DOM order and aria-selected. Separate stable label hit areas from the decorative sheets; redraw the fan vertically on mobile.",
+    "motion_spec": {
+      "states": [
+        "authored resting drawing",
+        "intent entrance",
+        "held intent drawing",
+        "authored exit",
+        "settled or actual selected state"
+      ],
+      "enter_sequence": "Hover loosens corner 4 px in 80 ms. Selection sends undersheet 18 px outward in 110 ms, main sheet in 145 ms, and numeral turn in 170 ms.",
+      "exit_sequence": "Deselection turns numeral first, tucks undersheet under rail in 110 ms, then lands main sheet 35 ms later.",
+      "interruption": "Retarget current per-layer transforms, mask progress and drawing lengths. Do not queue entrances. Actual focus, selection, checked, pending and result state override temporary hover; direct input takes effect immediately.",
+      "keyboard": "Show the full intent composition on focus plus an independent visible focus mark. Keep native control behavior; implement matching tabs, radio, range or modal-panel keys and focus management where applicable.",
+      "touch": "Use an expressive static resting silhouette with visible labels and generous stable targets. One tap activates or selects; never require a preview tap. Direct dragging remains immediate for range inputs.",
+      "reduced_motion": "Use authored static resting, focused and selected/result drawings without travel, stagger, recoil or rotation. Preserve the irregular silhouette, detached outside artwork, print layers and other defining art rather than replacing the control with a generic rectangle."
+    }
+  },
+  {
+    "kind": "pattern",
+    "id": "stencil-breakout-action",
+    "title": "Stencil breakout action",
+    "tags": [
+      "button",
+      "mask",
+      "shape-morph",
+      "ink",
+      "overflow",
+      "original-proposal"
+    ],
+    "proposal": "Original design proposal, not a claim of observed game or reference-site behavior. Begin with a stencil frame missing two corners. Intent expands an irregular patch through it, breaks the patch past one edge, and stamps a registration dot outside the opposite edge. The word shifts from cutout to printed treatment as the patch crosses its center. Exit retracts through a different slit before repairing the frame.",
+    "fits": [
+      "creative studio action"
+    ],
+    "implementation": "Use authored compatible SVG masks or deliberate discrete frames. Keep live text above art, verify contrast during crossing, and keep exterior drawing separate from target bounds.",
+    "motion_spec": {
+      "states": [
+        "authored resting drawing",
+        "intent entrance",
+        "held intent drawing",
+        "authored exit",
+        "settled or actual selected state"
+      ],
+      "enter_sequence": "Patch crosses in 125 ms; text treatment changes at center crossing; dot stamps at 115 ms; outer patch edge settles at 185 ms.",
+      "exit_sequence": "Dot cuts away in 40 ms; patch retreats through a narrow slit in 130 ms; missing stencil corner returns last.",
+      "interruption": "Retarget current per-layer transforms, mask progress and drawing lengths. Do not queue entrances. Actual focus, selection, checked, pending and result state override temporary hover; direct input takes effect immediately.",
+      "keyboard": "Show the full intent composition on focus plus an independent visible focus mark. Keep native control behavior; implement matching tabs, radio, range or modal-panel keys and focus management where applicable.",
+      "touch": "Use an expressive static resting silhouette with visible labels and generous stable targets. One tap activates or selects; never require a preview tap. Direct dragging remains immediate for range inputs.",
+      "reduced_motion": "Use authored static resting, focused and selected/result drawings without travel, stagger, recoil or rotation. Preserve the irregular silhouette, detached outside artwork, print layers and other defining art rather than replacing the control with a generic rectangle."
+    }
+  },
+  {
+    "kind": "pattern",
+    "id": "tension-wire-link",
+    "title": "Tension wire link",
+    "tags": [
+      "link",
+      "physical-character",
+      "line-drawing",
+      "overflow",
+      "original-proposal"
+    ],
+    "proposal": "Original design proposal, not a claim of observed game or reference-site behavior. Suspend a word on an angular wire between unequal anchors. Intent pulls one anchor beyond the label, bends a deliberate dogleg, and drags a triangular pennant into view. The backing leans against the pull while the live word stays level. Departure releases the pennant before restoring the resting kink.",
+    "fits": [
+      "next project link"
+    ],
+    "implementation": "Draw deterministic SVG control points rather than continuously tracking the cursor. Keep real link and hit region stationary, and reserve the anchor travel envelope.",
+    "motion_spec": {
+      "states": [
+        "authored resting drawing",
+        "intent entrance",
+        "held intent drawing",
+        "authored exit",
+        "settled or actual selected state"
+      ],
+      "enter_sequence": "External anchor moves 16 px over 135 ms; first wire segment straightens before second bends; pennant reveals from 80–145 ms.",
+      "exit_sequence": "Pennant rolls beneath anchor in 60 ms; wire releases through an authored midpoint over 120 ms; backing settles last.",
+      "interruption": "Retarget current per-layer transforms, mask progress and drawing lengths. Do not queue entrances. Actual focus, selection, checked, pending and result state override temporary hover; direct input takes effect immediately.",
+      "keyboard": "Show the full intent composition on focus plus an independent visible focus mark. Keep native control behavior; implement matching tabs, radio, range or modal-panel keys and focus management where applicable.",
+      "touch": "Use an expressive static resting silhouette with visible labels and generous stable targets. One tap activates or selects; never require a preview tap. Direct dragging remains immediate for range inputs.",
+      "reduced_motion": "Use authored static resting, focused and selected/result drawings without travel, stagger, recoil or rotation. Preserve the irregular silhouette, detached outside artwork, print layers and other defining art rather than replacing the control with a generic rectangle."
+    }
+  },
+  {
+    "kind": "pattern",
+    "id": "ripcord-burst-action",
+    "title": "Ripcord burst action",
+    "tags": [
+      "button",
+      "overflow",
+      "drawn-art",
+      "burst",
+      "original-proposal"
+    ],
+    "proposal": "Original design proposal, not a claim of observed game or reference-site behavior. Attach a loose illustrated cord to an angular action plate. Intent pulls the cord and unfolds an off-center six-point burst with unequal rays and two mismatched cutouts. Press stamps a short tick below the word. Departure winds the cord inward and collapses the burst along an authored seam.",
+    "fits": [
+      "event ticket action"
+    ],
+    "implementation": "Create cord and burst as original SVG assets. Animate stroke and groups without moving live text or hit region. Reserve this emphatic device for a deliberate action family.",
+    "motion_spec": {
+      "states": [
+        "authored resting drawing",
+        "intent entrance",
+        "held intent drawing",
+        "authored exit",
+        "settled or actual selected state"
+      ],
+      "enter_sequence": "Cord draws for 90 ms; burst halves unfold around their seam from 65–175 ms; printed accent lands at 185 ms.",
+      "exit_sequence": "Accent cuts away; burst folds over 85 ms; cord pulls back through its eyelet over the next 75 ms.",
+      "interruption": "Retarget current per-layer transforms, mask progress and drawing lengths. Do not queue entrances. Actual focus, selection, checked, pending and result state override temporary hover; direct input takes effect immediately.",
+      "keyboard": "Show the full intent composition on focus plus an independent visible focus mark. Keep native control behavior; implement matching tabs, radio, range or modal-panel keys and focus management where applicable.",
+      "touch": "Use an expressive static resting silhouette with visible labels and generous stable targets. One tap activates or selects; never require a preview tap. Direct dragging remains immediate for range inputs.",
+      "reduced_motion": "Use authored static resting, focused and selected/result drawings without travel, stagger, recoil or rotation. Preserve the irregular silhouette, detached outside artwork, print layers and other defining art rather than replacing the control with a generic rectangle."
+    }
+  },
+  {
+    "kind": "pattern",
+    "id": "machined-latch-toggle",
+    "title": "Machined latch toggle",
+    "tags": [
+      "toggle",
+      "hardware",
+      "physical-character",
+      "industrial",
+      "crysis",
+      "gears-of-war",
+      "original-proposal"
+    ],
+    "proposal": "Original design proposal, not a claim of observed game or reference-site behavior. Treat a binary setting as a machined latch: an asymmetric lever crosses a notched slot and a separate enamel tag names its value. Switching lifts the lever, clears a retaining tooth, travels to the other stop, then clamps down. The tag aligns when seated; its written state updates immediately.",
+    "fits": [
+      "portfolio sound preference"
+    ],
+    "implementation": "Use a native checkbox or accessible switch with written values. Draw hinge, tooth, slot and lever as decoration around a stable target. Subtle metal shading cannot be the state indicator.",
+    "motion_spec": {
+      "states": [
+        "authored resting drawing",
+        "intent entrance",
+        "held intent drawing",
+        "authored exit",
+        "settled or actual selected state"
+      ],
+      "enter_sequence": "Hover exposes tooth in 70 ms. Activation lifts for 45 ms, travels for 95 ms, and lands for 40 ms while actual value changes immediately.",
+      "exit_sequence": "Hover tooth retracts in 60 ms. A reverse toggle uses the opposite lift–travel–land path; active lever never resets because hover leaves.",
+      "interruption": "Retarget current per-layer transforms, mask progress and drawing lengths. Do not queue entrances. Actual focus, selection, checked, pending and result state override temporary hover; direct input takes effect immediately.",
+      "keyboard": "Show the full intent composition on focus plus an independent visible focus mark. Keep native control behavior; implement matching tabs, radio, range or modal-panel keys and focus management where applicable.",
+      "touch": "Use an expressive static resting silhouette with visible labels and generous stable targets. One tap activates or selects; never require a preview tap. Direct dragging remains immediate for range inputs.",
+      "reduced_motion": "Use authored static resting, focused and selected/result drawings without travel, stagger, recoil or rotation. Preserve the irregular silhouette, detached outside artwork, print layers and other defining art rather than replacing the control with a generic rectangle."
+    }
+  },
+  {
+    "kind": "pattern",
+    "id": "registration-slip-selector",
+    "title": "Registration slip selector",
+    "tags": [
+      "index",
+      "detached-selector",
+      "nearby-context",
+      "print",
+      "original-proposal"
+    ],
+    "proposal": "Original design proposal, not a claim of observed game or reference-site behavior. Put a detached L-shaped print guide in the gutter of a project index. Intent extends a thin strip and pins an offset project number above the title. A nearby preview gains a related cropped corner and caption. The guide moves between rows as one object rather than filling each row with a pill background.",
+    "fits": [
+      "project archive"
+    ],
+    "implementation": "Keep titles as normal links and preview as enhancement. Measure stable row anchors; distinguish focused link from current page. Use compact local guides at narrow widths.",
+    "motion_spec": {
+      "states": [
+        "authored resting drawing",
+        "intent entrance",
+        "held intent drawing",
+        "authored exit",
+        "settled or actual selected state"
+      ],
+      "enter_sequence": "Guide travels to row over 125 ms; strip draws in 75 ms; number stamps at 105 ms; preview corner opens from 95–180 ms.",
+      "exit_sequence": "Number slips behind guide in 55 ms; strip retracts in 70 ms. Park guide only when whole index loses intent; row-to-row movement retargets directly.",
+      "interruption": "Retarget current per-layer transforms, mask progress and drawing lengths. Do not queue entrances. Actual focus, selection, checked, pending and result state override temporary hover; direct input takes effect immediately.",
+      "keyboard": "Show the full intent composition on focus plus an independent visible focus mark. Keep native control behavior; implement matching tabs, radio, range or modal-panel keys and focus management where applicable.",
+      "touch": "Use an expressive static resting silhouette with visible labels and generous stable targets. One tap activates or selects; never require a preview tap. Direct dragging remains immediate for range inputs.",
+      "reduced_motion": "Use authored static resting, focused and selected/result drawings without travel, stagger, recoil or rotation. Preserve the irregular silhouette, detached outside artwork, print layers and other defining art rather than replacing the control with a generic rectangle."
+    }
+  },
+  {
+    "kind": "pattern",
+    "id": "poster-peel-project",
+    "title": "Poster peel project",
+    "tags": [
+      "card",
+      "paper",
+      "overflow",
+      "mask",
+      "physical-character",
+      "original-proposal"
+    ],
+    "proposal": "Original design proposal, not a claim of observed game or reference-site behavior. Present a project as a pasted poster with a lifted edge. Intent peels the edge outward, exposing a printed backside carrying a large directional word and irregular shadow cut. A staple stays fixed while the poster flexes around it. The project image remains readable inside this surrounding invitation.",
+    "fits": [
+      "portfolio project feature"
+    ],
+    "implementation": "Build peel from authored SVG panels and clipped backside, not distorted screenshots. Keep title and outcome visible outside peel. One real link owns the stable target.",
+    "motion_spec": {
+      "states": [
+        "authored resting drawing",
+        "intent entrance",
+        "held intent drawing",
+        "authored exit",
+        "settled or actual selected state"
+      ],
+      "enter_sequence": "Edge lifts over 80 ms; backside rotates and unmasks over 140 ms; printed direction reveals at 100 ms.",
+      "exit_sequence": "Printed word tucks away first; backside folds in 115 ms; edge makes one 25 ms landing without continuing wobble.",
+      "interruption": "Retarget current per-layer transforms, mask progress and drawing lengths. Do not queue entrances. Actual focus, selection, checked, pending and result state override temporary hover; direct input takes effect immediately.",
+      "keyboard": "Show the full intent composition on focus plus an independent visible focus mark. Keep native control behavior; implement matching tabs, radio, range or modal-panel keys and focus management where applicable.",
+      "touch": "Use an expressive static resting silhouette with visible labels and generous stable targets. One tap activates or selects; never require a preview tap. Direct dragging remains immediate for range inputs.",
+      "reduced_motion": "Use authored static resting, focused and selected/result drawings without travel, stagger, recoil or rotation. Preserve the irregular silhouette, detached outside artwork, print layers and other defining art rather than replacing the control with a generic rectangle."
+    }
+  },
+  {
+    "kind": "pattern",
+    "id": "unequal-beacon-reticle",
+    "title": "Unequal beacon reticle",
+    "tags": [
+      "button",
+      "overflow",
+      "detached-selector",
+      "technical",
+      "crysis",
+      "spider-man",
+      "original-proposal"
+    ],
+    "proposal": "Original design proposal, not a claim of observed game or reference-site behavior. Frame a command with three unequal reticle arms and an open fourth side for a protruding status slug. Intent extends the long arm before short arms lock in; a coordinate label appears above the frame. Press closes the fourth side for one beat. Confirmed completion sends one broken line to an adjacent result panel.",
+    "fits": [
+      "interactive demo launch"
+    ],
+    "implementation": "Use visible SVG strokes and real text. Result-line feedback follows actual success. Reserve exterior arm space; avoid flicker and a generic glowing frame.",
+    "motion_spec": {
+      "states": [
+        "authored resting drawing",
+        "intent entrance",
+        "held intent drawing",
+        "authored exit",
+        "settled or actual selected state"
+      ],
+      "enter_sequence": "Long arm extends in 90 ms; short arms settle at 115 and 145 ms; coordinate label cuts on at 125 ms.",
+      "exit_sequence": "Coordinate disappears first; short arms withdraw toward word; long arm collapses during the last 75 ms. Result status remains independently visible.",
+      "interruption": "Retarget current per-layer transforms, mask progress and drawing lengths. Do not queue entrances. Actual focus, selection, checked, pending and result state override temporary hover; direct input takes effect immediately.",
+      "keyboard": "Show the full intent composition on focus plus an independent visible focus mark. Keep native control behavior; implement matching tabs, radio, range or modal-panel keys and focus management where applicable.",
+      "touch": "Use an expressive static resting silhouette with visible labels and generous stable targets. One tap activates or selects; never require a preview tap. Direct dragging remains immediate for range inputs.",
+      "reduced_motion": "Use authored static resting, focused and selected/result drawings without travel, stagger, recoil or rotation. Preserve the irregular silhouette, detached outside artwork, print layers and other defining art rather than replacing the control with a generic rectangle."
+    }
+  },
+  {
+    "kind": "pattern",
+    "id": "chalk-fan-category",
+    "title": "Chalk fan category",
+    "tags": [
+      "filter",
+      "drawn-art",
+      "overflow",
+      "handmade",
+      "infamous-2",
+      "original-proposal"
+    ],
+    "proposal": "Original design proposal, not a claim of observed game or reference-site behavior. Mark categories with loose drawn wedges. Intent sweeps three unequal chalk strokes from a shared point beside the word. Selection leaves an irregular filled wedge and crossed tally beyond its edge. Nearby strokes open space around the chosen category. Selected art remains after the temporary flourish leaves.",
+    "fits": [
+      "creative work filters"
+    ],
+    "implementation": "Use native grouped choices or buttons with aria-pressed. Author varied SVG wedges from one family; never regenerate random marks every render. Keep result count visible as text.",
+    "motion_spec": {
+      "states": [
+        "authored resting drawing",
+        "intent entrance",
+        "held intent drawing",
+        "authored exit",
+        "settled or actual selected state"
+      ],
+      "enter_sequence": "Draw strokes with 25 ms stagger over 125 ms. Selection reveals wedge from pivot over 90 ms and stamps tally at 110 ms.",
+      "exit_sequence": "Hover strokes erase in reverse order. Selected wedge stays until explicit deselection, then divides through two masks over 100 ms.",
+      "interruption": "Retarget current per-layer transforms, mask progress and drawing lengths. Do not queue entrances. Actual focus, selection, checked, pending and result state override temporary hover; direct input takes effect immediately.",
+      "keyboard": "Show the full intent composition on focus plus an independent visible focus mark. Keep native control behavior; implement matching tabs, radio, range or modal-panel keys and focus management where applicable.",
+      "touch": "Use an expressive static resting silhouette with visible labels and generous stable targets. One tap activates or selects; never require a preview tap. Direct dragging remains immediate for range inputs.",
+      "reduced_motion": "Use authored static resting, focused and selected/result drawings without travel, stagger, recoil or rotation. Preserve the irregular silhouette, detached outside artwork, print layers and other defining art rather than replacing the control with a generic rectangle."
+    }
+  },
+  {
+    "kind": "pattern",
+    "id": "screenprint-overlap-switcher",
+    "title": "Screenprint overlap switcher",
+    "tags": [
+      "tabs",
+      "print",
+      "shape",
+      "nearby-context",
+      "original-proposal"
+    ],
+    "proposal": "Original design proposal, not a claim of observed game or reference-site behavior. Build a panel switcher from two misregistered sheets: one carries the word and one a broad irregular swatch. Intent slides them oppositely, creating a third overlap region. Selection anchors that overlap into the panel corner. Departure restores the imperfect registration in a different order.",
+    "fits": [
+      "case-study process panels"
+    ],
+    "implementation": "Use authored swatches and explicit overlap color rather than relying on blend modes for contrast. Keep live labels above both sheets. Selected silhouette must remain distinct in monochrome.",
+    "motion_spec": {
+      "states": [
+        "authored resting drawing",
+        "intent entrance",
+        "held intent drawing",
+        "authored exit",
+        "settled or actual selected state"
+      ],
+      "enter_sequence": "Word sheet moves 5 px up-left in 110 ms; swatch moves 9 px down-right in 145 ms; panel corner arrives 35 ms after selection.",
+      "exit_sequence": "If unselected, swatch returns in 95 ms and word sheet follows 30 ms later. Actual selected sheets remain anchored.",
+      "interruption": "Retarget current per-layer transforms, mask progress and drawing lengths. Do not queue entrances. Actual focus, selection, checked, pending and result state override temporary hover; direct input takes effect immediately.",
+      "keyboard": "Show the full intent composition on focus plus an independent visible focus mark. Keep native control behavior; implement matching tabs, radio, range or modal-panel keys and focus management where applicable.",
+      "touch": "Use an expressive static resting silhouette with visible labels and generous stable targets. One tap activates or selects; never require a preview tap. Direct dragging remains immediate for range inputs.",
+      "reduced_motion": "Use authored static resting, focused and selected/result drawings without travel, stagger, recoil or rotation. Preserve the irregular silhouette, detached outside artwork, print layers and other defining art rather than replacing the control with a generic rectangle."
+    }
+  },
+  {
+    "kind": "pattern",
+    "id": "folded-route-breadcrumb",
+    "title": "Folded route breadcrumb",
+    "tags": [
+      "navigation",
+      "paper",
+      "overflow",
+      "shape",
+      "original-proposal"
+    ],
+    "proposal": "Original design proposal, not a claim of observed game or reference-site behavior. Connect a short breadcrumb trail with a ribbon folding direction at each word. Intent on an ancestor exposes a contrasting underside and arrow projecting into the gap. Current page ends at a deliberate tear. Route change refolds the ribbon toward its new ending, forming a coherent navigational object.",
+    "fits": [
+      "case-study hierarchy"
+    ],
+    "implementation": "Keep ordered real links and aria-current. Draw ribbon behind words with reserved gaps. On narrow screens wrap into an intentional vertical folded strip without hiding ancestors.",
+    "motion_spec": {
+      "states": [
+        "authored resting drawing",
+        "intent entrance",
+        "held intent drawing",
+        "authored exit",
+        "settled or actual selected state"
+      ],
+      "enter_sequence": "Underside hinges open in 95 ms; arrow extends over 115 ms with a 20 ms delay.",
+      "exit_sequence": "Arrow tucks into fold in 60 ms; underside closes in 80 ms; current-page torn edge stays unchanged.",
+      "interruption": "Retarget current per-layer transforms, mask progress and drawing lengths. Do not queue entrances. Actual focus, selection, checked, pending and result state override temporary hover; direct input takes effect immediately.",
+      "keyboard": "Show the full intent composition on focus plus an independent visible focus mark. Keep native control behavior; implement matching tabs, radio, range or modal-panel keys and focus management where applicable.",
+      "touch": "Use an expressive static resting silhouette with visible labels and generous stable targets. One tap activates or selects; never require a preview tap. Direct dragging remains immediate for range inputs.",
+      "reduced_motion": "Use authored static resting, focused and selected/result drawings without travel, stagger, recoil or rotation. Preserve the irregular silhouette, detached outside artwork, print layers and other defining art rather than replacing the control with a generic rectangle."
+    }
+  },
+  {
+    "kind": "pattern",
+    "id": "shutter-cut-project-link",
+    "title": "Shutter-cut project link",
+    "tags": [
+      "card",
+      "mask",
+      "shape",
+      "type-choreography",
+      "original-proposal"
+    ],
+    "proposal": "Original design proposal, not a claim of observed game or reference-site behavior. Cut a preview into three unequal oblique shutter windows. Intent parts only the outer windows, exposing a strip with an oversized project verb while central image remains anchored. An outline title echo reaches into the gap. Departure withdraws the word before closing shutters.",
+    "fits": [
+      "motion design portfolio"
+    ],
+    "implementation": "Share image positioning across masks so image is continuous at rest. Keep actual title visible outside windows. Choose geometry around the focal point; simplify to two windows at narrow widths.",
+    "motion_spec": {
+      "states": [
+        "authored resting drawing",
+        "intent entrance",
+        "held intent drawing",
+        "authored exit",
+        "settled or actual selected state"
+      ],
+      "enter_sequence": "Outer shutters move along oblique edges in 150 ms with 20 ms offset; verb wipes in from 65–160 ms; outline echo follows for 35 ms.",
+      "exit_sequence": "Echo retracts in 40 ms; verb masks away in 75 ms; shutters close over the next 105 ms.",
+      "interruption": "Retarget current per-layer transforms, mask progress and drawing lengths. Do not queue entrances. Actual focus, selection, checked, pending and result state override temporary hover; direct input takes effect immediately.",
+      "keyboard": "Show the full intent composition on focus plus an independent visible focus mark. Keep native control behavior; implement matching tabs, radio, range or modal-panel keys and focus management where applicable.",
+      "touch": "Use an expressive static resting silhouette with visible labels and generous stable targets. One tap activates or selects; never require a preview tap. Direct dragging remains immediate for range inputs.",
+      "reduced_motion": "Use authored static resting, focused and selected/result drawings without travel, stagger, recoil or rotation. Preserve the irregular silhouette, detached outside artwork, print layers and other defining art rather than replacing the control with a generic rectangle."
+    }
+  },
+  {
+    "kind": "pattern",
+    "id": "split-arrow-portal",
+    "title": "Split-arrow portal",
+    "tags": [
+      "button",
+      "overflow",
+      "shape-morph",
+      "directional",
+      "original-proposal"
+    ],
+    "proposal": "Original design proposal, not a claim of observed game or reference-site behavior. Place a short word between mismatched arrow halves above and below its baseline. Intent pushes halves beyond the text edges until their negative space forms a directional portal. A sliver of destination artwork appears behind it. Press briefly aligns halves; departure closes the sliver before restoring the mismatch.",
+    "fits": [
+      "next case-study action"
+    ],
+    "implementation": "Use a normal link with independent SVG arrow halves. Keep live word stationary and reserve outside art space. Destination preview is optional and never delays navigation.",
+    "motion_spec": {
+      "states": [
+        "authored resting drawing",
+        "intent entrance",
+        "held intent drawing",
+        "authored exit",
+        "settled or actual selected state"
+      ],
+      "enter_sequence": "Upper half moves 13 px right and lower half 10 px left over 145 ms; destination sliver unmasks after 55 ms.",
+      "exit_sequence": "Close destination mask in 65 ms; bring halves inward in 95 ms; restore vertical mismatch during final 35 ms.",
+      "interruption": "Retarget current per-layer transforms, mask progress and drawing lengths. Do not queue entrances. Actual focus, selection, checked, pending and result state override temporary hover; direct input takes effect immediately.",
+      "keyboard": "Show the full intent composition on focus plus an independent visible focus mark. Keep native control behavior; implement matching tabs, radio, range or modal-panel keys and focus management where applicable.",
+      "touch": "Use an expressive static resting silhouette with visible labels and generous stable targets. One tap activates or selects; never require a preview tap. Direct dragging remains immediate for range inputs.",
+      "reduced_motion": "Use authored static resting, focused and selected/result drawings without travel, stagger, recoil or rotation. Preserve the irregular silhouette, detached outside artwork, print layers and other defining art rather than replacing the control with a generic rectangle."
+    }
+  },
+  {
+    "kind": "pattern",
+    "id": "tethered-drawer-banner",
+    "title": "Tethered drawer banner",
+    "tags": [
+      "drawer",
+      "menu",
+      "overflow",
+      "nearby-context",
+      "original-proposal"
+    ],
+    "proposal": "Original design proposal, not a claim of observed game or reference-site behavior. Make the menu trigger a crooked banner on a visible tether. Opening pulls it outside its bounds and unfolds navigation from its angled tail. Nearby title shifts into a complementary corner composition. Closing gathers links toward the tail, folds the surface, and reels banner to its perch.",
+    "fits": [
+      "creative portfolio navigation"
+    ],
+    "implementation": "Use a real expanded-state button and correctly modal or nonmodal panel. Close must work immediately throughout motion. Reserve a header envelope so banner cannot cover unrelated actions.",
+    "motion_spec": {
+      "states": [
+        "authored resting drawing",
+        "intent entrance",
+        "held intent drawing",
+        "authored exit",
+        "settled or actual selected state"
+      ],
+      "enter_sequence": "Banner and tether travel in 120 ms; surface unfolds in 165 ms; links reveal with 15 ms mask stagger while immediately operable.",
+      "exit_sequence": "Links gather toward tail in 75 ms; panel folds in 125 ms; banner returns in final 85 ms. Input routing and focus close immediately.",
+      "interruption": "Retarget current per-layer transforms, mask progress and drawing lengths. Do not queue entrances. Actual focus, selection, checked, pending and result state override temporary hover; direct input takes effect immediately.",
+      "keyboard": "Show the full intent composition on focus plus an independent visible focus mark. Keep native control behavior; implement matching tabs, radio, range or modal-panel keys and focus management where applicable.",
+      "touch": "Use an expressive static resting silhouette with visible labels and generous stable targets. One tap activates or selects; never require a preview tap. Direct dragging remains immediate for range inputs.",
+      "reduced_motion": "Use authored static resting, focused and selected/result drawings without travel, stagger, recoil or rotation. Preserve the irregular silhouette, detached outside artwork, print layers and other defining art rather than replacing the control with a generic rectangle."
+    }
+  },
+  {
+    "kind": "pattern",
+    "id": "scratch-cut-filter-label",
+    "title": "Scratch-cut filter label",
+    "tags": [
+      "filter",
+      "mask",
+      "drawn-art",
+      "selection",
+      "infamous-2",
+      "original-proposal"
+    ],
+    "proposal": "Original design proposal, not a claim of observed game or reference-site behavior. Print each category on an uneven paint strip. Intent cuts three diagonal scratches through the top layer, exposing an underside beyond the final letter. Selection removes a larger irregular notch and stamps a tally. Users never need to scratch manually to expose content or choose a filter.",
+    "fits": [
+      "street-culture archive"
+    ],
+    "implementation": "Use authored scratch masks with complete live text above them. Avoid random per-frame noise. Keep selected silhouette distinct without depending solely on color.",
+    "motion_spec": {
+      "states": [
+        "authored resting drawing",
+        "intent entrance",
+        "held intent drawing",
+        "authored exit",
+        "settled or actual selected state"
+      ],
+      "enter_sequence": "Scratches reveal in different directions over 45, 60 and 75 ms, starting 20 ms apart. Selection cuts notch in 65 ms and stamps tally.",
+      "exit_sequence": "On unselected strips cover final scratch first then the other two in 90 ms. Selected notch persists until actual deselection.",
+      "interruption": "Retarget current per-layer transforms, mask progress and drawing lengths. Do not queue entrances. Actual focus, selection, checked, pending and result state override temporary hover; direct input takes effect immediately.",
+      "keyboard": "Show the full intent composition on focus plus an independent visible focus mark. Keep native control behavior; implement matching tabs, radio, range or modal-panel keys and focus management where applicable.",
+      "touch": "Use an expressive static resting silhouette with visible labels and generous stable targets. One tap activates or selects; never require a preview tap. Direct dragging remains immediate for range inputs.",
+      "reduced_motion": "Use authored static resting, focused and selected/result drawings without travel, stagger, recoil or rotation. Preserve the irregular silhouette, detached outside artwork, print layers and other defining art rather than replacing the control with a generic rectangle."
+    }
+  },
+  {
+    "kind": "pattern",
+    "id": "type-stamp-submit",
+    "title": "Type-stamp submit",
+    "tags": [
+      "button",
+      "type-choreography",
+      "feedback",
+      "print",
+      "yakuza-0",
+      "original-proposal"
+    ],
+    "proposal": "Original design proposal, not a claim of observed game or reference-site behavior. Print an oversized submit word on a clipped ticket with an external registration shadow. Intent brings shadow roughly into register and swings a corner stamp into view. Press prints word through a short mask. Actual success replaces stamp with an approved glyph and written result; failure opens a split seam beside a precise correction.",
+    "fits": [
+      "studio enquiry form"
+    ],
+    "implementation": "Use a stable button and proper pending semantics. Drive feedback from actual request result. Printed duplicates are aria-hidden; readable status and field errors live outside the animated art.",
+    "motion_spec": {
+      "states": [
+        "authored resting drawing",
+        "intent entrance",
+        "held intent drawing",
+        "authored exit",
+        "settled or actual selected state"
+      ],
+      "enter_sequence": "Shadow aligns in 115 ms; stamp swings from outside corner in 140 ms. Press compresses print mask for 55 ms while request starts immediately.",
+      "exit_sequence": "Unpressed stamp tucks behind ticket in 70 ms before shadow misregisters in 100 ms. Pending and result art supersede pointer departure.",
+      "interruption": "Retarget current per-layer transforms, mask progress and drawing lengths. Do not queue entrances. Actual focus, selection, checked, pending and result state override temporary hover; direct input takes effect immediately.",
+      "keyboard": "Show the full intent composition on focus plus an independent visible focus mark. Keep native control behavior; implement matching tabs, radio, range or modal-panel keys and focus management where applicable.",
+      "touch": "Use an expressive static resting silhouette with visible labels and generous stable targets. One tap activates or selects; never require a preview tap. Direct dragging remains immediate for range inputs.",
+      "reduced_motion": "Use authored static resting, focused and selected/result drawings without travel, stagger, recoil or rotation. Preserve the irregular silhouette, detached outside artwork, print layers and other defining art rather than replacing the control with a generic rectangle."
+    }
+  },
+  {
+    "kind": "pattern",
+    "id": "sliced-ribbon-stepper",
+    "title": "Sliced ribbon stepper",
+    "tags": [
+      "progress",
+      "navigation",
+      "shape",
+      "overflow",
+      "original-proposal"
+    ],
+    "proposal": "Original design proposal, not a claim of observed game or reference-site behavior. Represent a short sequence as unequal diagonal ribbon sections. Current step projects a pointed flap into the content margin; completed steps keep stamped incisions. Choosing a reachable step transfers the flap along seams and unfolds a matching heading underline. Candidate hover lifts only a short edge.",
+    "fits": [
+      "creative enquiry stages"
+    ],
+    "implementation": "Use ordered steps with real controls only where navigation is allowed. Show full names and completion wording. Preserve form values and reserve projecting flap space.",
+    "motion_spec": {
+      "states": [
+        "authored resting drawing",
+        "intent entrance",
+        "held intent drawing",
+        "authored exit",
+        "settled or actual selected state"
+      ],
+      "enter_sequence": "Old flap folds in 55 ms; seam wipe crosses ribbon in 120 ms; new flap opens in 75 ms; heading underline draws in 90 ms.",
+      "exit_sequence": "Candidate edge folds shut in 65 ms. Active flap persists until actual step changes; content never waits for decorative seam travel.",
+      "interruption": "Retarget current per-layer transforms, mask progress and drawing lengths. Do not queue entrances. Actual focus, selection, checked, pending and result state override temporary hover; direct input takes effect immediately.",
+      "keyboard": "Show the full intent composition on focus plus an independent visible focus mark. Keep native control behavior; implement matching tabs, radio, range or modal-panel keys and focus management where applicable.",
+      "touch": "Use an expressive static resting silhouette with visible labels and generous stable targets. One tap activates or selects; never require a preview tap. Direct dragging remains immediate for range inputs.",
+      "reduced_motion": "Use authored static resting, focused and selected/result drawings without travel, stagger, recoil or rotation. Preserve the irregular silhouette, detached outside artwork, print layers and other defining art rather than replacing the control with a generic rectangle."
+    }
+  },
+  {
+    "kind": "pattern",
+    "id": "paint-rake-range",
+    "title": "Paint rake range",
+    "tags": [
+      "range",
+      "drawn-art",
+      "physical-character",
+      "overflow",
+      "original-proposal"
+    ],
+    "proposal": "Original design proposal, not a claim of observed game or reference-site behavior. Make a range control a scraped paint path with a toothed rake thumb protruding beyond the track. Value change reveals an authored texture behind a sharp paint edge. Focus unfolds a handwritten value flag on a crooked stem; release makes a short tooth-settling beat.",
+    "fits": [
+      "creative demo parameter"
+    ],
+    "implementation": "Retain native range input as interaction layer, a large stable thumb target and visible numeric value. Draw rake as SVG and mask a fixed paint asset. Decorative rake alone is never the draggable control.",
+    "motion_spec": {
+      "states": [
+        "authored resting drawing",
+        "intent entrance",
+        "held intent drawing",
+        "authored exit",
+        "settled or actual selected state"
+      ],
+      "enter_sequence": "Focus opens flag in 95 ms; dragging updates native value, thumb and paint edge immediately with no lag; release closes teeth 2 px in 55 ms.",
+      "exit_sequence": "Flag stem retracts in 70 ms when focus leaves; thumb and paint remain at actual value. New drag cancels landing immediately.",
+      "interruption": "Retarget current per-layer transforms, mask progress and drawing lengths. Do not queue entrances. Actual focus, selection, checked, pending and result state override temporary hover; direct input takes effect immediately.",
+      "keyboard": "Show the full intent composition on focus plus an independent visible focus mark. Keep native control behavior; implement matching tabs, radio, range or modal-panel keys and focus management where applicable.",
+      "touch": "Use an expressive static resting silhouette with visible labels and generous stable targets. One tap activates or selects; never require a preview tap. Direct dragging remains immediate for range inputs.",
+      "reduced_motion": "Use authored static resting, focused and selected/result drawings without travel, stagger, recoil or rotation. Preserve the irregular silhouette, detached outside artwork, print layers and other defining art rather than replacing the control with a generic rectangle."
+    }
+  },
+  {
+    "kind": "pattern",
+    "id": "marginalia-field-focus",
+    "title": "Marginalia field focus",
+    "tags": [
+      "form",
+      "focus",
+      "overflow",
+      "annotation",
+      "nearby-context",
+      "original-proposal"
+    ],
+    "proposal": "Original design proposal, not a claim of observed game or reference-site behavior. Give fields an open angular frame and annotation beyond the top-right edge. Focus extends an irregular underline past the field and unfolds an arrow toward its text baseline. A nearby section numeral echoes the open cutout. Error adds a broken slash and useful message rather than shaking the input.",
+    "fits": [
+      "portfolio enquiry form"
+    ],
+    "implementation": "Use labeled native inputs with associated help and errors. Essential instructions remain stable text. Reserve annotation margin and retain normal caret, selection and browser zoom behavior.",
+    "motion_spec": {
+      "states": [
+        "authored resting drawing",
+        "intent entrance",
+        "held intent drawing",
+        "authored exit",
+        "settled or actual selected state"
+      ],
+      "enter_sequence": "Underline draws outward in 115 ms; arrow unfolds from 45–130 ms; nearby numeral cutout changes once in 85 ms.",
+      "exit_sequence": "Arrow folds in 60 ms before underline retracts in 90 ms. Error message and slash remain until resolved.",
+      "interruption": "Retarget current per-layer transforms, mask progress and drawing lengths. Do not queue entrances. Actual focus, selection, checked, pending and result state override temporary hover; direct input takes effect immediately.",
+      "keyboard": "Show the full intent composition on focus plus an independent visible focus mark. Keep native control behavior; implement matching tabs, radio, range or modal-panel keys and focus management where applicable.",
+      "touch": "Use an expressive static resting silhouette with visible labels and generous stable targets. One tap activates or selects; never require a preview tap. Direct dragging remains immediate for range inputs.",
+      "reduced_motion": "Use authored static resting, focused and selected/result drawings without travel, stagger, recoil or rotation. Preserve the irregular silhouette, detached outside artwork, print layers and other defining art rather than replacing the control with a generic rectangle."
+    }
+  },
+  {
+    "kind": "pattern",
+    "id": "elastic-poster-menu",
+    "title": "Elastic poster menu",
+    "tags": [
+      "navigation",
+      "type-choreography",
+      "nearby-context",
+      "shape",
+      "original-proposal"
+    ],
+    "proposal": "Original design proposal, not a claim of observed game or reference-site behavior. Compose a full-screen menu as oversized words on diagonal elastic bands. Intent extends backing beyond both text edges and countershifts a nearby caption. Live word stays legible while its outline echo slips behind the band. Departure recoils into an intentionally asymmetric resting poster.",
+    "fits": [
+      "creative portfolio menu"
+    ],
+    "implementation": "Use real destination links. Stretch backing art, never glyphs or stable hit regions. Reserve space for expanded silhouettes; keep predictable document order.",
+    "motion_spec": {
+      "states": [
+        "authored resting drawing",
+        "intent entrance",
+        "held intent drawing",
+        "authored exit",
+        "settled or actual selected state"
+      ],
+      "enter_sequence": "Band extends from off-center pivot in 125 ms; outline masks behind it from 40–140 ms; adjacent caption takes a smaller 80 ms counterstep.",
+      "exit_sequence": "Caption returns first in 65 ms; band returns through one authored overshoot in 145 ms; outline echo lands 20 ms later.",
+      "interruption": "Retarget current per-layer transforms, mask progress and drawing lengths. Do not queue entrances. Actual focus, selection, checked, pending and result state override temporary hover; direct input takes effect immediately.",
+      "keyboard": "Show the full intent composition on focus plus an independent visible focus mark. Keep native control behavior; implement matching tabs, radio, range or modal-panel keys and focus management where applicable.",
+      "touch": "Use an expressive static resting silhouette with visible labels and generous stable targets. One tap activates or selects; never require a preview tap. Direct dragging remains immediate for range inputs.",
+      "reduced_motion": "Use authored static resting, focused and selected/result drawings without travel, stagger, recoil or rotation. Preserve the irregular silhouette, detached outside artwork, print layers and other defining art rather than replacing the control with a generic rectangle."
+    }
+  }
+]

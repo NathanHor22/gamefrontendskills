@@ -1,8 +1,9 @@
-__pycache__/
-*.py[cod]
-.venv/
+node_modules/
 .DS_Store
 Thumbs.db
 /work/
-/gamedev/data/preferences.local.json
-/gamedev/data/library.sqlite*
+# run output from audit/verify/capture when used inside this repo
+.game-ui-frontend/
+# browser runtime installed next to a skill copy by `npx game-ui-frontend browser`
+skills/*/package.json
+skills/*/package-lock.json

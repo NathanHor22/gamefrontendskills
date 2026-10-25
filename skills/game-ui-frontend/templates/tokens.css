@@ -1,0 +1,95 @@
+/*
+  Reference tokens for the template demos. Values are an example direction ("night signal"),
+  not a house style: replace colours, fonts, angle and timings with the project's own direction.
+  Colours are roles, so a re-theme changes values, never component CSS.
+*/
+:root {
+  /* colour roles */
+  --c-scene: #0d1220;          /* page / environment */
+  --c-scene-2: #18203a;        /* depth layer behind panels */
+  --c-plate: #111a33e6;        /* translucent panel over the scene */
+  --c-ink: #f4f1ea;            /* primary text on scene/plate */
+  --c-ink-muted: #a9b0c6;      /* secondary text, 8.6:1 on --c-scene */
+  --c-accent: #ffcf3f;         /* selection, primary action */
+  --c-accent-ink: #171204;     /* text on accent */
+  --c-signal: #ff4d6d;         /* exterior markers, alerts */
+  --c-cool: #4fd1ff;           /* secondary highlight */
+  --c-focus: #ffffff;          /* focus indicator, always highest contrast */
+
+  /* type */
+  --font-display: "Bahnschrift", "Haettenschweiler", "Impact", "Arial Narrow Bold", sans-serif;
+  --font-body: system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --step--1: clamp(0.78rem, 0.76rem + 0.1vw, 0.85rem);
+  --step-0: clamp(0.95rem, 0.92rem + 0.15vw, 1.05rem);
+  --step-1: clamp(1.2rem, 1.1rem + 0.5vw, 1.5rem);
+  --step-3: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+  --step-5: clamp(3.2rem, 2rem + 6vw, 7.5rem);
+
+  /* geometry */
+  --angle: -9deg;              /* the one dominant angle */
+  --cut: 14px;                 /* clipped-corner size */
+  --seam: 4px;                 /* gap between modules */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+  --target-min: 44px;
+
+  /* motion: entry and exit are separate gestures */
+  --t-enter: 220ms;
+  --t-exit: 160ms;
+  --t-stagger: 40ms;
+  --ease-enter: cubic-bezier(0.2, 0.9, 0.1, 1.15);  /* fast out, slight overshoot */
+  --ease-exit: cubic-bezier(0.5, 0, 0.75, 0);       /* accelerates away */
+  --ease-swap: cubic-bezier(0.3, 0, 0, 1);
+
+  /* layers */
+  --z-scene: 0; --z-plate: 10; --z-subject: 20; --z-label: 30; --z-marker: 35; --z-action: 40; --z-focus: 50;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --t-enter: 1ms;
+    --t-exit: 1ms;
+    --t-stagger: 0ms;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(120% 80% at 80% 0%, var(--c-scene-2), transparent 60%),
+    var(--c-scene);
+  color: var(--c-ink);
+  font: 400 var(--step-0)/1.5 var(--font-body);
+}
+
+/* One focus treatment everywhere: always visible, never covered by art. */
+:focus-visible {
+  outline: 3px solid var(--c-focus);
+  outline-offset: 4px;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  overflow: hidden; clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.demo-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-7) max(var(--space-4), env(safe-area-inset-left)) var(--space-8);
+}
+
+.demo-section { margin-block: var(--space-8); }
+.demo-section > h2 {
+  font: 700 var(--step-1)/1.1 var(--font-display);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0 0 var(--space-2);
+}
+.demo-section > p { color: var(--c-ink-muted); max-width: 70ch; margin: 0 0 var(--space-6); }

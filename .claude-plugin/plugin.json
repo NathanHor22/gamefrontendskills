@@ -1,0 +1,10 @@
+{
+  "name": "game-ui-frontend",
+  "description": "Design, improve and verify website UI using game interface research: layout, buttons, navigation, selectors, overlays and motion, with Playwright checks.",
+  "version": "2.0.0",
+  "author": {
+    "name": "Nathan Hor"
+  },
+  "repository": "https://github.com/NathanHor22/gamefrontendskills",
+  "license": "MIT"
+}

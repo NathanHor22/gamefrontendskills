@@ -1,0 +1,48 @@
+{
+  "screens": {
+    "title": { "label": "Title / start screen", "web": "Landing hero, splash, first-visit intro" },
+    "main_menu": { "label": "Main menu", "web": "Primary navigation, home index, site menu overlay" },
+    "mode_select": { "label": "Mode / level / difficulty select", "web": "Plan or path chooser, onboarding fork, category landing" },
+    "character_select": { "label": "Character / vehicle select, roster", "web": "Project, product or team index with a large preview" },
+    "customization": { "label": "Customization / creator", "web": "Product configurator, theme or avatar editor" },
+    "loadout": { "label": "Loadout / skills assignment", "web": "Plan builder, feature toggles, slot-based configuration" },
+    "status": { "label": "Character status sheet", "web": "Profile, account overview, spec sheet" },
+    "inventory": { "label": "Inventory", "web": "Asset library, file browser, collection with detail pane" },
+    "shop": { "label": "Shop / merchant", "web": "Pricing, store, catalogue with purchase actions" },
+    "map": { "label": "Map / atlas", "web": "Locations, site map, spatial index, timeline atlas" },
+    "hud": { "label": "HUD / in-play overlay", "web": "Persistent app chrome, status bar, live dashboard widgets" },
+    "combat_menu": { "label": "Command menu during play", "web": "Command palette, contextual action menu, radial or quick actions" },
+    "dialogue": { "label": "Dialogue / choice", "web": "Chat, guided questions, decision prompt" },
+    "pause": { "label": "Pause overlay", "web": "Modal, drawer, overlay menu that keeps the page visible" },
+    "settings": { "label": "Options / settings", "web": "Settings and preference forms" },
+    "save_load": { "label": "Save / load", "web": "Drafts, versions, saved items, history" },
+    "loading": { "label": "Loading", "web": "Loading, skeleton, progress and wait states" },
+    "results": { "label": "Results / rewards", "web": "Success, receipt, completion, summary report" },
+    "progression": { "label": "Progression / skill tree / route", "web": "Roadmap, achievements, onboarding steps, learning path" },
+    "hub_lobby": { "label": "Hub / lobby", "web": "Dashboard home, app launchpad, account hub" },
+    "confirmation": { "label": "Confirmation / comparison", "web": "Checkout confirm, destructive confirm, before/after compare" },
+    "text_entry": { "label": "Name / text entry", "web": "Form fields, sign-up, search input" },
+    "versus": { "label": "Versus / pre-match showcase", "web": "Comparison hero, head-to-head, launch announcement" },
+    "codex": { "label": "Codex / dossier / archive", "web": "Case studies, documentation, about/team pages, archive" },
+    "transition": { "label": "Screen transition", "web": "Route and section transitions, view swaps" },
+    "atmosphere": { "label": "Atmosphere only (no UI)", "web": "Mood, palette and imagery reference only" }
+  },
+  "source_types": ["screenshot", "video", "design_reference", "official_page", "manual", "interview", "developer_post", "catalog"],
+  "evidence_levels": {
+    "static_image": "A single still image was viewed. Establishes appearance only.",
+    "video_frames": "Several frames of a clip were viewed at recorded playheads. Establishes state order, not precise easing.",
+    "live_interaction": "The interface was operated live and its states observed.",
+    "production_reference": "A designer-published sheet or guide. Documents intent, not runtime behaviour.",
+    "source_defined": "Behaviour read from source code or a specification, not rendered output.",
+    "documented_text": "Text description only (manual, interview). No visual claim allowed."
+  },
+  "inspection_methods": {
+    "browser_view": "The image or page was opened and viewed in a browser.",
+    "image_fetched": "The image bytes were fetched and viewed; record sha256.",
+    "video_frames": "Frames were viewed at recorded playheads.",
+    "live_interaction": "The interface was operated.",
+    "user_capture": "The user supplied the capture; record sha256.",
+    "unrecorded": "Legacy seed data whose inspection method was not recorded. Not accepted for new imports."
+  },
+  "confidence": ["high", "medium", "low"]
+}

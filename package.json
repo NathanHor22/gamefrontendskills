@@ -1,0 +1,35 @@
+{
+  "name": "game-ui-frontend",
+  "version": "2.0.0",
+  "description": "Agent skill for Claude Code and Codex: design and verify original website UI using game interface research.",
+  "license": "MIT",
+  "author": "Nathan Hor",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NathanHor22/gamefrontendskills.git"
+  },
+  "type": "module",
+  "bin": {
+    "game-ui-frontend": "bin/cli.mjs"
+  },
+  "files": [
+    "bin/",
+    "skills/",
+    ".claude-plugin/",
+    "README.md",
+    "CREDITS.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test --test-concurrency=1",
+    "check": "node skills/game-ui-frontend/scripts/library.mjs check",
+    "docs": "node skills/game-ui-frontend/scripts/library.mjs docs --write"
+  },
+  "devDependencies": {
+    "axe-core": "4.10.3",
+    "playwright": "1.56.1"
+  }
+}

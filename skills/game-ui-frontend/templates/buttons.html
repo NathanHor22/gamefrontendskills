@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Button archetypes</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+/*
+  Every archetype below follows the same anatomy (see references/components/buttons.md):
+    target  - the real <a>/<button>; owns the hit area, focus and semantics
+    label   - live text; stays readable and in place
+    plate   - the drawn body; may be clipped, skewed, textured
+    exterior art - markers, emblems, rails, glows that may leave the box; pointer-events: none
+  Entry transitions are declared on the active state, exit transitions on the rest state,
+  so the two gestures differ and any interruption reverses from the current value.
+*/
+
+/* :focus-visible always gets the same art as :hover, so keyboard users see the full composition. */
+
+/* ---------- 1. Breakout primary action (hub START / title PLAY) ---------- */
+.breakout {
+  position: relative;
+  isolation: isolate;
+  display: inline-grid;
+  place-items: center;
+  min-height: 64px;
+  min-width: 220px;
+  padding: 0 var(--space-6) 0 76px;
+  margin: 20px 28px 20px 30px;          /* reserves room for the exterior art */
+  color: var(--c-accent-ink);
+  text-decoration: none;
+  font: 700 var(--step-1)/1 var(--font-display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.breakout__plate, .breakout__rail, .breakout__emblem { position: absolute; pointer-events: none; }
+.breakout__plate {
+  inset: 0;
+  z-index: -1;
+  background: var(--c-accent);
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%, 0 var(--cut));
+  transform: skewX(var(--angle));
+  transition: transform var(--t-exit) var(--ease-exit);
+}
+.breakout__rail {
+  inset: -7px -12px -7px -7px;
+  z-index: -2;
+  border: 2px solid var(--c-signal);
+  transform: skewX(var(--angle));
+  clip-path: inset(0 100% 0 0);
+  /* exit: rail retracts last, after the emblem has dropped */
+  transition: clip-path var(--t-exit) var(--ease-exit) calc(var(--t-exit) * 0.6);
+}
+.breakout__emblem {
+  left: -26px;
+  top: 50%;
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--c-scene);
+  border: 3px solid var(--c-accent);
+  box-shadow: 0 0 0 5px var(--c-scene), 0 0 0 7px var(--c-signal);
+  translate: 0 -50%;
+  /* exit: emblem drops first and fast */
+  transition: translate var(--t-exit) var(--ease-exit), rotate var(--t-exit) var(--ease-exit);
+}
+.breakout__emblem svg { width: 30px; height: 30px; fill: var(--c-accent); }
+.breakout__label { transition: translate var(--t-exit) var(--ease-exit); }
+
+.breakout:is(:hover, :focus-visible) .breakout__rail {
+  clip-path: inset(0 0 0 0);
+  transition: clip-path var(--t-enter) var(--ease-swap);   /* entry: rail draws first */
+}
+.breakout:is(:hover, :focus-visible) .breakout__emblem {
+  translate: -6px -78%;
+  rotate: -14deg;
+  transition: translate var(--t-enter) var(--ease-enter) var(--t-stagger), rotate var(--t-enter) var(--ease-enter) var(--t-stagger);
+}
+.breakout:is(:hover, :focus-visible) .breakout__label {
+  translate: 4px 0;
+  transition: translate var(--t-enter) var(--ease-enter) calc(var(--t-stagger) * 2);
+}
+.breakout:active .breakout__plate { transform: skewX(var(--angle)) scale(0.97); transition-duration: 60ms; }
+
+/* ---------- 2. Signal band text action (title-screen choice, no box) ---------- */
+.band-list { list-style: none; margin: 0; padding: 0 0 0 var(--space-6); display: grid; gap: var(--space-2); }
+.band {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target-min);
+  padding: 0 var(--space-3);
+  color: var(--c-ink-muted);
+  text-decoration: none;
+  font: 400 var(--step-1)/1 var(--font-body);
+  letter-spacing: 0.02em;
+  transition: color var(--t-exit) linear;
+}
+.band__field {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  left: -32px;
+  right: -140%;
+  top: 18%;
+  bottom: 18%;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--c-signal) 70%, transparent) 18%, transparent 92%);
+  filter: blur(5px);
+  opacity: 0;
+  transform: scaleX(0.25);
+  transform-origin: 0 50%;
+  transition: opacity var(--t-exit) linear, transform var(--t-exit) var(--ease-exit);
+}
+.band:is(:hover, :focus-visible), .band[aria-current="page"] { color: var(--c-ink); }
+.band:is(:hover, :focus-visible) .band__field, .band[aria-current="page"] .band__field {
+  opacity: 1;
+  transform: scaleX(1);
+  transition: opacity var(--t-enter) linear, transform calc(var(--t-enter) * 1.6) var(--ease-swap);
+}
+
+/* ---------- 3. Keycap secondary action (shortcut hangs below the plaque) ---------- */
+.keycap-row { display: flex; flex-wrap: wrap; gap: var(--space-5); align-items: flex-start; }
+.keycap-action {
+  --edge: color-mix(in srgb, var(--c-ink) 55%, transparent);
+  --fill: var(--c-plate);
+  position: relative;
+  isolation: isolate;
+  min-height: var(--target-min);
+  min-width: 112px;
+  padding: var(--space-2) var(--space-5);
+  margin-bottom: 22px;                        /* room for the hanging key */
+  border: 0;
+  background: none;
+  color: var(--c-ink);
+  font: 600 var(--step-0)/1 var(--font-body);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+/* The pointed plaque is drawn on pseudo-elements, so clip-path never clips the focus outline. */
+.keycap-action::before, .keycap-action::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 10px 100%, 0 50%);
+}
+.keycap-action::before { inset: 0; background: var(--edge); }
+.keycap-action::after { inset: 1px 1.5px; background: var(--fill); transition: background-color var(--t-exit) linear; }
+.keycap-action__key {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 4px);
+  translate: -50% 0;
+  min-width: 24px;
+  padding: 1px 6px;
+  border: 1px solid var(--c-ink-muted);
+  border-bottom-width: 3px;
+  border-radius: 4px;
+  color: var(--c-ink-muted);
+  font: 600 var(--step--1)/1.3 var(--font-mono);
+  pointer-events: none;
+  transition: translate var(--t-exit) var(--ease-exit), color var(--t-exit) linear;
+}
+.keycap-action:is(:hover, :focus-visible) { --edge: var(--c-cool); --fill: color-mix(in srgb, var(--c-cool) 22%, var(--c-plate)); }
+.keycap-action:active { --fill: color-mix(in srgb, var(--c-cool) 40%, var(--c-plate)); }
+.keycap-action:active .keycap-action__key { translate: -50% 0; border-bottom-width: 1px; margin-top: 2px; }
+.keycap-action:is(:hover, :focus-visible) .keycap-action__key {
+  translate: -50% 3px;
+  color: var(--c-cool);
+  border-color: var(--c-cool);
+  transition: translate var(--t-enter) var(--ease-enter), color var(--t-enter) linear;
+}
+
+/* ---------- 4. Hold-to-confirm destructive action ---------- */
+.hold {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 52px;
+  min-width: 220px;
+  padding: 0 var(--space-6);
+  border: 2px solid var(--c-signal);
+  background: transparent;
+  color: var(--c-ink);
+  font: 700 var(--step-0)/1 var(--font-display);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  touch-action: none;           /* a hold must not start a scroll */
+  user-select: none;
+}
+.hold__fill {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: repeating-linear-gradient(-55deg, var(--c-signal) 0 10px, color-mix(in srgb, var(--c-signal) 80%, black) 10px 20px);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+/* Intent shows a sliver of the fill: the gesture is hinted before it is started. */
+.hold:is(:hover, :focus-visible) .hold__fill { transform: scaleX(0.06); transition: transform var(--t-enter) var(--ease-enter); }
+.hold .hold__fill { transition: transform var(--t-exit) var(--ease-exit); }
+.hold[data-armed="true"] { background: color-mix(in srgb, var(--c-signal) 25%, transparent); }
+.hold-hint { margin: var(--space-2) 0 0; color: var(--c-ink-muted); font-size: var(--step--1); }
+
+/* ---------- reduced motion: same art, no travel ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .breakout__emblem, .breakout:is(:hover, :focus-visible) .breakout__emblem { rotate: 0deg; }
+  .band__field { transform: none; }
+}
+
+/* ---------- narrow screens: projection shrinks, nothing disappears ---------- */
+@media (max-width: 599px) {
+  .breakout { min-width: 0; width: calc(100% - 44px); margin-inline: 30px 14px; }
+  .band__field { right: -40%; }
+}
+</style>
+</head>
+<body>
+<main class="demo-page">
+  <h1 class="visually-hidden">Button archetypes</h1>
+
+  <section class="demo-section" aria-labelledby="b1">
+    <h2 id="b1">1 · Breakout primary</h2>
+    <p>The single biggest control on the view. An emblem sits outside the plate and lifts on intent; a contour rail draws
+      outside the edge. On leave the emblem drops first and the rail retracts after it.</p>
+    <a class="breakout" href="#start">
+      <span class="breakout__rail" aria-hidden="true"></span>
+      <span class="breakout__plate" aria-hidden="true"></span>
+      <span class="breakout__emblem" aria-hidden="true">
+        <svg viewBox="0 0 32 32"><path d="M16 2 20 12 30 16 20 20 16 30 12 20 2 16 12 12z"/></svg>
+      </span>
+      <span class="breakout__label">Start a project</span>
+    </a>
+  </section>
+
+  <section class="demo-section" aria-labelledby="b2">
+    <h2 id="b2">2 · Signal band text action</h2>
+    <p>No box at all. The label barely changes; a blurred field of colour grows outward from behind it, far past the text.
+      Use for title-screen-style menus with few choices.</p>
+    <nav aria-label="Demo menu">
+      <ul class="band-list">
+        <li><a class="band" href="#continue" aria-current="page"><span class="band__field" aria-hidden="true"></span>Continue</a></li>
+        <li><a class="band" href="#new"><span class="band__field" aria-hidden="true"></span>New project</a></li>
+        <li><a class="band" href="#archive"><span class="band__field" aria-hidden="true"></span>Archive</a></li>
+      </ul>
+    </nav>
+  </section>
+
+  <section class="demo-section" aria-labelledby="b3">
+    <h2 id="b3">3 · Keycap secondary actions</h2>
+    <p>Quiet secondary actions whose keyboard shortcut hangs below the plaque. The shortcut is real (press S or B) and declared with
+      <code>aria-keyshortcuts</code>.</p>
+    <div class="keycap-row">
+      <button class="keycap-action" type="button" aria-keyshortcuts="S" data-shortcut="s">Skip<kbd class="keycap-action__key" aria-hidden="true">S</kbd></button>
+      <button class="keycap-action" type="button" aria-keyshortcuts="B" data-shortcut="b">Back<kbd class="keycap-action__key" aria-hidden="true">B</kbd></button>
+    </div>
+  </section>
+
+  <section class="demo-section" aria-labelledby="b4">
+    <h2 id="b4">4 · Hold to confirm</h2>
+    <p>Destructive actions borrow the game "hold" gesture. Holding fills the plate; releasing early drains it from where it was.
+      People who cannot hold can click twice instead.</p>
+    <button class="hold" type="button" id="hold" aria-describedby="hold-hint"><span class="hold__fill" aria-hidden="true"></span><span class="hold__label">Delete draft</span></button>
+    <p class="hold-hint" id="hold-hint">Press and hold, or click twice, to delete.</p>
+  </section>
+
+  <p role="status" aria-live="polite" id="status" class="hold-hint"></p>
+</main>
+
+<script>
+const status = document.getElementById("status");
+const say = (text) => { status.textContent = text; };
+
+// Real shortcuts for the keycap actions, ignored while typing.
+document.addEventListener("keydown", (e) => {
+  if (e.metaKey || e.ctrlKey || e.altKey || e.target.closest("input, textarea, select, [contenteditable]")) return;
+  const btn = document.querySelector(`[data-shortcut="${e.key.toLowerCase()}"]`);
+  if (btn) { btn.click(); btn.focus(); }
+});
+document.querySelectorAll(".keycap-action").forEach((b) => b.addEventListener("click", () => say(`${b.firstChild.textContent} pressed`)));
+
+// Hold to confirm. One animation is played forward while held and reversed on release, so an early
+// release drains from the current fill instead of jumping or queueing. A short press (or a click from
+// assistive technology) arms the button instead; a second one within 3 s confirms.
+(function holdToConfirm(button, ms = 900) {
+  const fill = button.querySelector(".hold__fill");
+  const label = button.querySelector(".hold__label");
+  const original = label.textContent;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+  let anim = null;
+  let pressedAt = 0;
+  let armed = false;
+  let armTimer = 0;
+  let pressHandled = false;   // suppresses the click that follows our own press handling
+
+  function disarm() {
+    armed = false;
+    button.dataset.armed = "false";
+    label.textContent = original;
+    clearTimeout(armTimer);
+  }
+  function confirm() {
+    disarm();
+    anim?.cancel();
+    anim = null;
+    say("Draft deleted");
+  }
+  function tap() {
+    if (armed) return confirm();
+    armed = true;
+    button.dataset.armed = "true";
+    label.textContent = "Click again to delete";
+    say("Click again within 3 seconds to delete");
+    armTimer = setTimeout(disarm, 3000);
+  }
+  function press() {
+    pressedAt = performance.now();
+    pressHandled = true;
+    if (!anim) {
+      anim = fill.animate([{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }],
+        { duration: ms, easing: reduce.matches ? "steps(4, end)" : "linear", fill: "both" });
+      anim.onfinish = () => {
+        if (!anim) return;
+        if (anim.playbackRate > 0) confirm();
+        else { anim.cancel(); anim = null; }   // fully drained: hand the fill back to CSS (hover hint)
+      };
+    }
+    anim.playbackRate = 1;
+    anim.play();
+  }
+  function drain() {
+    if (!anim) return;
+    anim.playbackRate = -2.5;
+    anim.play();
+  }
+  function release() {
+    const short = anim && performance.now() - pressedAt < 250;
+    drain();
+    if (short) tap();
+    setTimeout(() => { pressHandled = false; }, 0);
+  }
+  const holdKey = (e) => e.key === " " || e.key === "Enter";
+
+  button.addEventListener("pointerdown", (e) => { if (e.button === 0) press(); });
+  button.addEventListener("pointerup", release);
+  button.addEventListener("pointerleave", drain);
+  button.addEventListener("pointercancel", drain);
+  button.addEventListener("blur", drain);
+  // preventDefault stops the browser's own click (Enter fires it on keydown, Space on keyup).
+  button.addEventListener("keydown", (e) => { if (!holdKey(e)) return; e.preventDefault(); if (!e.repeat) press(); });
+  button.addEventListener("keyup", (e) => { if (!holdKey(e)) return; e.preventDefault(); release(); });
+  button.addEventListener("click", () => { if (!pressHandled) tap(); });
+})(document.getElementById("hold"));
+</script>
+</body>
+</html>

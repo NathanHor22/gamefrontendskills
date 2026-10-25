@@ -4,17 +4,17 @@ This skill combines original analytical notes and website interaction proposals 
 
 ## Complete source records
 
-Each game record in [games.json](gamedev/data/games.json) contains source URLs, titles, inspection status, observations, and known capture or edition limits. The library helper makes these records searchable, using the bundled JSON in memory or a generated local database. No generated database binary is included in the repository. These indexes provide readable source lists:
+Each game record in [games.json](skills/game-ui-frontend/data/games.json) contains source URLs, titles, inspection status, observations, and known capture or edition limits. The library helper searches these records in memory. These pages provide readable source lists:
 
-- [Modern fighting, mobile, and expressive RPG studies](gamedev/references/modern-game-research.md)
-- [Horror, rhythm, paperwork, racing, RPG, LEGO, and sports studies](gamedev/references/cross-genre-game-research.md)
-- [Evidence definitions and research method](gamedev/references/research-library.md)
+- [Research catalog](skills/game-ui-frontend/references/research/catalog.md): every observation by screen type and game, with its source link (generated from the data)
+- [Research findings](skills/game-ui-frontend/references/research/findings.md): synthesis across the studied games
+- [Library data model and evidence rules](skills/game-ui-frontend/references/library.md)
 
-The indexes are navigation aids; the per-game records preserve the fuller provenance and distinguish reviewed sources from explicit research gaps.
+The catalog and findings are navigation aids; the per-game records preserve the fuller provenance and distinguish reviewed sources from explicit research gaps.
 
 ## Reference collections and documentation
 
-[Interface In Game](https://interfaceingame.com/) is a major screenshot reference. Individual source pages and image URLs are credited in the records. This package includes links and original analysis, not a mirror of its image collection. Respect the site's [terms](https://interfaceingame.com/terms-and-conditions/) when extending the research.
+[Interface In Game](https://interfaceingame.com/) is a major screenshot reference. Individual source pages and image URLs are credited in the records. This package includes links and original analysis, not a mirror of its image collection. Respect the site's [terms](https://interfaceingame.com/terms-and-conditions/) when extending the research: they prohibit crawling and scraping, so the skill's source policy marks it link-only. [Game UI Database](https://gameuidatabase.com/) blocks AI agents in its robots.txt; the skill never browses it automatically, though a person may browse it and supply captures.
 
 Other cited sources include official game sites, publisher manuals and showcases, creator footage, [MobyGames](https://www.mobygames.com/) capture pages, [Silent Hill Memories](https://www.silenthillmemories.net/), and credited editorial guides. Capture contributors and video creators are named in the relevant game records where available. Examples include LegacyOfKaiser, Alvrim, Calem MrNazreenn, heroicpinoy, and MobyGames contributors will.i.am, MAT, and Caelestis. Their footage and captures remain their own source material.
 

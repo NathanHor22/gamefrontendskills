@@ -1,0 +1,13 @@
+{
+  "name": "gamefrontendskills",
+  "owner": {
+    "name": "Nathan Hor"
+  },
+  "plugins": [
+    {
+      "name": "game-ui-frontend",
+      "source": "./",
+      "description": "Design, improve and verify website UI using game interface research."
+    }
+  ]
+}

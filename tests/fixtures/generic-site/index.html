@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Generic studio</title>
+<!-- Deliberately generic: the audit test expects these signals to be detected. -->
+<style>
+  body { margin: 0; font-family: Arial, sans-serif; color: #222; background: #fff; }
+  header, main { max-width: 1000px; margin: 0 auto; padding: 16px; }
+  nav a { margin-right: 16px; color: #333; text-decoration: none; transition: all 0.2s ease; }
+  nav a:hover { color: #06c; }
+  .btn { display: inline-block; padding: 10px 18px; border-radius: 8px; background: #06c; color: #fff; border: 0; transition: all 0.2s ease; }
+  .btn:hover { background: #048; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .card { height: 180px; border-radius: 8px; background: #f2f2f2; padding: 16px; }
+</style>
+</head>
+<body>
+<header>
+  <nav aria-label="Main"><a href="index.html">Home</a><a href="about.html">About</a><a href="#contact">Contact</a></nav>
+</header>
+<main>
+  <h1>We build digital products</h1>
+  <p>Modern, scalable solutions for your business.</p>
+  <button class="btn" type="button">Get started</button>
+  <a class="btn" href="about.html">Learn more</a>
+  <button class="btn" type="button">Contact us</button>
+  <section class="cards" aria-label="Services">
+    <div class="card">Design</div>
+    <div class="card">Development</div>
+    <div class="card">Strategy</div>
+  </section>
+</main>
+</body>
+</html>

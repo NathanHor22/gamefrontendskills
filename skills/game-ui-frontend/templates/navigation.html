@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Navigation archetypes</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+/* ---------- 1. Left-column menu over a scene, one travelling marker ---------- */
+.stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(220px, 320px) 1fr;
+  min-height: 460px;
+  overflow: hidden;                         /* the scene is cropped, the menu is not */
+  background:
+    linear-gradient(90deg, var(--c-scene) 0 28%, transparent 70%),
+    repeating-linear-gradient(var(--angle), transparent 0 46px, #ffffff08 46px 48px),
+    radial-gradient(60% 90% at 75% 40%, #3a2a5c, var(--c-scene-2) 70%);
+}
+.stage__subject {
+  grid-column: 2;
+  align-self: end;
+  justify-self: center;
+  font: 900 var(--step-5)/0.8 var(--font-display);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 2px color-mix(in srgb, var(--c-ink) 35%, transparent);
+  transform: rotate(var(--angle)) translateY(12%);
+  user-select: none;
+}
+.menu {
+  position: relative;
+  z-index: var(--z-label);
+  align-self: center;
+  padding: var(--space-6) var(--space-6) var(--space-6) var(--space-7);
+}
+.menu ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.menu__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 var(--space-4);
+  color: var(--c-ink-muted);
+  text-decoration: none;
+  font: 700 var(--step-1)/1 var(--font-display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color var(--t-exit) linear;
+}
+/* Move the label, never the link: shifting the hit area under a still pointer causes hover flicker. */
+.menu__label { display: inline-block; transition: translate var(--t-exit) var(--ease-exit); }
+.menu__link:is(:hover, :focus-visible), .menu__link[aria-current="page"] {
+  color: var(--c-ink);
+  transition: color var(--t-enter) linear;
+}
+.menu__link:is(:hover, :focus-visible) .menu__label, .menu__link[aria-current="page"] .menu__label {
+  translate: 6px 0;
+  transition: translate var(--t-enter) var(--ease-enter);
+}
+.menu__link[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: var(--space-4);
+  right: 30%;
+  bottom: 8px;
+  height: 3px;
+  background: var(--c-accent);
+  pointer-events: none;
+}
+/* The marker is one element for the whole menu. It travels to the item under intent and returns to the
+   current page when intent leaves, so the selection reads as a separate actor, not a per-row highlight. */
+.menu__marker {
+  position: absolute;
+  left: 8px;
+  top: 0;
+  width: 26px;
+  height: 26px;
+  pointer-events: none;
+  translate: 0 var(--marker-y, 0px);
+  transition: translate var(--t-enter) var(--ease-enter);
+}
+.menu__marker svg { width: 100%; height: 100%; fill: var(--c-signal); }
+.menu__marker::after {
+  content: "";
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  width: var(--marker-trail, 0px);
+  height: 2px;
+  background: linear-gradient(90deg, var(--c-signal), transparent);
+  transition: width var(--t-exit) var(--ease-exit);
+}
+.menu[data-intent="true"] .menu__marker::after { transition: width var(--t-enter) var(--ease-swap); }
+.menu__hint { margin: var(--space-5) 0 0 var(--space-4); color: var(--c-ink-muted); font-size: var(--step--1); }
+.menu-toggle { display: none; }
+
+/* ---------- 2. Slanted tab rail with a travelling wedge (ARIA tabs) ---------- */
+.tabs__list {
+  position: relative;
+  display: flex;
+  gap: var(--seam);
+  padding-bottom: 10px;
+  border-bottom: 1px solid color-mix(in srgb, var(--c-ink) 20%, transparent);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tabs__tab {
+  position: relative;
+  isolation: isolate;
+  flex: none;
+  min-height: var(--target-min);
+  padding: 0 var(--space-5);
+  border: 0;
+  background: none;
+  color: var(--c-ink-muted);
+  font: 700 var(--step-0)/1 var(--font-display);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.tabs__tab::before {
+  content: "";
+  position: absolute;
+  inset: 4px 0;
+  z-index: -1;
+  pointer-events: none;
+  background: var(--c-plate);
+  transform: skewX(var(--angle));
+  transition: background-color var(--t-exit) linear;
+}
+.tabs__tab:hover::before { background: color-mix(in srgb, var(--c-ink) 12%, var(--c-plate)); }
+.tabs__tab[aria-selected="true"] { color: var(--c-accent-ink); }
+.tabs__tab[aria-selected="true"]::before { background: var(--c-accent); transition: background-color var(--t-enter) linear; }
+.tabs__tab:focus-visible { outline-offset: 2px; }
+.tabs__wedge {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 4px;
+  width: var(--wedge-w, 0px);
+  translate: var(--wedge-x, 0px) 0;
+  background: var(--c-accent);
+  clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+  pointer-events: none;
+  transition: translate var(--t-enter) var(--ease-enter), width var(--t-enter) var(--ease-enter);
+}
+.tabs__panel { padding: var(--space-5) var(--space-2); max-width: 60ch; }
+.tabs__panel[hidden] { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .menu__link .menu__label { translate: 0 0 !important; }
+}
+
+/* ---------- narrow screens: the menu becomes a full-screen overlay with the same marker and type ---------- */
+@media (max-width: 719px) {
+  .stage { grid-template-columns: 1fr; min-height: 360px; }
+  .stage__subject { grid-column: 1; font-size: var(--step-3); }
+  .menu-toggle {
+    display: inline-flex;
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+    z-index: var(--z-action);
+    align-items: center;
+    gap: var(--space-2);
+    min-height: var(--target-min);
+    padding: 0 var(--space-4);
+    border: 2px solid var(--c-accent);
+    background: var(--c-scene);
+    color: var(--c-ink);
+    font: 700 var(--step-0)/1 var(--font-display);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .menu-toggle:hover { background: color-mix(in srgb, var(--c-accent) 20%, var(--c-scene)); }
+  .menu-toggle:active { background: var(--c-accent); color: var(--c-accent-ink); }
+  .menu {
+    position: absolute;
+    inset: 0;
+    padding: var(--space-8) var(--space-5) var(--space-5) var(--space-6);
+    background: color-mix(in srgb, var(--c-scene) 94%, transparent);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity var(--t-exit) linear, visibility 0s linear var(--t-exit);
+  }
+  .stage[data-open="true"] .menu { visibility: visible; opacity: 1; transition: opacity var(--t-enter) linear; }
+}
+</style>
+</head>
+<body>
+<main class="demo-page">
+  <h1 class="visually-hidden">Navigation archetypes</h1>
+
+  <section class="demo-section" aria-labelledby="n1">
+    <h2 id="n1">1 · Left-column menu with a travelling marker</h2>
+    <p>Narrow list over a large subject. One marker travels to the item you point at or focus, trailing a line, and returns to the
+      current page when you leave. On phones the same menu opens as an overlay.</p>
+    <div class="stage" id="stage">
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">Menu</button>
+      <nav class="menu" id="site-menu" aria-label="Site">
+        <span class="menu__marker" aria-hidden="true"><svg viewBox="0 0 26 26"><path d="M2 3 24 13 2 23 8 13z"/></svg></span>
+        <ul>
+          <li><a class="menu__link" href="#work" aria-current="page"><span class="menu__label">Work</span></a></li>
+          <li><a class="menu__link" href="#process"><span class="menu__label">Process</span></a></li>
+          <li><a class="menu__link" href="#studio"><span class="menu__label">Studio</span></a></li>
+          <li><a class="menu__link" href="#journal"><span class="menu__label">Journal</span></a></li>
+          <li><a class="menu__link" href="#contact"><span class="menu__label">Contact</span></a></li>
+        </ul>
+        <p class="menu__hint">Five destinations, one marker.</p>
+      </nav>
+      <div class="stage__subject" aria-hidden="true">Work</div>
+    </div>
+  </section>
+
+  <section class="demo-section" aria-labelledby="n2">
+    <h2 id="n2">2 · Slanted tab rail</h2>
+    <p>Tabs share one slant; a wedge travels under the selected tab. Arrow keys move between tabs, Home and End jump.</p>
+    <div class="tabs">
+      <div class="tabs__list" role="tablist" aria-label="Case study sections">
+        <button class="tabs__tab" role="tab" id="t-brief" aria-selected="true" aria-controls="p-brief">Brief</button>
+        <button class="tabs__tab" role="tab" id="t-process" aria-selected="false" aria-controls="p-process" tabindex="-1">Process</button>
+        <button class="tabs__tab" role="tab" id="t-outcome" aria-selected="false" aria-controls="p-outcome" tabindex="-1">Outcome</button>
+        <button class="tabs__tab" role="tab" id="t-credits" aria-selected="false" aria-controls="p-credits" tabindex="-1">Credits</button>
+        <span class="tabs__wedge" aria-hidden="true"></span>
+      </div>
+      <div class="tabs__panel" role="tabpanel" id="p-brief" aria-labelledby="t-brief" tabindex="0">What the client needed and why it was hard.</div>
+      <div class="tabs__panel" role="tabpanel" id="p-process" aria-labelledby="t-process" tabindex="0" hidden>How the work moved from sketches to production.</div>
+      <div class="tabs__panel" role="tabpanel" id="p-outcome" aria-labelledby="t-outcome" tabindex="0" hidden>What changed after launch.</div>
+      <div class="tabs__panel" role="tabpanel" id="p-credits" aria-labelledby="t-credits" tabindex="0" hidden>Who made it.</div>
+    </div>
+  </section>
+</main>
+
+<script>
+// Travelling marker: follows pointer/focus intent, rests on the current page otherwise.
+(function menuMarker(menu) {
+  const marker = menu.querySelector(".menu__marker");
+  const links = [...menu.querySelectorAll(".menu__link")];
+  const current = () => menu.querySelector('[aria-current="page"]') ?? links[0];
+  function moveTo(link, intent) {
+    // Links are positioned, so offsetTop is already measured from the menu.
+    const y = link.offsetTop + (link.offsetHeight - marker.offsetHeight) / 2;
+    menu.style.setProperty("--marker-y", `${y}px`);
+    menu.style.setProperty("--marker-trail", intent ? "16px" : "0px");
+    menu.dataset.intent = String(intent);
+  }
+  for (const link of links) {
+    link.addEventListener("pointerenter", () => moveTo(link, true));
+    link.addEventListener("focus", () => moveTo(link, true));
+    link.addEventListener("click", () => {
+      links.forEach((l) => l.removeAttribute("aria-current"));
+      link.setAttribute("aria-current", "page");
+    });
+  }
+  menu.addEventListener("pointerleave", () => { if (!menu.contains(document.activeElement)) moveTo(current(), false); });
+  menu.addEventListener("focusout", (e) => { if (!menu.contains(e.relatedTarget)) moveTo(current(), false); });
+  new ResizeObserver(() => moveTo(current(), false)).observe(menu);
+})(document.getElementById("site-menu"));
+
+// Overlay menu on narrow screens.
+(function overlay(stage) {
+  const toggle = stage.querySelector(".menu-toggle");
+  const menu = stage.querySelector(".menu");
+  function set(open) {
+    stage.dataset.open = String(open);
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.textContent = open ? "Close" : "Menu";
+    if (open) menu.querySelector(".menu__link")?.focus();
+  }
+  toggle.addEventListener("click", () => set(stage.dataset.open !== "true"));
+  stage.addEventListener("keydown", (e) => { if (e.key === "Escape" && stage.dataset.open === "true") { set(false); toggle.focus(); } });
+})(document.getElementById("stage"));
+
+// ARIA tabs with roving tabindex and a travelling wedge.
+(function tabs(list) {
+  const tabs = [...list.querySelectorAll('[role="tab"]')];
+  const wedge = list.querySelector(".tabs__wedge");
+  function placeWedge(tab) {
+    list.style.setProperty("--wedge-x", `${tab.offsetLeft}px`);
+    list.style.setProperty("--wedge-w", `${tab.offsetWidth}px`);
+  }
+  function select(tab, focus = true) {
+    for (const t of tabs) {
+      const on = t === tab;
+      t.setAttribute("aria-selected", String(on));
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+    }
+    placeWedge(tab);
+    if (focus) tab.focus();
+  }
+  list.addEventListener("click", (e) => { const t = e.target.closest('[role="tab"]'); if (t) select(t); });
+  list.addEventListener("keydown", (e) => {
+    const i = tabs.indexOf(document.activeElement);
+    if (i < 0) return;
+    const next = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
+    if (next === undefined) return;
+    e.preventDefault();
+    select(tabs[(next + tabs.length) % tabs.length]);
+  });
+  new ResizeObserver(() => placeWedge(tabs.find((t) => t.getAttribute("aria-selected") === "true"))).observe(list);
+  wedge.hidden = false;
+})(document.querySelector('[role="tablist"]'));
+</script>
+</body>
+</html>

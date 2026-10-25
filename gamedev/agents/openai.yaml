@@ -1,4 +1,0 @@
-interface:
-  display_name: "Game UI Art Direction"
-  short_description: "Original web controls, hover artwork, and motion"
-  default_prompt: "Use $gamedev to study game references and develop original frontend shapes, typography, and interaction choreography for this project."

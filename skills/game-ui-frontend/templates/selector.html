@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Index and preview</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+/*
+  Character-select anatomy for a project/product index:
+    stage   - large preview: oversized name behind, subject rising past its frame, detail shelf
+    roster  - compact, stable grid of native radio inputs (arrow keys for free)
+    marker  - one numbered disc that travels between cells; the grid itself never resizes
+*/
+.select {
+  display: grid;
+  grid-template-columns: 1fr minmax(240px, 320px);
+  grid-template-areas: "stage detail" "roster roster";
+  gap: var(--space-5) var(--space-6);
+}
+
+/* ---------- stage ---------- */
+.stage {
+  grid-area: stage;
+  position: relative;
+  isolation: isolate;
+  min-height: 380px;
+  display: grid;
+  place-items: end center;
+  overflow: visible;
+}
+.stage__frame {
+  position: absolute;
+  inset: 18% 6% 0;
+  z-index: -2;
+  background:
+    repeating-linear-gradient(var(--angle), transparent 0 22px, #ffffff07 22px 24px),
+    linear-gradient(160deg, var(--tone, #3a2a5c), var(--c-scene-2));
+  clip-path: polygon(0 var(--cut), var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%);
+  transition: background var(--t-exit) linear;
+}
+.stage__name {
+  position: absolute;
+  top: 4%;
+  left: 2%;
+  z-index: -1;
+  margin: 0;
+  font: 900 var(--step-5)/0.85 var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: color-mix(in srgb, var(--c-ink) 14%, transparent);
+  pointer-events: none;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+}
+/* The subject is drawn art that rises far above its frame: the drama of the screen. */
+.stage__subject {
+  width: min(340px, 70%);
+  aspect-ratio: 3 / 4;
+  margin-bottom: 0;
+  pointer-events: none;
+}
+.stage__subject svg { width: 100%; height: 100%; overflow: visible; }
+
+/* ---------- detail shelf ---------- */
+.detail {
+  grid-area: detail;
+  align-self: end;
+  padding: var(--space-5);
+  background: var(--c-plate);
+  border-left: 3px solid var(--c-accent);
+}
+.detail h3 { margin: 0 0 var(--space-1); font: 800 var(--step-3)/1 var(--font-display); text-transform: uppercase; }
+.detail__meta { display: grid; grid-template-columns: auto 1fr; gap: var(--space-1) var(--space-4); margin: var(--space-4) 0; font-size: var(--step--1); }
+.detail__meta dt { color: var(--c-ink-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.detail__meta dd { margin: 0; }
+.detail a { color: var(--c-accent); font-weight: 700; }
+
+/* ---------- roster ---------- */
+.roster { grid-area: roster; border: 0; margin: 0; padding: 0; min-width: 0; }
+.roster legend { padding: 0; margin-bottom: var(--space-3); color: var(--c-ink-muted); font-size: var(--step--1); text-transform: uppercase; letter-spacing: 0.1em; }
+.roster__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: var(--seam);
+}
+.cell { position: relative; }
+.cell input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.cell label {
+  position: relative;
+  display: grid;
+  align-content: end;
+  height: 88px;
+  padding: var(--space-2);
+  background: linear-gradient(170deg, var(--tone), var(--c-scene) 85%);
+  clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+  color: var(--c-ink);
+  font: 700 var(--step--1)/1.1 var(--font-display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  filter: saturate(0.55) brightness(0.8);
+  transition: filter var(--t-exit) linear;
+}
+.cell label:hover, .cell input:focus-visible + label, .cell input:checked + label {
+  filter: none;
+  transition: filter var(--t-enter) linear;
+}
+/* The clipped label can't show an outline, so the focus ring is drawn on the cell. */
+.cell:has(input:focus-visible) { outline: 3px solid var(--c-focus); outline-offset: 3px; }
+.cell input:disabled + label { cursor: not-allowed; filter: grayscale(1) brightness(0.55); }
+.cell input:disabled + label::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  width: 14px;
+  height: 18px;
+  background: var(--c-ink-muted);
+  clip-path: polygon(20% 40%, 20% 20%, 35% 5%, 65% 5%, 80% 20%, 80% 40%, 100% 40%, 100% 100%, 0 100%, 0 40%, 30% 40%, 30% 25%, 40% 15%, 60% 15%, 70% 25%, 70% 40%);
+}
+.roster__marker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--c-signal);
+  color: var(--c-ink);
+  font: 800 var(--step--1)/1 var(--font-display);
+  box-shadow: 0 0 0 3px var(--c-scene);
+  translate: var(--mx, 0px) var(--my, 0px);
+  transition: translate var(--t-enter) var(--ease-enter);
+  pointer-events: none;
+}
+
+@media (max-width: 719px) {
+  .select { grid-template-columns: 1fr; grid-template-areas: "stage" "detail" "roster"; }
+  .stage { min-height: 300px; }
+  .roster__grid { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 104px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 18px 4px 6px; }
+  .cell { scroll-snap-align: start; }
+}
+</style>
+</head>
+<body>
+<main class="demo-page">
+  <h1 class="visually-hidden">Index and preview</h1>
+  <section class="demo-section" aria-labelledby="s1">
+    <h2 id="s1">Project index · character-select anatomy</h2>
+    <p>The roster stays still; one numbered marker travels; the stage swaps its subject and name. Pointing previews a project,
+      choosing it (click, arrow keys) commits. Locked items keep the same geometry with their own artwork.</p>
+
+    <div class="select" id="select">
+      <div class="stage" aria-hidden="true">
+        <div class="stage__frame"></div>
+        <p class="stage__name"></p>
+        <div class="stage__subject"></div>
+      </div>
+
+      <div class="detail">
+        <h3 id="detail-title"></h3>
+        <p id="detail-summary"></p>
+        <dl class="detail__meta">
+          <dt>Year</dt><dd id="detail-year"></dd>
+          <dt>Role</dt><dd id="detail-role"></dd>
+        </dl>
+        <a id="detail-link" href="#">Open case study</a>
+      </div>
+      <p class="visually-hidden" role="status" id="announce"></p>
+
+      <fieldset class="roster">
+        <legend>Choose a project</legend>
+        <div class="roster__grid">
+          <span class="roster__marker" aria-hidden="true">1</span>
+        </div>
+      </fieldset>
+    </div>
+  </section>
+</main>
+
+<script>
+const projects = [
+  { id: "atlas", name: "Atlas", year: 2026, role: "Art direction", tone: "#3a2a5c", summary: "A route atlas for a touring exhibition.", shape: "M50 6 92 30 92 78 50 102 8 78 8 30Z" },
+  { id: "relay", name: "Relay", year: 2025, role: "Design & build", tone: "#123d4f", summary: "Live race telemetry for a cycling team.", shape: "M10 100 50 4 90 100 50 76Z" },
+  { id: "ledger", name: "Ledger", year: 2025, role: "Interface design", tone: "#4a2a1a", summary: "A night-shift accounting tool with stamps.", shape: "M14 10H86V96H14ZM28 26H72M28 44H72M28 62H58" },
+  { id: "signal", name: "Signal", year: 2024, role: "Motion", tone: "#1d3b2a", summary: "Identity system for a radio festival.", shape: "M50 54m-40 0a40 40 0 1 0 80 0a40 40 0 1 0 -80 0M50 54m-18 0a18 18 0 1 0 36 0a18 18 0 1 0 -36 0" },
+  { id: "kiln", name: "Kiln", year: 2023, role: "Art direction", tone: "#5a1f2a", summary: "Ceramics studio shop and archive.", shape: "M20 100 30 20H70L80 100ZM30 20 50 4 70 20" },
+  { id: "vault", name: "Vault", year: 2027, role: "Coming soon", tone: "#2b2b33", summary: "Not yet public.", shape: "M50 54m-30 0a30 30 0 1 0 60 0a30 30 0 1 0 -60 0", locked: true },
+];
+
+(function indexSelect(root) {
+  const grid = root.querySelector(".roster__grid");
+  const marker = root.querySelector(".roster__marker");
+  const stage = root.querySelector(".stage");
+  const name = stage.querySelector(".stage__name");
+  const subject = stage.querySelector(".stage__subject");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+  let committed = projects[0];
+  let shown = null;
+
+  for (const [i, p] of projects.entries()) {
+    const cell = document.createElement("div");
+    cell.className = "cell";
+    cell.style.setProperty("--tone", p.tone);
+    cell.innerHTML = `<input type="radio" name="project" id="p-${p.id}" value="${p.id}" ${i === 0 ? "checked" : ""} ${p.locked ? "disabled" : ""}>
+      <label for="p-${p.id}">${p.name}${p.locked ? '<span class="visually-hidden"> (locked)</span>' : ""}</label>`;
+    grid.append(cell);
+    cell.addEventListener("pointerenter", () => show(p, cell));
+    cell.querySelector("input").addEventListener("change", () => {
+      committed = p;
+      show(p, cell);
+      // Announce commits only; hover previews would be noise for screen-reader users.
+      document.getElementById("announce").textContent = `${p.name}, ${p.year}, ${p.role}`;
+    });
+    cell.querySelector("input").addEventListener("focus", () => show(p, cell));
+  }
+  grid.addEventListener("pointerleave", () => show(committed, cellOf(committed)));
+  const cellOf = (p) => grid.querySelector(`#p-${p.id}`).parentElement;
+
+  // Swaps start from whatever is on screen now, so rapid changes redirect instead of queueing.
+  function swapIn(el, enterFrom) {
+    const from = getComputedStyle(el);
+    const start = { opacity: from.opacity, translate: from.translate === "none" ? "0 0" : from.translate };
+    el.getAnimations().forEach((a) => a.cancel());
+    if (reduce.matches) return;
+    el.animate([{ ...start, ...enterFrom }, { opacity: 1, translate: "0 0" }],
+      { duration: 260, easing: "cubic-bezier(0.2, 0.9, 0.1, 1.1)" });
+  }
+
+  function show(p, cell) {
+    const i = projects.indexOf(p);
+    marker.textContent = String(i + 1);
+    grid.style.setProperty("--mx", `${cell.offsetLeft - 8}px`);
+    grid.style.setProperty("--my", `${cell.offsetTop - 12}px`);
+    if (shown === p) return;
+    shown = p;
+    stage.style.setProperty("--tone", p.tone);
+    name.textContent = p.name;
+    subject.innerHTML = `<svg viewBox="0 0 100 108" role="presentation"><path d="${p.shape}" fill="none" stroke="#f4f1ea" stroke-width="3" stroke-linejoin="round"/>
+      <path d="${p.shape}" fill="${p.tone}" opacity="0.6" transform="translate(4 5)"/></svg>`;
+    swapIn(subject, { opacity: 0, translate: "0 28px" });
+    swapIn(name, { opacity: 0, translate: "-24px 0" });
+    document.getElementById("detail-title").textContent = p.name;
+    document.getElementById("detail-summary").textContent = p.summary;
+    document.getElementById("detail-year").textContent = p.year;
+    document.getElementById("detail-role").textContent = p.role;
+    const link = document.getElementById("detail-link");
+    link.href = `#${p.id}`;
+    link.hidden = Boolean(p.locked);
+  }
+
+  new ResizeObserver(() => show(shown ?? committed, cellOf(shown ?? committed))).observe(grid);
+  show(committed, cellOf(committed));
+})(document.getElementById("select"));
+</script>
+</body>
+</html>

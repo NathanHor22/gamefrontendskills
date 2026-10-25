@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overlays and feedback</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+/* ---------- 1. Pause-style dialog: the page stays visible, choices sit in a corner ---------- */
+.open-pause {
+  min-height: var(--target-min);
+  padding: 0 var(--space-5);
+  border: 2px solid var(--c-ink);
+  background: none;
+  color: var(--c-ink);
+  font: 700 var(--step-0)/1 var(--font-display);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.open-pause:hover { background: color-mix(in srgb, var(--c-ink) 12%, transparent); }
+.open-pause:active { background: color-mix(in srgb, var(--c-ink) 24%, transparent); }
+
+.pause {
+  /* full-viewport layer so the menu can anchor to the lower-right corner */
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--c-ink);
+  display: none;
+}
+.pause[open] { display: grid; grid-template: 1fr auto / 1fr auto; }
+.pause::backdrop {
+  background: color-mix(in srgb, var(--c-scene) 55%, transparent);
+  backdrop-filter: blur(6px) saturate(0.6);
+}
+.pause__title {
+  grid-area: 1 / 1 / 2 / 3;
+  place-self: center;
+  margin: 0;
+  padding: var(--space-3) var(--space-7);
+  border-block: 1px solid color-mix(in srgb, var(--c-ink) 40%, transparent);
+  font: 400 var(--step-3)/1 var(--font-display);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+.pause__menu {
+  grid-area: 2 / 2;
+  margin: 0 max(var(--space-6), env(safe-area-inset-right)) max(var(--space-6), env(safe-area-inset-bottom)) 0;
+  padding: var(--space-4) 0;
+  list-style: none;
+  display: grid;
+  gap: var(--space-1);
+  min-width: 260px;
+  border-right: 3px solid var(--c-accent);
+  background: linear-gradient(270deg, var(--c-plate), transparent);
+}
+.pause__item {
+  position: relative;
+  width: 100%;
+  min-height: var(--target-min);
+  padding: 0 var(--space-6) 0 var(--space-5);
+  border: 0;
+  background: none;
+  color: var(--c-ink-muted);
+  text-align: right;
+  font: 700 var(--step-1)/1 var(--font-display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color var(--t-exit) linear;
+}
+.pause__item::before {      /* a slanted band that reaches out past the panel */
+  content: "";
+  position: absolute;
+  inset: 8px 0 8px -40px;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(270deg, var(--c-accent), transparent);
+  transform: skewX(var(--angle)) scaleX(0);
+  transform-origin: 100% 50%;
+  transition: transform var(--t-exit) var(--ease-exit);
+}
+.pause__item:is(:hover, :focus-visible) { color: var(--c-accent-ink); transition: color var(--t-enter) linear; }
+.pause__item:is(:hover, :focus-visible)::before { transform: skewX(var(--angle)) scaleX(1); transition: transform var(--t-enter) var(--ease-enter); }
+.pause__item:active::before { background: var(--c-accent); }
+
+/* Entry and exit are different gestures: the menu slides in from its edge, but leaves by collapsing. */
+.pause[data-state="opening"] .pause__menu { animation: menu-in var(--t-enter) var(--ease-enter) both; }
+.pause[data-state="opening"] .pause__title { animation: title-in calc(var(--t-enter) * 1.5) var(--ease-swap) both; }
+.pause[data-state="closing"] .pause__menu { animation: menu-out var(--t-exit) var(--ease-exit) both; }
+.pause[data-state="closing"] .pause__title { animation: title-out var(--t-exit) var(--ease-exit) both; }
+@keyframes menu-in { from { translate: 60px 0; opacity: 0; } }
+@keyframes menu-out { to { scale: 1 0.2; opacity: 0; } }
+@keyframes title-in { from { letter-spacing: 0.8em; opacity: 0; } }
+@keyframes title-out { to { opacity: 0; } }
+
+/* ---------- 2. Settings rows: label | value columns + explanation field ---------- */
+.settings { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 300px); gap: var(--space-6); }
+.settings__rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid #ffffff22; }
+.settings__row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 56px;
+  padding: 0 var(--space-3) 0 var(--space-5);
+  border-bottom: 1px solid #ffffff22;
+  transition: background-color var(--t-exit) linear;
+}
+.settings__row:has(:focus-visible), .settings__row:hover { background: color-mix(in srgb, var(--c-cool) 10%, transparent); }
+.settings__row:has(:focus-visible)::before, .settings__row:hover::before {   /* exterior marker outside the row */
+  content: "";
+  position: absolute;
+  left: -14px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  translate: 0 -50%;
+  rotate: 45deg;
+  background: var(--c-cool);
+  pointer-events: none;
+}
+.settings__label { font-weight: 600; }
+.switch {
+  position: relative;
+  width: 64px;
+  height: var(--target-min);
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.switch::before {      /* track */
+  content: "";
+  position: absolute;
+  inset: 12px 0;
+  background: var(--c-scene-2);
+  border: 1px solid var(--c-ink-muted);
+  transform: skewX(var(--angle));
+}
+.switch::after {       /* latch */
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 4px;
+  width: 26px;
+  height: 28px;
+  background: var(--c-ink-muted);
+  transform: skewX(var(--angle));
+  transition: translate var(--t-exit) var(--ease-exit), background-color var(--t-exit) linear;
+}
+.switch:is(:hover, :focus-visible)::before { border-color: var(--c-cool); background: color-mix(in srgb, var(--c-cool) 18%, var(--c-scene-2)); }
+.switch:active::after { scale: 0.9; }
+.switch[aria-checked="true"]::after { translate: 30px 0; background: var(--c-accent); transition: translate var(--t-enter) var(--ease-enter), background-color var(--t-enter) linear; }
+.stepper { display: flex; align-items: center; gap: var(--space-1); }
+.stepper button {
+  width: var(--target-min);
+  height: var(--target-min);
+  border: 0;
+  background: none;
+  color: var(--c-cool);
+  font-size: var(--step-0);
+  cursor: pointer;
+}
+/* clip-path also clips hit-testing, so the slanted shape lives on a pseudo-element, never on the button. */
+.stepper button { position: relative; isolation: isolate; }
+.stepper button::before {
+  content: "";
+  position: absolute;
+  inset: 6px 2px;
+  z-index: -1;
+  pointer-events: none;
+  clip-path: polygon(20% 0, 100% 0, 80% 100%, 0 100%);
+}
+.stepper button:is(:hover, :focus-visible) { color: var(--c-scene); }
+.stepper button:is(:hover, :focus-visible)::before { background: var(--c-cool); }
+.stepper button:active::before { background: var(--c-accent); }
+.stepper output { min-width: 8ch; text-align: center; font: 700 var(--step-0)/1 var(--font-display); text-transform: uppercase; letter-spacing: 0.06em; }
+.settings__help { align-self: start; padding: var(--space-5); border-left: 1px solid var(--c-cool); color: var(--c-ink-muted); min-height: 120px; }
+.settings__help h3 { margin: 0 0 var(--space-2); color: var(--c-cool); font: 700 var(--step-0)/1.2 var(--font-display); text-transform: uppercase; letter-spacing: 0.08em; }
+
+/* ---------- 3. Progress drawn from the subject: determinate stamps vs indeterminate sweep ---------- */
+.progress { display: flex; gap: 6px; align-items: end; height: 36px; }
+.progress__stamp { width: 18px; height: 26px; background: #ffffff1a; clip-path: polygon(50% 0, 100% 30%, 80% 100%, 20% 100%, 0 30%); transition: background-color 120ms linear; }
+.progress__stamp[data-on="true"] { background: var(--c-accent); }
+.progress--indeterminate .progress__stamp { animation: pulse 1.2s ease-in-out infinite; animation-delay: calc(var(--i) * 120ms); }
+@keyframes pulse { 50% { background: var(--c-cool); } }
+@media (prefers-reduced-motion: reduce) {
+  .progress--indeterminate .progress__stamp { animation: none; background: color-mix(in srgb, var(--c-cool) 50%, transparent); }
+}
+.progress-row { display: flex; flex-wrap: wrap; gap: var(--space-7); align-items: end; }
+.progress-row figcaption { margin-top: var(--space-2); font-size: var(--step--1); color: var(--c-ink-muted); }
+
+/* ---------- 4. Result toast: a small ceremony, emblem projecting past the plate ---------- */
+.toast {
+  position: fixed;
+  right: max(var(--space-5), env(safe-area-inset-right));
+  bottom: max(var(--space-5), env(safe-area-inset-bottom));
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-5) var(--space-3) var(--space-3);
+  background: var(--c-plate);
+  border-top: 3px solid var(--c-accent);
+  translate: 0 calc(100% + 40px);
+  transition: translate var(--t-exit) var(--ease-exit);
+}
+.toast[data-show="true"] { translate: 0 0; transition: translate var(--t-enter) var(--ease-enter); }
+.toast__crest { width: 44px; height: 44px; margin-top: -26px; display: grid; place-items: center; background: var(--c-accent); color: var(--c-accent-ink); clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); font: 900 var(--step-1)/1 var(--font-display); }
+.toast p { margin: 0; font: 700 var(--step-0)/1.2 var(--font-display); letter-spacing: 0.06em; text-transform: uppercase; }
+
+@media (max-width: 719px) {
+  .settings { grid-template-columns: 1fr; }
+  .pause__menu { min-width: 0; width: calc(100vw - 2 * var(--space-5)); margin-inline: var(--space-5); }
+  .pause[open] { grid-template: 1fr auto / 1fr; }
+  .pause__menu { grid-area: 2 / 1; }
+  .pause__title { grid-area: 1 / 1; }
+}
+</style>
+</head>
+<body>
+<main class="demo-page">
+  <h1 class="visually-hidden">Overlays and feedback</h1>
+
+  <section class="demo-section" aria-labelledby="o1">
+    <h2 id="o1">1 · Pause overlay</h2>
+    <p>The page stays visible behind a blur. A quiet title sits centre; three choices anchor the lower right. Escape closes.
+      The menu slides in from its edge but leaves by collapsing.</p>
+    <button class="open-pause" type="button" id="open-pause">Pause</button>
+    <dialog class="pause" id="pause" aria-labelledby="pause-title">
+      <p class="pause__title" id="pause-title">Paused</p>
+      <ul class="pause__menu">
+        <li><button class="pause__item" type="button" data-close>Resume</button></li>
+        <li><button class="pause__item" type="button" data-close>Settings</button></li>
+        <li><button class="pause__item" type="button" data-close>Leave</button></li>
+      </ul>
+    </dialog>
+  </section>
+
+  <section class="demo-section" aria-labelledby="o2">
+    <h2 id="o2">2 · Settings rows</h2>
+    <p>Label and value in two columns; a marker sits outside the focused row; the side field explains the focused setting.</p>
+    <div class="settings">
+      <ul class="settings__rows">
+        <li class="settings__row" data-help="Plays short sounds when you select and confirm.">
+          <span class="settings__label" id="l-sound">Interface sound</span>
+          <button class="switch" type="button" role="switch" aria-checked="true" aria-labelledby="l-sound"></button>
+        </li>
+        <li class="settings__row" data-help="Controls how much the interface moves. Reduced keeps every state but removes travel.">
+          <span class="settings__label" id="l-motion">Motion</span>
+          <div class="stepper" role="group" aria-labelledby="l-motion">
+            <button type="button" data-step="-1" aria-label="Previous motion option">◀</button>
+            <output aria-live="polite">Full</output>
+            <button type="button" data-step="1" aria-label="Next motion option">▶</button>
+          </div>
+        </li>
+        <li class="settings__row" data-help="Larger text everywhere, including menus.">
+          <span class="settings__label" id="l-text">Large text</span>
+          <button class="switch" type="button" role="switch" aria-checked="false" aria-labelledby="l-text"></button>
+        </li>
+      </ul>
+      <div class="settings__help" aria-live="polite">
+        <h3>About this setting</h3>
+        <p id="help-text">Focus or point at a setting to see what it does.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="demo-section" aria-labelledby="o3">
+    <h2 id="o3">3 · Progress from the subject</h2>
+    <p>Determinate progress fills real stamps and reports a value; indeterminate waiting looks visibly different and never
+      pretends to know a percentage.</p>
+    <div class="progress-row">
+      <figure>
+        <div class="progress" id="det" role="progressbar" aria-label="Upload" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+        <figcaption id="det-label">0%</figcaption>
+      </figure>
+      <figure>
+        <div class="progress progress--indeterminate" role="progressbar" aria-label="Connecting" aria-busy="true"></div>
+        <figcaption>Connecting…</figcaption>
+      </figure>
+      <button class="open-pause save-btn" type="button" id="save">Save</button>
+    </div>
+  </section>
+
+  <div class="toast" id="toast" role="status" data-show="false">
+    <span class="toast__crest" aria-hidden="true">✓</span>
+    <p id="toast-text"></p>
+  </div>
+</main>
+
+<script>
+// Pause dialog with separate entry/exit gestures. Reopening during the exit cancels it instead of queueing.
+(function pause(dialog, opener) {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+  function open() {
+    dialog.dataset.state = "opening";
+    if (!dialog.open) dialog.showModal();
+    dialog.querySelector(".pause__item").focus();
+  }
+  function close() {
+    if (reduce.matches) { dialog.close(); return; }
+    dialog.dataset.state = "closing";
+    const menu = dialog.querySelector(".pause__menu");
+    const done = () => { if (dialog.dataset.state === "closing") dialog.close(); };
+    menu.addEventListener("animationend", done, { once: true });
+  }
+  opener.addEventListener("click", open);
+  dialog.addEventListener("cancel", (e) => { e.preventDefault(); close(); });      // Escape
+  dialog.addEventListener("close", () => { dialog.dataset.state = ""; opener.focus(); });
+  dialog.querySelectorAll("[data-close]").forEach((b) => b.addEventListener("click", close));
+  dialog.addEventListener("click", (e) => { if (e.target === dialog) close(); });     // click on the blurred page
+})(document.getElementById("pause"), document.getElementById("open-pause"));
+
+// Settings: switches, stepper, explanation field.
+document.querySelectorAll(".switch").forEach((s) => s.addEventListener("click", () => s.setAttribute("aria-checked", String(s.getAttribute("aria-checked") !== "true"))));
+document.querySelectorAll(".stepper").forEach((g) => {
+  const options = ["Full", "Reduced", "None"];
+  const out = g.querySelector("output");
+  g.addEventListener("click", (e) => {
+    const step = Number(e.target.closest("[data-step]")?.dataset.step ?? 0);
+    if (!step) return;
+    out.textContent = options[(options.indexOf(out.textContent) + step + options.length) % options.length];
+  });
+});
+document.querySelectorAll(".settings__row").forEach((row) => {
+  const help = () => { document.getElementById("help-text").textContent = row.dataset.help; };
+  row.addEventListener("pointerenter", help);
+  row.addEventListener("focusin", help);
+});
+
+// Progress demo + result toast.
+(function progress(el, label) {
+  for (let i = 0; i < 10; i++) el.insertAdjacentHTML("beforeend", '<span class="progress__stamp"></span>');
+  document.querySelectorAll(".progress--indeterminate").forEach((p) => {
+    for (let i = 0; i < 10; i++) p.insertAdjacentHTML("beforeend", `<span class="progress__stamp" style="--i:${i}"></span>`);
+  });
+  let value = 0;
+  const timer = setInterval(() => {
+    value = Math.min(100, value + 10);
+    el.setAttribute("aria-valuenow", value);
+    label.textContent = `${value}%`;
+    el.querySelectorAll(".progress__stamp").forEach((s, i) => { s.dataset.on = String(i < value / 10); });
+    if (value === 100) clearInterval(timer);
+  }, 400);
+})(document.getElementById("det"), document.getElementById("det-label"));
+
+(function toast(el) {
+  let hide = 0;
+  document.getElementById("save").addEventListener("click", () => {
+    document.getElementById("toast-text").textContent = "Draft saved";
+    el.dataset.show = "true";
+    clearTimeout(hide);
+    hide = setTimeout(() => { el.dataset.show = "false"; }, 3000);
+  });
+})(document.getElementById("toast"));
+</script>
+</body>
+</html>

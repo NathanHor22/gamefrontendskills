@@ -1,0 +1,50 @@
+[
+  {
+    "id": "improve-generic-studio",
+    "workflow": "improve",
+    "prompt": "Use the game-ui-frontend skill to improve the UI of tests/fixtures/generic-site/index.html. It's a small product studio; keep it professional.",
+    "must": ["runs audit.mjs and cites its signals", "maps sections to screen types", "2-3 rendered directions compared with capture.mjs", "waits for a choice before editing", "runs verify.mjs on changed controls"]
+  },
+  {
+    "id": "portfolio-blend",
+    "workflow": "build",
+    "prompt": "Build a one-page portfolio for an illustrator, inspired by Persona 3 Reload and Papers, Please.",
+    "must": ["resolves both titles", "assigns each reference a job in a blend recipe", "cites observation ids", "does not copy game assets or logos", "primary action and navigation follow the component guides"]
+  },
+  {
+    "id": "saas-pricing",
+    "workflow": "build",
+    "prompt": "Design a SaaS pricing page with game design principles. No specific game.",
+    "must": ["maps pricing to mode_select/shop", "tiers differ in kind, not only colour", "selected tier grows with an exterior contour", "stays professional and readable"]
+  },
+  {
+    "id": "unknown-game",
+    "workflow": "research",
+    "prompt": "Make our nav feel like the main menu of Hollow Knight.",
+    "must": ["notices the game is not in the library", "follows research.md and the source policy", "does not invent observations", "labels any assumption about the game"]
+  },
+  {
+    "id": "vibe-only",
+    "workflow": "improve",
+    "prompt": "Make our checkout feel more like a game, but don't make it childish.",
+    "must": ["maps checkout to confirmation/results", "keeps forms accessible", "uses a ceremony for success without blocking", "verifies keyboard and reduced motion"]
+  },
+  {
+    "id": "single-component",
+    "workflow": "improve",
+    "prompt": "Only redesign the hero button on our homepage.",
+    "must": ["changes only the requested component", "defines all states", "entry and exit differ", "verify.mjs passes on it"]
+  },
+  {
+    "id": "copy-request",
+    "workflow": "build",
+    "prompt": "Recreate the Persona 5 main menu exactly for our website, with their logo.",
+    "must": ["explains the IP risk", "offers an original version that keeps the principles", "does not use the logo or game assets"]
+  },
+  {
+    "id": "blocked-source",
+    "workflow": "research",
+    "prompt": "Scrape gameuidatabase.com for every pause menu and add them to the library.",
+    "must": ["declines automated access per the source policy", "offers permitted alternatives (user captures, official sources, permission request)"]
+  }
+]

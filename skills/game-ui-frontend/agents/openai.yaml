@@ -1,0 +1,4 @@
+interface:
+  display_name: "Game UI for Frontend"
+  short_description: "Improve or build website UI with game interface research, verified in a browser"
+  default_prompt: "Use $game-ui-frontend to improve this site's UI with game design principles: audit it, propose rendered directions, implement the chosen one and verify the controls."

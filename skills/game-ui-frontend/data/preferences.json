@@ -1,0 +1,19 @@
+{
+  "purpose": "Develop original frontend website art direction through game interface geometry, typography, scene relationships and interaction choreography.",
+  "source_policy": {
+    "mobbin.com": "excluded",
+    "codepen.io": "excluded",
+    "gameuidatabase.com": "no_automated_access",
+    "interfaceingame.com": "link_only"
+  },
+  "personal_reference_sites": [],
+  "preferred_references": [],
+  "title_resolutions": {},
+  "interaction_priorities": [
+    "Authored silhouettes and typography",
+    "Artwork that can extend outside a stable control target",
+    "Distinct entry, settle, exit and interrupted behavior",
+    "Coherent scene and material logic",
+    "Original keyboard, touch, responsive and reduced-motion states"
+  ]
+}

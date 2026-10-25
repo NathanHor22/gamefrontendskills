@@ -1,116 +1,149 @@
-# Game UI Art Direction for Frontend Development · `$gamedev`
+# game-ui-frontend
 
-A Codex skill for designing original frontend websites through game interface research: distinctive silhouettes, typography, artwork outside control bounds, and expressive entrance and exit choreography.
+An agent skill for **Claude Code** and **Codex** that improves or builds website UI using game interface
+research, then checks the result in a real browser.
 
-Use it to turn a reference such as “Persona 3 Reload meets Papers, Please” into a coherent website direction, then implement the direction in your project when asked. It studies the relationship between controls, their selected states, and the surrounding scene. The skill excludes Mobbin/Mobin and CodePen.
+Games have spent decades solving hard interface problems on a single screen: one focal subject, a selection
+you can't miss, a primary action that looks like nothing else, and motion with order and asymmetry. This skill
+gives your agent a library of studied game screens (title screens, main menus, character select, pause,
+settings, results…), guides for placement, components and styles derived from them, working reference code,
+and Playwright scripts that audit your site and verify every control it changes.
 
-## Install in Codex
+## Install
 
-Ask Codex to install the skill from [NathanHor22/gamefrontendskills](https://github.com/NathanHor22/gamefrontendskills):
-
-```text
-$skill-installer install the gamedev skill from
-https://github.com/NathanHor22/gamefrontendskills/tree/main/gamedev
+```sh
+npx github:NathanHor22/gamefrontendskills install      # Claude Code and/or Codex, whichever you have
+npx github:NathanHor22/gamefrontendskills browser      # Playwright + Chromium for audit/verify (optional, ~150 MB)
 ```
 
-For a project-local installation, copy the entire `gamedev/` directory into your project's `.agents/skills/gamedev/` directory. Preserve its `data/`, `references/`, `scripts/`, and `agents/` subfolders. See the [official Codex skills documentation](https://learn.chatgpt.com/docs/build-skills) for skill discovery and installation.
+| Option | Effect |
+| --- | --- |
+| `--claude` / `--codex` | Install for one tool only (default: every tool found on this machine) |
+| `--project` | Install into the current project (`.claude/skills/`, `.agents/skills/`) instead of your user folder |
+| `--dir <path>` | Install somewhere else |
 
-Use Codex with a configured account or API access. Online research and visual inspection depend on the tools available in your Codex environment. The bundled research can be queried offline with Python; the local helper requires **Python 3.10+ with SQLite FTS5**, uses only the standard library, and needs no API key.
+Other commands: `doctor` (check the install), `mcp` (print Playwright MCP config for both tools),
+`uninstall`, and `library` / `audit` / `verify` / `capture` to run the scripts directly.
+
+**Claude Code plugin** (alternative): `/plugin marketplace add NathanHor22/gamefrontendskills`, then
+`/plugin install game-ui-frontend@gamefrontendskills`.
+
+Requirements: Node 20 or newer. The library needs nothing else; browser checks need Playwright (installed by
+`browser`, or already in your project).
 
 ## Use it
 
-```text
-$gamedev research Persona 3 Reload and Papers, Please for my
-portfolio. Develop three original directions, each with a signature
-navigation control and distinct enter and exit choreography.
-```
+Improve an existing site:
 
 ```text
-$gamedev study Tōkon and Dragon Ball FighterZ. Design a project
-selector with artwork that extends outside the hit area. Separate
-observed game behavior from your new website animation proposal.
+Use the game-ui-frontend skill to improve the UI of http://localhost:3000.
+It's a portfolio for an architecture studio; keep the brand colours.
 ```
+
+Build something new:
 
 ```text
-$gamedev implement the chosen direction in this project. Keep its
-character on keyboard, touch, narrow screens, and reduced motion.
-Test rapid re-entry and interrupted transitions.
+Use game-ui-frontend to build a landing page for our rhythm-game studio.
+Take composition from Taiko no Tatsujin and navigation clarity from Street Fighter 6.
 ```
 
-Research requests produce research and design suggestions. Implementation requests use the current project's stack and instructions. The skill does not publish a website by itself.
+Work on one piece:
 
-## Included research
+```text
+With game-ui-frontend, redesign the project grid on /work as a character-select style index, then verify it.
+```
 
-The 2026-10-19 research snapshot contains:
+What the agent does:
 
-| Coverage | Count |
-| --- | ---: |
-| Game and edition profiles | 44 |
-| Profiles with visually studied interfaces | 38 |
-| Reviewed image sources, including production references | 107 |
-| Inspected video sources | 9 |
-| Visual observations | 128 |
-| Original website interaction proposals | 24 |
+1. **Intake.** It reads your repo (stack, tokens, fonts) and asks only for what it can't find.
+2. **Audit** (`audit.mjs`). It takes screenshots at phone, tablet and desktop widths, makes an inventory of interactive elements, and checks for generic-UI signals (single typeface, uniform rounded buttons, `transition: all`, colour-only hovers, uniform card grids, no reduced-motion support) and accessibility violations.
+3. **Diagnosis.** It maps each section of your site to a game screen type: hero → title screen, nav → main menu, project grid → character select, modal → pause, and so on.
+4. **Evidence.** It pulls the relevant studied screens from the library.
+5. **Directions.** It writes 2–3 distinct directions and renders each as a static mock. It compares them side by side (`capture.mjs`) and waits for your choice.
+6. **Implementation** in your stack, highest-impact sections first.
+7. **Verification** (`verify.mjs`) in real Chromium:
+   - states, frame strips of entry and exit motion
+   - interruption, hover flicker, and decoration stealing clicks
+   - keyboard reach and focus visibility, target size, pixel-measured contrast
+   - reduced motion, phone layout and accessibility
+8. **Report.** You get before/after images, the evidence behind each decision, and the verification results.
 
-The remaining profiles include one atmosphere-only study and five without visual observations. A composite counts as one image source. An inspected clip does not imply every transition or hover state was reviewed.
+## What's inside
 
-References span Persona, Tekken, Street Fighter, Tōkon, FighterZ, Mobile Legends, horror interfaces, racing games, Taiko, LEGO, Final Fantasy, Apex, FIFA/FC, and more. Start with the [modern game studies](gamedev/references/modern-game-research.md) or [cross-genre studies](gamedev/references/cross-genre-game-research.md). Full records preserve source links, exact editions where known, observations, inferences, proposed website adaptations, and research gaps.
+```
+skills/game-ui-frontend/
+  SKILL.md                     the agent's entry point (short router)
+  references/
+    workflows/                 improve · build · research · verify
+    layout/                    screen-map (website surface → game screen, zone diagrams) · placement rules
+    components/                buttons · navigation · selectors · panels · forms · feedback
+    styles/                    typography · colour & material · shape · motion
+    research/                  findings (synthesis) · catalog (generated: every observation by screen and game)
+    library.md                 data model and commands
+  templates/                   tokens.css + working demos: buttons, navigation, selector, overlay
+  scripts/                     library.mjs · audit.mjs · verify.mjs · capture.mjs
+  data/                        games.json · patterns.json · vocabulary.json · preferences.json
+  examples/                    worked example · optional authored-site studies
+```
 
-This is a sourced research collection with original design proposals. It is not an exhaustive game catalog, a trained model, or a bundle of game artwork. Screenshots establish appearance at an instant; motion claims require separate evidence. Capture dates, prerelease material, production sheets, and unknown builds remain labeled.
+The templates are original, held to the same bar as your code: each one passes `verify.mjs` in CI.
 
-## Query or rebuild the library
-
-Run these commands from the repository root:
+## The library
 
 ```sh
-python gamedev/scripts/library.py stats
-python gamedev/scripts/library.py check
-python gamedev/scripts/library.py resolve "dragonball fighterz"
-python gamedev/scripts/library.py search "detached selection"
-python gamedev/scripts/library.py show persona-3-reload
+node skills/game-ui-frontend/scripts/library.mjs screens                   # screen types + coverage
+node skills/game-ui-frontend/scripts/library.mjs search --screen title     # everything for a screen type
+node skills/game-ui-frontend/scripts/library.mjs search "exterior marker" --limit 5
+node skills/game-ui-frontend/scripts/library.mjs resolve "dragonball fighterz"
+node skills/game-ui-frontend/scripts/library.mjs show tk8-options-mask-and-selection-sweep
 ```
 
-The helper uses SQLite FTS5 keyword search, not embeddings, and never fetches URLs. The repository stores portable JSON records rather than a generated database binary. When no local database exists, these commands query the bundled records in memory automatically. Importing new research creates a persistent local database, seeded with the bundled records; that generated file is ignored by Git.
+The library holds 44 game/edition profiles, 128 visual observations from 107 reviewed images and 9 video
+sources, and 24 original web interaction patterns (`library.mjs stats` gives the current numbers). It's
+selected research, not an exhaustive catalogue. Coverage is uneven: character select, mode select, main
+menu and hub screens are well covered, while title, pause, loading and settings screens are thin (see
+`library.mjs screens`).
 
-You can also build a separate database explicitly:
+Every observation separates what the source shows (`observed`) from interpretation (`inferred`) and from an
+original web proposal (`website_translation`). Each one records its screen type, its evidence level (still
+image, video frames, production sheet, text) and how the source was inspected. A screenshot is never treated as
+evidence of motion.
+
+Your own research goes to `~/.game-ui-frontend/library.json` (`library.mjs import --file …`), separate from
+the bundled data. Upgrades never overwrite or hide it, and `retract` removes mistakes. Personal preferences go
+in `~/.game-ui-frontend/preferences.json`.
+
+## Sources and rules
+
+- Game images are research, not assets: the skill borrows principles (placement, layering, state logic,
+  motion order) and draws original art. No game assets are bundled.
+- A per-domain source policy in `data/preferences.json` controls research. Mobbin and CodePen are excluded;
+  Game UI Database is never browsed automatically (it blocks AI agents); Interface In Game is link-only (its
+  terms prohibit crawling). Browser scripts refuse those domains.
+- Browser scripts only open the URL you give them and its same-origin links, never submit forms or log in,
+  and write output to `.game-ui-frontend/runs/` in your project. Add that folder to your `.gitignore`.
+
+See [CREDITS.md](CREDITS.md) for source acknowledgements.
+
+## Develop
 
 ```sh
-python gamedev/scripts/library.py --db work/rebuilt-library.sqlite import --file gamedev/data/games.json
-python gamedev/scripts/library.py --db work/rebuilt-library.sqlite import --file gamedev/data/patterns.json
-python gamedev/scripts/library.py --db work/rebuilt-library.sqlite check
+npm install && npx playwright install chromium
+npm test                                   # library, packaging, docs and browser tests
+npm run check                              # data + doc integrity (links, evidence ids, catalog freshness)
+npm run docs                               # regenerate the research catalog after editing data
 ```
 
-To preserve research added after installation, run this from your installed skill directory before replacing it:
+CI runs the library and packaging tests on Linux and Windows (Node 20 and 22) and the browser tests on Linux.
 
-```sh
-python scripts/library.py export --file my-library-backup.json
-```
+## Roadmap
 
-See [research-library.md](gamedev/references/research-library.md) for the schema, evidence rules, import behavior, and coverage definitions.
+- Automated research: scheduled discovery from permitted sources (official APIs, press kits, your own
+  captures), vision triage, Playwright frame capture from permitted video, and a review queue.
+- More title, pause, loading and settings screens.
+- Automate the eval runs in [evals/](evals/) (briefs and rubric exist; scoring is manual today).
 
-## Make it yours
+## License
 
-Public defaults do not assume that you created the example websites or share their creator's title preferences. Tell the skill your audience, content, visual references, and rejected directions. Use exact game editions when they matter.
-
-For persistent personal settings, add `gamedev/data/preferences.local.json` in your installed copy. That file is ignored by Git. For example:
-
-```json
-{
-  "personal_reference_sites": ["https://your-portfolio.example/"],
-  "title_resolutions": {
-    "my blue persona reference": "persona-3-reload"
-  }
-}
-```
-
-Local dictionaries merge with the public defaults; local lists replace the corresponding default lists. The included Nathan Hor and Quipus studies are optional credited examples of authored website interaction, not a default identity or style to impose on every project.
-
-## Validate changes
-
-Run `python -B -m unittest discover -s tests -v` and `python gamedev/scripts/library.py check` from the repository root. The included GitHub Actions workflow runs the behavioral tests and integrity check on Linux and Windows with Python 3.10 and 3.13.
-
-## Sources and license
-
-Original code, instructions, analysis, and proposals are distributed under the [MIT license](LICENSE). Linked games, websites, images, footage, fonts, and trademarks retain their respective owners' rights. No game image or video files are bundled. Use original or appropriately permitted assets in your own designs.
-
-See [CREDITS.md](CREDITS.md) for source acknowledgments. New research should include provenance, actual inspection, exact edition information where available, and a clear separation between observation and new design proposals. Do not scrape or mirror source galleries.
+MIT for the original code, instructions, analysis and proposals. Linked games, images, footage, fonts and
+trademarks belong to their owners.

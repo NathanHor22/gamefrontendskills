@@ -3,16 +3,27 @@ on: [push, pull_request]
 permissions:
   contents: read
 jobs:
-  check:
+  library:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-        python: ["3.10", "3.13"]
+        node: ["20", "22"]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-node@v4
         with:
-          python-version: ${{ matrix.python }}
-      - run: python -B -m unittest discover -s tests -v
-      - run: python -B gamedev/scripts/library.py check
+          node-version: ${{ matrix.node }}
+      - run: npm ci --ignore-scripts
+      - run: node --test tests/library.test.mjs tests/package.test.mjs
+      - run: node skills/game-ui-frontend/scripts/library.mjs check
+  browser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: node --test --test-concurrency=1 tests/browser.test.mjs

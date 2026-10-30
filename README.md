@@ -91,7 +91,7 @@ skills/game-ui-frontend/
   examples/                    worked example · optional authored-site studies
 ```
 
-The templates are original, held to the same bar as your code: each one passes `verify.mjs` in CI.
+The original templates include browser verification tests, available locally or through the manual CI run.
 
 ## The library
 
@@ -133,13 +133,22 @@ See [CREDITS.md](CREDITS.md) for source acknowledgements.
 ## Develop
 
 ```sh
-npm install && npx playwright install chromium
-npm test                                   # library, packaging, docs and browser tests
+npm ci --ignore-scripts
+node --test tests/library.test.mjs tests/package.test.mjs
 npm run check                              # data + doc integrity (links, evidence ids, catalog freshness)
 npm run docs                               # regenerate the research catalog after editing data
 ```
 
-CI runs the library and packaging tests on Linux and Windows (Node 20 and 22) and the browser tests on Linux.
+Browser verification is optional. To run it locally:
+
+```sh
+npx playwright install chromium
+node --test --test-concurrency=1 tests/browser.test.mjs
+```
+
+Pushes and pull requests run the library and packaging tests on Linux and Windows (Node 20 and 22),
+without installing Chromium. To include browser tests, use **Actions → Check skill and library → Run workflow**.
+That manual browser job uses Ubuntu 24.04, supported by the pinned Playwright version.
 
 ## Roadmap
 

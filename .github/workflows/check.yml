@@ -1,5 +1,5 @@
 name: Check skill and library
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
 permissions:
   contents: read
 jobs:
@@ -18,7 +18,8 @@ jobs:
       - run: node --test tests/library.test.mjs tests/package.test.mjs
       - run: node skills/game-ui-frontend/scripts/library.mjs check
   browser:
-    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

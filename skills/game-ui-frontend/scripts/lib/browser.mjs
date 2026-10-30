@@ -5,9 +5,7 @@ import { createRequire } from "node:module";
 import { pathToFileURL } from "node:url";
 import { SKILL_ROOT, loadPreferences, paths } from "../library.mjs";
 
-const INSTALL_HINT = `Playwright is not installed. Either:
-  npx game-ui-frontend browser            (installs it next to the skill), or
-  npm i -D playwright && npx playwright install chromium   (in your project)`;
+const INSTALL_HINT = `Playwright is not installed. Follow the browser setup in "${path.join(SKILL_ROOT, "SKILL.md")}". Install dependencies beside this skill copy, including when skills use supplied a temporary directory.`;
 
 function resolveFrom(dir, name) {
   try {
@@ -34,7 +32,7 @@ export async function launch() {
   try {
     return await chromium.launch();
   } catch (e) {
-    if (/Executable doesn't exist/.test(e.message)) throw new Error("Chromium is missing. Run: npx playwright install chromium");
+    if (/Executable doesn't exist/.test(e.message)) throw new Error(`Chromium is missing. Follow the browser setup in "${path.join(SKILL_ROOT, "SKILL.md")}".`);
     throw e;
   }
 }

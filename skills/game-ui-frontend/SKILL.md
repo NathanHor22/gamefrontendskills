@@ -10,7 +10,8 @@ selection, a primary action that looks like nothing else, and motion with order 
 turns studied game screens into original website UI, then proves the result works in a real browser.
 
 All paths below are relative to this skill's directory. Run scripts with the skill's **absolute** path
-from the user's project directory.
+from the user's project directory. With `skills use`, resolve paths from the temporary supporting directory
+provided in the prompt. No permanent skill installation or repository checkout is needed.
 
 ## Pick the workflow
 
@@ -38,9 +39,17 @@ node scripts/capture.mjs <a> <b> <c> --labels "A,B,C"            # side-by-side 
 node scripts/verify.mjs <url> --selector "<css>" [--context "<css>"] [--click-first "<css>"] [--viewport 390x844]
 ```
 
-Library commands need only Node ≥ 20. Browser scripts need Playwright: if they report it missing, tell the user
-to run `npx game-ui-frontend browser` (or `npm i -D playwright axe-core && npx playwright install chromium` in
-their project). Never claim a visual or behavioural check you could not run. If Playwright MCP tools are
+Library commands need only Node ≥ 20. Browser scripts need Playwright and axe-core. Reuse them if available;
+otherwise install them beside this skill copy (including when it is temporary):
+
+```sh
+npm install --prefix "<absolute skill directory>" --no-save --package-lock=false playwright@1.56.1 axe-core@4.10.3
+node "<absolute skill directory>/node_modules/playwright/cli.js" install chromium
+```
+
+Use `npm.cmd` on Windows if PowerShell blocks `npm.ps1`. Keep this setup outside the user's project;
+Chromium is downloaded into Playwright's browser cache. Research alone needs none of these dependencies.
+Never claim a visual or behavioural check you could not run. If Playwright MCP tools are
 available, use them for exploring; use the scripts for anything you report as verified.
 
 **Always look at the images** the scripts write (screenshots, `*-strip.png`). The scripts measure behaviour;

@@ -9,27 +9,32 @@ gives your agent a library of studied game screens (title screens, main menus, c
 settings, results…), guides for placement, components and styles derived from them, working reference code,
 and Playwright scripts that audit your site and verify every control it changes.
 
-## Install
+## Use through skills.sh without a permanent install
+
+You need Node.js **22.20 or newer**, Git, and an installed, signed-in Codex CLI or Claude Code.
+Run the matching command from your website project:
 
 ```sh
-npx github:NathanHor22/gamefrontendskills install      # Claude Code and/or Codex, whichever you have
-npx github:NathanHor22/gamefrontendskills browser      # Playwright + Chromium for audit/verify (optional, ~150 MB)
+# Codex
+npx skills@latest use NathanHor22/gamefrontendskills@game-ui-frontend --agent codex
+
+# Claude Code
+npx skills@latest use NathanHor22/gamefrontendskills@game-ui-frontend --agent claude-code
 ```
 
-| Option | Effect |
-| --- | --- |
-| `--claude` / `--codex` | Install for one tool only (default: every tool found on this machine) |
-| `--project` | Install into the current project (`.claude/skills/`, `.agents/skills/`) instead of your user folder |
-| `--dir <path>` | Install somewhere else |
+On Windows, use `npx.cmd` if PowerShell blocks `npx.ps1`.
 
-Other commands: `doctor` (check the install), `mcp` (print Playwright MCP config for both tools),
-`uninstall`, and `library` / `audit` / `verify` / `capture` to run the scripts directly.
+Then describe your design task in the session that opens. To print the skill prompt for an existing
+coding-agent chat on the same machine, omit `--agent codex` or `--agent claude-code`.
 
-**Claude Code plugin** (alternative): `/plugin marketplace add NathanHor22/gamefrontendskills`, then
-`/plugin install game-ui-frontend@gamefrontendskills`.
+[skills.sh's `use` command](https://github.com/vercel-labs/skills/blob/main/docs/commands.md#skills-use)
+fetches the instructions, research and scripts into a temporary directory. It does not register a permanent
+agent skill or add skill files to your project. Files still reach your machine: npm can cache the CLI,
+and temporary supporting files may remain after the session. A public GitHub skill is readable and downloadable.
 
-Requirements: Node 20 or newer. The library needs nothing else; browser checks need Playwright (installed by
-`browser`, or already in your project).
+Research needs no browser dependencies. For screenshots and verification, ask the agent to follow the
+browser setup in the supplied `SKILL.md`. Playwright and axe-core go beside that temporary skill copy;
+Chromium uses Playwright's browser cache. Existing project dependencies can also be reused.
 
 ## Use it
 

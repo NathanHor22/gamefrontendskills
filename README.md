@@ -1,19 +1,43 @@
 # game-ui-frontend
 
-An agent skill for **Claude Code** and **Codex** that improves or builds website UI using game interface
-research, then checks the result in a real browser.
+Ever asked Claude or ChatGeeBeeTee to make you a website and thought, **“Rah, didn’t my barber get this exact same one?”**
 
-Website these days ugghhhh. Commander Chief would not approve. The battalion would not approve. I built my own style.
+Same purple gradient. Same three little boxes. Same “revolutionising the future” waffle. Man asked for a portfolio and got a SaaS landing page selling productivity to accountants. Allow it, fam.
 
-For a playable website, three agents connect the research to the visitor's task. The **game design philosopher**
-extracts a rule, a choice and its consequence from footage. The **gameplay web designer** builds a loop
-around something the visitor wants to do. The **design critic** tries that task and explains which choices
-to keep, revise or remove. [Video studies and design philosophy](skills/game-ui-frontend/references/research/game-design-philosophy.md) · [Brief-to-direction guide](skills/game-ui-frontend/references/art-direction.md)
+Plug this skill into your website project and give it some prime Adel Taarabt at Loftus Road. A little nutmeg and a cheeky one-two. Bang, your website’s looking leng now, y’know.
 
-## Run with skills.sh
+Want a portfolio where picking a project feels like choosing your fighter? A print shop where you pull the ink yourself and take the print home? Exactly, brev. We didn’t spend all those years playing games just to make another website with three cards and a purple blob.
 
-You need Node.js **22.20 or newer**, Git, and an installed, signed-in Codex CLI or Claude Code.
-Run the matching command from your website project:
+There’s enough Man City in this world. Be prime Neymar Jr at Barcelona.
+
+## Try it in chat, brev
+
+Drop this line into your Claude or ChatGeeBeeTee chat. No terminals. No tech wizardry. Straight up easy like getting a Tesco Meal Deal. Bosh
+
+```text
+Read https://raw.githubusercontent.com/NathanHor22/gamefrontendskills/main/skills/game-ui-frontend/SKILL.md and use it as my website design guide for this chat. Ask me to paste any reference you can’t open.
+```
+
+If the links are moving funny yea, paste the [skill instructions](skills/game-ui-frontend/SKILL.md) into the chat and say:
+
+> Use this as my design guide. Give me the name of any other page you need me to paste.
+
+For the portfolio idea below, start with the [creative direction guide](skills/game-ui-frontend/references/art-direction.md).
+
+Then tell it what you’re making. For example:
+
+> I’m a gig photographer. Make my portfolio feel like a PS1 character-select screen. Let people pick a band and see the night I shot them.
+
+Swap in your own idea and you’re cooking, my guy.
+
+## For dem technical mandem
+
+\<details>
+\<summary>Go on then, show us the workings.\</summary>
+
+### Running it on your own patch
+
+From your project folder, run the line for your agent. You’ll need Git, Node.js **22.20 or newer**, and a signed-in Claude Code or Codex CLI. Make sure they’re all there before you start blaming the computer, yeah?
 
 ```sh
 # Codex
@@ -23,160 +47,54 @@ npx skills@latest use NathanHor22/gamefrontendskills@game-ui-frontend --agent co
 npx skills@latest use NathanHor22/gamefrontendskills@game-ui-frontend --agent claude-code
 ```
 
-Then describe your design task in the session that opens. On Windows, skills.sh can report
-`command not found: codex` for an npm-installed Codex. Run the following from PowerShell and paste
-the printed prompt into an open Codex session on the same machine. This also works for Claude Code.
+PowerShell kicking off and throwing hands? Run this instead, then paste what it prints into Claude Code or Codex on the same machine.
 
 ```powershell
 npx.cmd skills@latest use NathanHor22/gamefrontendskills@game-ui-frontend
 ```
 
-On other platforms, omit `--agent` and its value to print the prompt for an existing session.
+The skill lives in a temporary folder outside your repo. npm might keep a cached copy too. [How skills.sh works](https://github.com/vercel-labs/skills/blob/main/docs/commands.md#skills-use)
 
-`skills use` loads one skill into a temporary directory outside your repository. npm may cache the CLI,
-and the temporary directory can remain available after the command exits. [How skills.sh runs a skill](https://github.com/vercel-labs/skills/blob/main/docs/commands.md#skills-use)
+### Who’s doing what?
 
-Research needs no browser dependencies. For screenshots and verification, ask the agent to follow the
-browser setup in the supplied `SKILL.md`. Playwright and axe-core go beside that temporary skill copy;
-Chromium uses Playwright's browser cache. Existing project dependencies can also be reused.
+Say you want a character-select portfolio.
 
-The philosopher, designer and critic are [three roles](skills/game-ui-frontend/agents/) inside this one
-skill. The session reads their prompts from the temporary copy and can delegate each role from there.
+The **philosopher** studies how a fighting game handles its roster. The **designer** gives each project a slot. Then the **critic** pulls up and asks the real question: can someone pick a project with one thumb while the night bus is taking corners like it’s auditioning for *Fast & Furious: Peckham Drift*?
 
-## Use it
+If the menu only looks good on a massive monitor in a fancy studio, it’s getting sent back to the training ground.
 
-Improve an existing site:
+[The three roles](skills/game-ui-frontend/agents/) · [Creative direction guide](skills/game-ui-frontend/references/art-direction.md) · [Print Room demo](skills/game-ui-frontend/templates/print-room.html)
 
-```text
-Use the game-ui-frontend skill to improve the UI of http://localhost:3000.
-It's a portfolio for an architecture studio; keep the brand colours.
-```
+The research covers **47 game and edition profiles**, **136 visual observations from 111 reviewed images and 12 video sources**, and **24 original web interaction patterns**. Man’s done the homework, fam.
 
-Build something new:
+Fancy checking the footage yourself? The studies have timestamps and everything.
 
-```text
-Use game-ui-frontend to build a landing page for our rhythm-game studio.
-Take composition from Taiko no Tatsujin and navigation clarity from Street Fighter 6.
-```
+[Video studies](skills/game-ui-frontend/references/research/game-design-philosophy.md) · [Library commands](skills/game-ui-frontend/references/library.md)
 
-Work on one piece:
+### Under the bonnet
 
-```text
-With game-ui-frontend, redesign the project grid on /work as a character-select style index, then verify it.
-```
-
-Build a playable experience:
-
-```text
-Use game-ui-frontend to design our print studio as a small retro workshop. Let visitors choose
-an artwork and ink, pull a proof and keep a copy. Use the philosopher, designer and critic.
-```
-
-Open the [Print Room](skills/game-ui-frontend/templates/print-room.html) locally to try the reference
-experience. For another subject, use its actual materials, decisions and outcomes.
-
-For a page or component redesign, the skill follows this workflow.
-
-1. **Intake.** It reads your repo (stack, tokens, fonts) and asks only for what it can't find.
-2. **Audit** (`audit.mjs`). It takes screenshots at phone, tablet and desktop widths, makes an inventory of interactive elements, and checks for generic-UI signals (single typeface, uniform rounded buttons, `transition: all`, colour-only hovers, uniform card grids, no reduced-motion support) and accessibility violations.
-3. **Diagnosis.** It maps each section of your site to a game screen type: hero → title screen, nav → main menu, project grid → character select, modal → pause, and so on.
-4. **Evidence.** It reads the relevant game records or timestamped studies and explains what each contributes.
-5. **Directions.** For an open brief it compares distinct rendered options. For a specified direction it develops that choice. A brief centered on a mechanic gets a working interaction that a visitor can try.
-6. **Implementation** in your stack, highest-impact sections first.
-7. **Verification** (`verify.mjs`) in real Chromium:
-   - states, frame strips of entry and exit motion
-   - interruption, hover flicker, and decoration stealing clicks
-   - keyboard reach and focus visibility, target size, pixel-measured contrast
-   - reduced motion, phone layout and accessibility
-8. **Report.** You get before/after images, the evidence behind each decision, and the verification results.
-
-## What's inside
-
-```
-skills/game-ui-frontend/
-  SKILL.md                     the agent's entry point (short router)
-  references/
-    workflows/                 improve · build · research · verify
-    layout/                    screen-map (website surface → game screen, zone diagrams) · placement rules
-    components/                buttons · navigation · selectors · panels · forms · feedback
-    styles/                    typography · colour & material · shape · motion
-    research/                  video studies · design philosophy · Warframe navigation · generated catalog
-    art-direction.md           brief, reference decisions and worked website directions
-    library.md                 data model and commands
-  agents/                      philosophy, website design and critique roles · skill metadata
-  templates/                   print room, buttons, navigation, selector and overlay
-  scripts/                     library.mjs · audit.mjs · verify.mjs · capture.mjs
-  data/                        games.json · patterns.json · vocabulary.json · preferences.json
-  examples/                    worked example · optional authored-site studies
-```
-
-The original component templates have browser verification tests, available locally or through the manual
-CI run. The Print Room journey test changes the inks and checks the downloadable proof.
-
-## The library
-
-```sh
-node skills/game-ui-frontend/scripts/library.mjs screens                   # screen types + coverage
-node skills/game-ui-frontend/scripts/library.mjs search --screen title     # everything for a screen type
-node skills/game-ui-frontend/scripts/library.mjs search "exterior marker" --limit 5
-node skills/game-ui-frontend/scripts/library.mjs resolve "dragonball fighterz"
-node skills/game-ui-frontend/scripts/library.mjs show tk8-options-mask-and-selection-sweep
-```
-
-The library holds 47 game/edition profiles, 136 visual observations from 111 reviewed images and 12 video
-sources, and 24 original web interaction patterns (`library.mjs stats` gives the current numbers). It's
-selected research, not an exhaustive catalogue. Coverage is uneven: character select, mode select, main
-menu and hub screens are well covered, while title, pause, loading and settings screens are thin (see
-`library.mjs screens`).
-
-Every observation separates what the source shows (`observed`) from interpretation (`inferred`) and from an
-original web proposal (`website_translation`). Each one records its screen type, its evidence level (still
-image, video frames, production sheet, text) and how the source was inspected. A screenshot is never treated as
-evidence of motion.
-
-Your own research goes to `~/.game-ui-frontend/library.json` (`library.mjs import --file …`), separate from
-the bundled data. Upgrades never overwrite or hide it, and `retract` removes mistakes. Personal preferences go
-in `~/.game-ui-frontend/preferences.json`.
-
-## Sources and rules
-
-- Game images are research, not assets: the skill borrows principles (placement, layering, state logic,
-  motion order) and draws original art. No game assets are bundled.
-- A per-domain source policy in `data/preferences.json` controls research. Game UI Database blocks AI agents,
-  and Interface In Game prohibits crawling. Browser scripts enforce the source policy.
-- Browser scripts open the URL you give them and its same-origin links. Audit, capture and verification
-  save their reports in the system temporary directory by default and print the output path.
-
-See [CREDITS.md](CREDITS.md) for source acknowledgements.
-
-## Develop
+Working on the skill itself? Run these from the repo, bossman.
 
 ```sh
 npm ci --ignore-scripts
 node --test tests/library.test.mjs tests/package.test.mjs
-npm run check                              # data + doc integrity (links, evidence ids, catalog freshness)
-npm run docs                               # regenerate the research catalog after editing data
+npm run check
 ```
 
-Browser verification is optional. To run it locally:
+For the browser checks, run `npx playwright install chromium`, then:
 
 ```sh
-npx playwright install chromium
 node --test --test-concurrency=1 tests/browser.test.mjs
 ```
 
-Pushes and pull requests run the library and packaging tests on Linux and Windows (Node 20 and 22),
-without installing Chromium. To include browser tests, use **Actions → Check skill and library → Run workflow**.
-That manual browser job uses Ubuntu 24.04, supported by the pinned Playwright version.
+Want to see the reports? Open your system’s temporary folder and look for directories starting with `guf-browser-`. They’re in there somewhere, hiding like your mate when it’s his round.
 
-## Roadmap
+[Browser setup](skills/game-ui-frontend/SKILL.md#tools)
 
-- Automated research: scheduled discovery from permitted sources (official APIs, press kits, your own
-  captures), vision triage, Playwright frame capture from permitted video, and a review queue.
-- More title, pause, loading and settings screens.
-- Automate the eval runs in [evals/](evals/) (briefs and rubric exist; scoring is manual today).
+\</details>
 
-## License
+[Credits](CREDITS.md) · [MIT licence](LICENSE)
 
-MIT for the original code, instructions, analysis and proposals. Linked games, images, footage, fonts and
-trademarks belong to their owners.
+## More information
+
+What, you the feds? Allow it, fam. Check the repo itself, blud. We’re from the ends.

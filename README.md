@@ -61,7 +61,7 @@ Say you want a character-select portfolio. The **philosopher** studies how a fig
 
 **Unslop** has a go as soon as that first screen works. Pick the circuit board, pick the software project. Both give you the same tidy little blurb? Back in you go, mate. Show us the board working in someone’s hand. Let us poke through the software files. Once those pages are hooked up, Unslop tries both again and checks that hitting Back lands you on the project you just left.
 
-The **critic** takes the finished thing on the night bus. Can you still pick a project with one thumb while the driver’s auditioning for *Fast & Furious: Peckham Drift*? If you asked for only the selected portrait to lift, it checks the neighbours keep still too.
+The **critic** takes the finished thing on the night bus. Does this website still stand out on a rainy night in stoke? If you asked for only the selected portrait to lift, it gets dutty and starts wetting things up yea. And straight up tells the agent it's taking the piss and having a howler
 
 [The four roles](skills/game-ui-frontend/agents/) · [What Nathan’s globe and Quipus taught us to check](skills/game-ui-frontend/references/art-direction-review.md) · [Creative direction guide](skills/game-ui-frontend/references/art-direction.md) · [Print Room demo](skills/game-ui-frontend/templates/print-room.html)
 

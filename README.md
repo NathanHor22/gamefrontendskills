@@ -20,9 +20,11 @@ Use https://raw.githubusercontent.com/NathanHor22/gamefrontendskills/main/skills
 
 If the links are moving funny, yeah, paste the [skill instructions](skills/game-ui-frontend/SKILL.md) into the chat and say:
 
-> Build my site with this skill. If you need another game study, tell me which one to paste.
+> Build my site with this skill. If you need another page from the skill, tell me which one to paste.
 
 “Build me a site for my gig photography” is plenty to get going, mate. It might ask **“How do you lay out the prints after a gig?”** Tell it you peg them up in set-list order and love the little details. Now someone can see the whole night on your wall, pick a print, zoom in close enough to read the set list taped to the amp, then pull back to the same peg.
+
+The skill tries that zoom while it builds. If all you get on your phone is a bigger blurry thumbnail, it goes looking for the full-size shot. And if you call them gig prints, they stay gig prints. “Immersive visual storytelling solutions”? Behave.
 
 Got a software product? Expect a different question. **“Give me one job a customer hands it. What do they get back?”** Say your agents check invoices. A visitor could try a sample invoice, watch its line items pass from the reader to the checker, then open the discrepancy slip. Change the quantity and see which line gets flagged. Already told it what matters? It can crack on.
 
@@ -55,13 +57,13 @@ The skill lives in a temporary folder outside your repo. npm might keep a cached
 
 ### Who’s doing what?
 
-Say you want a character-select portfolio.
+Say you want a character-select portfolio. The **philosopher** studies how a fighting game lets you browse its roster. The **designer** gives each project a slot and works out what’s worth seeing when you pick it.
 
-The **philosopher** studies how a fighting game handles its roster. The **designer** gives each project a slot. **Unslop** gets in as soon as that screen works. If every slot glows and you can’t tell which one you’ve picked, it sorts the glow, then tries another project on a phone. The **critic** still wants to know whether you can pick one with your thumb while the night bus is taking corners like it’s auditioning for *Fast & Furious: Peckham Drift*.
+**Unslop** has a go as soon as that first screen works. Pick the circuit board, pick the software project. Both give you the same tidy little blurb? Back in you go, mate. Show us the board working in someone’s hand. Let us poke through the software files. Once those pages are hooked up, Unslop tries both again and checks that hitting Back lands you on the project you just left.
 
-If the menu only looks good on a massive monitor in a fancy studio, it’s getting sent back to the training ground.
+The **critic** takes the finished thing on the night bus. Can you still pick a project with one thumb while the driver’s auditioning for *Fast & Furious: Peckham Drift*? If you asked for only the selected portrait to lift, it checks the neighbours keep still too.
 
-[The four roles](skills/game-ui-frontend/agents/) · [Creative direction guide](skills/game-ui-frontend/references/art-direction.md) · [Print Room demo](skills/game-ui-frontend/templates/print-room.html)
+[The four roles](skills/game-ui-frontend/agents/) · [What Nathan’s globe and Quipus taught us to check](skills/game-ui-frontend/references/art-direction-review.md) · [Creative direction guide](skills/game-ui-frontend/references/art-direction.md) · [Print Room demo](skills/game-ui-frontend/templates/print-room.html)
 
 The research covers **260 game/edition profiles**, **407 visual observations from 114 reviewed images and 100 video sources**, and **24 original web interaction patterns**. Man’s done the homework, fam.
 

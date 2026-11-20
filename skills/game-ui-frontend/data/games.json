@@ -383,6 +383,80 @@
   },
   {
     "kind": "game",
+    "id": "capcom-vs-snk-2",
+    "title": "Capcom vs. SNK 2",
+    "aliases": [
+      "CvS2",
+      "Capcom vs SNK 2",
+      "Capcom vs. SNK 2: Millionaire Fighting 2001",
+      "Capcom vs. SNK 2: Mark of the Millennium 2001"
+    ],
+    "franchise": "Capcom vs. SNK",
+    "genres": [
+      "fighting"
+    ],
+    "edition": "Dreamcast Millionaire Fighting 2001, English-patched Ratio Match recording.",
+    "visual_tags": [
+      "diamond roster",
+      "team slots",
+      "character preview",
+      "ratio assignment",
+      "team order"
+    ],
+    "reviewed_on": "2026-11-20",
+    "sources": [
+      {
+        "id": "cvs2-dreamcast-ratio-run",
+        "url": "https://www.youtube.com/watch?v=Kokb0iM8YnU",
+        "title": "DeNice1776 Dreamcast ratio run with the English translation patch",
+        "type": "video",
+        "visually_inspected": true,
+        "inspection": {
+          "method": "video_frames",
+          "on": "2026-11-20"
+        },
+        "notes": "Directly inspected ten-second YouTube storyboard samples. The uploader identifies the English-patched Dreamcast build. Text and timing may differ across releases and modes."
+      }
+    ],
+    "observations": [
+      {
+        "id": "cvs2-diamond-roster-team-slots",
+        "source_id": "cvs2-dreamcast-ratio-run",
+        "screen": "character_select",
+        "screen_label": "Player Select",
+        "category": "interface",
+        "evidence_level": "video_frames",
+        "media_positions": [
+          "2:50",
+          "3:00",
+          "3:10"
+        ],
+        "observed": "The Groove list at 2:50 gives way to a diagonal bank of diamond portraits. At 3:00 the enlarged fighter is Nakoruru and at 3:10 it is Athena. The name and preview sit left of the bank, with separate red player slots along the outer edge.",
+        "inferred": "The bank gives every fighter a recognizable address. The large portrait identifies the candidate while the edge can retain picks already made.",
+        "website_translation": "In a studio service builder, keep all offerings in a fixed index. Preview one sample large and keep chosen services in a small, editable brief. Use team slots only where customers can combine services.",
+        "confidence": "high"
+      },
+      {
+        "id": "cvs2-ratio-and-order",
+        "source_id": "cvs2-dreamcast-ratio-run",
+        "screen": "loadout",
+        "screen_label": "Ratio allocation and team order",
+        "category": "interface",
+        "evidence_level": "video_frames",
+        "media_positions": [
+          "3:10",
+          "3:20",
+          "3:30"
+        ],
+        "observed": "The diamond roster at 3:10 is replaced at 3:20 by two clusters of portraits and a ratio assignment prompt. At 3:30 the team portraits surround a VS mark with the order controls above.",
+        "inferred": "The same portraits link membership, allocation and order. Each screen asks a different question of the same team.",
+        "website_translation": "When a real package builder asks how to divide time or budget, carry selected service images into that allocation view and let visitors revise the members. Show an order control only if sequence changes the delivered work.",
+        "confidence": "high"
+      }
+    ]
+  },
+  {
+    "kind": "game",
     "id": "clair-obscur-expedition-33",
     "title": "Clair Obscur: Expedition 33",
     "aliases": [
@@ -2731,6 +2805,61 @@
   },
   {
     "kind": "game",
+    "id": "marvel-super-heroes-vs-street-fighter",
+    "title": "Marvel Super Heroes vs. Street Fighter",
+    "aliases": [
+      "MSHVSF",
+      "Marvel Super Heroes vs Street Fighter",
+      "Marvel Super Heroes versus Street Fighter"
+    ],
+    "franchise": "Marvel vs. Capcom",
+    "genres": [
+      "fighting"
+    ],
+    "edition": "Arcade game as presented in the Marvel vs. Capcom Fighting Collection: Arcade Classics showcase.",
+    "visual_tags": [
+      "tapered portrait roster",
+      "oversized preview",
+      "fighter silhouettes"
+    ],
+    "reviewed_on": "2026-11-20",
+    "sources": [
+      {
+        "id": "mshvsf-collection-showcase",
+        "url": "https://www.youtube.com/watch?v=2jBk6rDKork",
+        "title": "Marvel vs Capcom official collection showcase for Marvel Super Heroes vs. Street Fighter",
+        "type": "video",
+        "visually_inspected": true,
+        "inspection": {
+          "method": "video_frames",
+          "on": "2026-11-20"
+        },
+        "notes": "Four consecutive one-second YouTube storyboard samples from the arcade collection trailer. The red side borders and subtitle strip belong to the presentation. Input and continuous animation were not inspected."
+      }
+    ],
+    "observations": [
+      {
+        "id": "mshvsf-portrait-and-sprite",
+        "source_id": "mshvsf-collection-showcase",
+        "screen": "character_select",
+        "screen_label": "team member selection",
+        "category": "interface",
+        "evidence_level": "video_frames",
+        "media_positions": [
+          "0:21",
+          "0:22",
+          "0:23",
+          "0:24"
+        ],
+        "observed": "A tapered bank of small portraits holds the center. The large portrait on its left changes from Ryu to Captain America to an upside-down Spider-Man and then a single large eye. A smaller full-body character appears below the large portrait.",
+        "inferred": "A compact roster makes alternatives available while the change of scale and pose gives the current fighter an identity. The trailer samples do not establish how selection was triggered.",
+        "website_translation": "For an audio shop, crop each roster image around an identifying part, then give the selected turntable or speaker its own full composition. Keep the name and price adjacent to that view. Let the visitor choose when to open specifications.",
+        "confidence": "high"
+      }
+    ]
+  },
+  {
+    "kind": "game",
     "id": "marvel-tokon-fighting-souls",
     "title": "MARVEL Tōkon: Fighting Souls",
     "aliases": [
@@ -3538,7 +3667,7 @@
       "illustrated status portraits",
       "asymmetric overlay"
     ],
-    "coverage": "Three visually inspected official screenshots: map selection, combat commands, and a daily-life dialogue overlay. Main pause-menu transitions and animation have not been inspected.",
+    "coverage": "Three official screenshots cover map selection, battle commands and dialogue. Sampled release footage adds the pause menu and a decoded Social Link list-to-detail transition.",
     "sources": [
       {
         "id": "p3r-official",
@@ -3583,6 +3712,18 @@
           "method": "browser_view",
           "on": "2026-10-19"
         }
+      },
+      {
+        "id": "p3r-relaxalax-pause",
+        "url": "https://www.youtube.com/watch?v=PwTS-CcrSjQ",
+        "title": "RelaxAlax, Pause Menus Shouldn't Be This Good",
+        "type": "video",
+        "visually_inspected": true,
+        "inspection": {
+          "method": "video_frames",
+          "on": "2026-11-20"
+        },
+        "notes": "Timed storyboard samples and decoded video frames from the English-language footage of Reload. The essay includes other Persona releases. Only the cited Reload playheads support this observation."
       }
     ],
     "observations": [
@@ -3624,15 +3765,33 @@
         "category": "interface",
         "evidence_level": "static_image",
         "confidence_note": "high for visible styling; behavior remains unverified"
+      },
+      {
+        "id": "p3r-social-link-list-to-detail",
+        "source_id": "p3r-relaxalax-pause",
+        "screen": "pause",
+        "screen_label": "pause menu and Social Link detail",
+        "category": "interface",
+        "evidence_level": "video_frames",
+        "media_positions": [
+          "9:00",
+          "9:04.64",
+          "9:04.76",
+          "9:04.88",
+          "9:05.24"
+        ],
+        "observed": "The root places a leaning column of commands beside a suspended figure. In Social Link, the selected Fool row is visible at 9:04.64. At 9:04.76 the list has cleared and Mitsuru's description appears beside the figure. By 9:04.88 the rank and portraits are in place. At 9:05.24 the protagonist's hand is open beside the card.",
+        "inferred": "The information swap and accompanying gesture finish at different moments. The samples identify their order. Native input latency, easing and reverse behavior are unmeasured.",
+        "website_translation": "For a photography exhibition, keep the identity of the selected print visible as the visitor opens edition details. Reveal the facts while the image finishes reframing. Return to the same print and restore focus to its opening control.",
+        "confidence": "high"
       }
     ],
     "research_pending": [
-      "Main pause-menu typography and portrait composition",
-      "Recorded transitions and motion timing",
-      "Additional settings and item screens"
+      "Uninterrupted menu opening, closing and rapid re-entry",
+      "Additional settings and item transitions"
     ],
     "kind": "game",
-    "reviewed_on": "2026-10-19"
+    "reviewed_on": "2026-11-20"
   },
   {
     "id": "persona-4-golden",
@@ -4864,6 +5023,135 @@
           "0:12.550",
           "0:12.650"
         ]
+      }
+    ]
+  },
+  {
+    "kind": "game",
+    "id": "warframe",
+    "title": "Warframe",
+    "aliases": [
+      "Warframe Star Chart",
+      "Warframe Navigation"
+    ],
+    "genres": [
+      "cooperative action",
+      "action RPG"
+    ],
+    "edition": "Digital Extremes' Origin System Star Chart guide (capture build unspecified), PC Update 36 Navigation, and the separate PC Update 44.1 Icebind party flow.",
+    "visual_tags": [
+      "mission deploy",
+      "destination selection",
+      "spatial index",
+      "node briefing",
+      "in-place loadout",
+      "squad vote"
+    ],
+    "reviewed_on": "2026-11-20",
+    "sources": [
+      {
+        "id": "wf-system-image",
+        "url": "https://www-static.warframe.com/uploads/c032472fd2f0bffc8bb7626272b02143.jpg",
+        "page_url": "https://www.warframe.com/en/news/star-chart",
+        "title": "Digital Extremes — The Star Chart, system overview",
+        "type": "screenshot",
+        "visually_inspected": true,
+        "inspection": {
+          "method": "image_fetched",
+          "on": "2026-11-20",
+          "sha256": "52921e19d14c7ef15de61861c0a0a143b4ffbfc8926fc2e50443bb2d037a30c3"
+        },
+        "notes": "The guide's date is not a build identifier. This image shows the Whispers in the Walls quest label and Nora's Mix Vol. 5."
+      },
+      {
+        "id": "wf-desdemona-image",
+        "url": "https://www-static.warframe.com/uploads/66f1be34ab89ea74fe28f2b721efe055.jpg",
+        "page_url": "https://www.warframe.com/en/patch-notes/pc/36-0-0",
+        "title": "Digital Extremes — PC Update 36, Suggested Damage on Desdemona",
+        "type": "screenshot",
+        "visually_inspected": true,
+        "inspection": {
+          "method": "image_fetched",
+          "on": "2026-11-20",
+          "sha256": "558d931b966ecee88e5c88e45a8e75b9938350f1e63fdfbe813f59422cbd7548"
+        },
+        "notes": "The patch illustration darkens surrounding material to emphasize the damage recommendation. Treat this emphasis as editorial."
+      },
+      {
+        "id": "wf-excalibur-loadout-image",
+        "url": "https://www-static.warframe.com/uploads/7a990e593fae7a120778d8b7f348a3e0.jpg",
+        "page_url": "https://www.warframe.com/en/patch-notes/pc/36-0-0",
+        "title": "Digital Extremes — PC Update 36, Warframe options in Navigation",
+        "type": "screenshot",
+        "visually_inspected": true,
+        "inspection": {
+          "method": "image_fetched",
+          "on": "2026-11-20",
+          "sha256": "a4e2ff8e4da92ff354eef332ca9932bb7c083c8cb3ecb25e9ae45c7c498fa3bf"
+        }
+      },
+      {
+        "id": "wf-icebind-vote-image",
+        "url": "https://www-static.warframe.com/uploads/fcbcb356e12efd1149d69cf121dfe486.jpg",
+        "page_url": "https://www.warframe.com/en/patch-notes/pc/44-1-0",
+        "title": "Digital Extremes — PC Update 44.1, voting on a Cryobell in The Icebind",
+        "type": "screenshot",
+        "visually_inspected": true,
+        "inspection": {
+          "method": "image_fetched",
+          "on": "2026-11-20",
+          "sha256": "354b990187043c6309e56b3af4fea87ee91a22fbc22c12193e72aa98b879bd19"
+        }
+      }
+    ],
+    "observations": [
+      {
+        "id": "wf-origin-system-destinations",
+        "source_id": "wf-system-image",
+        "screen": "map",
+        "screen_label": "Origin System overview",
+        "category": "interface",
+        "evidence_level": "static_image",
+        "observed": "Widely spaced white destination names sit beside bodies of different sizes against dark space. A kneeling figure sits behind the chart. Thin arcs cross the field. Small dark-and-gold utility groups sit at the corners.",
+        "inferred": "The planet silhouette and its nearby name form a target a returning player can recognize by position. The perimeter gives persistent tools a different visual role.",
+        "website_translation": "Use a venue floor plan for a festival with multiple stages. Give each stage a labeled position and an illustration drawn from its actual architecture. Reveal its programme on selection.",
+        "confidence": "high"
+      },
+      {
+        "id": "wf-desdemona-node-brief",
+        "source_id": "wf-desdemona-image",
+        "screen": "mode_select",
+        "screen_label": "Desdemona mission node details",
+        "category": "interface",
+        "evidence_level": "static_image",
+        "observed": "A gold diamond and Desdemona label sit below a rectangular preview above the planet. The panel layers a location name over scene art. Below it are the mission type, Grineer faction, level range 26–28 and a Suggested Damage row with two symbols. Nearby node names remain visible.",
+        "inferred": "The readout answers what the activity involves, how demanding it is, and how to prepare while keeping its location in view.",
+        "website_translation": "Choose a workshop on a programme map to reveal an actual work sample, the session title, duration and prerequisite. Keep the parent venue visible and open the full syllabus on request.",
+        "confidence": "high"
+      },
+      {
+        "id": "wf-navigation-inline-loadout",
+        "source_id": "wf-excalibur-loadout-image",
+        "screen": "loadout",
+        "screen_label": "Equipment options inside Navigation",
+        "category": "interface",
+        "evidence_level": "static_image",
+        "observed": "A vertical strip of equipment icons occupies the left edge. Beside the Excalibur thumbnail a narrow dark panel shows Swap, Upgrade and three configurations, with a check beside Config A. Named destinations and their connecting lines remain in view across the middle.",
+        "inferred": "A player changing their preparation can keep the route in view. The checked row communicates an equipped value independently of the pointer.",
+        "website_translation": "Let a visitor switch their existing ticket or selected date in a local panel while the session they are considering stays visible. Show the applied value when the panel closes.",
+        "confidence": "high"
+      },
+      {
+        "id": "wf-icebind-squad-deployment",
+        "source_id": "wf-icebind-vote-image",
+        "screen": "confirmation",
+        "screen_label": "The Icebind group mission vote, PC Update 44.1",
+        "category": "interface",
+        "evidence_level": "static_image",
+        "observed": "Six mission columns repeat type, planet, faction and modifiers in the same order. Four player emblems overlap the top of the frost-edged Pluto option. The shared countdown is centered below the row and the personal modifier occupies a separate area below it.",
+        "inferred": "Players can read the group's preferred destination and their own conditions separately. The shared time belongs to the whole choice.",
+        "website_translation": "For a group scheduling brief, attach participant votes to actual session options and keep the viewer's availability separate. Give the organizer an explicit final booking action.",
+        "confidence": "high"
       }
     ]
   },

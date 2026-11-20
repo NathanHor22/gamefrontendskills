@@ -1,0 +1,34 @@
+# What a pause menu can tell you about where you are
+
+Use this study for a brief where someone interrupts a primary activity to inspect details, adjust a choice or visit a related section. Decide what they should recognize when they open the menu, what information the destination adds, and exactly where they should land on return.
+
+## Four treatments in RelaxAlax's video
+
+The Reload transition is also searchable as `p3r-social-link-list-to-detail`.
+
+The playheads below refer to five-second storyboard samples from *Pause Menus Shouldn't Be This Good* and decoded frames of the Reload submenu, reviewed on 2026-11-20. Selected original narration was transcribed locally and checked against the images. The samples establish visible states and their order. The input that began the transition, its easing curve and the uninterrupted close remain unverified.
+
+| Screen | Visible evidence | Design decision it suggests |
+| --- | --- | --- |
+| Earlier *Persona 3*, shown in the PS2 section | Skill pairs the party and its resource bars with the chosen skill's cost and description. Persona devotes that space to Orpheus and his statistics. Status gives the protagonist a portrait beside his social attributes. Flat blue planes and strong section titles connect the three views. [3:30–3:40](https://www.youtube.com/watch?v=PwTS-CcrSjQ&t=210s) | Decide what the visitor is inspecting first. A shared color and type treatment can connect markedly different arrangements of information. |
+| *Persona 4* | The menu lays a narrow vertical band of colored stripes over the field. “Item” grows among the other labels, with available money in one corner and party faces at the edge. The Skill screen gives its list a wider reading area while keeping those faces visible. [3:55–4:00](https://www.youtube.com/watch?v=PwTS-CcrSjQ&t=235s) | Keep the underlying place visible when orientation matters. Carry one meaningful piece of context into the next view, such as the particular project or person being edited. |
+| *Persona 5 Royal* | The main command list crowds around Joker's silhouette. The active word gets a red accent. In Confidant, a stack of people and ranks gives way to a portrait of Takuto Maruki, his name, relationship rank and description. Black silhouettes, torn-looking white edges and red fields hold the views together. [Main menu at 5:40](https://www.youtube.com/watch?v=PwTS-CcrSjQ&t=340s) · [List and detail at 6:50–7:00](https://www.youtube.com/watch?v=PwTS-CcrSjQ&t=410s) | Give an index a fast scan and a detail its own composition. A face, name or characteristic edge can carry recognition across the change. |
+| *Persona 3 Reload* | The root menu suspends an upside-down protagonist beside a slanted column of words in blue water. Social Link arranges rank, names and portraits around a larger figure. On Skill, the figure hangs beside party bars. On Status, his hands frame his face. [Main and Social Link at 9:00–9:05](https://www.youtube.com/watch?v=PwTS-CcrSjQ&t=540s) · [Skill at 9:20](https://www.youtube.com/watch?v=PwTS-CcrSjQ&t=560s) · [Status at 9:35](https://www.youtube.com/watch?v=PwTS-CcrSjQ&t=575s) | Reframe one subject to explain a change of task. Plan different crops and gestures around the actual space each section needs. |
+
+In Reload's Social Link view, the selected Fool row is still visible at 9:04.64. At 9:04.76 the list has cleared and Mitsuru's description is visible beside the protagonist. At 9:04.88 the rank panel and party portraits occupy their new positions. By 9:05.24 his hand has opened around the card. The selection, the information swap and the character gesture read as distinct events. A website can use that order to let someone start reading while an illustration finishes moving. [RelaxAlax, Social Link footage](https://www.youtube.com/watch?v=PwTS-CcrSjQ&t=544s)
+
+## How the Reload team arrived there
+
+Art director Tomohiro Kumagai describes a menu that takes the protagonist inward to examine his relationships and information. The earlier game's blues and bubble-like movement informed the water, reflected light and suspended pose. The team built a dedicated UI model with enough articulation for the hair, expression and music player, and tailored its pose to each menu. Planners supplied the information each screen needed. Designers composed around it, then tried the candidates in the game to judge readability and operation. Those decisions connect the fiction, the movement and the practical shape of each screen. [Famitsu's interview with the Reload team, 29 November 2023](https://www.famitsu.com/news/202311/29325647.html)
+
+## Original direction for a website
+
+**A tradeoff in the essay.** RelaxAlax credits *Persona 5*'s stark colour differences with making even a crooked ability panel legible. In *Reload*, he reads the slowly drifting figure as emotionally different, then questions whether the closer blues make information harder to pick out. This is the critic’s interpretation. On a gallery site, the exhibition room can keep its close tonal range while the active edition, price and Back action each have a clear edge against it. Test whether a visitor can find the active edition while the photograph is still moving. [Persona 5 discussion, 6:30](https://www.youtube.com/watch?v=PwTS-CcrSjQ&t=390s) · [Reload’s movement, 9:17](https://www.youtube.com/watch?v=PwTS-CcrSjQ&t=557s) · [Contrast critique, 10:16](https://www.youtube.com/watch?v=PwTS-CcrSjQ&t=616s)
+
+**Brief** — “Build an online photography exhibition. Let visitors look closely at a photograph and find its print editions.” Treat opening details like turning a photographic print over. This gives the exhibition a reason for a theatrical transition and the visitor a familiar way back.
+
+- **Open.** A “Print details” tab projects from a corner of the mount. On activation, the paper edge lifts and the reverse of the mount occupies the detail area. Keep the photograph title and a small crop visible. Make the destination controls usable as soon as the view opens.
+- **Choose.** “Editions” shows the whole print against a scale reference with size, price and availability for the chosen edition. “Process” replaces that composition with a close crop of the paper surface and the photographer's note. Both reuse the mount edge. The visitor's question determines which image and text deserve space.
+- **Return.** Back from an edition restores the Editions list and its focused option. Closing the detail view returns to the same photograph, scroll position and opening control. On a phone, use the paper edge as the top of a full-width sheet. In reduced motion, swap the views directly and retain the title, crop and focus cues.
+
+For a prompt about a single preference such as text size, keep the control beside the reading surface and show the result there. A full-menu scene earns its space when there is a destination worth exploring.

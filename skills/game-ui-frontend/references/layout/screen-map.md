@@ -215,12 +215,19 @@ Patterns: `sliced-ribbon-stepper`.
 
 ## Locations, site map, timeline ← map (`map`)
 
+When choosing a place also starts a booking or configures a service, follow the whole
+[Warframe navigation and deployment flow](../research/warframe-navigation.md). Preserve the visitor's
+place while they inspect requirements or change an option.
+
 - A readable list beside an atmospheric map; one high-contrast selected row. Evidence: `p3r-map-select-list`
 - Fine technical grids, object-specific glyphs, a detached focus ring and a separate detail channel.
   Evidence: `alien-isolation-map-anatomy`
 - A historical atlas with a chronological rail along the bottom. Evidence: `ff16-situation-map-anatomy`
 
 ## App chrome, status bars, live widgets ← HUD (`hud`)
+
+Read [the HUD and camera study](../research/hud-and-camera.md) to decide which facts need a permanent
+position, which should appear beside a choice, and what context a close crop removes.
 
 - Compact clusters at edges; the content (the "scene") owns the centre.
 - Step lists with completed lines filled and a detached marker pointing at the current line suit

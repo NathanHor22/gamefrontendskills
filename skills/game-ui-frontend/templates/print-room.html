@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#eee8d7">
+<title>Print Room — pull a two-ink proof</title>
+<style>
+  :root { color-scheme: light; --paper: #eee8d7; --black: #152c29; --red: #aa3827; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--black); font: 17px/1.45 "Trebuchet MS", system-ui, sans-serif; }
+  main { max-width: 1440px; margin: auto; padding: clamp(16px, 4vw, 62px); }
+  header { display: flex; align-items: baseline; gap: 20px; margin-bottom: clamp(12px, 2vw, 32px); }
+  h1, h2, p { margin: 0; }
+  h1 { font: bold italic clamp(46px, 7vw, 104px)/.92 Georgia, serif; letter-spacing: -.08em; }
+  h2 { font: bold clamp(25px, 3vw, 42px)/1 Georgia, serif; letter-spacing: -.05em; }
+  .workshop { display: grid; grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr); border-block: 2px solid var(--black); }
+  figure { position: relative; overflow: hidden; margin: 0; align-self: stretch; background: #516c65; min-height: clamp(360px, 39vw, 580px); }
+  #room { display: block; width: 100%; height: 100%; position: absolute; object-fit: cover; image-rendering: pixelated; }
+  #room.operable { cursor: grab; touch-action: pan-y pinch-zoom; }
+  #room.dragging { cursor: grabbing; }
+  #room[aria-hidden=true] { filter: brightness(.76); }
+  #proof { position: absolute; inset: 4% 0; margin: auto; height: 92%; max-width: 90%; object-fit: contain; filter: drop-shadow(6px 10px 7px #152c2966); }
+  #skip { position: absolute; top: 12px; right: 12px; }
+  aside { padding: clamp(20px, 3vw, 42px); border-left: 2px solid var(--black); background: #f8f1df; }
+  .step { display: grid; align-content: start; gap: 18px; }
+  .step[hidden], [hidden] { display: none !important; }
+  fieldset { margin: 0; padding: 0; border: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  legend { width: 100%; padding: 0 0 7px; font-weight: 700; }
+  .choice { position: relative; cursor: pointer; min-height: 44px; display: inline-flex; align-items: center; }
+  .choice input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+  .choice span { display: inline-flex; align-items: center; min-height: 44px; padding: 7px 10px; border-bottom: 2px solid #75827c; }
+  .choice input:checked + span { border-color: var(--black); background: var(--black); color: var(--paper); }
+  .choice input:focus-visible + span, :is(button,a,summary,input[type=range]):focus-visible { outline: 3px solid #176bbb; outline-offset: 3px; }
+  .swatch::before { content: ""; width: .9em; height: .9em; margin-right: .45em; border: 1px solid currentColor; border-radius: 50%; background: var(--ink); }
+  summary { cursor: pointer; padding-block: 10px; width: fit-content; }
+  details label { display: block; margin-top: 5px; }
+  input[type=range] { accent-color: var(--red); width: 100%; min-height: 44px; cursor: pointer; }
+  button, a { font: inherit; }
+  .action, .plain { cursor: pointer; min-height: 44px; }
+  .action { position: relative; isolation: isolate; width: fit-content; max-width: 100%; color: #fff7de; background: none; border: 0; text-decoration: none; padding: 12px 24px; font-weight: bold; }
+  .action::before, .action::after { content: ""; position: absolute; z-index: -1; inset: 0; pointer-events: none; transform: skewX(-8deg); }
+  .action::before { background: var(--red); }
+  .action::after { z-index: -2; background: var(--black); translate: 3px 3px; transition: translate .13s ease-in; }
+  .action:is(:hover,:focus-visible)::after { translate: 8px 5px; transition-duration: .22s; }
+  .action:active::before { translate: 2px 2px; background: #762e24; }
+  .plain { border: 0; background: var(--paper); color: var(--black); padding: 6px 10px; text-decoration: underline; text-underline-offset: 3px; width: fit-content; }
+  .pull-label { font-weight: bold; display: block; }
+  .instruction { max-width: 32ch; }
+  h2[tabindex]:focus { outline: none; }
+  @media (max-width: 740px) {
+    main { padding: 16px; } header { margin-block: 9px 15px; }
+    .workshop { grid-template-columns: 1fr; }
+    figure { min-height: 0; aspect-ratio: 3 / 2; }
+    aside { border: 0; border-top: 2px solid var(--black); padding: 20px 14px; }
+    .step { gap: 13px; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::after { transition: none !important; } }
+</style>
+</head>
+<body>
+<main>
+  <header><h1>Print Room</h1></header>
+  <div class="workshop">
+    <figure aria-label="Printmaking workbench">
+      <canvas id="room" width="600" height="400" role="img" aria-label="A sunlit studio with a wooden screen press and an inked plate."></canvas>
+      <img id="proof" alt="" hidden>
+      <button class="plain" id="skip" type="button">Skip camera move</button>
+    </figure>
+    <aside>
+      <noscript>Enable JavaScript to operate the press and save your print.</noscript>
+      <section class="step" id="setup" aria-labelledby="choose-title">
+        <h2 id="choose-title" tabindex="-1">Make a print</h2>
+        <fieldset>
+          <legend>Choose a plate</legend>
+          <label class="choice"><input type="radio" name="plate" value="heron" checked><span>Heron</span></label>
+          <label class="choice"><input type="radio" name="plate" value="shoal"><span>Shoal</span></label>
+          <label class="choice"><input type="radio" name="plate" value="arch"><span>Arch</span></label>
+        </fieldset>
+        <fieldset>
+          <legend>Second ink</legend>
+          <label class="choice"><input type="radio" name="ink" value="#c74931" checked><span class="swatch" style="--ink:#c74931">Vermilion</span></label>
+          <label class="choice"><input type="radio" name="ink" value="#27667f"><span class="swatch" style="--ink:#27667f">Prussian</span></label>
+          <label class="choice"><input type="radio" name="ink" value="#af7c29"><span class="swatch" style="--ink:#af7c29">Ochre</span></label>
+        </fieldset>
+        <details><summary>Adjust ink registration</summary>
+          <label for="offset">Horizontal shift <output for="offset" id="offset-value">0 px</output></label>
+          <input type="range" id="offset" min="-20" max="20" value="0">
+        </details>
+        <button class="action" type="button" id="prepare">Set the screen</button>
+      </section>
+      <section class="step" id="pull" aria-labelledby="pull-title" hidden>
+        <h2 id="pull-title" tabindex="-1">Pull the ink</h2>
+        <p class="instruction">Drag the squeegee across the sheet, or move the slider to transfer the second colour.</p>
+        <label class="pull-label" for="stroke">Squeegee position</label>
+        <input type="range" id="stroke" min="0" max="100" step="1" value="0">
+        <button class="action" id="one-pass" type="button">Pull in one pass</button>
+        <button class="plain" id="change" type="button">Change plate or ink</button>
+      </section>
+      <section class="step" id="result" aria-labelledby="result-title" hidden>
+        <h2 id="result-title" tabindex="-1">Your proof</h2>
+        <p id="caption"></p>
+        <a class="action" id="download" download>Save print as PNG</a>
+        <button class="plain" id="again" type="button">Back to the press</button>
+      </section>
+    </aside>
+  </div>
+</main>
+<script>
+"use strict";
+const byId = id => document.getElementById(id);
+const room = byId("room");
+const brush = room.getContext("2d");
+const studio = "#1f3a36",
+  paper = "#f3e6c7";
+const sheet = document.createElement("canvas"),
+  base = document.createElement("canvas");
+sheet.width = base.width = 720;
+sheet.height = base.height = 960;
+const selected = name => document.querySelector('input[name="' + name + '"]:checked');
+const media = matchMedia("(prefers-reduced-motion: reduce)");
+const plateDescriptions = {
+  heron: "A long-legged heron against a round sun above reeds",
+  shoal: "Four dark fish crossing bands of moving water",
+  arch: "A tall stone arch casting a diagonal shadow beneath the sun"
+};
+const bed = { x: -67, y: 75, z: -51, width: 95, depth: 99 };
+const pose = { yaw: 0.75, tilt: 0.63, zoom: 0.9, lift: 0 };
+let step = "setup";
+let motionFrame = 0;
+let inkCoverage = 0;
+const views = {
+  setup: { yaw: 0.48, tilt: 0.65, zoom: 1.12, lift: -5 },
+  pull: { yaw: 0.17, tilt: 1.02, zoom: 1.67, lift: -6 },
+  result: { yaw: 0.65, tilt: 0.54, zoom: 0.96, lift: -5 }
+};
+
+function polygon(ctx, points, fill) {
+  ctx.fillStyle = fill;
+  ctx.beginPath();
+  ctx.moveTo(...points[0]);
+  for (let i = 1; i < points.length; i++) ctx.lineTo(...points[i]);
+  ctx.closePath();
+  ctx.fill();
+}
+function ellipse(ctx, x, y, rx, ry, angle, colour) {
+  ctx.fillStyle = colour;
+  ctx.beginPath();
+  ctx.ellipse(x, y, rx, ry, angle, 0, Math.PI * 2);
+  ctx.fill();
+}
+function strokeLine(ctx, x, y, x2, y2, colour, width) {
+  ctx.strokeStyle = colour;
+  ctx.lineWidth = width;
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+  ctx.lineTo(x2, y2);
+  ctx.stroke();
+}
+
+// The same two separations feed the projected paper, the partial ink pass and the full-size download.
+function drawPlate(ctx, plate, accent) {
+  ctx.fillStyle = paper;
+  ctx.fillRect(0, 0, 720, 960);
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(48, 48, 624, 864);
+  ctx.clip();
+  const ink = selected("ink").value,
+    shift = Number(byId("offset").value);
+  if (accent) {
+    ctx.save();
+    ctx.translate(shift, 0);
+    if (plate === "heron") {
+      ellipse(ctx, 416, 302, 181, 181, 0, ink);
+      for (let i = 0; i < 15; i++) {
+        const x = 24 + i * 49,
+          y = 594 + Math.sin(i * 1.72) * 49;
+        polygon(ctx, [[x, 916], [x + 8, y], [x + 27, 850], [x + 22, 916]], ink);
+      }
+    } else if (plate === "shoal") {
+      for (let i = 0; i < 9; i++) {
+        const y = 65 + i * 110;
+        polygon(ctx, [[15, y], [166, y + 24], [397, y - 4], [705, y + 62], [705, y + 87], [395, y + 25], [172, y + 46], [15, y + 22]], ink);
+      }
+    } else {
+      ellipse(ctx, 450, 230, 137, 137, 0, ink);
+      polygon(ctx, [[34, 898], [344, 505], [690, 469], [690, 925]], ink);
+    }
+    ctx.restore();
+  }
+  if (plate === "heron") {
+    polygon(ctx, [
+      [128, 527], [141, 450], [226, 384], [319, 181], [392, 157], [489, 187], [592, 199], [490, 212],
+      [433, 213], [387, 236], [332, 434], [294, 509], [225, 564], [111, 617]
+    ], studio);
+    polygon(ctx, [[225, 521], [233, 535], [217, 735], [279, 772], [266, 780], [195, 747]], studio);
+    polygon(ctx, [[251, 510], [267, 514], [272, 683], [327, 719], [318, 731], [253, 694]], studio);
+    ellipse(ctx, 420, 186, 8, 8, 0, paper);
+    for (let i = 0; i < 10; i++) strokeLine(ctx, 145 + i * 8, 518 + i * 2, 242 + i * 5, 405 + i * 3, paper, 3);
+    for (let i = 0; i < 8; i++) strokeLine(ctx, 64 + i * 72, 856, 97 + i * 71, 646 + (i % 3) * 42, studio, 4);
+  } else if (plate === "shoal") {
+    for (const [x, y, s] of [
+      [210, 248, 0.86],
+      [453, 370, 1.05],
+      [230, 540, 1.4],
+      [442, 730, 0.78]
+    ]) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(-0.26);
+      ctx.scale(s, s);
+      polygon(ctx, [[-124, 0], [-57, -40], [20, -45], [81, -17], [130, -54], [123, 52], [83, 12], [16, 43], [-60, 36]], studio);
+      ellipse(ctx, -61, -6, 7, 7, 0, paper);
+      for (let i = 0; i < 7; i++) strokeLine(ctx, -37 + i * 13, -22, -51 + i * 13, 21, paper, 3);
+      ctx.restore();
+    }
+  } else {
+    ctx.fillStyle = studio;
+    ctx.fillRect(96, 155, 74, 650);
+    ctx.fillRect(470, 155, 74, 650);
+    ctx.beginPath();
+    ctx.arc(320, 155, 224, Math.PI, 0);
+    ctx.arc(320, 155, 150, 0, Math.PI, true);
+    ctx.fill();
+    polygon(ctx, [[43, 872], [238, 638], [655, 604], [673, 652], [269, 686], [126, 899]], studio);
+    for (let i = 0; i < 16; i++) strokeLine(ctx, 103, 202 + i * 35, 155, 183 + i * 35, paper, 3);
+    for (let i = 0; i < 10; i++) strokeLine(ctx, 58 + i * 65, 880, 176 + i * 52, 733, studio, 4);
+  }
+  // A fixed carving grain stays registered when the camera or squeegee moves.
+  let grain = 53;
+  for (let i = 0; i < 6600; i++) {
+    grain = (grain * 16807) % 2147483647;
+    const x = grain % 720;
+    grain = (grain * 16807) % 2147483647;
+    const y = grain % 960;
+    ctx.fillStyle = i % 3 === 0 ? "#233b3129" : "#f8eccc80";
+    ctx.fillRect(x, y, (grain % 5) + 1, (grain % 3) + 1);
+  }
+  ctx.restore();
+}
+function updateArt() {
+  const plate = selected("plate").value;
+  drawPlate(base.getContext("2d"), plate, false);
+  drawPlate(sheet.getContext("2d"), plate, true);
+  room.setAttribute("aria-label", "On the studio press: " + plateDescriptions[plate] + ".");
+  byId("offset-value").value = byId("offset").value + " px";
+  drawRoom();
+}
+
+// Orthographic camera maps actual x, height and depth onto a small raster. The text stays full resolution.
+function point(x, y, z) {
+  const { yaw, tilt, zoom, lift } = pose;
+  const across = x * Math.cos(yaw) - z * Math.sin(yaw);
+  const depth = x * Math.sin(yaw) + z * Math.cos(yaw);
+  const vertical = depth * Math.sin(tilt) - y * Math.cos(tilt);
+  return [Math.round(room.width / 2 + across * zoom), Math.round(251 + lift + vertical * zoom)];
+}
+function face(vertices, color) {
+  polygon(
+    brush,
+    vertices.map(p => point(...p)),
+    color
+  );
+}
+function block(x, y, z, width, height, depth, top, front, side) {
+  const right = x + width,
+    upper = y + height,
+    near = z + depth;
+  face([[x, y, near], [right, y, near], [right, upper, near], [x, upper, near]], front);
+  face([[right, y, z], [right, y, near], [right, upper, near], [right, upper, z]], side);
+  face([[x, upper, z], [right, upper, z], [right, upper, near], [x, upper, near]], top);
+}
+function horizontalImage(image, x, y, z, width, depth, fraction = 1) {
+  if (fraction <= 0) return;
+  const origin = point(x, y, z),
+    right = point(x + width, y, z),
+    near = point(x, y, z + depth);
+  brush.save();
+  brush.setTransform(
+    (right[0] - origin[0]) / image.width,
+    (right[1] - origin[1]) / image.width,
+    (near[0] - origin[0]) / image.height,
+    (near[1] - origin[1]) / image.height,
+    origin[0],
+    origin[1]
+  );
+  const paintedWidth = image.width * fraction;
+  brush.drawImage(image, 0, 0, paintedWidth, image.height, 0, 0, paintedWidth, image.height);
+  brush.restore();
+}
+function drawRoom() {
+  // Floor, walls and the long shadow of the bench.
+  brush.fillStyle = "#607b73";
+  brush.fillRect(0, 0, 600, 400);
+  face([[-370, 0, -155], [350, 0, -155], [350, 300, -155], [-370, 300, -155]], "#8faba0");
+  face([[-212, 0, -155], [-212, 0, 236], [-212, 270, 236], [-212, 270, -155]], "#526f66");
+  face([[-370, 0, -155], [350, 0, -155], [350, 0, 295], [-370, 0, 295]], "#738278");
+  for (let x = -300; x <= 320; x += 48)
+    face([[x, 0, -155], [x + 2, 0, -155], [x + 2, 0, 295], [x, 0, 295]], "#62776b");
+  for (let x = -168; x < 82; x += 49) {
+    face([[x, 1, -145], [x + 43, 1, -145], [x + 122, 1, 60], [x + 79, 1, 60]], "#a6ac89");
+  }
+  face([[-162, 1, -59], [143, 1, -61], [176, 1, 113], [-128, 1, 122]], "#53695f");
+  // Windows, distant hills and a proof pinned to the studio wall.
+  for (let x = -178; x < 80; x += 49) {
+    block(x, 81, -153, 44, 94, 4, "#e5ddb4", "#edddb5", "#9c9b82");
+    const ridge = 85 + 9 * Math.cos(x / 45);
+    face([[x, 82, -148], [x + 44, 82, -148], [x + 44, ridge + 9, -148], [x + 18, ridge + 15, -148], [x, ridge + 7, -148]], "#aab69c");
+    block(x, 123, -148, 45, 4, 3, "#ccbfa0", "#9f9c80", "#808774");
+  }
+  block(-187, 75, -151, 273, 5, 18, "#d0b791", "#947c63", "#816d5b");
+  block(105, 79, -150, 75, 86, 4, "#d5c6a2", "#e1cfac", "#8e8270");
+  face([[115, 90, -145], [165, 90, -145], [174, 122, -145], [145, 143, -145]], "#b4614b");
+  for (let i = 0; i < 4; i++)
+    face([[113 + i * 10, 98, -144], [119 + i * 10, 98, -144], [139 + i * 7, 136, -144]], "#4b655f");
+  block(126, 162, -144, 24, 5, 2, "#e7d7b2", "#bcac89", "#8b8873");
+  // The bench supports a wooden frame, paper stock and the three open ink tins.
+  for (const x of [-141, 122]) {
+    for (const z of [-65, 62]) block(x, 1, z, 15, 52, 15, "#9f7860", "#825e4c", "#604e44");
+  }
+  block(-156, 52, -80, 309, 11, 166, "#ba906b", "#997154", "#705343");
+  for (let z = -62; z < 82; z += 29)
+    face([[-156, 63, z], [153, 63, z], [153, 63, z + 1], [-156, 63, z + 1]], "#a97f5f");
+  for (let i = 0; i < 38; i++) {
+    const x = -151 + ((i * 37) % 290),
+      z = -78 + ((i * 31) % 155);
+    face([[x, 63, z], [x + 3 + (i % 11), 63, z], [x + 1, 63, z + 1]], "#8d7057");
+  }
+  for (let i = 0; i < 3; i++) block(-148 + i * 3, 64 + i, -56 + i * 2, 38, 1, 74, "#dbcfaa", "#bbae92", "#a69477");
+  block(-107, 64, -70, 185, 5, 135, "#82948b", "#435c55", "#354c46");
+  block(-103, 69, -67, 177, 4, 129, "#e8cba1", "#ad8866", "#725d4d");
+  block(-94, 73, -58, 159, 1, 111, "#49665b", "#39594d", "#36554c");
+  for (let i = 0; i < 3; i++) {
+    block(88 + i * 17, 64, -53 + i * 5, 16, 18, 19, "#ddc5a0", "#c5b291", "#8d8c72");
+    block(89 + i * 17, 82, -52 + i * 5, 14, 3, 17, ["#c74931", "#27667f", "#af7c29"][i], "#625b4e", "#615448");
+  }
+  const fraction = step === "pull" ? inkCoverage / 100 : 1;
+  horizontalImage(base, bed.x, bed.y, bed.z, bed.width, bed.depth);
+  horizontalImage(sheet, bed.x, bed.y, bed.z, bed.width, bed.depth, fraction);
+  const rollerX = step === "pull" ? bed.x + bed.width * Number(byId("stroke").value) / 100 : bed.x - 17;
+  block(rollerX - 3, 76, -53, 6, 7, 104, "#172f2c", "#344942", "#132d2a");
+  block(rollerX - 4, 83, -55, 8, 6, 108, "#ce8458", "#a45a3e", "#8d4a37");
+}
+function moveCamera(target, duration) {
+  cancelAnimationFrame(motionFrame);
+  const start = { ...pose },
+    begins = performance.now();
+  function frame(now) {
+    const progress = duration && !media.matches ? Math.min(1, (now - begins) / duration) : 1;
+    const ease = 1 - (1 - progress) ** 3;
+    for (const axis of Object.keys(target)) pose[axis] = start[axis] + (target[axis] - start[axis]) * ease;
+    drawRoom();
+    if (progress < 1) motionFrame = requestAnimationFrame(frame);
+    else {
+      if (document.activeElement === byId("skip")) byId("choose-title").focus({ preventScroll: true });
+      byId("skip").hidden = true;
+    }
+  }
+  frame(begins);
+}
+function showStep(next) {
+  if (next === "result") {
+    const plateName = selected("plate").labels[0].textContent.trim(),
+      inkName = selected("ink").labels[0].textContent.trim();
+    const png = sheet.toDataURL("image/png");
+    byId("proof").src = png;
+    byId("proof").alt = plateDescriptions[selected("plate").value] + ", printed in black and " + inkName + ".";
+    byId("caption").textContent = plateName + " in " + inkName + " · " + sheet.width + " × " + sheet.height + " px";
+    byId("download").href = png;
+    byId("download").download = plateName.toLowerCase() + "-" + inkName.toLowerCase() + ".png";
+  }
+  step = next;
+  byId("skip").hidden = true;
+  for (const id of ["setup", "pull", "result"]) byId(id).hidden = id !== step;
+  byId("proof").hidden = step !== "result";
+  room.setAttribute("aria-hidden", String(step === "result"));
+  room.classList.toggle("operable", step === "pull");
+  if (step === "pull") {
+    byId("stroke").value = 0;
+    inkCoverage = 0;
+  }
+  byId(step).querySelector("h2").focus({ preventScroll: true });
+  if (step === "pull" && matchMedia("(max-width: 740px)").matches) room.scrollIntoView({ block: "nearest" });
+  moveCamera(views[step], 300);
+}
+byId("setup").addEventListener("input", updateArt);
+byId("prepare").onclick = () => showStep("pull");
+function applyStroke(value) {
+  byId("stroke").value = value;
+  inkCoverage = Math.max(inkCoverage, Number(byId("stroke").value));
+  drawRoom();
+  if (Number(byId("stroke").value) === 100) showStep("result");
+}
+byId("stroke").oninput = () => applyStroke(byId("stroke").value);
+
+// Map the pointer back onto the sloped bed; the separate native slider operates the same stroke.
+function pressPosition(event) {
+  const box = room.getBoundingClientRect(),
+    scale = Math.max(box.width / room.width, box.height / room.height);
+  const origin = point(bed.x, bed.y + 1, bed.z);
+  const right = point(bed.x + bed.width, bed.y + 1, bed.z);
+  const near = point(bed.x, bed.y + 1, bed.z + bed.depth);
+  const x = (event.clientX - box.left - box.width / 2) / scale + room.width / 2 - origin[0];
+  const y = (event.clientY - box.top - box.height / 2) / scale + room.height / 2 - origin[1];
+  const acrossX = right[0] - origin[0],
+    acrossY = right[1] - origin[1];
+  const downX = near[0] - origin[0],
+    downY = near[1] - origin[1];
+  const determinant = acrossX * downY - acrossY * downX;
+  return { across: (x * downY - y * downX) / determinant, down: (acrossX * y - acrossY * x) / determinant };
+}
+let grab = null;
+room.addEventListener("pointerdown", event => {
+  if (step !== "pull" || grab || event.button !== 0) return;
+  const { across, down } = pressPosition(event),
+    progress = Number(byId("stroke").value) / 100;
+  if (Math.abs(across - progress) > 0.24 || down < -0.22 || down > 1.22) return;
+  cancelAnimationFrame(motionFrame);
+  grab = { id: event.pointerId, offset: progress - across };
+  room.setPointerCapture(event.pointerId);
+  room.classList.add("dragging");
+});
+room.addEventListener("pointermove", event => {
+  if (grab?.id !== event.pointerId || step !== "pull") return;
+  applyStroke(Math.round((pressPosition(event).across + grab.offset) * 100));
+});
+function endGrab(event) {
+  if (grab?.id !== event.pointerId) return;
+  if (room.hasPointerCapture(event.pointerId)) room.releasePointerCapture(event.pointerId);
+  room.classList.remove("dragging");
+  grab = null;
+  if (step === "pull") moveCamera(views.pull, 170);
+}
+room.addEventListener("pointerup", endGrab);
+room.addEventListener("pointercancel", endGrab);
+room.addEventListener("lostpointercapture", endGrab);
+byId("one-pass").onclick = () => applyStroke(100);
+byId("change").onclick = byId("again").onclick = () => showStep("setup");
+byId("skip").onclick = () => {
+  moveCamera(views.setup, 0);
+  byId("choose-title").focus({ preventScroll: true });
+};
+media.addEventListener("change", () => {
+  if (media.matches) moveCamera(views[step], 0);
+});
+updateArt();
+moveCamera(views.setup, 950);
+</script>
+</body>
+</html>

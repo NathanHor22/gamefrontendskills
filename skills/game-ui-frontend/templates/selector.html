@@ -10,7 +10,7 @@
   Character-select anatomy for a project/product index:
     stage   - large preview: oversized name behind, subject rising past its frame, detail shelf
     roster  - compact, stable grid of native radio inputs (arrow keys for free)
-    marker  - one numbered disc that travels between cells; the grid itself never resizes
+    marker  - a folded corner points to the preview; the gold seam marks the committed project
 */
 .select {
   display: grid;
@@ -71,11 +71,33 @@
   background: var(--c-plate);
   border-left: 3px solid var(--c-accent);
 }
-.detail h3 { margin: 0 0 var(--space-1); font: 800 var(--step-3)/1 var(--font-display); text-transform: uppercase; }
-.detail__meta { display: grid; grid-template-columns: auto 1fr; gap: var(--space-1) var(--space-4); margin: var(--space-4) 0; font-size: var(--step--1); }
+.detail h2 { margin: 0 0 var(--space-1); font: 800 var(--step-3)/1 var(--font-display); text-transform: uppercase; }
+.detail__meta { display: grid; grid-template-columns: auto 1fr; gap: var(--space-1) var(--space-4); margin: var(--space-4) 0; }
 .detail__meta dt { color: var(--c-ink-muted); text-transform: uppercase; letter-spacing: 0.08em; }
 .detail__meta dd { margin: 0; }
-.detail a { color: var(--c-accent); font-weight: 700; }
+.detail summary {
+  position: relative;
+  width: fit-content;
+  padding: var(--space-3) var(--space-2);
+  color: var(--c-accent);
+  font: italic 800 var(--step-1)/1.2 var(--font-display);
+  cursor: pointer;
+}
+.detail summary::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 4px;
+  height: 3px;
+  background: currentColor;
+  transform: scaleX(.2) skewX(-30deg);
+  transform-origin: left;
+  transition: transform var(--t-exit) var(--ease-exit);
+  pointer-events: none;
+}
+.detail summary:is(:hover, :focus-visible)::after, .detail details[open] summary::after {
+  transform: scaleX(1) skewX(-30deg);
+  transition: transform var(--t-enter) var(--ease-enter);
+}
 
 /* ---------- roster ---------- */
 .roster { grid-area: roster; border: 0; margin: 0; padding: 0; min-width: 0; }
@@ -92,12 +114,12 @@
   position: relative;
   display: grid;
   align-content: end;
-  height: 88px;
+  min-height: 88px;
   padding: var(--space-2);
   background: linear-gradient(170deg, var(--tone), var(--c-scene) 85%);
   clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
   color: var(--c-ink);
-  font: 700 var(--step--1)/1.1 var(--font-display);
+  font: 700 var(--step-0)/1.1 var(--font-display);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   cursor: pointer;
@@ -111,6 +133,8 @@
 /* The clipped label can't show an outline, so the focus ring is drawn on the cell. */
 .cell:has(input:focus-visible) { outline: 3px solid var(--c-focus); outline-offset: 3px; }
 .cell input:disabled + label { cursor: not-allowed; filter: grayscale(1) brightness(0.55); }
+.cell input:checked + label { box-shadow: inset 0 -4px var(--c-accent); }
+.cell__icon { width: 32px; height: 34px; margin-bottom: 6px; stroke: currentColor; fill: none; stroke-width: 5; pointer-events: none; }
 .cell input:disabled + label::after {
   content: "";
   position: absolute;
@@ -125,22 +149,18 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 30px;
-  height: 30px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
+  z-index: 1;
+  width: 22px;
+  height: 22px;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
   background: var(--c-signal);
-  color: var(--c-ink);
-  font: 800 var(--step--1)/1 var(--font-display);
-  box-shadow: 0 0 0 3px var(--c-scene);
   translate: var(--mx, 0px) var(--my, 0px);
   transition: translate var(--t-enter) var(--ease-enter);
   pointer-events: none;
 }
 
 @media (max-width: 719px) {
-  .select { grid-template-columns: 1fr; grid-template-areas: "stage" "detail" "roster"; }
+  .select { grid-template-columns: minmax(0, 1fr); grid-template-areas: "stage" "roster" "detail"; }
   .stage { min-height: 300px; }
   .roster__grid { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 104px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 18px 4px 6px; }
   .cell { scroll-snap-align: start; }
@@ -149,11 +169,8 @@
 </head>
 <body>
 <main class="demo-page">
-  <h1 class="visually-hidden">Index and preview</h1>
+  <h1 id="s1">Selected work</h1>
   <section class="demo-section" aria-labelledby="s1">
-    <h2 id="s1">Project index · character-select anatomy</h2>
-    <p>The roster stays still; one numbered marker travels; the stage swaps its subject and name. Pointing previews a project,
-      choosing it (click, arrow keys) commits. Locked items keep the same geometry with their own artwork.</p>
 
     <div class="select" id="select">
       <div class="stage" aria-hidden="true">
@@ -162,23 +179,24 @@
         <div class="stage__subject"></div>
       </div>
 
-      <div class="detail">
-        <h3 id="detail-title"></h3>
-        <p id="detail-summary"></p>
-        <dl class="detail__meta">
-          <dt>Year</dt><dd id="detail-year"></dd>
-          <dt>Role</dt><dd id="detail-role"></dd>
-        </dl>
-        <a id="detail-link" href="#">Open case study</a>
-      </div>
-      <p class="visually-hidden" role="status" id="announce"></p>
-
       <fieldset class="roster">
-        <legend>Choose a project</legend>
+        <legend class="visually-hidden">Choose a project</legend>
         <div class="roster__grid">
-          <span class="roster__marker" aria-hidden="true">1</span>
+          <span class="roster__marker" aria-hidden="true"></span>
         </div>
       </fieldset>
+      <div class="detail">
+        <h2 id="detail-title"></h2>
+        <p id="detail-summary"></p>
+        <details id="project-details">
+          <summary>Project credits</summary>
+          <dl class="detail__meta">
+            <dt>Year</dt><dd id="detail-year"></dd>
+            <dt>Role</dt><dd id="detail-role"></dd>
+          </dl>
+        </details>
+      </div>
+      <p class="visually-hidden" role="status" id="announce"></p>
     </div>
   </section>
 </main>
@@ -195,7 +213,6 @@ const projects = [
 
 (function indexSelect(root) {
   const grid = root.querySelector(".roster__grid");
-  const marker = root.querySelector(".roster__marker");
   const stage = root.querySelector(".stage");
   const name = stage.querySelector(".stage__name");
   const subject = stage.querySelector(".stage__subject");
@@ -208,14 +225,17 @@ const projects = [
     cell.className = "cell";
     cell.style.setProperty("--tone", p.tone);
     cell.innerHTML = `<input type="radio" name="project" id="p-${p.id}" value="${p.id}" ${i === 0 ? "checked" : ""} ${p.locked ? "disabled" : ""}>
-      <label for="p-${p.id}">${p.name}${p.locked ? '<span class="visually-hidden"> (locked)</span>' : ""}</label>`;
+      <label for="p-${p.id}"><svg class="cell__icon" aria-hidden="true" viewBox="0 0 100 108"><path d="${p.shape}"/></svg>
+        ${p.name}${p.locked ? '<span class="visually-hidden"> (locked)</span>' : ""}</label>`;
     grid.append(cell);
-    cell.addEventListener("pointerenter", () => show(p, cell));
+    cell.addEventListener("pointerenter", (event) => {
+      if (event.pointerType !== "touch") show(p, cell);
+    });
     cell.querySelector("input").addEventListener("change", () => {
       committed = p;
       show(p, cell);
       // Announce commits only; hover previews would be noise for screen-reader users.
-      document.getElementById("announce").textContent = `${p.name}, ${p.year}, ${p.role}`;
+      document.getElementById("announce").textContent = p.summary;
     });
     cell.querySelector("input").addEventListener("focus", () => show(p, cell));
   }
@@ -225,18 +245,17 @@ const projects = [
   // Swaps start from whatever is on screen now, so rapid changes redirect instead of queueing.
   function swapIn(el, enterFrom) {
     const from = getComputedStyle(el);
-    const start = { opacity: from.opacity, translate: from.translate === "none" ? "0 0" : from.translate };
-    el.getAnimations().forEach((a) => a.cancel());
+    const running = el.getAnimations();
+    const start = running.length ? { opacity: from.opacity, translate: from.translate } : enterFrom;
+    running.forEach((a) => a.cancel());
     if (reduce.matches) return;
-    el.animate([{ ...start, ...enterFrom }, { opacity: 1, translate: "0 0" }],
+    el.animate([start, { opacity: 1, translate: "0 0" }],
       { duration: 260, easing: "cubic-bezier(0.2, 0.9, 0.1, 1.1)" });
   }
 
   function show(p, cell) {
-    const i = projects.indexOf(p);
-    marker.textContent = String(i + 1);
-    grid.style.setProperty("--mx", `${cell.offsetLeft - 8}px`);
-    grid.style.setProperty("--my", `${cell.offsetTop - 12}px`);
+    grid.style.setProperty("--mx", `${cell.offsetLeft}px`);
+    grid.style.setProperty("--my", `${cell.offsetTop}px`);
     if (shown === p) return;
     shown = p;
     stage.style.setProperty("--tone", p.tone);
@@ -249,9 +268,7 @@ const projects = [
     document.getElementById("detail-summary").textContent = p.summary;
     document.getElementById("detail-year").textContent = p.year;
     document.getElementById("detail-role").textContent = p.role;
-    const link = document.getElementById("detail-link");
-    link.href = `#${p.id}`;
-    link.hidden = Boolean(p.locked);
+    document.getElementById("project-details").hidden = Boolean(p.locked);
   }
 
   new ResizeObserver(() => show(shown ?? committed, cellOf(shown ?? committed))).observe(grid);

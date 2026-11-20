@@ -1,5 +1,6 @@
 // Shared Playwright helpers for audit.mjs, capture.mjs and verify.mjs.
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { createRequire } from "node:module";
 import { pathToFileURL } from "node:url";
@@ -62,8 +63,8 @@ export function toUrl(target) {
 }
 
 export function outDir(kind, explicit) {
-  const stamp = new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19);
-  const dir = path.resolve(explicit ?? path.join(".game-ui-frontend", "runs", `${stamp}-${kind}`));
+  if (explicit == null) return fs.mkdtempSync(path.join(os.tmpdir(), `game-ui-frontend-${kind}-`));
+  const dir = path.resolve(explicit);
   fs.mkdirSync(dir, { recursive: true });
   return dir;
 }

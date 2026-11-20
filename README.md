@@ -12,13 +12,13 @@ There’s enough Man City in this world. Be prime Neymar Jr at Barcelona.
 
 ## Try it in chat, brev
 
-Drop this line into your Claude or ChatGeeBeeTee chat. No terminals. No tech wizardry. Straight up easy like getting a Tesco Meal Deal. Bosh
+Drop this line into your Claude or ChatGeeBeeTee chat. No terminals. No tech wizardry. Straight-up easy, like getting a Tesco Meal Deal. Bosh.
 
 ```text
 Read https://raw.githubusercontent.com/NathanHor22/gamefrontendskills/main/skills/game-ui-frontend/SKILL.md and use it as my website design guide for this chat. Ask me to paste any reference you can’t open.
 ```
 
-If the links are moving funny yea, paste the [skill instructions](skills/game-ui-frontend/SKILL.md) into the chat and say:
+If the links are moving funny, yeah, paste the [skill instructions](skills/game-ui-frontend/SKILL.md) into the chat and say:
 
 > Use this as my design guide. Give me the name of any other page you need me to paste.
 
@@ -32,8 +32,8 @@ Swap in your own idea and you’re cooking, my guy.
 
 ## For dem technical mandem
 
-\<details>
-\<summary>Go on then, show us the workings.\</summary>
+<details>
+<summary>Go on then, show us the workings.</summary>
 
 ### Running it on your own patch
 
@@ -65,7 +65,7 @@ If the menu only looks good on a massive monitor in a fancy studio, it’s getti
 
 [The three roles](skills/game-ui-frontend/agents/) · [Creative direction guide](skills/game-ui-frontend/references/art-direction.md) · [Print Room demo](skills/game-ui-frontend/templates/print-room.html)
 
-The research covers **47 game and edition profiles**, **136 visual observations from 111 reviewed images and 12 video sources**, and **24 original web interaction patterns**. Man’s done the homework, fam.
+The research covers **47 game/edition profiles**, **136 visual observations from 111 reviewed images and 12 video sources**, and **24 original web interaction patterns**. Man’s done the homework, fam.
 
 Fancy checking the footage yourself? The studies have timestamps and everything.
 
@@ -91,7 +91,7 @@ Want to see the reports? Open your system’s temporary folder and look for dire
 
 [Browser setup](skills/game-ui-frontend/SKILL.md#tools)
 
-\</details>
+</details>
 
 [Credits](CREDITS.md) · [MIT licence](LICENSE)
 

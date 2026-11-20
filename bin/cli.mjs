@@ -106,7 +106,7 @@ async function main() {
   const opts = parse(rest);
   switch (command) {
     case "install": case "browser":
-      console.error(`Run the temporary skill with: ${USE} --agent codex (or --agent claude-code)`);
+      console.error(`Run ${USE} and paste the printed prompt into your coding agent.`);
       return 1;
     case "mcp": return mcp();
     case "doctor": return doctor(opts);

@@ -77,8 +77,8 @@ not three accent colours). For each:
 - **Placement** of the prioritised sections ([placement.md](../layout/placement.md)).
 
 For a visual redesign, build each candidate as a static mock of the most important section.
-Use plain HTML/CSS in `.game-ui-frontend/mocks/<direction>.html`, starting from `templates/tokens.css`
-and the matching template.
+Create a fresh directory in the system temporary folder for the draft HTML and CSS. Start from
+`templates/tokens.css` and the matching template in the temporary skill.
 
 For a gameplay-led redesign, exercise the visitor's complete action in a working prototype instead. Give
 the critic the task and the visitor's current route so they can compare the result, effort and ability to recover.
@@ -86,7 +86,7 @@ the critic the task and the visitor's current route so they can compare the resu
 Compare candidate views together with the capture script.
 
 ```
-node scripts/capture.mjs .game-ui-frontend/mocks/a.html .game-ui-frontend/mocks/b.html .game-ui-frontend/mocks/c.html --labels "A,B,C"
+node "<absolute skill directory>/scripts/capture.mjs" "<absolute drafts directory>/a.html" "<absolute drafts directory>/b.html" "<absolute drafts directory>/c.html" --labels "A,B,C"
 ```
 
 Look at `compare-1440.png` and `compare-390.png` yourself, then show the user the directions with the images'

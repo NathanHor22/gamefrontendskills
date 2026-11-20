@@ -85,6 +85,21 @@ test("print room transfers the chosen inks and exports the visible proof", { ski
     await browser.close();
   }
 });
+
+test("setting the screen on a short phone brings the press into reach", { skip }, async () => {
+  const { chromium } = await import("playwright");
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage({ viewport: { width: 375, height: 500 }, hasTouch: true, isMobile: true, reducedMotion: "reduce" });
+    await page.goto(pathToFileURL(path.join(T, "print-room.html")).href);
+    await page.getByRole("button", { name: "Set the screen" }).tap();
+    const press = await page.locator("#room").boundingBox();
+    assert.ok(press.y >= 0 && press.y + press.height <= 500, `press occupies y=${press.y} to ${press.y + press.height}`);
+    assert.equal(await page.getByRole("heading", { name: "Pull the ink" }).evaluate(el => el === document.activeElement), true);
+  } finally {
+    await browser.close();
+  }
+});
 const failing = (report) => [...report.page, ...report.controls.flatMap((c) => (c.checks ?? []).map((x) => ({ ...x, control: `${c.selector}[${c.index}]` })))]
   .filter((x) => x.status === "fail");
 

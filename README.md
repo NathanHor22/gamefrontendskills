@@ -23,10 +23,15 @@ npx skills@latest use NathanHor22/gamefrontendskills@game-ui-frontend --agent co
 npx skills@latest use NathanHor22/gamefrontendskills@game-ui-frontend --agent claude-code
 ```
 
-On Windows, use `npx.cmd` if PowerShell blocks `npx.ps1`.
+Then describe your design task in the session that opens. On Windows, skills.sh can report
+`command not found: codex` for an npm-installed Codex. Run the following from PowerShell and paste
+the printed prompt into an open Codex session on the same machine. This also works for Claude Code.
 
-Then describe your design task in the session that opens. To print the skill prompt for an existing
-coding-agent chat on the same machine, omit `--agent codex` or `--agent claude-code`.
+```powershell
+npx.cmd skills@latest use NathanHor22/gamefrontendskills@game-ui-frontend
+```
+
+On other platforms, omit `--agent` and its value to print the prompt for an existing session.
 
 `skills use` loads one skill into a temporary directory outside your repository. npm may cache the CLI,
 and the temporary directory can remain available after the command exits. [How skills.sh runs a skill](https://github.com/vercel-labs/skills/blob/main/docs/commands.md#skills-use)

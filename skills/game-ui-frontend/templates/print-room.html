@@ -381,6 +381,7 @@ function showStep(next) {
     inkCoverage = 0;
   }
   byId(step).querySelector("h2").focus({ preventScroll: true });
+  if (step === "pull" && matchMedia("(max-width: 740px)").matches) room.scrollIntoView({ block: "nearest" });
   moveCamera(views[step], 300);
 }
 byId("setup").addEventListener("input", updateArt);

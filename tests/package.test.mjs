@@ -69,7 +69,8 @@ test("previous setup commands point to skills.sh without writing to the website"
   for (const command of ["install", "browser"]) {
     const r = spawnSync(process.execPath, [path.join(ROOT, "bin", "cli.mjs"), command, "--project"], { cwd: project, encoding: "utf8" });
     assert.equal(r.status, 1);
-    assert.match(r.stderr, /skills@latest use NathanHor22\/gamefrontendskills@game-ui-frontend/);
+    const launcher = process.platform === "win32" ? "npx.cmd" : "npx";
+    assert.ok(r.stderr.includes(`${launcher} skills@latest use NathanHor22/gamefrontendskills@game-ui-frontend`), r.stderr);
   }
   assert.deepEqual(fs.readdirSync(project), ["index.html"]);
   assert.equal(fs.readFileSync(path.join(project, "index.html"), "utf8"), "<title>Studio</title>");

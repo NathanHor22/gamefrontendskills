@@ -9,7 +9,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 const PKG_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SKILL = "game-ui-frontend";
 const SOURCE = path.join(PKG_ROOT, "skills", SKILL);
-const USE = "npx skills@latest use NathanHor22/gamefrontendskills@game-ui-frontend";
+const USE = `${process.platform === "win32" ? "npx.cmd" : "npx"} skills@latest use NathanHor22/gamefrontendskills@game-ui-frontend`;
 
 const HELP = `game-ui-frontend: game interface research for website UI
 

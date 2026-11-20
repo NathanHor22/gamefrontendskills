@@ -15,18 +15,16 @@ There’s enough Man City in this world. Be prime Neymar Jr at Barcelona.
 Drop this line into your Claude or ChatGeeBeeTee chat. No terminals. No tech wizardry. Straight-up easy, like getting a Tesco Meal Deal. Bosh.
 
 ```text
-Use https://raw.githubusercontent.com/NathanHor22/gamefrontendskills/main/skills/game-ui-frontend/SKILL.md to build my website from the game research in the skill. Ask me up to two quick questions about anything missing, then build it.
+Use https://raw.githubusercontent.com/NathanHor22/gamefrontendskills/main/skills/game-ui-frontend/SKILL.md to build my website from its game research. If you need more, ask up to two questions about my work and what visitors should get to do. Then build it.
 ```
 
 If the links are moving funny, yeah, paste the [skill instructions](skills/game-ui-frontend/SKILL.md) into the chat and say:
 
 > Build my site with this skill. If you need another game study, tell me which one to paste.
 
-“Build me a site for my gig photography” is plenty to get going, mate. It might ask **“What should people come here to do?”** and **“What should it feel like when they arrive?”** Try this:
+“Build me a site for my gig photography” is plenty to get going, mate. It might ask **“How do you lay out the prints after a gig?”** Tell it you peg them up in set-list order and love the little details. Now someone can see the whole night on your wall, pick a print, zoom in close enough to read the set list taped to the amp, then pull back to the same peg.
 
-> Let people pick a band and see the night I shot them. I want it to feel like flicking through the gig posters outside the Brixton Academy.
-
-Now the posters are your opening menu. Pick a band, see its shoot, come back to the poster you picked. The skill gets that browsing behaviour from its game studies. The photographs and the character of the venue come from you. Already know what you want? Stick it all in the first message and it can crack on.
+Got a software product? Expect a different question. **“Give me one job a customer hands it. What do they get back?”** Say your agents check invoices. A visitor could try a sample invoice, watch its line items pass from the reader to the checker, then open the discrepancy slip. Change the quantity and see which line gets flagged. Already told it what matters? It can crack on.
 
 In a coding agent it builds in your project. In an ordinary chat you can get one HTML file to save and open. Fancy seeing where the moves come from? [Start-screen studies](skills/game-ui-frontend/references/research/title-screens.md)
 

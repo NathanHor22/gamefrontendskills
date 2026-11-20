@@ -4,7 +4,7 @@ Start with the [short brief in the skill](../../SKILL.md#when-someone-says-build
 
 ## Choose what the visitor gets to do
 
-Use the person’s answer as a verb and an object: pick a performance, compare two pieces, open a recording. Look for that decision in the [opening studies](../research/title-screens.md) or [catalogue](../research/catalog.md). When the user names a game, resolve its edition in the bundle. If it’s absent, say which studied analogue you used and what it shares with the requested experience. A quiet browse and a dramatic entrance can lead to the same content in very different ways.
+Use [one real example of the work](../art-direction.md#design-from-one-real-example) before picking a game. For a collection, establish how its owner groups the pieces and what deserves a closer look. For a tool, follow an input through the work it performs to an output someone can inspect. Use the [opening studies](../research/title-screens.md) or [catalogue](../research/catalog.md) to find the relevant decision, which might be browsing, preparation, work in progress or a result. When the user names a game, resolve its edition in the bundle. If it’s absent, identify the studied analogue and what it shares with the requested experience.
 
 | What the brief needs | What happened in the game | What that could become |
 | --- | --- | --- |
@@ -27,4 +27,4 @@ Use the project’s stack, content and existing routes. In an empty project, a s
 
 Give a mouse and a keyboard the same preview. Let a phone visitor reach the destination with a tap. Keep each hit area still when its face animates. Back after browsing should restore the choice. A shared link opens the destination immediately and preserves browser history back to the referring page. Include a visible route to the entrance. Reduced motion keeps the same content and actions available. Use the [verification workflow](verify.md) where browser tools are available.
 
-Try the first choice, return, and try a different one if the brief has alternatives. Report the working path, the specific game moment that shaped it and what you actually verified. Keep evidence, intake questions and critique in the conversation, outside the visitor-facing interface.
+Test the detail the design promised. On a photo board, enlarge a print, inspect a second region of your choice, then fit the image and return to its place. For a software demo, run two inputs and compare their actual outputs. In a connected product check the outcome against the service response. Report the working path, the specific game moment that shaped it and what you verified. Keep evidence, intake questions and critique in the conversation, outside the visitor-facing interface.

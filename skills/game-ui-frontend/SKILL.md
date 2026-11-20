@@ -22,22 +22,32 @@ provided in the prompt. Read the research, role prompts and templates from that 
 bundle and its dependencies there. Only write the website changes or deliverables the user requested
 into their project.
 
-In a web-only chat, open the [menu study index](references/research/title-screens.md) and the one
-study that fits. Resolve relative links against the raw URL of the document containing them, keeping
+In a web-only chat, use the [art-direction guide](references/art-direction.md) to find the game study
+that fits the job. Resolve relative links against the raw URL of the document containing them, keeping
 the same repository revision. This route needs no install or catalogue download.
 
 ## When someone says "build my website with this"
 
 Read their brief and any available project content first. A loose build request is an invitation to
-make a working site. Ask up to two short questions together in chat, only for decisions still missing.
-Adapt them to what the person has already told you:
+make a working site. Ask up to two short questions together, in the person's own vocabulary. Ask
+for a concrete example of their work and the part a visitor should experience. Inventing the
+interface is the designer's job. Different answers should change what you build.
 
-- **What should someone who visits be able to do?** For a theatre, that might be choosing a show or finding the next performance.
-- **What should they see or handle first?** For that theatre, lifting a curtain and picking up a programme suggest different openings. A place, an object, a feeling or a game they love is enough.
+- For **photography**, try "How do you arrange the pictures from a shoot when you show them to someone?" and "What would you like them to do when a particular photo catches their eye?"
+- For **SaaS**, try "Walk me through one job your product does for a customer, from what goes in to what comes out." and "How much of that job should a visitor be able to try here?" If the brief already identifies a team of agents, spend the missing question on what passes between them or what counts as a finished run.
+- If you only know they want a website, first find out what it is for. Use what they volunteer. A game name or visual treatment is optional.
+
+Use an answer to shape the first scene, the thing the visitor operates, and the consequence. "I shoot
+in pairs and want people to notice the small differences" is enough to invent a wall of paired
+prints. The person need never suggest pegs or zoom. Let the visitor open the whole image, zoom
+into a detail they choose, then pull back to the same spot. Software that spins up agents could let someone submit one
+representative job, see its work handed on and open its output. Choose the mechanic that belongs
+to this person's work. The [art-direction guide](references/art-direction.md#design-from-one-real-example)
+works through both decisions.
 
 When you ask, wait for the reply. These questions are for the person commissioning the site.
 If the brief already answers them, or the person says "you choose", go straight to the build.
-Use one fitting game moment and implement the first useful choice **and what it opens**. The
+Use a fitting game moment and implement the first useful action **and its result**. The
 [build workflow](references/workflows/build.md) carries that choice into the rest of the site.
 Give each content destination an address that opens it directly, including a fragment in a single-file
 site. After a choice from the entrance, browser Back restores the chosen item and its focus.
@@ -46,12 +56,17 @@ Make the same trip work by keyboard, touch and with reduced motion.
 In a chat with no project-editing tools, deliver a runnable version as a self-contained HTML file
 or one complete HTML code block the person can save and open.
 
-If only this file is available, two observations from the bundled research can still ground a build.
-In *Persona 5 Royal*, a cyan plate moves along a fixed row of commands and each choice reframes the
-plaza (`persona-5-royal-opening-study`). In *Gran Turismo* on PSP, an orange-lit shelf opens a
-collection, then a car, and returning restores the shelf grid (`gran-turismo-psp-opening-study`).
-Use either when it fits. If a named game is missing from the research, name the studied analogue
-you used. If another bundled reference matters, request that particular study by name.
+If only this file is available, *Life is Strange: Before the Storm* shows a focus frame moving
+between three pictures while the chapter chooser stays open (`life-is-strange-before-the-storm-opening-study`).
+*Sifu* shows portraits and clippings arranged on a board (`sifu-board-anatomy`, a still). The
+string, pegs and camera zoom on a photographer's wall would be your own design. In *Warframe*, a
+mission brief keeps neighbouring nodes visible and equipment can be changed in Navigation
+(`wf-desdemona-node-brief`, `wf-navigation-inline-loadout`). Use that preparation sequence when
+it fits the product. A public demo uses clearly labelled sample work unless a real service is
+connected and intended for visitors. For other briefs, *Persona 5 Royal* reframes a plaza around
+a fixed row of choices (`persona-5-royal-opening-study`), and *Gran Turismo* on PSP returns
+from a car to its shelf grid (`gran-turismo-psp-opening-study`). If another reference matters,
+request that bundled study by name or identify the nearest studied analogue.
 
 ## Pick the workflow
 

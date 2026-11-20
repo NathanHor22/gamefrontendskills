@@ -5,8 +5,22 @@ transcript and output. Track scores per skill version so changes can be compared
 
 For a brief with a `follow_up`, give the agent an empty disposable web project and send only the
 `prompt`. Record its first reply. Supply the `follow_up` when it asks, then let it finish.
-Open the result and try both destinations. Match each design citation to the bundled study and
-record which part of the interaction it explains. Check the transcript for outside design sources.
+Count the decisions it asks the owner to make, including repeated questions and subquestions.
+A sparse brief should take at most two. For the photography case, supply two distinct, rights-cleared
+photos with the reply, one landscape named `hall.jpg` and one portrait named `stairs.jpg`.
+Open each full print, zoom in, inspect a region beyond the initial focal point using keyboard or
+touch, fit the image again, then return to its position on the board.
+
+Run the two SaaS cases in separate sessions with the identical first message. Exercise both inputs
+in each finished demo and inspect the resulting handoff or camera availability. Check that the
+answers changed what visitors do. Match each cited decision to a bundled observation or playhead,
+then identify which interaction detail the designer invented for this product.
+
+To test creative transfer, try the photography brief again with only “I photograph closing cinemas
+in pairs. I want visitors to see the relationship, then read the faded lettering in each shot.”
+Supply the same images. Does the design invent a way to compare and inspect them without asking
+the photographer to choose a layout? Judge the visible result. A different arrangement can serve
+these answers just as well as a hanging board.
 
 ## Scoring (0–2 each, 20 max)
 

@@ -11,6 +11,8 @@ Trace the designer’s key decision to an observation or playhead in a bundled s
 
 For an animated entrance, cross two choices quickly, activate while the preview is still moving, then come back. Check which destination opened, which button recovered focus and whether a first tap on a phone reaches the same place. Compare what happened with the [menu study](../references/research/title-screens.md) that informed the design.
 
+Test the particular promise from the brief. Can you read a small detail in the open photograph and find its neighbours again? If the product claims to process work, change one input and inspect what changed in the output. For a demo, check that someone can tell they are using sample data before they launch it.
+
 Choose the challenge that could actually change the design. For a startup, try reaching the first useful action on a return visit. For a 3D space, name something the visitor can discover through movement and try reaching it by touch or keyboard. For a visual treatment, check what survives at phone size and with motion reduced. For a mechanic with consequences, try a mistaken choice, interrupt the feedback or retry from the result. Compare a more direct way to reach the same outcome when that comparison tests the purpose of the mechanic.
 
 Read a section on a phone. If its headline, caption and button say the same thing, keep the one that helps the visitor act. Check that any numbers, linework or small print earn their place under the skill's visual rules.

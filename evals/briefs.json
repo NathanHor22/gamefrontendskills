@@ -7,6 +7,27 @@
     "must": ["the opening reply asks at most two short questions a first-time site owner can answer without knowing games", "after the answers it builds a working opening in the test project", "its account of the opening and selection identifies a matching observation or playhead from the bundled game studies", "the theatre and shows supply the scene, labels and content", "a visitor can open each named show from the entrance, read the correct time and room, and return to the selected show"]
   },
   {
+    "id": "photographer-editing-wall",
+    "workflow": "build",
+    "prompt": "Build me a website for my photography.",
+    "follow_up": "I photograph closing cinemas. In my studio I hang the prints in pairs, stand back, then lean in to see the detail. I want people to browse that way, with the quiet of Life is Strange. The two prints are Last Showing (hall.jpg) and After the Credits (stairs.jpg).",
+    "must": ["asks about the photographer’s work or how people should experience it, within two questions", "uses the supplied photographs as hung prints in a shared board view", "each print opens large enough to inspect the full image at its own aspect ratio", "touch or keyboard can open either print and return to its place with focus restored", "the handoff identifies an observed game decision and credits the studio process for the hanging and zoom interaction"]
+  },
+  {
+    "id": "saas-support-agents",
+    "workflow": "build",
+    "prompt": "Build a website for my SaaS product.",
+    "follow_up": "We sell support triage. The customer chooses a ticket and starts a run. One agent identifies the problem and a second uses that finding to draft a handoff. Let buyers try two samples: a missing receipt goes to Billing, a failed invite goes to Accounts. This is a public demo with no service connected.",
+    "must": ["discovers what the product does and what a visitor should experience before choosing a mechanic", "the visitor starts a clearly identified sample run for a chosen ticket", "the first agent’s finding is used in the second agent’s handoff", "running the other sample produces its own issue and correct destination team", "the result can be read with motion reduced and makes no claim of live execution"]
+  },
+  {
+    "id": "saas-kit-rental",
+    "workflow": "build",
+    "prompt": "Build a website for my SaaS product.",
+    "follow_up": "It helps rental desks find a free camera for a shoot. Buyers should try checking a date before they contact us. On 8 May the Bolex is free and the Aaton is out. On 9 May it’s the other way round. Use those dates for the demo.",
+    "must": ["the intake leaves open who or what does the work", "the product's core interaction lets the visitor check availability for either date", "changing the date changes which camera is available", "the interface represents the rental desk’s workflow without invented worker agents or a claim of a confirmed reservation"]
+  },
+  {
     "id": "game-led-printmaking",
     "workflow": "build",
     "prompt": "Build a retro print workshop where I can try inks on a 3D press and keep a proof. Give the opening the feel of starting a game. Use the philosophy, website and critic agents.",

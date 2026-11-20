@@ -43,6 +43,8 @@ For a build, inspect the sequence of edits. Did Unslop see the first usable scre
 
 For the quiet bindery, supply a clean page with two accessible sample selectors that currently change only a sentence about the binding. Either sample should initially be easy to select. After the pass, hide the explanatory sentence and try both samples. Can you tell what each binding does at the fold? Try again with reduced motion. A change of colour, heading or card layout alone leaves the original problem intact. Let the designer invent how to show the difference.
 
+For the React gig archive, run the same brief once with a JavaScript app and once with a strict TypeScript app. Supply a working shows list, two detail URLs and a booking route. Open them before the redesign. Afterward, change one show title in the existing data source and check the wall and detail together. Run each project’s production build and the typed project’s type check. Try the same addresses, including a direct visit to a detail and keyboard Back from an opened print.
+
 For criterion 6, check secondary actions as well as the main one. Decorative chevrons, suffix arrows and underlined
 labels count against the design. Change the selected target and check a functional arrow's position or bearing.
 Its owner should still be clear with animation off. For criterion 4, look for choices grounded in the brief and

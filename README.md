@@ -28,7 +28,9 @@ The skill tries that zoom while it builds. If all you get on your phone is a big
 
 Got a software product? Expect a different question. **“Give me one job a customer hands it. What do they get back?”** Say your agents check invoices. A visitor could try a sample invoice, watch its line items pass from the reader to the checker, then open the discrepancy slip. Change the quantity and see which line gets flagged. Already told it what matters? It can crack on.
 
-In a coding agent it builds in your project. In an ordinary chat you can get one HTML file to save and open. Fancy seeing where the moves come from? [Start-screen studies](skills/game-ui-frontend/references/research/title-screens.md)
+Already got a React site, mate? Same chat prompt. Tell it “turn my gigs page into a wall of prints” and it’ll build that wall inside your app. Tap a print and you land on the gig page you already had. It reads what’s there and writes in your project’s JavaScript or TypeScript. Works with plain JS and TS sites too.
+
+In an ordinary chat, say “give me the React component in TypeScript” and you’ll get the `.tsx` file, its styles and where to plug it in. Just want one HTML file to open? That works too. [React setup](skills/game-ui-frontend/references/workflows/build.md#build-it-in-react) · [Start-screen studies](skills/game-ui-frontend/references/research/title-screens.md)
 
 ## For dem technical mandem
 

@@ -131,21 +131,31 @@ async function hoverProfile(page) {
   return sampled ? colourOnly / sampled : 0;
 }
 
+function pageUrl(url, current) {
+  const [documentUrl, fragment] = url.href.split("#", 2);
+  if (fragment?.startsWith("/") || fragment?.startsWith("!/")) {
+    url.hash = fragment; // A second # marks a section within this route.
+  } else if (fragment !== undefined && documentUrl === current?.href.split("#", 1)[0]) {
+    return current;
+  } else {
+    url.hash = "";
+  }
+  return url;
+}
+
 export async function audit(target, { pages: maxPages = 6, viewports = [390, 768, 1440], axe = true, out } = {}) {
   const start = toUrl(target);
-  const origin = new URL(start).origin;
-  assertAllowed(start);
+  const entry = pageUrl(assertAllowed(start));
   const root = outDir("audit", out);
   const browser = await launch();
-  const queue = [start];
-  const seen = new Set();
+  const queue = [entry];
+  const seen = new Set([entry.href]);
   const pages = [];
   try {
     while (queue.length && pages.length < maxPages) {
-      const url = queue.shift().split("#")[0];
-      if (seen.has(url)) continue;
-      seen.add(url);
-      const tail = new URL(url).pathname.split("/").filter(Boolean).slice(-2).join("-");
+      const current = queue.shift();
+      const url = current.href;
+      const tail = current.pathname.split("/").filter(Boolean).slice(-2).join("-");
       const slug = `${String(pages.length + 1).padStart(2, "0")}-${(tail.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "") || "home").slice(0, 40)}`;
       const record = { url, slug, shots: {}, console: [] };
       for (const width of viewports) {
@@ -168,8 +178,11 @@ export async function audit(target, { pages: maxPages = 6, viewports = [390, 768
             if (axe) record.axe = await runAxe(page);
             for (const link of data.links) {
               try {
-                const u = new URL(link);
-                if (u.origin === origin && !SKIP_LINK.test(u.pathname) && !seen.has(u.href.split("#")[0])) queue.push(u.href);
+                const u = pageUrl(new URL(link), current);
+                if (u.origin !== entry.origin || u.protocol !== entry.protocol || seen.has(u.href)) continue;
+                if (SKIP_LINK.test(u.pathname) || SKIP_LINK.test(u.hash.split("?", 1)[0])) continue;
+                seen.add(u.href);
+                queue.push(u);
               } catch { /* ignore */ }
             }
           } else {

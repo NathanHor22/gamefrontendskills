@@ -1,5 +1,11 @@
 [
   {
+    "id": "existing-react-gig-archive",
+    "workflow": "improve",
+    "prompt": "My gig archive is a React app. Turn the shows list into a wall of prints in set-list order. Keep the show pages people already share, and keep the booking link working.",
+    "must": ["the existing shows route renders the wall from the app's show records", "source changes fit the host's JavaScript or TypeScript and use its navigation API", "two prints open their respective existing show URLs on first tap or keyboard activation", "reloading a shared show URL opens its detail and browser Back from the wall's selection restores the print and focus", "the booking route still works through its original link", "the site's normal type and production build checks succeed where configured"]
+  },
+  {
     "id": "quiet-bindery-creative-review",
     "workflow": "improve",
     "prompt": "I bind sketchbooks for people who draw across the fold. Moss opens flat. Ochre springs partly shut. My sample page is tidy, but I'd like people to discover what the difference feels like before they pick one. Keep it quiet.",

@@ -82,6 +82,7 @@ Look at `compare-1440.png` and `compare-390.png` yourself. When the user asked t
 
 - Invoke the [Unslop agent](../../agents/unslop.md) on the first changed surface while the redesign is underway. Give it the scoped files and the original visitor task. Integrate its repairs, then have it replay the affected journey when the destination or shared component is ready. For a single component these checks can share one pass once the interaction works.
 - Follow the repo's conventions: framework components, CSS approach, token files, naming, tests.
+- Match the feature’s [JavaScript or TypeScript conventions](build.md#javascript-and-typescript). For React, follow [Build it in React](build.md#build-it-in-react) on the existing route or component and verify it through the app’s own server.
 - Add the direction's tokens (colour roles, type scale, angle, seam, motion timings) to the project's token
   system first, then convert components one at a time in priority order.
 - Use the templates as reference implementations, not paste-ins. Translate them into the project's components.

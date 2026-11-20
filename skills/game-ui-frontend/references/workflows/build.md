@@ -27,10 +27,28 @@ Follow one item all the way through. Which performance did they choose? Do the v
 
 ## Deliver the working site
 
-Use the project’s stack, content and existing routes. In an empty project, a standalone HTML file with local styles and script can be enough. Use original or supplied artwork. Where content is genuinely missing, make sample material easy to replace and identify it in the handoff. A booking or purchase confirmation requires a real service result.
+Use the project’s stack, content and existing routes. In an empty project with no requested stack, a standalone HTML file with local styles and script can be enough. Use original or supplied artwork. Where content is genuinely missing, make sample material easy to replace and identify it in the handoff. A booking or purchase confirmation requires a real service result.
 
 Give a mouse and a keyboard the same preview. Let a phone visitor reach the destination with a tap. Keep each hit area still when its face animates. Back after browsing should restore the choice. A shared link opens the destination immediately and preserves browser history back to the referring page. Include a visible route to the entrance. Reduced motion keeps the same content and actions available. Use the [verification workflow](verify.md) where browser tools are available.
 
 Where a visitor deliberately marks a detail, keep it independent of ordinary session progress. Save a passage at 2:12, listen on to 3:04, then open its shared address in the same browser. It should land at 2:12 even though Resume belongs at 3:04. For a large scene, [the city-streaming study](../research/streaming-a-city.md) shows how to prioritise that destination while keeping the rest of the space usable.
 
 Test the detail the design promised. On a photo board, enlarge a print, inspect a second region of your choice, then fit the image and return to its place. For a software demo, run two inputs and compare their actual outputs. In a connected product check the outcome against the service response. Report the working path, the specific game moment that shaped it and what you verified. Keep evidence, intake questions and critique in the conversation, outside the visitor-facing interface.
+
+## JavaScript and TypeScript
+
+Read the feature before choosing a file extension. Trace one record from its export or loader, through the view, to the callback that opens or saves it. Check the nearest package scripts, neighbouring source files and applicable `tsconfig` or `jsconfig`. In a mixed workspace, use the conventions of the package and feature being changed. An explicit language request applies to the requested work.
+
+For JavaScript, match the host’s module format, JSX conventions and any JSDoc types. For TypeScript, use `.tsx` for JSX and `.ts` for ordinary modules. Reuse the app’s exported props, record and callback types. For example, if `onPick` accepts a show ID, pass the record’s actual ID and let the existing handler open the show. Handle a missing route record through the app’s existing empty or error state. Keep its compiler settings and run the package’s type check as well as its build when those are separate. [React with TypeScript](https://react.dev/learn/typescript) · [Type checking JavaScript](https://www.typescriptlang.org/docs/handbook/intro-to-js-ts.html)
+
+In a plain JavaScript or TypeScript site, mount the interaction through the current DOM entry point. In chat, supply the requested source language and explain how to run it. For TypeScript, include the compile or dev command that makes the source usable in a browser. For a fresh React brief with no language preference or project evidence, JSX is a suitable default.
+
+## Build it in React
+
+In an existing app, follow a link from the current navigation to the page the user wants to change. Find the component that renders it, where its data comes from and how the app styles it. Build the playable scene there in the project's JSX or TSX. Reuse its layout, providers, links, data loading and actions. For a component-only request, keep its props, callbacks and place in the page. In a new React project, use the requested toolchain or a minimal React setup that runs and builds the scene.
+
+Suppose the app already opens a gig at `/shows/:slug`. Let the contact sheet read those same show records. Hover or keyboard focus can bring a print forward. Activating its link opens the existing show and leaves browsing history intact. Drive the opened show from the routed slug so a refresh or shared link opens the right one. Restore focus to its print when the visitor returns to the wall. A project without a router can keep its existing navigation convention.
+
+Keep transient gestures such as zoom and drag in the interactive component. Attach an imperative canvas to a ref and clean up any listeners or animation frames the scene starts when it unmounts. In a server-rendered app, render the same initial scene on server and client. With Next.js App Router, keep data loading in its existing layer and put the interactive controls behind the nearest suitable client boundary. [React effects](https://react.dev/reference/react/useEffect) · [Next.js server and client components](https://nextjs.org/docs/app/getting-started/server-and-client-components)
+
+Run the app’s own production build and relevant checks. Give Unslop the served route and the control to try. On a hoverable chooser, park the pointer over one item, open another by keyboard and use browser Back. Its print, focus and preview should agree even if React remounts the chooser under the pointer. Refresh the detail URL and make the trip again on a phone. In a chat without file access, return complete labelled component and style files plus the import and usage for the route. If the project layout is unknown, state the mounting assumption so the owner can use the result.

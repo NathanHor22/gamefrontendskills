@@ -23,6 +23,7 @@ function parseViewport(value) {
   return { width: Number(m[1]), height: Number(m[2]) };
 }
 const MOBILE = { width: 390, height: 844 };
+const CONTROL_TIMEOUT = 3000;
 const MOVEMENT = /transform|translate|rotate|scale|left|top|right|bottom|inset|margin|offset|clip-path|width|height/;
 
 const slug = (s) => s.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "").toLowerCase().slice(0, 40) || "control";
@@ -37,16 +38,35 @@ async function away(page) {
   await page.mouse.move(2, 2);
 }
 
-/** Clicks each visible --click-first selector (opens menus or dialogs) and waits for the page to settle. */
+async function waitForState(locator, state) {
+  try {
+    await locator.waitFor({ state, timeout: CONTROL_TIMEOUT });
+    return true;
+  } catch (error) {
+    if (error.name === "TimeoutError") return false;
+    throw error;
+  }
+}
+
+/** A responsive layout may omit an opener; a client-rendered route may mount one after load. */
 async function prepare(page, clickFirst = []) {
   for (const sel of clickFirst) {
     const loc = page.locator(sel).first();
-    if (await loc.isVisible().catch(() => false)) {
-      await loc.click();
+    if (await waitForState(loc, "visible")) {
+      await loc.click({ timeout: CONTROL_TIMEOUT });
       await page.waitForTimeout(50);
-      await page.waitForFunction(() => document.getAnimations().every((a) => a.playState !== "running" || a.effect?.getComputedTiming().endTime === Infinity), null, { timeout: 3000 }).catch(() => {});
+      await page.waitForFunction(() => document.getAnimations().every((a) => a.playState !== "running" || a.effect?.getComputedTiming().endTime === Infinity), null, { timeout: CONTROL_TIMEOUT }).catch(error => {
+        if (error.name !== "TimeoutError") throw error;
+      });
     }
   }
+}
+
+async function openForChecks(page, url, clickFirst) {
+  // Revisiting a hash route can keep the mounted menu and the previous control's state.
+  if (page.url() !== "about:blank") await page.goto("about:blank");
+  await page.goto(url, { waitUntil: "load" });
+  await prepare(page, clickFirst);
 }
 
 function union(a, b) {
@@ -193,14 +213,14 @@ async function recordMotion(page, handle, browser, dir, clip, phase, trigger) {
 
 async function verifyControl({ browser, page, url, selector, index, root, opts }) {
   const loc = page.locator(selector).nth(index);
-  if (!(await loc.isVisible())) {
+  if (!(await waitForState(loc, "visible"))) {
     const { width, height } = page.viewportSize();
     return {
       selector, index, name: "", status: "fail", shots: {},
       checks: [{ id: "visible", status: "fail", detail: `not visible at ${width}×${height}; use --viewport (e.g. 390x844) or --click-first to open its container` }],
     };
   }
-  const handle = await loc.elementHandle();
+  let handle = await loc.elementHandle({ timeout: CONTROL_TIMEOUT });
   await handle.scrollIntoViewIfNeeded();
   const name = (await handle.evaluate((el) => el.getAttribute("aria-label") || el.innerText || el.value || el.tagName)).trim().replace(/\s+/g, " ").slice(0, 60);
   const dir = path.join(root, `${slug(selector)}-${index}`);
@@ -296,7 +316,12 @@ async function verifyControl({ browser, page, url, selector, index, root, opts }
   await page.evaluate(() => getSelection()?.removeAllRanges());   // the drag-away release can select text
   await settle(page, handle);
   // Releasing outside can land a click on a dialog backdrop and close it; reopen for the remaining checks.
-  if (opts.clickFirst?.length && !(await handle.isVisible())) { await prepare(page, opts.clickFirst); await settle(page, handle); }
+  if (opts.clickFirst?.length && !(await handle.isVisible())) {
+    await prepare(page, opts.clickFirst);
+    await loc.waitFor({ state: "visible", timeout: CONTROL_TIMEOUT });
+    handle = await loc.elementHandle({ timeout: CONTROL_TIMEOUT });
+    await settle(page, handle);
+  }
   const pressDiff = await diffRatio(page, own.hover, own.pressed);
   add("press-visible", pressDiff > 0.001 ? "pass" : "warn", `pressed differs ${pct(pressDiff)} from hover`);
 
@@ -360,9 +385,9 @@ async function verifyControl({ browser, page, url, selector, index, root, opts }
   const rmContext = await browser.newContext({ viewport: page.viewportSize(), reducedMotion: "reduce" });
   try {
     const rm = await rmContext.newPage();
-    await rm.goto(url, { waitUntil: "load" }); await prepare(rm, opts.clickFirst);
-    const h = await rm.locator(selector).nth(index).elementHandle();
-    await h.scrollIntoViewIfNeeded();
+    await openForChecks(rm, url, opts.clickFirst);
+    const h = await rm.locator(selector).nth(index).elementHandle({ timeout: CONTROL_TIMEOUT });
+    await h.scrollIntoViewIfNeeded({ timeout: CONTROL_TIMEOUT });
     await away(rm); await settle(rm, h);
     const rc = await center(h);
     const restFile = await shot(rm, clip, path.join(dir, "reduced-rest.png"));
@@ -385,9 +410,10 @@ async function verifyControl({ browser, page, url, selector, index, root, opts }
   const mobile = await browser.newContext({ viewport: MOBILE, hasTouch: true, isMobile: true });
   try {
     const mp = await mobile.newPage();
-    await mp.goto(url, { waitUntil: "load" }); await prepare(mp, opts.clickFirst);
-    const h = await mp.locator(selector).nth(index).elementHandle();
-    const shown = await h.evaluate((el) => el.checkVisibility({ visibilityProperty: true, opacityProperty: true }));
+    await openForChecks(mp, url, opts.clickFirst);
+    const mobileControl = mp.locator(selector).nth(index);
+    const h = await waitForState(mobileControl, "visible") ? await mobileControl.elementHandle({ timeout: CONTROL_TIMEOUT }) : null;
+    const shown = h && await h.evaluate((el) => el.checkVisibility({ visibilityProperty: true, opacityProperty: true }));
     const b = shown ? (await h.scrollIntoViewIfNeeded(), await h.boundingBox()) : null;
     if (!shown) add("mobile-visible", "info", "hidden at 390px (for example inside a closed menu); verify the open state separately");
     else if (!b) add("mobile-visible", "warn", "not rendered at 390px");
@@ -442,10 +468,15 @@ export async function verify(target, { selectors, max = 3, longLabel = false, ax
     await mctx.close();
 
     for (const selector of selectors) {
-      const count = await page.locator(selector).count();
-      if (!count) { report.controls.push({ selector, status: "fail", checks: [{ id: "found", status: "fail", detail: "selector matched nothing" }] }); continue; }
+      await openForChecks(page, url, clickFirst);
+      const matches = page.locator(selector);
+      if (!(await waitForState(matches.first(), "attached"))) {
+        report.controls.push({ selector, status: "fail", checks: [{ id: "found", status: "fail", detail: "selector matched nothing" }] });
+        continue;
+      }
+      const count = await matches.count();
       for (let i = 0; i < Math.min(count, max); i++) {
-        await page.reload({ waitUntil: "load" }); await prepare(page, clickFirst);
+        if (i > 0) await openForChecks(page, url, clickFirst);
         report.controls.push(await verifyControl({ browser, page, url, selector, index: i, root, opts: { longLabel, context, clickFirst } }));
       }
     }

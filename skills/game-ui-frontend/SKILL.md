@@ -1,6 +1,6 @@
 ---
 name: game-ui-frontend
-description: Build original websites with playable start screens from a short brief and this skill’s game research. Use for game-led website builds, redesigns, creative direction, interaction critique and game UI research.
+description: Build or redesign playable website interfaces in JavaScript, TypeScript and React using this skill’s game research. Use for game-led website builds, creative direction, interaction critique and game UI research.
 ---
 
 # Game UI for frontend websites
@@ -53,8 +53,8 @@ Give each content destination an address that opens it directly, including a fra
 site. After a choice from the entrance, browser Back restores the chosen item and its focus.
 On a direct visit, offer a link to the entrance and preserve the visitor's actual browser history.
 Make the same trip work by keyboard, touch and with reduced motion.
-In a chat with no project-editing tools, deliver a runnable version as a self-contained HTML file
-or one complete HTML code block the person can save and open.
+Follow the feature’s [JavaScript or TypeScript conventions](references/workflows/build.md#javascript-and-typescript). For React, use [Build it in React](references/workflows/build.md#build-it-in-react). In chat, honour the requested language and give the files, styles and integration code the person needs.
+For a web brief with no project or stack specified in ordinary chat, deliver a self-contained HTML file or one complete HTML code block the person can save and open.
 
 If only this file is available, *Life is Strange: Before the Storm* shows a focus frame moving
 between three pictures while the chapter chooser stays open (`life-is-strange-before-the-storm-opening-study`).

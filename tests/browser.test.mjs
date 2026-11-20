@@ -174,6 +174,45 @@ for (const [file, opts] of cases) {
   });
 }
 
+test("verify discovers controls mounted after opening a menu and reacquires them after dismissal", { skip, timeout: 90000 }, async () => {
+  const dir = out();
+  const page = path.join(dir, "menu.html");
+  fs.writeFileSync(page, `<!doctype html><meta name="viewport" content="width=device-width"><style>
+    body{margin:50px} button{padding:16px} button:focus-visible{outline:4px solid navy}
+  </style><main></main><script>
+    const main = document.querySelector("main");
+    setTimeout(() => {
+      const opener = document.createElement("button");
+      opener.id = "menu";
+      opener.textContent = "Menu";
+      main.append(opener);
+      opener.onclick = () => {
+        const existing = main.querySelector("nav");
+        if (existing) { existing.remove(); return; }
+        setTimeout(() => {
+          const menu = document.createElement("nav");
+          menu.innerHTML = '<button id="album">Album</button><button id="details">Details</button>';
+          main.append(menu);
+        }, 200);
+      };
+    }, 200);
+    document.addEventListener("mouseup", event => {
+      if (!main.contains(event.target)) main.querySelector("nav")?.remove();
+    });
+  </script>`);
+  const { verify } = await import("../skills/game-ui-frontend/scripts/verify.mjs");
+  const url = pathToFileURL(page).href + "#/albums";
+  const { report } = await verify(url, { selectors: ["#album", "#details", "#missing"], clickFirst: ["#menu"], axe: false, out: dir });
+  const [album, details, missing] = report.controls;
+  assert.equal(album.name, "Album");
+  assert.equal(details.name, "Details");
+  for (const id of ["keyboard-reachable", "mobile-visible", "reduced-motion-movement"]) {
+    assert.equal(album.checks.find(check => check.id === id)?.status, "pass", id);
+  }
+  assert.equal(missing.checks[0].id, "found");
+  assert.equal(missing.status, "fail");
+});
+
 test("verify catches hover flicker and decoration stealing the pointer", { skip, timeout: 300000 }, async () => {
   const dir = out();
   const page = path.join(dir, "bad.html");
@@ -201,6 +240,31 @@ test("audit detects generic-UI signals on the fixture site and few on a template
   assert.equal(generic.report.pages.length, 2, "followed the same-origin link");
   const authored = await audit(path.join(T, "buttons.html"), { pages: 1, viewports: [1440], axe: false, out: out() });
   assert.deepEqual(authored.report.signals.map((s) => s.id), []);
+});
+
+test("audit inventories distinct hash routes and skips duplicate sections and action links", { skip }, async (t) => {
+  const { audit } = await import("../skills/game-ui-frontend/scripts/audit.mjs");
+  const dir = out();
+  t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
+  const app = path.join(dir, "index.html");
+  fs.writeFileSync(app, `<!doctype html><h1></h1>
+    <script>document.querySelector("h1").textContent = location.hash || "Index";</script>
+    <nav hidden>
+      <a href="#/work?tag=new#art">Work</a><a href="#/work?tag=new#notes">Notes</a>
+      <a href="#/work?tag=old">Archive</a><a href="#!/intro#top">Intro</a><a href="#top">Top</a>
+      <a href="about.html#credits">Credits</a><a href="about.html#team">Team</a>
+      <a href="#/logout?from=work">Sign out</a><a href="#!/poster.pdf?download=1">Poster</a>
+      <a href="https://example.invalid/#/other">External</a>
+    </nav>`);
+  fs.writeFileSync(path.join(dir, "about.html"), "<!doctype html><h1>About</h1>");
+  const url = pathToFileURL(app).href;
+  const { report } = await audit(url + "#!/intro#opening", { pages: 10, viewports: [800], axe: false, out: dir });
+  assert.deepEqual(report.pages.map(p => [p.url, p.desktop.headings[0].text]), [
+    [url + "#!/intro", "#!/intro"],
+    [url + "#/work?tag=new", "#/work?tag=new"],
+    [url + "#/work?tag=old", "#/work?tag=old"],
+    [new URL("about.html", url).href, "About"],
+  ]);
 });
 
 test("browser scripts refuse sites marked no_automated_access", { skip }, async () => {

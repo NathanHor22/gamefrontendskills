@@ -16,6 +16,8 @@ Pick selectors that match the **interactive element** (the `<a>`/`<button>`, or 
 native input), one or two instances per component type. Always **look at the strips**: `states-strip.png`
 (rest, hover, interrupted, pressed, focus, reduced-motion hover, mobile), `enter-strip.png` and `exit-strip.png`.
 
+For a React project, point the scripts at the route served by the app. Include the hash when the router uses addresses such as `/#/shows`. If opening the contact sheet mounts its controls, pass the opener with `--click-first` and select a print with `--selector`. Then open a print yourself to check its destination and the return trip.
+
 ## Review the rendered design
 
 - Start with the full desktop and phone screens. Trace the main layout and the first action back to the visitor's goal and the selected game study. If swapping in any other client’s name would leave the same hero, cards and call to action, redesign that screen around what this visitor came to do.

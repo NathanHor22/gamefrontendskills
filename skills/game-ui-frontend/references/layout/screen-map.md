@@ -5,8 +5,8 @@ Every website surface has a game screen that already solved a similar problem. U
 and (3) place things on the page. Zone diagrams are desktop starting points, not templates to copy;
 [placement.md](placement.md) explains the rules behind them and how they reflow on narrow screens.
 
-Look evidence up with `node scripts/library.mjs show <id>`, or list everything for a screen type with
-`node scripts/library.mjs search --screen <type>`. Pattern ids are original web proposals, not game facts.
+Look evidence up with `node scripts/library.mjs show --bundled <id>`, or search a screen type with
+`node scripts/library.mjs search --bundled --screen <type>`. Pattern ids identify original web proposals.
 
 Legend for diagrams: `■` focal subject, `◆` primary or selected action, `≡` index/list, `·` utility perimeter,
 `▢` detail/preview pane, `~` scene/background that stays visible.

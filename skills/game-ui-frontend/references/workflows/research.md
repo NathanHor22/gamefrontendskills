@@ -1,7 +1,8 @@
 # Research: adding game screens to the library
 
-Use when a brief needs a game or screen type the library lacks (`node scripts/library.mjs screens` shows
-coverage), or when the user asks to research a game. Record format and commands: [library.md](../library.md).
+Use when the user asks to study a game, analyse supplied footage or extend the library. For a website
+build with a missing reference, choose the nearest documented game decision in the bundle and explain
+the adaptation. The [library guide](../library.md) covers record formats and research commands.
 
 The CLI indexes structured game records and patterns. A game can also appear in a video essay without
 having its own record. Check the [video-study index](../art-direction.md) before repeating the research.

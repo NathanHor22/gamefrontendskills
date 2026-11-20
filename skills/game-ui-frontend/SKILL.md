@@ -1,6 +1,6 @@
 ---
 name: game-ui-frontend
-description: Develop original websites from game design research. Use for game design philosophy, creative direction, playable website mechanics, 3D environments, retro startups, mission flows, character selection and expressive controls. Includes a research agent, a website design agent, a design critic, a searchable game library, working frontend examples and browser verification.
+description: Build original websites with playable start screens from a short brief and this skill’s game research. Use for game-led website builds, redesigns, creative direction, interaction critique and game UI research.
 ---
 
 # Game UI for frontend websites
@@ -9,9 +9,12 @@ A game gives someone a reason to act and makes the consequence visible. Start wi
 came to do. Study how a game handles an equivalent decision, then design the website's own space,
 controls and feedback around its subject.
 
-Use the user's brief and this skill as the design authority throughout the site. Set aside conventional
-AI website styling. Choose a game interaction that fits the visitor's task and use the site's own subject
-to decide how it looks. If a detail serves neither the task nor the subject, leave it out.
+For website direction, builds and redesigns, draw the interaction and art direction exclusively from the game
+research shipped with this skill. The user's project supplies the subject, content, artwork, brand
+and technical constraints. Use the bundled studies and `data/games.json` for game evidence. A
+template or web pattern can help implement a decision once you have its source. Use `--bundled`
+for library lookups. Leave website galleries, component showcases, personal reference
+sites and new game searches out of this process. A request to research new material has its own workflow.
 
 All paths below are relative to this skill's directory. Run scripts with the skill's **absolute** path
 from the user's project directory. With `skills use`, resolve paths from the temporary supporting directory
@@ -19,23 +22,50 @@ provided in the prompt. Read the research, role prompts and templates from that 
 bundle and its dependencies there. Only write the website changes or deliverables the user requested
 into their project.
 
+In a web-only chat, open the [menu study index](references/research/title-screens.md) and the one
+study that fits. Resolve relative links against the raw URL of the document containing them, keeping
+the same repository revision. This route needs no install or catalogue download.
+
+## When someone says "build my website with this"
+
+Read their brief and any available project content first. A loose build request is an invitation to
+make a working site. Ask up to two short questions together in chat, only for decisions still missing.
+Adapt them to what the person has already told you:
+
+- **What should someone who visits be able to do?** For a theatre, that might be choosing a show or finding the next performance.
+- **What should they see or handle first?** For that theatre, lifting a curtain and picking up a programme suggest different openings. A place, an object, a feeling or a game they love is enough.
+
+When you ask, wait for the reply. These questions are for the person commissioning the site.
+If the brief already answers them, or the person says "you choose", go straight to the build.
+Use one fitting game moment and implement the first useful choice **and what it opens**. The
+[build workflow](references/workflows/build.md) carries that choice into the rest of the site.
+Give each content destination an address that opens it directly, including a fragment in a single-file
+site. After a choice from the entrance, browser Back restores the chosen item and its focus.
+On a direct visit, offer a link to the entrance and preserve the visitor's actual browser history.
+Make the same trip work by keyboard, touch and with reduced motion.
+In a chat with no project-editing tools, deliver a runnable version as a self-contained HTML file
+or one complete HTML code block the person can save and open.
+
+If only this file is available, two observations from the bundled research can still ground a build.
+In *Persona 5 Royal*, a cyan plate moves along a fixed row of commands and each choice reframes the
+plaza (`persona-5-royal-opening-study`). In *Gran Turismo* on PSP, an orange-lit shelf opens a
+collection, then a car, and returning restores the shelf grid (`gran-turismo-psp-opening-study`).
+Use either when it fits. If a named game is missing from the research, name the studied analogue
+you used. If another bundled reference matters, request that particular study by name.
+
 ## Pick the workflow
 
 | The user wants… | Follow |
 | --- | --- |
 | "Improve my site / page / component" (existing code or URL) | [workflows/improve.md](references/workflows/improve.md) |
-| "Build a site / page with these game principles" | [workflows/build.md](references/workflows/build.md) |
-| "Study these videos", "give my site a creative direction", or "make it feel playable" | [Art direction](references/art-direction.md) routes the brief to source moments. For an interaction loop, spatial environment or retro startup, use the agents below. |
-| "Research <game>" or the library lacks a screen type | [workflows/research.md](references/workflows/research.md) |
+| "Build my website with this", a named game, or a game-like opening for an existing project | [workflows/build.md](references/workflows/build.md) |
+| "Give me a creative direction" or "study these videos" | [Art direction](references/art-direction.md) routes the brief to source moments. Give the requested design or analysis. |
+| "Research this game" or "add this footage to the library" | [workflows/research.md](references/workflows/research.md) |
 | Check that controls behave (after any UI change) | [workflows/verify.md](references/workflows/verify.md) |
 
-For an open design brief, compare distinct rendered directions. For a specific direction, develop it
-directly. For an experience built around a mechanic, prototype a whole visitor action and its consequence.
-Verify the resulting journey in the browser when implementation is requested.
-
-Before composing either design, use [From a website brief to an art direction](references/art-direction.md).
-Explain the visitor’s decision, what they see on arrival, what exploring reveals, and which action commits.
-Carry the project’s own subject through the art and controls.
+Compare rendered directions when the person asks to explore options. For a build request, choose a
+direction from the brief and follow it through to the working destination. Use the
+[art-direction guide](references/art-direction.md) for how to translate a documented choice into original work.
 
 ## Title screens and start menus
 
@@ -65,7 +95,8 @@ just to fill space. A press bed can have a working rail. A flat, inked button al
 ## Research, design and critique
 
 For a game-led experience, give the [game design philosopher](agents/game-design-philosopher.md) the brief and
-sources. Pass its findings to the [gameplay web designer](agents/gameplay-web-designer.md), then ask the
+relevant bundled studies. For an explicit research request, include the supplied sources instead.
+Pass its findings to the [gameplay web designer](agents/gameplay-web-designer.md), then ask the
 [design critic](agents/game-design-critic.md) to challenge the direction or play the built journey. Pass the
 critic's strongest objection back to the designer and verify the change. Use the relevant role alone for a
 research-only, transfer-only or review request. When the runtime supports delegation, pass each role
@@ -75,11 +106,11 @@ When working alone, apply the profiles in sequence and identify the review as a 
 ## Tools
 
 ```
-node scripts/library.mjs search --screen character_select       # evidence for a screen type
-node scripts/library.mjs search "exterior marker" --limit 5      # by idea
-node scripts/library.mjs resolve "dragonball fighterz"           # informal game names → ids
-node scripts/library.mjs show <id>                               # full record
-node scripts/library.mjs screens                                 # screen types, web equivalents, coverage
+node scripts/library.mjs search --bundled --kind observation --screen character_select
+node scripts/library.mjs search --bundled "exterior marker" --limit 5
+node scripts/library.mjs resolve --bundled "dragonball fighterz"
+node scripts/library.mjs show --bundled <id>
+node scripts/library.mjs screens --bundled
 
 node scripts/audit.mjs <url> [--pages 6]                         # screenshots + inventory + generic-UI signals
 node scripts/capture.mjs <a> <b> <c> --labels "A,B,C"            # side-by-side mocks or before/after
@@ -139,6 +170,5 @@ judging the art is your job.
 
 ## Preferences
 
-Read `data/preferences.json`, then the user's `~/.game-ui-frontend/preferences.json` if present (objects merge,
-lists replace). The user's explicit instructions win. `examples/authored-sites.json` holds optional credited
-example sites from this skill's author; don't assume they reflect the current user's identity or taste.
+Read `data/preferences.json` and respect the user's project requirements. Personal preferences can help
+interpret a name or a constraint. The bundled game studies supply the creative references for builds.

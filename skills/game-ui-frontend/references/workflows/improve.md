@@ -6,8 +6,8 @@ temporary directory. Use `--out <directory>` when the user wants to keep the rep
 
 ## 1. Intake (ask only what you cannot find)
 
-Find in the repo first: framework, styling system, component library, design tokens, existing fonts, dev
-server command and port, and any design docs. Then confirm or ask:
+Read the repo for framework, styling system, tokens, fonts, server command and existing design decisions.
+Use the table to spot gaps. For creative intake, use the [two questions in the skill](../../SKILL.md#when-someone-says-build-my-website-with-this). Ask for the URL or scope only if the target itself is unclear.
 
 | Need | Why |
 | --- | --- |
@@ -17,8 +17,7 @@ server command and port, and any design docs. Then confirm or ask:
 | Constraints: brand colours/fonts, things that must not change, deadlines | Keeps the direction applicable |
 | Scope: one component, one page, or the whole site | Sizes the work |
 
-If the user named games, run `node scripts/library.mjs resolve "<name>"` for each. An ambiguous edition
-(e.g. "Persona 3 Golden") gets one short question only if it changes the design; otherwise state the assumption.
+If the user named a game, run `node scripts/library.mjs resolve --bundled "<name>"`. If an edition is ambiguous, use the brief to pick the closest studied edition and name it.
 
 Start the dev server if needed (follow the project's own scripts). Browser tools open only the URL the user
 gave you and its same-origin links. They never submit forms, log in or buy anything.
@@ -51,14 +50,12 @@ action, main index), then navigation, then forms, feedback and details.
 For each prioritised screen type:
 
 ```
-node scripts/library.mjs search --screen character_select
-node scripts/library.mjs search "detached marker preview" --screen character_select
-node scripts/library.mjs show <observation-id>
+node scripts/library.mjs search --bundled --screen character_select
+node scripts/library.mjs search --bundled "detached marker preview" --screen character_select
+node scripts/library.mjs show --bundled <observation-id>
 ```
 
-Use 2–4 observations per screen type, from different games. If the library is thin for a screen type
-(`node scripts/library.mjs screens` shows counts), research new references with [research.md](research.md)
-before designing, or say plainly that the direction rests on fewer references.
+Use the bundled observation that explains the visitor's decision. Add another when it answers a different question. If coverage is thin, name the closest studied analogue and identify your own design choices.
 
 ## 5. Directions: render them, don't just describe them
 
@@ -66,8 +63,7 @@ Frame each direction around what the visitor came to decide. Use [the art-direct
 to name what stays visible, what changes on selection and what opens on request. In the mock, replace any
 ornamental numbering, filler labels or repeated card copy with space for the subject itself.
 
-Write 2–3 **genuinely different** directions (different material, shape vocabulary and motion character,
-not three accent colours). For each:
+For a requested comparison, render 2–3 directions that differ in material, shape and motion. For a direct request to change the site, develop one evidence-backed direction and proceed to implementation. For each direction describe:
 
 - **Name** and a one-line idea ("Print registration desk").
 - **Evidence**: which observations informed which decision.
@@ -76,21 +72,20 @@ not three accent colours). For each:
 - **Signature control**: anatomy plus enter/exit/interruption ([buttons.md](../components/buttons.md), [motion.md](../styles/motion.md)).
 - **Placement** of the prioritised sections ([placement.md](../layout/placement.md)).
 
-For a visual redesign, build each candidate as a static mock of the most important section.
+For a comparison of visual directions, build each candidate as a static mock of the most important section.
 Create a fresh directory in the system temporary folder for the draft HTML and CSS. Start from
 `templates/tokens.css` and the matching template in the temporary skill.
 
 For a gameplay-led redesign, exercise the visitor's complete action in a working prototype instead. Give
 the critic the task and the visitor's current route so they can compare the result, effort and ability to recover.
 
-Compare candidate views together with the capture script.
+When comparing candidates, capture them together.
 
 ```
 node "<absolute skill directory>/scripts/capture.mjs" "<absolute drafts directory>/a.html" "<absolute drafts directory>/b.html" "<absolute drafts directory>/c.html" --labels "A,B,C"
 ```
 
-Look at `compare-1440.png` and `compare-390.png` yourself, then show the user the directions with the images'
-paths and a recommendation. **Wait for their choice** before changing their code.
+Look at `compare-1440.png` and `compare-390.png` yourself. When the user asked to choose between options, show the images and recommendation and wait for their choice.
 
 ## 6. Implement in their stack
 

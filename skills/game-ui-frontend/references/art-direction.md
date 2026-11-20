@@ -35,7 +35,7 @@ Combine references where they solve different parts of the *same* problem. A ros
 - **Draw the transition.** Describe the starting pose, the first visible response, the settled view and the route back. Identify one thing that stays put so a visitor can compare successive choices. Give each movement a meaning, such as replacing the subject, revealing a surface or confirming a choice. Keep controls operable during the change.
 - **Give the visitor the same decision on each device.** Describe the phone composition, the touch action that replaces hover and the still pose that carries selection with reduced motion. Use focus to reveal the same comparison data. Let an explicit action open detail.
 
-In the response, lead with the design philosophy in the language of the brief. Walk through one visit using real labels, explain the signature control and name the game moment that informed it. These are design notes for the person building the site. Only visitor-facing copy belongs in the mockup.
+For a direction request, walk through one visit using real labels and explain the game moment behind the signature control. For a build, implement that visit and give the user the working result along with the source for the design decision. Keep these notes in the handoff.
 
 ## Two directions from the same print studio
 

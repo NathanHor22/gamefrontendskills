@@ -22,10 +22,11 @@ Use the [catalogue by game and screen](catalog.md#by-game) to find individual ed
 
 ## Study the actual opening
 
-Search the library for `title` and `main_menu`. For first-run choices and returning players, also check `character_select`, `hub_lobby` and `confirmation`. Find two useful openings with different staging,
-then study the relevant clip or capture before deciding. Scrub to four moments: first readable
-frame, untouched idle, change of focus, and the moment a choice opens or returns. Record the source
-and playhead for each motion claim. Mark anything an image cannot establish as unverified.
+For a build, look up the recorded sequence in a study above or search the bundled library for
+`title` and `main_menu`. For first-run choices and returning players also try `character_select`,
+`hub_lobby` and `confirmation`. Follow what was visible on arrival, what kept moving at rest, what
+changed with focus and what happened on activation or return. Use the recorded playheads to support
+those observations. For a request to study footage, inspect those moments in the clip itself.
 
 | Evidence | What to borrow, not copy |
 | --- | --- |

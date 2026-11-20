@@ -7,7 +7,7 @@
     {
       "name": "game-ui-frontend",
       "source": "./",
-      "description": "Design, improve and verify website UI using game interface research."
+      "description": "Build a playable website from a short brief and a library of studied game menus and mechanics."
     }
   ]
 }

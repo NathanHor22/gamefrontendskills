@@ -178,9 +178,9 @@ export class Library {
     this.index = buildIndex(this.records);
   }
 
-  static open(p = paths()) {
+  static open(p = paths(), { bundledOnly = false } = {}) {
     const bundled = [...loadRecords(path.join(p.data, "games.json")), ...loadRecords(path.join(p.data, "patterns.json"))];
-    const user = fs.existsSync(p.store) ? loadRecords(p.store) : [];
+    const user = !bundledOnly && fs.existsSync(p.store) ? loadRecords(p.store) : [];
     return new Library({ bundled, user, vocab: loadVocabulary(p.data), preferences: loadPreferences(p) });
   }
 
@@ -510,7 +510,7 @@ export function renderCatalog(lib) {
     "",
     `${s.games} game/edition profiles, ${s.games_with_visual_study} with visual study, ${s.visual_observations} visual observations, ${s.reviewed_image_sources} reviewed image sources, ${s.reviewed_video_sources} reviewed video sources, ${s.original_web_patterns} original web patterns. Selected research, not an exhaustive catalogue.`,
     "",
-    "Use `node scripts/library.mjs show <id>` for any id below.",
+    "Use `node scripts/library.mjs show --bundled <id>` for any id below.",
     "",
     "## By screen type",
     "",
@@ -624,7 +624,9 @@ const HELP = `Usage: node scripts/library.mjs <command> [options]
   export --file <path>           write your user store entries
   links [--game <id>]            check source URLs over the network (respects source_policy)
   docs [--write]                 render references/research/catalog.md
-  where                          print data and user-store paths`;
+  where                          print data and user-store paths
+
+  --bundled                      use shipped records only for resolve, search, show, screens or stats`;
 
 function parseArgs(argv) {
   const out = { _: [] };
@@ -633,7 +635,7 @@ function parseArgs(argv) {
     if (a.startsWith("--")) {
       const k = a.slice(2);
       const next = argv[i + 1];
-      if (next === undefined || next.startsWith("--")) out[k] = true;
+      if (k === "bundled" || next === undefined || next.startsWith("--")) out[k] = true;
       else { out[k] = next; i++; }
     } else out._.push(a);
   }
@@ -650,7 +652,10 @@ export async function main(argv = process.argv.slice(2), p = paths()) {
   const [command, ...rest] = args._;
   const limit = args.limit === undefined ? undefined : Number(args.limit);
   if (limit !== undefined && !(Number.isInteger(limit) && limit >= 1 && limit <= 200)) throw new Error("--limit must be 1-200");
-  const lib = Library.open(p);
+  if (args.bundled && !["resolve", "search", "show", "screens", "stats"].includes(command)) {
+    throw new Error("--bundled applies only to resolve, search, show, screens and stats");
+  }
+  const lib = Library.open(p, { bundledOnly: args.bundled });
   switch (command) {
     case "resolve":
       return emit(resolve(lib, rest.join(" "), limit ?? 6));

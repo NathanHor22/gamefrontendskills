@@ -15,20 +15,20 @@ There’s enough Man City in this world. Be prime Neymar Jr at Barcelona.
 Drop this line into your Claude or ChatGeeBeeTee chat. No terminals. No tech wizardry. Straight-up easy, like getting a Tesco Meal Deal. Bosh.
 
 ```text
-Read https://raw.githubusercontent.com/NathanHor22/gamefrontendskills/main/skills/game-ui-frontend/SKILL.md and design my website from my brief and this skill. Skip your usual AI website styling. Ask me to paste any reference you can’t open.
+Use https://raw.githubusercontent.com/NathanHor22/gamefrontendskills/main/skills/game-ui-frontend/SKILL.md to build my website from the game research in the skill. Ask me up to two quick questions about anything missing, then build it.
 ```
 
 If the links are moving funny, yeah, paste the [skill instructions](skills/game-ui-frontend/SKILL.md) into the chat and say:
 
-> Design it from my brief and this skill. Skip your usual AI website styling. Give me the name of any other page you need me to paste.
+> Build my site with this skill. If you need another game study, tell me which one to paste.
 
-For the portfolio idea below, start with the [creative direction guide](skills/game-ui-frontend/references/art-direction.md).
+“Build me a site for my gig photography” is plenty to get going, mate. It might ask **“What should people come here to do?”** and **“What should it feel like when they arrive?”** Try this:
 
-Then tell it what you’re making. For example:
+> Let people pick a band and see the night I shot them. I want it to feel like flicking through the gig posters outside the Brixton Academy.
 
-> I’m a gig photographer. Make my portfolio feel like a PS1 character-select screen. Let people pick a band and see the night I shot them.
+Now the posters are your opening menu. Pick a band, see its shoot, come back to the poster you picked. The skill gets that browsing behaviour from its game studies. The photographs and the character of the venue come from you. Already know what you want? Stick it all in the first message and it can crack on.
 
-Swap in your own idea and you’re cooking, my guy.
+In a coding agent it builds in your project. In an ordinary chat you can get one HTML file to save and open. Fancy seeing where the moves come from? [Start-screen studies](skills/game-ui-frontend/references/research/title-screens.md)
 
 ## For dem technical mandem
 

@@ -7,7 +7,7 @@ Review the brief, the designer's proposed experience and any available build. St
 
 Trace a visitor from arrival to a meaningful outcome. What action can they predict? What changes when they act? Can they recognize the consequence and change their mind? Examine the strongest design choice and the weakest assumption. For each, explain the benefit to this audience, its cost and a situation in which your judgment would reverse.
 
-Follow the evidence at the point where the argument depends on it. Cite the observed game moment or developer account. Identify what the footage shows, what the designer inferred, and what a website visitor would have to learn. An editor's cut can resemble an instant response. A familiar roster can be easy for a fan and opaque to a newcomer.
+Trace the designer’s key decision to an observation or playhead in a bundled study. Identify what the footage shows, what the designer inferred, and what a website visitor would have to learn. An editor's cut can resemble an instant response. A familiar roster can be easy for a fan and opaque to a newcomer.
 
 For an animated entrance, cross two choices quickly, activate while the preview is still moving, then come back. Check which destination opened, which button recovered focus and whether a first tap on a phone reaches the same place. Compare what happened with the [menu study](../references/research/title-screens.md) that informed the design.
 

@@ -4,7 +4,7 @@
 
 112 game/edition profiles, 112 with visual study, 251 visual observations, 112 reviewed image sources, 95 reviewed video sources, 24 original web patterns. Selected research, not an exhaustive catalogue.
 
-Use `node scripts/library.mjs show <id>` for any id below.
+Use `node scripts/library.mjs show --bundled <id>` for any id below.
 
 ## By screen type
 

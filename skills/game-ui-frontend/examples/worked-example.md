@@ -1,8 +1,8 @@
 # Worked example: improving a generic studio site
 
-An example of the full Workflow A output, run against the test fixture `tests/fixtures/generic-site/`
-(a deliberately generic two-page studio site). Use it as the shape and depth of a real answer, not as a
-design to copy. The directions are original proposals; the evidence ids are real library records.
+This example compares redesign directions for the test fixture `tests/fixtures/generic-site/`,
+a deliberately generic two-page studio site. The directions are original proposals drawn from the
+listed game observations. For a direct build request, follow the [build workflow](../references/workflows/build.md).
 
 ---
 
@@ -98,5 +98,4 @@ Report the real numbers from those runs, in this shape (this example was not imp
 ## 8. Report to the user
 
 What changed per section and why (with the evidence ids above), before/after images from `capture.mjs`,
-verification counts, and next steps: contact form with a stamp-style submit (`type-stamp-submit`) and a results
-moment; research one more `title` reference because the library has only two.
+verification counts and any open work, such as a contact form with a stamp-style submit (`type-stamp-submit`) and a results moment.

@@ -12,12 +12,17 @@ except the explicit `links` command).
 
 ## Commands
 
+For website design, use `--bundled` with `resolve`, `search`, `show`, `screens` or `stats`.
+This reads the records shipped with the skill, including their original sources. A saved title
+preference can still select an edition in that collection. Ordinary library commands also include
+your personal additions, edits and retractions.
+
 ```
-node scripts/library.mjs resolve "dragonball fighterz"
-node scripts/library.mjs search "detached marker" --screen main_menu --limit 5
+node scripts/library.mjs resolve --bundled "dragonball fighterz"
+node scripts/library.mjs search --bundled "detached marker" --screen main_menu --limit 5
 node scripts/library.mjs search --screen title                  # everything for a screen type
 node scripts/library.mjs search "ledger" --genre racing --kind observation
-node scripts/library.mjs show tk8-options-mask-and-selection-sweep
+node scripts/library.mjs show --bundled tk8-options-mask-and-selection-sweep
 node scripts/library.mjs screens                                # vocabulary + coverage counts
 node scripts/library.mjs stats
 node scripts/library.mjs check                                  # data, ids, doc links, catalog freshness

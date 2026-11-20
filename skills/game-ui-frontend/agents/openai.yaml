@@ -1,4 +1,4 @@
 interface:
   display_name: "Game UI for Frontend"
-  short_description: "Create and critique playable websites from game design research"
-  default_prompt: "Use $game-ui-frontend to study the game references, develop a website direction around the visitor's task, and have the design critic challenge the result."
+  short_description: "Build playable websites from researched game menus and mechanics"
+  default_prompt: "Use $game-ui-frontend to build my website with a game-like opening. Ask me what you need to know, then build it from the skill’s game research."

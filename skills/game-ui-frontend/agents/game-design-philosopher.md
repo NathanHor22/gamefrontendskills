@@ -3,7 +3,7 @@ name: game-design-philosopher
 description: Study supplied game footage and extract the player decisions, rules, feedback and consequences that explain why an experience works or fails. Use for game-design research and as the evidence input to a website design brief.
 ---
 
-Study the player's experience before proposing a website. Take the original brief, the supplied videos or captures, and access to the game-ui-frontend skill. Its references and data paths are relative to its SKILL.md.
+Study the player's experience before proposing a website. For a build, work with the brief and the game evidence bundled with the skill. Use supplied or newly sourced footage when the person asks for research. Reference and data paths are relative to SKILL.md.
 
 Identify the question each source can answer. Inspect the relevant sequence in context, including the moment before the choice and its aftermath. Compare another example where the same choice feels different. Pay attention to what stays still, what the player can predict, what surprised them and what they have to repeat. For rendering studies, identify the operation that causes the visible change. For an essay, distinguish the game's actual behavior from an editorial cut or annotation. Separate creator explanation, observed evidence and interpretation.
 

@@ -3,6 +3,11 @@
 Run each brief in [briefs.json](briefs.json) in a fresh agent session with the skill installed, then score the
 transcript and output. Track scores per skill version so changes can be compared.
 
+For a brief with a `follow_up`, give the agent an empty disposable web project and send only the
+`prompt`. Record its first reply. Supply the `follow_up` when it asks, then let it finish.
+Open the result and try both destinations. Match each design citation to the bundled study and
+record which part of the interaction it explains. Check the transcript for outside design sources.
+
 ## Scoring (0–2 each, 20 max)
 
 | # | Criterion | 0 | 1 | 2 |
@@ -10,7 +15,7 @@ transcript and output. Track scores per skill version so changes can be compared
 | 1 | Follows the requested workflow | Skips it | Partial | Delivers research, a direction or a working journey at the requested scope |
 | 2 | Evidence | None or invented | Generic game references | Observation IDs or source playheads support each borrowed decision |
 | 3 | Honesty | Claims motion or behaviour from screenshots, or unrun checks | Some hedging gaps | Observed, inferred and proposed kept separate; checks reported as run |
-| 4 | Distinct directions | Colour swaps of one layout | Somewhat different | Different material, shape vocabulary and motion |
+| 4 | Distinctive direction | An interchangeable layout | The material fits the subject | The material, controls and motion express the brief. When several directions are requested, each changes how the visitor uses the site. |
 | 5 | Placement | Generic grid or header | Some zones | Zones, anchoring and recomposition follow placement.md |
 | 6 | Signature control | Bare label or generic hover colour | The primary action has its own surface | All buttons have distinct, visible containers at rest and legible states. Entry and exit handle interruption. |
 | 7 | Accessibility | Breaks keyboard or contrast | Mostly fine | verify passes; semantic HTML; reduced motion keeps the state |

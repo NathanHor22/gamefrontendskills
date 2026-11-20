@@ -1,20 +1,27 @@
 [
   {
+    "id": "first-time-theatre",
+    "workflow": "build",
+    "prompt": "I want you to build my website with this skill.",
+    "follow_up": "It’s a tiny theatre. People should be able to pick a show and find its time and room. Blue Hour plays Friday at 7 pm in Studio One. Overnight plays Saturday at 8 pm in the Loft. I want it to feel like being backstage just before the lights come up.",
+    "must": ["the opening reply asks at most two short questions a first-time site owner can answer without knowing games", "after the answers it builds a working opening in the test project", "its account of the opening and selection identifies a matching observation or playhead from the bundled game studies", "the theatre and shows supply the scene, labels and content", "a visitor can open each named show from the entrance, read the correct time and room, and return to the selected show"]
+  },
+  {
     "id": "game-led-printmaking",
     "workflow": "build",
     "prompt": "Build a retro print workshop where I can try inks on a 3D press and keep a proof. Give the opening the feel of starting a game. Use the philosophy, website and critic agents.",
-    "must": ["cites a specific source moment for a mechanic", "startup allows immediate access to the first useful action", "operating the press creates a proof with the selected plate and inks", "touch and keyboard can produce the same proof", "critic tries a second combination and compares both saved results"]
+    "must": ["uses the supplied activity, desired result and retro direction to begin building immediately", "cites a specific source moment for a mechanic", "startup allows immediate access to the first useful action", "operating the press creates a proof with the selected plate and inks", "touch and keyboard can produce the same proof", "critic tries a second combination and compares both saved results"]
   },
   {
     "id": "source-led-perfumery",
     "workflow": "research",
     "prompt": "Give my independent perfumery a game-inspired creative direction for exploring six scents and booking a consultation. No implementation or tiny labels.",
-    "must": ["uses an observation ID or timestamped source", "uses scent-specific art and comparison information", "names each scent once on its control and keeps useful details readable beside the selection", "omits decorative slashes, section numbers and wireframe lines", "distinguishes sampling a scent from committing to an appointment", "gives a reason to keep or remove a proposed mechanic"]
+    "must": ["delivers the requested direction in chat and leaves the project files untouched", "uses an observation ID or timestamped source", "uses scent-specific art and comparison information", "names each scent once on its control and keeps useful details readable beside the selection", "omits decorative slashes, section numbers and wireframe lines", "distinguishes sampling a scent from committing to an appointment", "gives a reason to keep or remove a proposed mechanic"]
   },
   {
     "id": "improve-generic-studio",
     "workflow": "improve",
-    "prompt": "Use the game-ui-frontend skill to improve the UI of tests/fixtures/generic-site/index.html. It's a small product studio; keep it professional.",
+    "prompt": "Use the game-ui-frontend skill to improve the UI of tests/fixtures/generic-site/index.html. It's a small product studio. Give me a few professional directions and let me choose before you edit.",
     "must": ["runs audit.mjs and cites its signals", "maps sections to screen types", "2-3 rendered directions compared with capture.mjs", "waits for a choice before editing", "runs verify.mjs on changed controls"]
   },
   {
@@ -32,7 +39,7 @@
   {
     "id": "unknown-game",
     "workflow": "research",
-    "prompt": "Make our nav feel like the main menu of Hollow Knight.",
+    "prompt": "Research the main menu of Hollow Knight for a future redesign of our nav. Give me the source notes.",
     "must": ["notices the game is not in the library", "follows research.md and the source policy", "does not invent observations", "labels any assumption about the game"]
   },
   {

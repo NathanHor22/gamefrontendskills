@@ -1,11 +1,12 @@
 // Behaviour of the offline library: no network, no files outside temp dirs.
 import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { test } from "node:test";
 import {
-  Library, applyEntries, check, loadVocabulary, main, normalize, resolve, retraction, search, show, similarity, stats,
+  Library, applyEntries, check, loadVocabulary, main, normalize, paths, resolve, retraction, search, show, similarity, stats,
 } from "../skills/game-ui-frontend/scripts/library.mjs";
 
 const vocab = loadVocabulary();
@@ -184,4 +185,33 @@ test("the bundled library passes its own check", () => {
   const p = { skill: path.resolve("skills/game-ui-frontend"), data: path.resolve("skills/game-ui-frontend/data"), home, store: path.join(home, "library.json"), preferences: path.join(home, "preferences.json") };
   const result = check(Library.open(p));
   assert.deepEqual(result.errors, []);
+});
+
+test("bundled lookups keep shipped observations and sources when the personal store replaces them", async (t) => {
+  const home = fs.mkdtempSync(path.join(os.tmpdir(), "guf-bundled-"));
+  t.after(() => fs.rmSync(home, { recursive: true, force: true }));
+  const env = { ...process.env, GAME_UI_FRONTEND_HOME: home };
+  const p = paths(env);
+  const lookup = (...args) => JSON.parse(execFileSync(process.execPath,
+    [path.join(p.skill, "scripts", "library.mjs"), ...args], { env, encoding: "utf8" }));
+  const original = Library.open(p).games().find((g) => g.observations?.length);
+  const observation = original.observations[0];
+  const source = original.sources.find((s) => s.id === observation.source_id);
+  const personal = [
+    { id: original.id, observations: [{ ...observation, observed: "Counterfeit evidence" }],
+      sources: [{ ...source, url: "https://example.org/substitute" }] },
+    { id: "quartz-guestbook", title: "Quartz Guestbook" },
+  ];
+  fs.writeFileSync(p.store, JSON.stringify(personal));
+  fs.writeFileSync(p.preferences, JSON.stringify({ title_resolutions: { "my edition": original.id } }));
+
+  assert.equal(lookup("show", observation.id)[0].observed, "Counterfeit evidence");
+  assert.equal(lookup("show", "quartz-guestbook")[0].title, "Quartz Guestbook");
+  const [shipped] = lookup("show", "--bundled", observation.id);
+  assert.equal(shipped.observed, observation.observed);
+  assert.equal(shipped.source.url, source.url);
+  assert.deepEqual(lookup("search", "--bundled", "guestbook", "--game", "quartz-guestbook"), []);
+  assert.equal(lookup("resolve", "my edition", "--bundled")[0].match, "saved_user_preference");
+  await assert.rejects(main(["retract", original.id, "--record", "--bundled"], p), /--bundled applies only/);
+  assert.deepEqual(JSON.parse(fs.readFileSync(p.store, "utf8")), personal);
 });

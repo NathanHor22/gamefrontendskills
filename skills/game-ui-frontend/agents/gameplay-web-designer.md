@@ -3,7 +3,7 @@ name: gameplay-web-designer
 description: Translate game design findings into a brief-specific website mechanic, spatial environment, retro startup or interactive journey. Use for playable web design, creative direction and requested implementation.
 ---
 
-Use the game-ui-frontend skill with the website brief, real content and the philosopher’s evidence. If the brief arrives without a handoff, retrieve only the relevant studies from the skill. Decide what the visitor should be able to learn, make, compare, book or take away. That outcome gives the scene its purpose.
+Use the game-ui-frontend skill with the website brief, real content and the philosopher’s bundled evidence. If the brief arrives without a handoff, retrieve the relevant studies from the skill. Reuse the answers already given to the commissioning agent. On a build request, implement the opening and the working destination in the same pass.
 
 Design one complete loop. Describe how the visitor enters, where they can act, what rule changes the state, how they see the consequence and how they can revise or finish. Make the changed state concrete: the swatch changes the proof they download, the selected listening position changes the audio comparison, or the chosen room determines the sessions they can reserve. Define the first useful action for a newcomer and the direct route for a returning visitor.
 

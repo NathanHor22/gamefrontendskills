@@ -1,6 +1,6 @@
 # Research findings
 
-Synthesis across the studied games: the design moves worth borrowing and what the motion evidence does and does not establish. Every claim traces to records in the library; see [catalog.md](catalog.md) for the per-game list of observations and sources, and `node scripts/library.mjs show <id>` for full records. Each "original website direction" is a proposal, not a fact about a game.
+Use the [catalogue](catalog.md) to trace each observation to its game and source. Run `node scripts/library.mjs show --bundled <id>` for the full record. Each original website direction is a proposal for how to use that evidence.
 
 ## Fighting, mobile and expressive RPG studies
 
@@ -101,9 +101,9 @@ The title menu and initial setup were also viewed at identified source positions
 
 ## Coverage gaps
 
-Run `node scripts/library.mjs screens` for current counts per screen type. Title, pause, loading, save/load, dialogue and settings screens are the thinnest; research them first when a brief depends on them.
+Run `node scripts/library.mjs screens --bundled` for current coverage. The [start-screen studies](title-screens.md) follow arrival, selection and transitions across editions. For a build, choose the closest studied interaction when evidence for a particular screen is thin.
 
-- Original Dreamcast Phantasy Star Online: manual text was accessible, while image pixels were unavailable. PSO2 New Genesis was visually studied separately. “Phantasm online” remains a provisional franchise interpretation.
+- The [RPG menu study](rpg-and-rhythm-title-menus.md) pairs the original Dreamcast *Phantasy Star Online* title footage with the manual's account of the options. It documents *PSO2 New Genesis* separately. “Phantasm online” remains a provisional franchise interpretation.
 - Silent Hill: this batch covers original-generation SH2 and a Japanese 2024 remake demo, not all installments or the current remake patch.
 - Racing: DiRT Rally 2.0 and Colin McRae Rally 2.0 were chosen explicitly. The original titled releases are distinct, unstudied editions. The DiRT loading movie did not decode.
 - FIFA/FC: FIFA 23 and FC 25 are selected historical examples, not claims of current-edition coverage.

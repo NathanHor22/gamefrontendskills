@@ -3,11 +3,7 @@
 An agent skill for **Claude Code** and **Codex** that improves or builds website UI using game interface
 research, then checks the result in a real browser.
 
-Games have spent decades solving hard interface problems on a single screen: one focal subject, a selection
-you can't miss, a primary action that looks like nothing else, and motion with order and asymmetry. This skill
-gives your agent a library of studied game screens (title screens, main menus, character select, pause,
-settings, results…), guides for placement, components and styles derived from them, working reference code,
-and Playwright scripts that audit your site and verify every control it changes.
+Website these days ugghhhh. Commander Chief would not approve. The battalion would not approve. I built my own style. Me studied games me want to use my game knowledge to beat codepen and mobin. They can kiss it mate and do one.
 
 ## Use through skills.sh without a permanent install
 

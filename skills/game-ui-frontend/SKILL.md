@@ -89,6 +89,8 @@ Let sound be a choice. Test the entrance in silence. The [design studies](refere
 
 ## Buttons, type and detail
 
+Apply the [anti-AI design rules](references/anti-ai-design.md) to new screens and redesigns. Start with the real subject and its first usable control. Strip out stock badges, headline flourishes, nested boxes and decorative diagrams. Keep a detail when removing it costs the visitor information, a usable action or a quality the brief actually asks for.
+
 Give every button a visible container at rest, including secondary actions, icon buttons and links styled
 as buttons. Enclose the label or icon in a filled surface or a complete border shaped to suit the project.
 For a print shop that could be an inked block with a paper edge. Change the fill, edge or depth for hover,

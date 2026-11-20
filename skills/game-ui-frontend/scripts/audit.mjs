@@ -82,7 +82,7 @@ function signals(pages) {
   const families = {};
   for (const p of pages) for (const [f, n] of Object.entries(p.desktop.families)) families[f] = (families[f] ?? 0) + n;
   const famList = Object.keys(families);
-  if (famList.length <= 1) out.push({ id: "single-typeface", detail: `all text uses ${famList[0] ?? "one font"}; no display/body contrast` });
+  if (famList.length === 1) out.push({ id: "single-typeface", detail: `sampled text uses ${famList[0]}. Check whether headings and reading text are distinguishable.` });
   const radii = buttons.map((b) => b.style.radius);
   const topRadius = radii.sort((a, b) => radii.filter((x) => x === b).length - radii.filter((x) => x === a).length)[0];
   if (buttons.length >= 3 && share(buttons, (b) => b.style.radius === topRadius && !b.style.clip && !b.pseudo_art) >= 0.8 && /^([4-9]|1[0-6])px$/.test(topRadius ?? "")) {

@@ -57,7 +57,7 @@ native input), one or two instances per component type. Always **look at the str
 
 ## Other tools
 
-- `audit.mjs <url>`: before and after a redesign; the generic-UI signal list should shrink.
+- `audit.mjs <url>` flags repeated visual treatments for inspection. Judge them with the [anti-AI design rules](../anti-ai-design.md). One typeface can give clear hierarchy, and equal slots can make a roster easier to scan. Report the actual obstacle and what changed for the visitor.
 - `capture.mjs a b c --labels "…"`: side-by-side images of mocks or before/after.
 - With Playwright MCP available, use it for exploration (clicking through flows, reading the page). Use these
   scripts for anything you report as verified, because they are repeatable.

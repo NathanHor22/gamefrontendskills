@@ -34,16 +34,7 @@ reduced-motion support, accessibility violations) are a starting list, not the d
 
 ## 3. Diagnose with the screen map
 
-For each page section, write one row:
-
-| Section | Screen type ([screen-map.md](../layout/screen-map.md)) | What it does now | What the game equivalent does better | Priority |
-| --- | --- | --- | --- | --- |
-| Hero | `title` | Centred H1 + two equal buttons | One focal subject, one primary action, quiet secondary | High |
-| Header nav | `main_menu` | Five links, underline on hover | Filled menu plates, a travelling stamp and a distinct current plate | Medium |
-| Projects | `character_select` | 3×N equal cards | Stable roster + large preview stage | High |
-
-Prioritise by (visitor impact × how generic it is now) ÷ effort. Fix the focal surfaces first (hero, primary
-action, main index), then navigation, then forms, feedback and details.
+Map the visitor's first decision and its destination to a [game screen](../layout/screen-map.md). In a page-wide redesign, an opening pitch and three feature cards can give way to a single working surface. On a gig photographer's site, let someone pick a show from the contact sheets, open a photograph and return to it. Preserve the existing work, booking route and any facts needed to choose. For a component request, apply the diagnosis within that component.
 
 ## 4. Gather evidence
 

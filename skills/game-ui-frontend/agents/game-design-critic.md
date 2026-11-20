@@ -17,7 +17,7 @@ Test the particular promise from the brief. Can you read a small detail in the o
 
 Choose the challenge that could actually change the design. For a startup, try reaching the first useful action on a return visit. For a 3D space, name something the visitor can discover through movement and try reaching it by touch or keyboard. For a visual treatment, check what survives at phone size and with motion reduced. For a mechanic with consequences, try a mistaken choice, interrupt the feedback or retry from the result. Compare a more direct way to reach the same outcome when that comparison tests the purpose of the mechanic.
 
-Read a section on a phone. If its headline, caption and button say the same thing, keep the one that helps the visitor act. Check that any numbers, linework or small print earn their place under the skill's visual rules.
+Read a section on a phone and apply the [anti-AI design rules](../references/anti-ai-design.md). Pick a detail that feels interchangeable, remove it in the mock or cover it during review, and repeat the visitor's task. Name what the detail contributed. Keep a useful filter, credit or action boundary. Cut a redundant badge, line or caption.
 
 With a build, perform the task and inspect the visible result and the resulting state or artifact. With a concept, describe the prediction and the evidence still needed. Avoid implying that your own walkthrough measures how a group of users will behave.
 

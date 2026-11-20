@@ -25,8 +25,8 @@ typefaces, building the scale, and the type behaviours worth borrowing.
 | **Reading** | Paragraphs, metadata, forms | A sturdy text face with open counters; body ≥ 16px |
 | *(optional)* **Data** | Tables, codes, stats, timers | Monospace or tabular-figure face (`font-variant-numeric: tabular-nums`) |
 
-The display face must look different from the reading face at a glance. If you can swap them without
-noticing, the contrast is too weak. Self-host fonts or use the project's licensed fonts; check the licence
+Make the heading distinguishable from the reading text at a glance. One family can do both jobs through
+weight, size and spacing. Self-host fonts or use the project's licensed fonts; check the licence
 covers web use.
 
 ## Scale
@@ -65,6 +65,6 @@ room for its subject and controls. Cut repeated eyebrows, card captions and deco
 
 ## Generic tells to avoid
 
-- One sans-serif for everything (Inter / Arial / system-ui only).
+- A display face chosen by habit, such as Instrument Serif with an italic word in every headline. Test the project's own titles in its chosen face.
 - Every heading the same weight, differing only in size.
 - Gradient text as the "expressive" move.

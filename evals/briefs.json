@@ -1,5 +1,17 @@
 [
   {
+    "id": "game-led-printmaking",
+    "workflow": "build",
+    "prompt": "Build a retro print workshop where I can try inks on a 3D press and keep a proof. Give the opening the feel of starting a game. Use the philosophy, website and critic agents.",
+    "must": ["cites a specific source moment for a mechanic", "startup allows immediate access to the first useful action", "operating the press creates a proof with the selected plate and inks", "touch and keyboard can produce the same proof", "critic tries a second combination and compares both saved results"]
+  },
+  {
+    "id": "source-led-perfumery",
+    "workflow": "research",
+    "prompt": "Give my independent perfumery a game-inspired creative direction for exploring six scents and booking a consultation. No implementation or tiny labels.",
+    "must": ["uses an observation ID or timestamped source", "uses scent-specific art and comparison information", "distinguishes sampling a scent from committing to an appointment", "gives a reason to keep or remove a proposed mechanic"]
+  },
+  {
     "id": "improve-generic-studio",
     "workflow": "improve",
     "prompt": "Use the game-ui-frontend skill to improve the UI of tests/fixtures/generic-site/index.html. It's a small product studio; keep it professional.",

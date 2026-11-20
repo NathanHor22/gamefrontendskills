@@ -1,17 +1,19 @@
 ---
 name: game-ui-frontend
-description: Design, improve and verify website and web-app UI using game interface research (title screens, main menus, character select, pause, settings, results). Use when the user wants to improve a site's UI "with game design principles", build a page inspired by named games, or create distinctive buttons, navigation, selectors, overlays, layouts and motion instead of generic components. Includes a searchable library of studied game screens, layout and component guides, working reference code, and Playwright scripts that audit a site and verify controls in a real browser. Not for game development or gameplay systems.
+description: Develop original websites from game design research. Use for game design philosophy, creative direction, playable website mechanics, 3D environments, retro startups, mission flows, character selection and expressive controls. Includes a research agent, a website design agent, a design critic, a searchable game library, working frontend examples and browser verification.
 ---
 
 # Game UI for frontend websites
 
-Games have solved hard interface problems for one screen at a time: one focal subject, an unmistakable
-selection, a primary action that looks like nothing else, and motion with order and asymmetry. This skill
-turns studied game screens into original website UI, then proves the result works in a real browser.
+A game gives someone a reason to act and makes the consequence visible. Start with what the visitor
+came to do. Study how a game handles an equivalent decision, then design the website's own space,
+controls and feedback around its subject.
 
 All paths below are relative to this skill's directory. Run scripts with the skill's **absolute** path
 from the user's project directory. With `skills use`, resolve paths from the temporary supporting directory
-provided in the prompt. No permanent skill installation or repository checkout is needed.
+provided in the prompt. Read the research, role prompts and templates from that directory. Keep the skill
+bundle and its dependencies there. Only write the website changes or deliverables the user requested
+into their project.
 
 ## Pick the workflow
 
@@ -19,11 +21,27 @@ provided in the prompt. No permanent skill installation or repository checkout i
 | --- | --- |
 | "Improve my site / page / component" (existing code or URL) | [workflows/improve.md](references/workflows/improve.md) |
 | "Build a site / page with these game principles" | [workflows/build.md](references/workflows/build.md) |
+| "Study these videos", "give my site a creative direction", or "make it feel playable" | [Art direction](references/art-direction.md) routes the brief to source moments. For an interaction loop, spatial environment or retro startup, use the agents below. |
 | "Research <game>" or the library lacks a screen type | [workflows/research.md](references/workflows/research.md) |
 | Check that controls behave (after any UI change) | [workflows/verify.md](references/workflows/verify.md) |
 
-Both design workflows run: intake → (audit) → map sections to screen types → gather evidence → 2–3
-**rendered** directions → user picks → implement in their stack → verify → report.
+For an open design brief, compare distinct rendered directions. For a specific direction, develop it
+directly. For an experience built around a mechanic, prototype a whole visitor action and its consequence.
+Verify the resulting journey in the browser when implementation is requested.
+
+Before composing either design, use [From a website brief to an art direction](references/art-direction.md).
+Explain the visitor’s decision, what they see on arrival, what exploring reveals, and which action commits.
+Carry the project’s own subject through the art and controls. Keep decorative numbering and filler microcopy out of the interface.
+
+## Research, design and critique
+
+For a game-led experience, give the [game design philosopher](agents/game-design-philosopher.md) the brief and
+sources. Pass its findings to the [gameplay web designer](agents/gameplay-web-designer.md), then ask the
+[design critic](agents/game-design-critic.md) to challenge the direction or play the built journey. Pass the
+critic's strongest objection back to the designer and verify the change. Use the relevant role alone for a
+research-only, transfer-only or review request. When the runtime supports delegation, pass each role
+prompt and the absolute temporary skill path to a separate general subagent in the session.
+When working alone, apply the profiles in sequence and identify the review as a self-review.
 
 ## Tools
 
@@ -65,8 +83,9 @@ judging the art is your job.
   [forms](references/components/forms.md) · [feedback](references/components/feedback.md)
 - **Styles:** [typography](references/styles/typography.md) · [colour and material](references/styles/color-material.md) ·
   [shape](references/styles/shape.md) · [motion](references/styles/motion.md)
-- **Working code:** [templates/](templates/) has `tokens.css`, `buttons.html`, `navigation.html`, `selector.html` and
-  `overlay.html`. Each passes `verify.mjs`. Translate them into the project's stack; don't paste them in.
+- **Working code:** [Print Room](templates/print-room.html) demonstrates a playable 3D workshop and a local
+  PNG export. The [component templates](templates/) cover buttons, navigation, a selector and an overlay.
+  Translate the applicable behavior into the project's stack.
 - **Evidence:** [research/findings.md](references/research/findings.md) (synthesis) and
   [research/catalog.md](references/research/catalog.md) (every observation by screen type and game).
 - **Example answer:** [examples/worked-example.md](examples/worked-example.md).
@@ -76,7 +95,8 @@ judging the art is your job.
 1. **Original work.** Game images are research, not assets. No game logos, characters, fonts or wholesale screen
    copies. Borrow placement, layering, state logic and motion order; draw new art.
 2. **Evidence honesty.** Separate what a source shows (`observed`) from interpretation and from your proposals.
-   A screenshot can't establish motion, timing or hover. Cite observation ids for game-derived decisions.
+   A screenshot can't establish motion, timing or hover. Cite a library observation ID or a source playhead
+   from the linked video study for game-derived decisions.
 3. **Directions must differ in material, shape vocabulary and motion**, not in accent colour. Reject any direction
    that would fit an unrelated startup after a colour swap.
 4. **Never move or reshape a control's hit area on hover.** Move child layers; decorative art is `pointer-events: none`;

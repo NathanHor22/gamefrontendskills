@@ -1,8 +1,8 @@
 # Workflow A: improve an existing website's UI
 
-Use when the user says "improve my site / this page / our UI with game design principles". Scripts are in
-`scripts/`; run them with the skill's absolute path. Output folders go under `.game-ui-frontend/runs/` in the
-user's project; suggest adding `.game-ui-frontend/` to their `.gitignore`.
+Use when the user says "improve my site / this page / our UI with game design principles". Run the scripts
+in `scripts/` with the skill's absolute path. Each browser command prints its output path in the system
+temporary directory. Use `--out <directory>` when the user wants to keep the reports somewhere else.
 
 ## 1. Intake (ask only what you cannot find)
 
@@ -62,6 +62,10 @@ before designing, or say plainly that the direction rests on fewer references.
 
 ## 5. Directions: render them, don't just describe them
 
+Frame each direction around what the visitor came to decide. Use [the art-direction guide](../art-direction.md)
+to name what stays visible, what changes on selection and what opens on request. In the mock, replace any
+ornamental numbering, filler labels or repeated card copy with space for the subject itself.
+
 Write 2–3 **genuinely different** directions (different material, shape vocabulary and motion character,
 not three accent colours). For each:
 
@@ -72,9 +76,14 @@ not three accent colours). For each:
 - **Signature control**: anatomy plus enter/exit/interruption ([buttons.md](../components/buttons.md), [motion.md](../styles/motion.md)).
 - **Placement** of the prioritised sections ([placement.md](../layout/placement.md)).
 
-Then build each direction as a **throwaway static mock** of the most important section (usually the hero plus
-primary action, or the main index). Use plain HTML/CSS in `.game-ui-frontend/mocks/<direction>.html`, starting
-from `templates/tokens.css` and the matching template. Compare them in one image:
+For a visual redesign, build each candidate as a static mock of the most important section.
+Use plain HTML/CSS in `.game-ui-frontend/mocks/<direction>.html`, starting from `templates/tokens.css`
+and the matching template.
+
+For a gameplay-led redesign, exercise the visitor's complete action in a working prototype instead. Give
+the critic the task and the visitor's current route so they can compare the result, effort and ability to recover.
+
+Compare candidate views together with the capture script.
 
 ```
 node scripts/capture.mjs .game-ui-frontend/mocks/a.html .game-ui-frontend/mocks/b.html .game-ui-frontend/mocks/c.html --labels "A,B,C"

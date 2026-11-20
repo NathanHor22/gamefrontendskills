@@ -8,6 +8,7 @@ Each game record in [games.json](skills/game-ui-frontend/data/games.json) contai
 
 - [Research catalog](skills/game-ui-frontend/references/research/catalog.md): every observation by screen type and game, with its source link (generated from the data)
 - [Research findings](skills/game-ui-frontend/references/research/findings.md): synthesis across the studied games
+- [Game design philosophy](skills/game-ui-frontend/references/research/game-design-philosophy.md) credits the nine supplied video essays by Acerola, Stumblebee, Game Maker’s Toolkit, Pumpo, HeavynSent, RelaxAlax and Snoman Gaming at the moments used. The [Warframe study](skills/game-ui-frontend/references/research/warframe-navigation.md) credits Digital Extremes’ guides, captures and patch notes.
 - [Library data model and evidence rules](skills/game-ui-frontend/references/library.md)
 
 The catalog and findings are navigation aids; the per-game records preserve the fuller provenance and distinguish reviewed sources from explicit research gaps.

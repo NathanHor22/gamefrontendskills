@@ -1,7 +1,10 @@
 # Selectors and indexes: rosters, grids, carousels, filters
 
-Working code: [templates/selector.html](../../templates/selector.html) (radio-based roster, travelling numbered
-marker, stage that swaps subject and name, locked items). Placement: [screen-map.md](../layout/screen-map.md#project--product--team-index--character-select-character_select).
+Working code: [templates/selector.html](../../templates/selector.html) (radio roster, travelling marker,
+subject preview and project details). Placement: [screen-map.md](../layout/screen-map.md#project--product--team-index--character-select-character_select).
+
+For products or services, use the [character-select footage study](../research/character-select.md) to
+decide what each option communicates at thumbnail scale and what only its larger preview can explain.
 
 ## What games teach about choosing from many
 
@@ -50,15 +53,16 @@ Patterns: `registration-slip-selector`, `poster-peel-project`, `shutter-cut-proj
   running animation, then animate from those values. Rapid browsing redirects instead of queueing.
 - Give subject, name and detail shelf different entries (subject rises, name slides, detail cross-fades)
   and keep the roster still.
-- Detail shelf in a fixed position: title, 1–2 lines, 2–4 aligned metadata pairs, one action.
+- Give comparison facts a consistent position on the shelf. Put details the visitor rarely compares behind
+  a named disclosure. A fact belongs on the first screen if hiding it could change the visitor's choice.
 - Reduced motion: swap instantly; keep the marker position change, which is state rather than decoration.
 
 ## Placement and reflow
 
 - Desktop: stage top-left or centre, detail shelf on the right, roster along the bottom.
 - Tablet: stage above, detail beside the roster.
-- Phone: stage then detail stacked; the roster becomes a horizontal scroller with `scroll-snap-type: x mandatory`;
-  the marker moves with the scrolled cell.
+- Phone: keep the chooser within reach of the subject and place its detail beside or below it. The example
+  puts a horizontally scrollable roster between the stage and the detail, with the marker on the scrolled cell.
 
 ## Engineering rules
 

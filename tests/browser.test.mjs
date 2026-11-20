@@ -4,8 +4,9 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 import { test } from "node:test";
-import { findPackage } from "../skills/game-ui-frontend/scripts/lib/browser.mjs";
+import { findPackage, outDir } from "../skills/game-ui-frontend/scripts/lib/browser.mjs";
 
 const T = path.resolve("skills/game-ui-frontend/templates");
 let skip = false;
@@ -19,6 +20,71 @@ else {
   }
 }
 const out = () => fs.mkdtempSync(path.join(os.tmpdir(), "guf-browser-"));
+
+test("browser runs get distinct system temporary directories and honor explicit output", () => {
+  const project = out();
+  const cwd = process.cwd();
+  try {
+    process.chdir(project);
+    const first = outDir("audit");
+    const second = outDir("audit");
+    assert.equal(path.dirname(first), path.resolve(os.tmpdir()));
+    assert.notEqual(first, second);
+    assert.deepEqual(fs.readdirSync(project), []);
+    assert.equal(outDir("capture", "proofs"), path.join(project, "proofs"));
+    assert.deepEqual(fs.readdirSync(project), ["proofs"]);
+    for (const dir of [first, second]) fs.rmdirSync(dir);
+  } finally {
+    process.chdir(cwd);
+    fs.rmSync(project, { recursive: true, force: true });
+  }
+});
+
+test("print room transfers the chosen inks and exports the visible proof", { skip }, async () => {
+  const { chromium } = await import("playwright");
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage({ viewport: { width: 1200, height: 800 }, reducedMotion: "reduce" });
+    await page.goto(pathToFileURL(path.join(T, "print-room.html")).href);
+    await page.getByRole("radio", { name: "Heron" }).focus();
+    await page.keyboard.press("ArrowRight");
+    await page.getByRole("radio", { name: "Vermilion" }).focus();
+    await page.keyboard.press("ArrowRight");
+    await page.getByRole("button", { name: "Set the screen" }).click();
+    // Physical position of the handle on the near-overhead press view (600 × 400 design surface).
+    const room = await page.locator("#room").boundingBox();
+    const scale = Math.max(room.width / 600, room.height / 400);
+    const y = room.y + room.height / 2 - 44 * scale;
+    const start = room.x + room.width / 2 - 110 * scale;
+    await page.mouse.move(start, y);
+    await page.mouse.down();
+    await page.mouse.move(start + 82 * scale, y + 11 * scale, { steps: 5 });
+    const partial = Number(await page.getByRole("slider", { name: "Squeegee position" }).inputValue());
+    assert.ok(partial > 35 && partial < 65, "dragging transfers colour under the physical handle");
+    await page.mouse.move(start + 180 * scale, y + 25 * scale, { steps: 5 });
+    await page.mouse.up();
+    const save = page.getByRole("link", { name: "Save print as PNG" });
+    const downloadPromise = page.waitForEvent("download");
+    await save.click();
+    const download = await downloadPromise;
+    assert.equal(download.suggestedFilename(), "shoal-prussian.png");
+    const bytes = fs.readFileSync(await download.path());
+    assert.deepEqual([bytes.readUInt32BE(16), bytes.readUInt32BE(20)], [720, 960]);
+    const firstProof = await page.locator("#proof").getAttribute("src");
+    assert.equal(firstProof, "data:image/png;base64," + bytes.toString("base64"));
+
+    await page.getByRole("button", { name: "Back to the press" }).click();
+    assert.equal(await page.getByRole("radio", { name: "Shoal" }).isChecked(), true);
+    await page.getByRole("radio", { name: "Prussian" }).focus();
+    await page.keyboard.press("ArrowRight");
+    await page.getByRole("button", { name: "Set the screen" }).click();
+    await page.getByRole("slider", { name: "Squeegee position" }).press("End");
+    await save.waitFor();
+    assert.notEqual(await save.getAttribute("href"), firstProof, "the new ink produces new pixels");
+  } finally {
+    await browser.close();
+  }
+});
 const failing = (report) => [...report.page, ...report.controls.flatMap((c) => (c.checks ?? []).map((x) => ({ ...x, control: `${c.selector}[${c.index}]` })))]
   .filter((x) => x.status === "fail");
 

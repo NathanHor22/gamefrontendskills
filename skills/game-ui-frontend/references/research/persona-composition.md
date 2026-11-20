@@ -1,0 +1,15 @@
+# Persona 3 Reload as a composition of pictures, type and actions
+
+## What Acerola takes apart
+
+In *How Persona Combines 2D and 3D Graphics*, the frame at 18:20 pairs a face with a wire overlay and a green polygonal piece of hair. By 18:40 Acerola has put the stages of a scene render on screen, including geometry, lighting, shadows and colour processing. Read these as the author’s analysis of a particular capture. The finished illustration alone would give little indication of those intermediate steps. [Geometry comparison, 18:20](https://www.youtube.com/watch?v=dVWkPADNdJ4&t=1100s) · [Rendering breakdown, 18:40](https://www.youtube.com/watch?v=dVWkPADNdJ4&t=1120s)
+
+At 20:20 the tilted commands, inverted figure and cool background read as one graphic. In the narrated breakdown Acerola describes distorting the room image as if seen through water, tinting it blue, then blending light patterns and gradients over it. Decoded frames show the room alone at 20:49, a white diagonal across it at 21:00, lettering along that edge at 21:03, the model crossing it at 21:05, and the commands present by 21:12. This is the essay’s reconstruction of the picture. Measuring the time between these cuts would measure the edit. The developers separately describe creating a character model specifically for this UI. [Composite, 20:20](https://www.youtube.com/watch?v=dVWkPADNdJ4&t=1220s) · [Narrated breakdown, 20:44](https://www.youtube.com/watch?v=dVWkPADNdJ4&t=1244s) · [Famitsu’s interview with the developers](https://www.famitsu.com/news/202311/29325647.html)
+
+The official combat still offers another composition. White italic action words extend past a small blue disc, each beside its input glyph. A much larger broken arc passes behind the figure, leaving the center available to the scene. The group of actions reads as a single instrument at a distance, yet each verb remains distinct up close. The image establishes placement and contrast. The following web gesture is original. [Official combat command screenshot](https://p3re.jp/en/resources/img/top/feature_modal/feature2_ss1_b331067ecccb15dd88f1397af612ac3b.webp)
+
+## Original direction for a ceramics archive
+
+For “let visitors explore our vessels and the marks left by firing,” start with a side-lit silhouette of one pot. Use a photographic cutout for its surface, a flat ink shape behind its rim and a single large verb along the seam. **Inspect glaze** sits on a stable target. On focus or hover, a sliver of the ink shape peels past the rim, settles, then retracts behind the pot on leave. Activating it reveals a close crop of the actual glaze and a readable material note. The crop also works as a still on touch and reduced motion.
+
+This construction gives different jobs to the image, flat shape and live text. Use an original photographed pot and CSS layers for a fixed view. A rotatable model earns its cost only if inspecting another side helps someone choose. Keep the live label above the art, the target stationary and its focus ring visible at every crop.

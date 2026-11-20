@@ -7,8 +7,8 @@ transcript and output. Track scores per skill version so changes can be compared
 
 | # | Criterion | 0 | 1 | 2 |
 | --- | --- | --- | --- | --- |
-| 1 | Follows the right workflow | Skips it | Partial | All steps in order, including waiting for a choice |
-| 2 | Evidence | None or invented | Generic game references | Observation ids that actually support each decision |
+| 1 | Follows the requested workflow | Skips it | Partial | Delivers research, a direction or a working journey at the requested scope |
+| 2 | Evidence | None or invented | Generic game references | Observation IDs or source playheads support each borrowed decision |
 | 3 | Honesty | Claims motion or behaviour from screenshots, or unrun checks | Some hedging gaps | Observed, inferred and proposed kept separate; checks reported as run |
 | 4 | Distinct directions | Colour swaps of one layout | Somewhat different | Different material, shape vocabulary and motion |
 | 5 | Placement | Generic grid or header | Some zones | Zones, anchoring and recomposition follow placement.md |
@@ -19,3 +19,8 @@ transcript and output. Track scores per skill version so changes can be compared
 | 10 | Brief-specific `must` items | < half | Most | All |
 
 A direction that would suit an unrelated startup after a colour change scores 0 on criterion 4.
+
+For a playable brief, give the critic a visitor task before showing the designer’s rationale. Try a second
+choice and verify that the resulting artifact or saved state changes accordingly. Record the strongest
+reason to keep the mechanic and the strongest reason to change it. A predicted issue and an observed
+failure should be identifiable in the review.

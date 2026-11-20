@@ -21,13 +21,17 @@ contact → `text_entry` + `results`.
 
 ## 3. Research
 
+Use [the art-direction guide](../art-direction.md) to choose studies by the visitor's decision. Write the
+philosophy against the actual content, then walk through arrival, inspection, action and return with the
+site's labels. For a video, cite the relevant playhead and identify which part informs the proposed behavior.
+
 For each screen type, gather 2–4 observations from different games (`library.mjs search --screen <type>`).
 Assign each reference a **job** when blending: one gives composition and tone, another the navigation or
 motion pacing. Write a blend recipe:
 
 1. Product goal
-2. Source A contribution (observed principle + evidence id)
-3. Source B contribution (observed principle + evidence id)
+2. Source A contribution (visible decision + observation ID or video playhead)
+3. Source B contribution where it helps a different part of the brief
 4. Unifying rule (one angle, one material, one marker logic)
 5. What is original (layout, art, copy, interactions)
 
@@ -35,9 +39,10 @@ If coverage is thin, research new references first ([research.md](research.md)).
 
 ## 4. Directions (render, compare, choose)
 
-Same as Workflow A, step 5: 2–3 distinct directions, each with evidence, material, shape vocabulary, type roles,
-a signature control and placement. Build each as a static mock of the hero and the primary index, compare them
-with `capture.mjs`, and recommend one. Wait for the user's choice unless they asked you to decide.
+For a page composition, use Workflow A, step 5. For a playable or spatial brief, prototype the smallest
+complete visitor action inside the proposed environment. Give the critic a task with an observable result
+and let them try an alternate choice, return and try again. A still can compare the artwork, while the
+working interaction establishes whether the mechanic helps. Develop a specified direction directly.
 
 ## 5. Build
 

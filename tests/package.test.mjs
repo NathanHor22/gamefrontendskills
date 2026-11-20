@@ -1,4 +1,4 @@
-// Packaging and documentation integrity: installer, manifests, docs that agents read.
+// Portable skill contents, manifests, and the documentation agents read.
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
 import fs from "node:fs";
@@ -9,7 +9,6 @@ import { Library, checkDocs, loadVocabulary, stats } from "../skills/game-ui-fro
 
 const ROOT = path.resolve(".");
 const SKILL = path.join(ROOT, "skills", "game-ui-frontend");
-const cli = (...args) => spawnSync(process.execPath, [path.join(ROOT, "bin", "cli.mjs"), ...args], { encoding: "utf8" });
 
 test("SKILL.md frontmatter is valid for Claude Code and Codex", () => {
   const text = fs.readFileSync(path.join(SKILL, "SKILL.md"), "utf8");
@@ -64,31 +63,33 @@ test("the evidence check catches an unknown id", () => {
   assert.ok(errors.some((e) => e.includes("missing.md")));
 });
 
-test("installer copies the skill, upgrades in place and keeps browser deps", () => {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "guf-install-"));
-  let r = cli("install", "--dir", dir);
-  assert.equal(r.status, 0, r.stderr);
-  const target = path.join(dir, "game-ui-frontend");
-  for (const f of ["SKILL.md", "scripts/library.mjs", "scripts/verify.mjs", "data/games.json", "templates/buttons.html", "agents/openai.yaml"]) {
-    assert.ok(fs.existsSync(path.join(target, f)), f);
+test("previous setup commands point to skills.sh without writing to the website", () => {
+  const project = fs.mkdtempSync(path.join(os.tmpdir(), "guf-website-"));
+  fs.writeFileSync(path.join(project, "index.html"), "<title>Studio</title>");
+  for (const command of ["install", "browser"]) {
+    const r = spawnSync(process.execPath, [path.join(ROOT, "bin", "cli.mjs"), command, "--project"], { cwd: project, encoding: "utf8" });
+    assert.equal(r.status, 1);
+    assert.match(r.stderr, /skills@latest use NathanHor22\/gamefrontendskills@game-ui-frontend/);
   }
-  fs.mkdirSync(path.join(target, "node_modules", "marker"), { recursive: true });
-  fs.writeFileSync(path.join(target, "stale.txt"), "old file");
-  r = cli("install", "--dir", dir);
-  assert.equal(r.status, 0, r.stderr);
-  assert.ok(fs.existsSync(path.join(target, "node_modules", "marker")), "node_modules kept");
-  assert.ok(!fs.existsSync(path.join(target, "stale.txt")), "old files removed");
-  r = cli("uninstall", "--dir", dir);
-  assert.equal(r.status, 0);
-  assert.ok(!fs.existsSync(target));
+  assert.deepEqual(fs.readdirSync(project), ["index.html"]);
+  assert.equal(fs.readFileSync(path.join(project, "index.html"), "utf8"), "<title>Studio</title>");
 });
 
-test("installed copy runs standalone", () => {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "guf-run-"));
-  cli("install", "--dir", dir);
-  const r = spawnSync(process.execPath, [path.join(dir, "game-ui-frontend", "scripts", "library.mjs"), "search", "--screen", "title"], {
-    encoding: "utf8", env: { ...process.env, GAME_UI_FRONTEND_HOME: fs.mkdtempSync(path.join(os.tmpdir(), "guf-home-")) },
+test("one portable skill provides the research and three roles outside the website", () => {
+  const temp = fs.mkdtempSync(path.join(os.tmpdir(), "guf-session-"));
+  const project = path.join(temp, "website");
+  const bundle = path.join(temp, "bundle");
+  fs.mkdirSync(project);
+  fs.cpSync(SKILL, bundle, { recursive: true, filter: (file) => path.basename(file) !== "node_modules" });
+  const entry = fs.readFileSync(path.join(bundle, "SKILL.md"), "utf8");
+  for (const role of ["game-design-philosopher", "gameplay-web-designer", "game-design-critic"]) {
+    const profile = `agents/${role}.md`;
+    assert.ok(entry.includes(profile) && fs.existsSync(path.join(bundle, profile)), role);
+  }
+  const r = spawnSync(process.execPath, [path.join(bundle, "scripts", "library.mjs"), "search", "--screen", "title"], {
+    cwd: project, encoding: "utf8", env: { ...process.env, GAME_UI_FRONTEND_HOME: path.join(temp, "user") },
   });
   assert.equal(r.status, 0, r.stderr);
   assert.ok(JSON.parse(r.stdout).length >= 2);
+  assert.deepEqual(fs.readdirSync(project), []);
 });

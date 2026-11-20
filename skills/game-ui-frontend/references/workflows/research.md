@@ -3,6 +3,10 @@
 Use when a brief needs a game or screen type the library lacks (`node scripts/library.mjs screens` shows
 coverage), or when the user asks to research a game. Record format and commands: [library.md](../library.md).
 
+The CLI indexes structured game records and patterns. A game can also appear in a video essay without
+having its own record. Check the [video-study index](../art-direction.md) before repeating the research.
+For example, the [3rd Strike roster comparison](../research/character-select.md) can be cited by playhead.
+
 ## 1. Source policy (read `data/preferences.json` → `source_policy`)
 
 | Policy | Meaning |
@@ -26,6 +30,12 @@ Resolve the title (`library.mjs resolve`). Remakes, remasters, ports and seasons
 `edition`/`build_notes`, and never attribute a remake's screen to the original.
 
 ## 3. Look at the image yourself
+
+For a video essay, inspect the cited sequence and distinguish game footage, the essayist's graphics or
+voiceover, and any developer explanation. A playhead identifies the sampled moment. Widely spaced
+storyboard images can support changes of composition across shots. To claim movement within one shot,
+check adjacent frames from that shot. In a research-and-direction request, connect each finding to the
+visitor's decision using [the art-direction guide](../art-direction.md).
 
 You must actually view each image or frame (browser view, fetched image, or a user capture). Text about an
 image is not inspection. Record **how** you viewed it (`inspection.method`) and when (`inspection.on`). For

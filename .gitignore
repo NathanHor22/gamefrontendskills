@@ -4,6 +4,6 @@ Thumbs.db
 /work/
 # run output from audit/verify/capture when used inside this repo
 .game-ui-frontend/
-# browser runtime installed next to a skill copy by `npx game-ui-frontend browser`
+# optional browser dependencies beside a development copy of the skill
 skills/*/package.json
 skills/*/package-lock.json

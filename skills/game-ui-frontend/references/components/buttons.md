@@ -6,6 +6,11 @@ secondary, hold-to-confirm). Verify any button with
 
 ## What games teach about buttons
 
+For a *Persona 3 Reload* brief, study how the combat words sit across a disc and how the pause menu layers
+a figure with a diagonal field. Choose a project-specific object whose edge the verb can share. The
+ceramics example gives **Inspect glaze** a cutout, a moving ink edge and a stable focus target.
+[Persona composition study](../research/persona-composition.md)
+
 1. **Selection changes the silhouette, not just the colour.** A marker appears outside the row, a plate
    extends past its neighbours, or a band of colour reaches beyond the text.
    Evidence: `hi-fi-rush-main-menu-anatomy`, `dbfz-brush-scene-options`, `ff7rebirth-difficulty-artwork`, `sh2r-main`

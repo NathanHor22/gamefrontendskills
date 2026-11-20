@@ -9,7 +9,7 @@
     "id": "source-led-perfumery",
     "workflow": "research",
     "prompt": "Give my independent perfumery a game-inspired creative direction for exploring six scents and booking a consultation. No implementation or tiny labels.",
-    "must": ["uses an observation ID or timestamped source", "uses scent-specific art and comparison information", "distinguishes sampling a scent from committing to an appointment", "gives a reason to keep or remove a proposed mechanic"]
+    "must": ["uses an observation ID or timestamped source", "uses scent-specific art and comparison information", "names each scent once on its control and keeps useful details readable beside the selection", "omits decorative slashes, section numbers and wireframe lines", "distinguishes sampling a scent from committing to an appointment", "gives a reason to keep or remove a proposed mechanic"]
   },
   {
     "id": "improve-generic-studio",
@@ -45,7 +45,7 @@
     "id": "single-component",
     "workflow": "improve",
     "prompt": "Only redesign the hero button on our homepage.",
-    "must": ["changes only the requested component", "defines all states", "entry and exit differ", "verify.mjs passes on it"]
+    "must": ["changes only the requested component", "one readable action label in a visible styled container at rest, without arrows or underlines", "defines all states", "entry and exit differ", "verify.mjs passes on it"]
   },
   {
     "id": "copy-request",

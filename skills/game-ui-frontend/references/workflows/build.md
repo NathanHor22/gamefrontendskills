@@ -35,7 +35,9 @@ motion pacing. Write a blend recipe:
 4. Unifying rule (one angle, one material, one marker logic)
 5. What is original (layout, art, copy, interactions)
 
-If coverage is thin, research new references first ([research.md](research.md)).
+If coverage is thin, research new references first ([research.md](research.md)). For a game-led opening,
+use the [title-screen workflow](../research/title-screens.md) before sketching a hero. Keep the title
+screen and the main menu distinct in the plan even when they share one viewport.
 
 ## 4. Directions (render, compare, choose)
 

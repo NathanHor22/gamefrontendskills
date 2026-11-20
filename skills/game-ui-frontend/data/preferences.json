@@ -10,7 +10,9 @@
   "preferred_references": [],
   "title_resolutions": {},
   "interaction_priorities": [
-    "Authored silhouettes and typography",
+    "Visible, project-specific button containers in every state, with no arrows, chevrons or underlines",
+    "One readable label per idea, with essential text at the point of use, including on phones",
+    "No ornamental slashes, padded section numbers, giant background words, tiny footer captions or decorative 3D lines",
     "Artwork that can extend outside a stable control target",
     "Distinct entry, settle, exit and interrupted behavior",
     "Coherent scene and material logic",

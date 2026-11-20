@@ -10,6 +10,6 @@ The official combat still offers another composition. White italic action words 
 
 ## Original direction for a ceramics archive
 
-For “let visitors explore our vessels and the marks left by firing,” start with a side-lit silhouette of one pot. Use a photographic cutout for its surface, a flat ink shape behind its rim and a single large verb along the seam. **Inspect glaze** sits on a stable target. On focus or hover, a sliver of the ink shape peels past the rim, settles, then retracts behind the pot on leave. Activating it reveals a close crop of the actual glaze and a readable material note. The crop also works as a still on touch and reduced motion.
+For “let visitors explore our vessels and the marks left by firing,” start with a side-lit silhouette of one pot. Use a photographic cutout for its surface and an ink shape behind its rim. Print **Inspect glaze** inside a glazed-tile button where the two meet. On focus or hover, a sliver of the ink shape peels past the rim, settles, then retracts behind the pot on leave. Activating the tile reveals a close crop of the actual glaze and a readable material note. The crop also works as a still on touch and reduced motion.
 
 This construction gives different jobs to the image, flat shape and live text. Use an original photographed pot and CSS layers for a fixed view. A rotatable model earns its cost only if inspecting another side helps someone choose. Keep the live label above the art, the target stationary and its focus ring visible at every crop.

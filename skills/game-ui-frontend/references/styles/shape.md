@@ -16,14 +16,14 @@ everywhere: buttons, cells, panels, markers, loaders.
 
 | Slot | Example choices |
 | --- | --- |
-| **Plate** (buttons, cells, panels) | Skewed parallelogram, chamfered rectangle, pointed plaque, torn sheet |
-| **Marker** (selection) | Arrowhead, diamond, numbered disc, bracket pair, sphere with trail |
-| **Rail / divider** | Hairline with diamond joint, slash rail, dotted guide, tick ruler |
+| **Plate** (buttons, cells, panels) | Skewed parallelogram, chamfered rectangle, notched plaque, torn sheet |
+| **Marker** (selection) | Diamond, enamel disc, bracket pair |
+| **Rail / divider** (if a separation or relationship needs drawing) | Paper seam, fine rule between ledger columns, path joining real stops |
 | **Emblem** (primary, success) | Medallion, crest, seal, stamp |
 | **Texture edge** (optional) | Brush, halftone, scanline, paper fibre |
 
-Write the vocabulary down in the direction ("plates are −9° parallelograms with a 14px cut; the marker is a
-red arrowhead; rails are hairlines with diamond joints") and reuse it. Don't invent a new shape per component.
+Write the vocabulary down in the direction (“plates are flat ink shapes with one cut corner, and a red disc
+marks the selected job”) and reuse it. A flat visible plate can be complete in its own right.
 
 ## Making shapes in CSS/SVG
 
@@ -31,7 +31,7 @@ red arrowhead; rails are hairlines with diamond joints") and reuse it. Don't inv
 | --- | --- | --- |
 | Parallelogram plate | `transform: skewX(var(--angle))` on a pseudo-element | Don't skew the element holding text, or un-skew the text |
 | Chamfer / cut corner | `clip-path: polygon(...)` on a pseudo-element | `clip-path` clips hit-testing and the focus outline, so never put it on the control itself |
-| Pointed plaque | `clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 50%, …)` | Use two stacked pseudo-elements for an outline (an outer and an inner layer) |
+| Notched plaque | Cut a rectangular step into one corner of a filled plate with `clip-path: polygon(...)` | Keep the label clear of the notch and the focus outline outside the artwork |
 | Bracket corners | Four small borders via gradients or SVG | Keep them `pointer-events: none` |
 | Torn / brush edges | SVG `mask-image` or an SVG path background | Keep a solid fallback; check contrast behind text |
 | Medallion | `border-radius: 50%` + ring shadows (`box-shadow: 0 0 0 4px …`) | Ring shadows don't affect layout |

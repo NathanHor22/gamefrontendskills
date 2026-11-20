@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Signal Room</title>
+<style>
+:root{color-scheme:dark;font:100%/1.5 system-ui,sans-serif;background:#0b191b;color:#f0f2dd}
+*{box-sizing:border-box}body{margin:0}a,button{font:inherit;color:inherit}[hidden]{display:none!important}
+.stage{position:relative;isolation:isolate;display:grid;align-items:end;min-height:100vh;min-height:100svh;padding:clamp(1.1rem,6vw,6rem);overflow:hidden;background:#153538}
+.scenery{position:absolute;inset:0;z-index:-2;pointer-events:none}
+svg{width:100%;height:100%;object-fit:cover;display:block}
+.scrim{position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,#0b191b 0%,#0b191bf0 22%,#0b191b00 74%)}
+.lamp{transform-origin:735px 164px;transform:rotate(var(--aim,-8deg));transition:transform .4s ease}
+.stage[data-scene="charts"]{--aim:-20deg}.stage[data-scene="logs"]{--aim:14deg}
+.haze{animation:drift 18s ease-in-out infinite alternate paused;transform-origin:center}
+@keyframes drift{from{transform:translateX(-25px)}to{transform:translateX(36px)}}
+.stage[data-paused="false"] .haze{animation-play-state:running}
+.copy{max-width:34rem}h1{font-family:Georgia,serif;font-size:clamp(3.35rem,9vw,9rem);font-weight:normal;line-height:.84;margin:0 0 1.5rem;letter-spacing:-.065em}
+.copy p{color:#dbe5d7;max-width:31ch}
+nav{display:grid;gap:.6rem;width:min(100%,19rem);margin:1.5rem 0 1rem}
+.control{min-height:44px;display:inline-flex;align-items:center;padding:.65rem 1rem;border:1px solid #a0b9a7;background:#142e32;color:#f0f2dd;text-decoration:none;border-radius:.18rem;text-align:left;cursor:pointer}
+.control:hover,.control:focus-visible{background:#294c4c}.control:active{background:#385d56}
+.control:focus-visible{outline:3px solid #f5ce87;outline-offset:3px}
+#motion{font-size:.9rem}.details{max-width:44rem;margin:auto;padding:3rem 1.2rem;scroll-margin:1rem}.details h2{font:2.5rem Georgia,serif}.details:focus{outline:2px solid #f5ce87;outline-offset:-4px}
+@media(max-width:640px){.stage{min-height: max(38rem,100svh)}.scenery{inset:0 0 42%}.scrim{background:linear-gradient(0deg,#0b191b 0%,#0b191b 36%,#0b191b00 82%)}h1{margin-bottom:.9rem}}
+@media(prefers-reduced-motion:reduce){.haze{animation:none}.lamp{transition:none}}
+</style>
+<main>
+<header class="stage" id="entrance" data-scene="idle">
+<div class="scenery" aria-hidden="true">
+<svg viewBox="0 0 1100 680" preserveAspectRatio="xMaxYMid slice" focusable="false">
+<defs>
+<linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%" gradientUnits="objectBoundingBox"><stop stop-color="#0e222a"/><stop offset="1" stop-color="#4b716b"/></linearGradient>
+<linearGradient id="beam"><stop stop-color="#ffe6a8" stop-opacity=".72"/><stop offset="1" stop-color="#ffe6a8" stop-opacity="0"/></linearGradient>
+</defs>
+<rect width="1100" height="680" fill="url(#sky)"/>
+<circle cx="854" cy="113" r="53" fill="#d6d9b3"/>
+<path d="M0 410Q260 370 412 426T650 390T1100 418V680H0Z" fill="#355556"/>
+<path class="haze" d="M-65 330Q220 265 560 321T1160 293V326Q850 397 510 352T-65 368Z" fill="#95b3a1" opacity=".23"/>
+<path d="M0 533Q277 461 530 539L645 495L777 482L926 530L1100 530V680H0Z" fill="#112d33"/>
+<path d="M694 486L714 199H757L779 486Z" fill="#e0d1a8"/>
+<path d="M728 201H757L779 486H738Z" fill="#a39072"/>
+<path d="M695 199H777V181H695ZM708 181V145H764V181Z" fill="#13292d"/>
+<path d="M696 145L735 121L776 145Z" fill="#d49462"/>
+<path class="lamp" d="M735 160L1100 61V260L735 171Z" fill="url(#beam)"/>
+<circle cx="735" cy="164" r="7" fill="#ffebb6"/>
+<path d="M648 502L796 491L919 556L839 591L622 547Z" fill="#1d3d3e"/>
+</svg></div><div class="scrim" aria-hidden="true"></div>
+<div class="copy"><h1>Signal<br>Room</h1>
+<p>Charts and watch logs from the headland station.</p>
+<nav aria-label="Station archive">
+<a class="control" data-aim="charts" href="#charts">Browse sea charts</a>
+<a class="control" data-aim="logs" href="#logs">Read watch logs</a>
+</nav>
+<button class="control" id="motion" type="button" hidden>Pause background</button>
+</div></header>
+<section class="details" id="charts" tabindex="-1"><h2>Sea charts</h2><p><strong>North Headland:</strong> The north channel clears the reef at the green marker. The south inlet is sheltered, but too shallow at low tide.</p><a class="control" data-return="charts" href="#entrance">Return to Signal Room</a></section>
+<section class="details" id="logs" tabindex="-1"><h2>Watch logs</h2><p><strong>Night watch, 02:10:</strong> Fog pushed in from the east. The lamp stayed visible from the north channel, and the supply launch made the inlet before dawn.</p><a class="control" data-return="logs" href="#entrance">Return to Signal Room</a></section>
+</main>
+<script>
+const stage = document.querySelector('.stage');
+const motion = document.querySelector('#motion');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+let paused = false;
+function syncMotion() {
+  stage.dataset.paused = String(paused || reduce.matches);
+  motion.hidden = reduce.matches;
+  motion.textContent = paused ? 'Resume background' : 'Pause background';
+}
+motion.addEventListener('click', () => { paused = !paused; syncMotion(); });
+reduce.addEventListener('change', syncMotion);
+syncMotion();
+function show(aim) { stage.dataset.scene = aim; }
+for (const link of document.querySelectorAll('[data-aim]')) {
+  link.addEventListener('pointerenter', event => { if (event.pointerType === 'mouse') show(link.dataset.aim); });
+  link.addEventListener('focus', () => show(link.dataset.aim));
+  link.addEventListener('pointerleave', () => { if (document.activeElement !== link) show('idle'); });
+  link.addEventListener('blur', () => show('idle'));
+  link.addEventListener('click', event => {
+    if (event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) return;
+    requestAnimationFrame(() => document.querySelector(link.hash).focus({preventScroll:true}));
+  });
+}
+for (const link of document.querySelectorAll('[data-return]')) {
+  link.addEventListener('click', event => {
+    if (event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) return;
+    requestAnimationFrame(() => stage.querySelector('[data-aim="' + link.dataset.return + '"]').focus({preventScroll:true}));
+  });
+}
+</script>
+</html>

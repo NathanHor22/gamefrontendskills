@@ -100,8 +100,61 @@ test("setting the screen on a short phone brings the press into reach", { skip }
     await browser.close();
   }
 });
+
+test("secondary actions are recognisable before hover and settings use labelled buttons", { skip }, async () => {
+  const { chromium } = await import("playwright");
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage({ reducedMotion: "reduce" });
+    for (const [file, selector] of [
+      ["buttons.html", ".band:not([aria-current])"],
+      ["navigation.html", ".menu__link:not([aria-current])"],
+      ["print-room.html", "#change"],
+    ]) {
+      await page.goto(pathToFileURL(path.join(T, file)).href);
+      if (file === "print-room.html") await page.getByRole("button", { name: "Set the screen" }).click();
+      await page.mouse.move(0, 0);
+      const action = page.locator(selector).first();
+      await action.waitFor();
+      const surface = await action.evaluate(el => {
+        const style = getComputedStyle(el);
+        return style.backgroundColor !== "rgba(0, 0, 0, 0)" ||
+          [style.borderTopWidth, style.borderRightWidth, style.borderBottomWidth, style.borderLeftWidth]
+            .every(width => parseFloat(width) > 0);
+      });
+      assert.ok(surface, `${file} should enclose its secondary action at rest`);
+      await action.hover();
+      assert.doesNotMatch(await action.evaluate(el => getComputedStyle(el).textDecorationLine), /underline/, file);
+    }
+    await page.goto(pathToFileURL(path.join(T, "overlay.html")).href);
+    const options = page.getByRole("group", { name: "Motion" }).getByRole("button");
+    assert.deepEqual(await options.allTextContents(), ["Previous", "Next"]);
+  } finally {
+    await browser.close();
+  }
+});
+
 const failing = (report) => [...report.page, ...report.controls.flatMap((c) => (c.checks ?? []).map((x) => ({ ...x, control: `${c.selector}[${c.index}]` })))]
   .filter((x) => x.status === "fail");
+
+test("the phone selector changes the artwork and gives the selection one readable title", { skip }, async () => {
+  const { chromium } = await import("playwright");
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage({ viewport: { width: 320, height: 740 }, reducedMotion: "reduce" });
+    await page.goto(pathToFileURL(path.join(T, "selector.html")).href);
+    const artwork = page.locator(".stage path");
+    const firstShape = await artwork.getAttribute("d");
+    await page.getByRole("radio", { name: "Atlas" }).press("ArrowRight");
+    assert.notEqual(await artwork.getAttribute("d"), firstShape);
+    assert.equal(await page.getByRole("heading", { name: "Relay", exact: true }).isVisible(), true);
+    assert.doesNotMatch(await page.locator(".stage").innerText(), /relay/i, "the art should not repeat the project name");
+    const bodySize = await page.locator("#detail-summary").evaluate(el => parseFloat(getComputedStyle(el).fontSize));
+    assert.ok(bodySize >= 16, `project detail is ${bodySize}px on a phone`);
+  } finally {
+    await browser.close();
+  }
+});
 
 // Every template must pass its own verification: the reference code is held to the same bar as user code.
 const cases = [

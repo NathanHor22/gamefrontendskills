@@ -6,6 +6,7 @@ coverage), or when the user asks to research a game. Record format and commands:
 The CLI indexes structured game records and patterns. A game can also appear in a video essay without
 having its own record. Check the [video-study index](../art-direction.md) before repeating the research.
 For example, the [3rd Strike roster comparison](../research/character-select.md) can be cited by playhead.
+For an opening or an animated menu, the [start-screen studies](../research/title-screens.md) link each family to its footage. Look up an individual edition with `node scripts/library.mjs resolve "Gran Turismo PSP"` or inspect a single sequence with `node scripts/library.mjs show gran-turismo-psp-opening-study`.
 
 ## 1. Source policy (read `data/preferences.json` → `source_policy`)
 

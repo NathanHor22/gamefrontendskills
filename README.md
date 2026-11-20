@@ -15,12 +15,12 @@ There’s enough Man City in this world. Be prime Neymar Jr at Barcelona.
 Drop this line into your Claude or ChatGeeBeeTee chat. No terminals. No tech wizardry. Straight-up easy, like getting a Tesco Meal Deal. Bosh.
 
 ```text
-Read https://raw.githubusercontent.com/NathanHor22/gamefrontendskills/main/skills/game-ui-frontend/SKILL.md and use it as my website design guide for this chat. Ask me to paste any reference you can’t open.
+Read https://raw.githubusercontent.com/NathanHor22/gamefrontendskills/main/skills/game-ui-frontend/SKILL.md and design my website from my brief and this skill. Skip your usual AI website styling. Ask me to paste any reference you can’t open.
 ```
 
 If the links are moving funny, yeah, paste the [skill instructions](skills/game-ui-frontend/SKILL.md) into the chat and say:
 
-> Use this as my design guide. Give me the name of any other page you need me to paste.
+> Design it from my brief and this skill. Skip your usual AI website styling. Give me the name of any other page you need me to paste.
 
 For the portfolio idea below, start with the [creative direction guide](skills/game-ui-frontend/references/art-direction.md).
 
@@ -65,11 +65,11 @@ If the menu only looks good on a massive monitor in a fancy studio, it’s getti
 
 [The three roles](skills/game-ui-frontend/agents/) · [Creative direction guide](skills/game-ui-frontend/references/art-direction.md) · [Print Room demo](skills/game-ui-frontend/templates/print-room.html)
 
-The research covers **47 game/edition profiles**, **136 visual observations from 111 reviewed images and 12 video sources**, and **24 original web interaction patterns**. Man’s done the homework, fam.
+The research covers **112 game/edition profiles**, **251 visual observations from 112 reviewed images and 95 video sources**, and **24 original web interaction patterns**. Man’s done the homework, fam.
 
 Fancy checking the footage yourself? The studies have timestamps and everything.
 
-[Video studies](skills/game-ui-frontend/references/research/game-design-philosophy.md) · [Library commands](skills/game-ui-frontend/references/library.md)
+[Start screens and menus](skills/game-ui-frontend/references/research/title-screens.md) · [Video studies](skills/game-ui-frontend/references/research/game-design-philosophy.md) · [Library commands](skills/game-ui-frontend/references/library.md)
 
 ### Under the bonnet
 

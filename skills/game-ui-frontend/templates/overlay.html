@@ -6,20 +6,20 @@
 <title>Overlays and feedback</title>
 <link rel="stylesheet" href="tokens.css">
 <style>
-/* ---------- 1. Pause-style dialog: the page stays visible, choices sit in a corner ---------- */
+/* Pause dialog */
 .open-pause {
   min-height: var(--target-min);
   padding: 0 var(--space-5);
-  border: 2px solid var(--c-ink);
-  background: none;
+  border: 2px solid var(--c-cool);
+  background: var(--c-scene-2);
   color: var(--c-ink);
   font: 700 var(--step-0)/1 var(--font-display);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
 }
-.open-pause:hover { background: color-mix(in srgb, var(--c-ink) 12%, transparent); }
-.open-pause:active { background: color-mix(in srgb, var(--c-ink) 24%, transparent); }
+.open-pause:is(:hover, :focus-visible) { background: var(--c-cool); color: var(--c-scene); }
+.open-pause:active { background: var(--c-accent); color: var(--c-accent-ink); }
 
 .pause {
   /* full-viewport layer so the menu can anchor to the lower-right corner */
@@ -43,8 +43,6 @@
   grid-area: 1 / 1 / 2 / 3;
   place-self: center;
   margin: 0;
-  padding: var(--space-3) var(--space-7);
-  border-block: 1px solid color-mix(in srgb, var(--c-ink) 40%, transparent);
   font: 400 var(--step-3)/1 var(--font-display);
   letter-spacing: 0.3em;
   text-transform: uppercase;
@@ -52,22 +50,22 @@
 .pause__menu {
   grid-area: 2 / 2;
   margin: 0 max(var(--space-6), env(safe-area-inset-right)) max(var(--space-6), env(safe-area-inset-bottom)) 0;
-  padding: var(--space-4) 0;
+  padding: var(--space-4);
   list-style: none;
   display: grid;
   gap: var(--space-1);
   min-width: 260px;
-  border-right: 3px solid var(--c-accent);
-  background: linear-gradient(270deg, var(--c-plate), transparent);
+  background: var(--c-plate);
 }
 .pause__item {
   position: relative;
+  isolation: isolate;
   width: 100%;
   min-height: var(--target-min);
   padding: 0 var(--space-6) 0 var(--space-5);
-  border: 0;
-  background: none;
-  color: var(--c-ink-muted);
+  border: 1px solid #67738c;
+  background: var(--c-scene-2);
+  color: var(--c-ink);
   text-align: right;
   font: 700 var(--step-1)/1 var(--font-display);
   letter-spacing: 0.06em;
@@ -78,17 +76,17 @@
 .pause__item::before {      /* a slanted band that reaches out past the panel */
   content: "";
   position: absolute;
-  inset: 8px 0 8px -40px;
+  inset: -1px 0 -1px -8px;
   z-index: -1;
   pointer-events: none;
-  background: linear-gradient(270deg, var(--c-accent), transparent);
+  background: var(--c-accent);
   transform: skewX(var(--angle)) scaleX(0);
   transform-origin: 100% 50%;
   transition: transform var(--t-exit) var(--ease-exit);
 }
 .pause__item:is(:hover, :focus-visible) { color: var(--c-accent-ink); transition: color var(--t-enter) linear; }
 .pause__item:is(:hover, :focus-visible)::before { transform: skewX(var(--angle)) scaleX(1); transition: transform var(--t-enter) var(--ease-enter); }
-.pause__item:active::before { background: var(--c-accent); }
+.pause__item:active::before { background: var(--c-ink); }
 
 /* Entry and exit are different gestures: the menu slides in from its edge, but leaves by collapsing. */
 .pause[data-state="opening"] .pause__menu { animation: menu-in var(--t-enter) var(--ease-enter) both; }
@@ -100,33 +98,19 @@
 @keyframes title-in { from { letter-spacing: 0.8em; opacity: 0; } }
 @keyframes title-out { to { opacity: 0; } }
 
-/* ---------- 2. Settings rows: label | value columns + explanation field ---------- */
+/* Settings rows */
 .settings { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 300px); gap: var(--space-6); }
-.settings__rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid #ffffff22; }
+.settings__rows { list-style: none; margin: 0; padding: 0; }
 .settings__row {
-  position: relative;
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
   gap: var(--space-4);
   min-height: 56px;
   padding: 0 var(--space-3) 0 var(--space-5);
-  border-bottom: 1px solid #ffffff22;
   transition: background-color var(--t-exit) linear;
 }
 .settings__row:has(:focus-visible), .settings__row:hover { background: color-mix(in srgb, var(--c-cool) 10%, transparent); }
-.settings__row:has(:focus-visible)::before, .settings__row:hover::before {   /* exterior marker outside the row */
-  content: "";
-  position: absolute;
-  left: -14px;
-  top: 50%;
-  width: 10px;
-  height: 10px;
-  translate: 0 -50%;
-  rotate: 45deg;
-  background: var(--c-cool);
-  pointer-events: none;
-}
 .settings__label { font-weight: 600; }
 .switch {
   position: relative;
@@ -160,32 +144,35 @@
 .switch[aria-checked="true"]::after { translate: 30px 0; background: var(--c-accent); transition: translate var(--t-enter) var(--ease-enter), background-color var(--t-enter) linear; }
 .stepper { display: flex; align-items: center; gap: var(--space-1); }
 .stepper button {
-  width: var(--target-min);
-  height: var(--target-min);
+  min-width: var(--target-min);
+  min-height: var(--target-min);
+  padding: 0 var(--space-3);
   border: 0;
   background: none;
   color: var(--c-cool);
-  font-size: var(--step-0);
+  font: 700 var(--step-0)/1 var(--font-display);
   cursor: pointer;
 }
-/* clip-path also clips hit-testing, so the slanted shape lives on a pseudo-element, never on the button. */
+/* Keep the hit area steady while the face changes. */
 .stepper button { position: relative; isolation: isolate; }
 .stepper button::before {
   content: "";
   position: absolute;
-  inset: 6px 2px;
+  inset: 3px;
   z-index: -1;
   pointer-events: none;
-  clip-path: polygon(20% 0, 100% 0, 80% 100%, 0 100%);
+  background: var(--c-scene-2);
+  border: 1px solid var(--c-cool);
+  transform: skewX(var(--angle));
 }
 .stepper button:is(:hover, :focus-visible) { color: var(--c-scene); }
 .stepper button:is(:hover, :focus-visible)::before { background: var(--c-cool); }
 .stepper button:active::before { background: var(--c-accent); }
 .stepper output { min-width: 8ch; text-align: center; font: 700 var(--step-0)/1 var(--font-display); text-transform: uppercase; letter-spacing: 0.06em; }
-.settings__help { align-self: start; padding: var(--space-5); border-left: 1px solid var(--c-cool); color: var(--c-ink-muted); min-height: 120px; }
-.settings__help h3 { margin: 0 0 var(--space-2); color: var(--c-cool); font: 700 var(--step-0)/1.2 var(--font-display); text-transform: uppercase; letter-spacing: 0.08em; }
+.settings__help { align-self: start; margin: 0; padding: var(--space-4); color: var(--c-ink); background: var(--c-plate); }
+.settings__help:empty { padding: 0; }
 
-/* ---------- 3. Progress drawn from the subject: determinate stamps vs indeterminate sweep ---------- */
+/* Progress */
 .progress { display: flex; gap: 6px; align-items: end; height: 36px; }
 .progress__stamp { width: 18px; height: 26px; background: #ffffff1a; clip-path: polygon(50% 0, 100% 30%, 80% 100%, 20% 100%, 0 30%); transition: background-color 120ms linear; }
 .progress__stamp[data-on="true"] { background: var(--c-accent); }
@@ -195,9 +182,10 @@
   .progress--indeterminate .progress__stamp { animation: none; background: color-mix(in srgb, var(--c-cool) 50%, transparent); }
 }
 .progress-row { display: flex; flex-wrap: wrap; gap: var(--space-7); align-items: end; }
-.progress-row figcaption { margin-top: var(--space-2); font-size: var(--step--1); color: var(--c-ink-muted); }
+.progress-row figure { margin: 0; }
+.progress-row figcaption { margin-top: var(--space-2); color: var(--c-ink); }
 
-/* ---------- 4. Result toast: a small ceremony, emblem projecting past the plate ---------- */
+/* Result toast */
 .toast {
   position: fixed;
   right: max(var(--space-5), env(safe-area-inset-right));
@@ -208,7 +196,6 @@
   gap: var(--space-4);
   padding: var(--space-3) var(--space-5) var(--space-3) var(--space-3);
   background: var(--c-plate);
-  border-top: 3px solid var(--c-accent);
   translate: 0 calc(100% + 40px);
   transition: translate var(--t-exit) var(--ease-exit);
 }
@@ -223,16 +210,16 @@
   .pause__menu { grid-area: 2 / 1; }
   .pause__title { grid-area: 1 / 1; }
 }
+@media (max-width: 400px) {
+  .settings__row:has(.stepper) { grid-template-columns: 1fr; gap: var(--space-1); padding-block: var(--space-2); }
+}
 </style>
 </head>
 <body>
 <main class="demo-page">
   <h1 class="visually-hidden">Overlays and feedback</h1>
 
-  <section class="demo-section" aria-labelledby="o1">
-    <h2 id="o1">1 · Pause overlay</h2>
-    <p>The page stays visible behind a blur. A quiet title sits centre; three choices anchor the lower right. Escape closes.
-      The menu slides in from its edge but leaves by collapsing.</p>
+  <div class="demo-section">
     <button class="open-pause" type="button" id="open-pause">Pause</button>
     <dialog class="pause" id="pause" aria-labelledby="pause-title">
       <p class="pause__title" id="pause-title">Paused</p>
@@ -242,45 +229,39 @@
         <li><button class="pause__item" type="button" data-close>Leave</button></li>
       </ul>
     </dialog>
-  </section>
+  </div>
 
   <section class="demo-section" aria-labelledby="o2">
-    <h2 id="o2">2 · Settings rows</h2>
-    <p>Label and value in two columns; a marker sits outside the focused row; the side field explains the focused setting.</p>
+    <h2 id="o2">Settings</h2>
     <div class="settings">
       <ul class="settings__rows">
-        <li class="settings__row" data-help="Plays short sounds when you select and confirm.">
+        <li class="settings__row">
           <span class="settings__label" id="l-sound">Interface sound</span>
           <button class="switch" type="button" role="switch" aria-checked="true" aria-labelledby="l-sound"></button>
         </li>
-        <li class="settings__row" data-help="Controls how much the interface moves. Reduced keeps every state but removes travel.">
+        <li class="settings__row" data-help="Reduced motion keeps fades and removes travel.">
           <span class="settings__label" id="l-motion">Motion</span>
           <div class="stepper" role="group" aria-labelledby="l-motion">
-            <button type="button" data-step="-1" aria-label="Previous motion option">◀</button>
+            <button type="button" data-step="-1" aria-label="Previous motion option">Previous</button>
             <output aria-live="polite">Full</output>
-            <button type="button" data-step="1" aria-label="Next motion option">▶</button>
+            <button type="button" data-step="1" aria-label="Next motion option">Next</button>
           </div>
         </li>
-        <li class="settings__row" data-help="Larger text everywhere, including menus.">
+        <li class="settings__row">
           <span class="settings__label" id="l-text">Large text</span>
           <button class="switch" type="button" role="switch" aria-checked="false" aria-labelledby="l-text"></button>
         </li>
       </ul>
-      <div class="settings__help" aria-live="polite">
-        <h3>About this setting</h3>
-        <p id="help-text">Focus or point at a setting to see what it does.</p>
-      </div>
+      <p class="settings__help" id="help-text" aria-live="polite"></p>
     </div>
   </section>
 
   <section class="demo-section" aria-labelledby="o3">
-    <h2 id="o3">3 · Progress from the subject</h2>
-    <p>Determinate progress fills real stamps and reports a value; indeterminate waiting looks visibly different and never
-      pretends to know a percentage.</p>
+    <h2 id="o3">Transfers</h2>
     <div class="progress-row">
       <figure>
         <div class="progress" id="det" role="progressbar" aria-label="Upload" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
-        <figcaption id="det-label">0%</figcaption>
+        <figcaption id="det-label">Upload 0%</figcaption>
       </figure>
       <figure>
         <div class="progress progress--indeterminate" role="progressbar" aria-label="Connecting" aria-busy="true"></div>
@@ -331,7 +312,7 @@ document.querySelectorAll(".stepper").forEach((g) => {
   });
 });
 document.querySelectorAll(".settings__row").forEach((row) => {
-  const help = () => { document.getElementById("help-text").textContent = row.dataset.help; };
+  const help = () => { document.getElementById("help-text").textContent = row.dataset.help ?? ""; };
   row.addEventListener("pointerenter", help);
   row.addEventListener("focusin", help);
 });
@@ -346,7 +327,7 @@ document.querySelectorAll(".settings__row").forEach((row) => {
   const timer = setInterval(() => {
     value = Math.min(100, value + 10);
     el.setAttribute("aria-valuenow", value);
-    label.textContent = `${value}%`;
+    label.textContent = `Upload ${value}%`;
     el.querySelectorAll(".progress__stamp").forEach((s, i) => { s.dataset.on = String(i < value / 10); });
     if (value === 100) clearInterval(timer);
   }, 400);

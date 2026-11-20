@@ -16,7 +16,7 @@ before choosing colours or components.
 | **Index** | The list of choices: nav, roster, filters | Compact, stable, at an edge | Never resizes when something in it is hovered |
 | **Primary action** | The one thing you want done | Biggest interactive element, often breaks its rail | One per view, in a predictable corner |
 | **Detail** | Description, metadata and stats for the current selection | A separate pane or shelf that updates in place | Fixed position; swaps content, doesn't move |
-| **Utility perimeter** | Settings, account, help, currency, hints | Small icons at the edges and corners | Edges and corners, low contrast until focused |
+| **Utility perimeter** | Settings, account, help, currency, hints | Small icons at the edges and corners | Keep only the utilities needed here. Give each action a compact, visible surface |
 
 If two zones fight for the same space, the zone higher in the list above wins the large area and the
 other zone shrinks. Sites look generic when every zone gets equal weight, as in a 3×N card grid.
@@ -25,8 +25,8 @@ other zone shrinks. Sites look generic when every zone gets equal weight, as in 
 
 - The focal subject should be **3–5×** the size of the largest interactive label. Games get drama from
   very large subjects next to small, crisp controls (`dbfz-perspective-roster`, `tk8-main-menu-art-vs-utility`).
-- Display type: **≥ 6×** body size for title or hero words, `clamp()`-scaled (see [typography.md](../styles/typography.md)).
-- Index items stay small and dense: 14–18px labels, tight rhythm. They are a tool, not the show.
+- Give the subject space. Size the live heading so visitors can see the subject, its name and the main action together on a phone. See [typography.md](../styles/typography.md).
+- Keep the index compact with short labels, readable type and closely grouped plates. Give each touch target enough room.
 - The primary action is the **largest control**, at least 1.5× the height of other buttons. It may break
   out of the rail or row it belongs to (`wild-rift-play-medallion`).
 
@@ -42,7 +42,7 @@ at the bottom edge. Centred stacks are rare and kept for ceremonies (results, pa
 | Detail pane | Right of the index, or a shelf under the focal subject | Follows the eye from list to result |
 | Utility icons | Top-right and bottom-left corners | Out of the reading path |
 | Status / progress | Top edge rail | Glanceable, never covers content |
-| Hints / shortcuts | Bottom edge, small | Available, not loud |
+| Working shortcuts | Inside the relevant plate when frequently used | Helps repeat visitors act quickly |
 
 For right-to-left languages, mirror the horizontal anchors with logical properties
 (`inset-inline-start`, `margin-inline-end`) rather than writing a second layout.
@@ -52,8 +52,7 @@ For right-to-left languages, mirror the horizontal anchors with logical properti
 Frame-breaking is the signature of game UI: a character rising out of a card, a sphere sitting outside a
 row, a contour wrapping past the edge. Rules:
 
-- **Allowed to overflow:** decorative plates, exterior markers, subject cut-outs, glows, splashes,
-  contour rails, oversized background lettering.
+- **Allowed to overflow:** a subject cut-out, a plate edge, or a marker that makes a selection visible.
 - **Never overflow or be covered:** readable labels, body text, focus indicators, other controls' hit areas.
 - Overflowing art is `pointer-events: none` and lives in an overflow-visible wrapper whose parent
   reserves room for it (padding or margin equal to the maximum projection), so it never causes
@@ -64,11 +63,11 @@ row, a contour wrapping past the edge. Rules:
 ## 5. Layer order (back to front)
 
 ```
-scene → plates/panels → focal subject → oversized decorative type → index & labels
+scene → plates/panels → focal subject → index & labels
       → selection marker → primary action → focus indicator (always top)
 ```
 
-Large type can sit *behind* the subject (`tk8-versus-authored-illustration-layering`, `gbvsr-portrait-ledger`).
+Keep the subject's name legible beside it. Let the image carry the scale of the scene.
 Keep a short list of `z-index` tokens (`--z-scene: 0` … `--z-focus: 50`) instead of arbitrary numbers.
 
 ## 6. One angle, one rhythm

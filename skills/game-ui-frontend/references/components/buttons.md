@@ -17,7 +17,7 @@ ceramics example gives **Inspect glaze** a cutout, a moving ink edge and a stabl
 2. **The primary action is physically different from everything else**: a medallion, a pointed plate,
    an interlocking pair. It is often larger than its rail and breaks out of it.
    Evidence: `wild-rift-play-medallion`, `hok-interlocking-mode-start`, `mlbb-lobby-art-and-action`
-3. **Many menu choices have no box at all.** Type, spacing and one marker do the work.
+3. **Some source games leave choices unboxed.** For the web, borrow their spacing and type weight and put each action on its own plate.
    Evidence: `silent-hill-2-2001-main-anatomy`, `sifu-main-menu-anatomy`, `lego-marvel-menu-anatomy`
 4. **Labels can be embedded in objects** such as stamps, plaques and keycaps.
    Evidence: `papers-please-stamp-anatomy`, `clair-obscur-expedition-33-merchant-anatomy`
@@ -38,37 +38,37 @@ ceramics example gives **Inspect glaze** a cutout, a moving ink edge and a stabl
 | Layer | Element | Rules |
 | --- | --- | --- |
 | Target | `<button>` for actions, `<a href>` for navigation | Its box never changes on hover. Min 44×44px on touch. |
-| Label | Text node or `<span>` | Moves only by `translate` on the span, never by changing padding/width. |
-| Plate | Child `<span aria-hidden>` or `::before` | All `clip-path`, skew and texture live here. |
+| Label | Text node or `<span>` | Use a short, readable verb or destination. Keep arrow glyphs and underlines off the label in every state. |
+| Plate | Child `<span aria-hidden>` or `::before` | Enclose the label with a visible fill or continuous frame at rest. Use the site's material, cuts and edges to give the container character. |
 | Exterior art | Child `<span aria-hidden>` or `::after` | `pointer-events: none`; parent reserves margin for it. |
 
 ## Archetypes
 
 ### Breakout primary
-The one main action per view: hero CTA, "Start", "Book", "Buy". A clipped plate, an emblem sitting
-outside its corner, and a contour rail that draws outside the edge.
+The one main action per view can use a clipped plate with a distinct fill. In the demo, an exterior
+emblem and contour mark this as the primary control. A flat plate can carry the action by itself.
 - **Where:** bottom-right of the composition, or directly under the focal subject. One per view.
 - **Size:** the largest control on screen (≥ 56px tall on desktop).
 - **Motion:** entry is rail draws → emblem lifts → label nudges (staggered). Exit is emblem drops first, rail retracts last.
 - **Lineage:** `wild-rift-play-medallion`, `hok-interlocking-mode-start`, `apex-legends-main-menu-anatomy`
 - Patterns: `ripcord-burst-action`, `unequal-beacon-reticle`, `stencil-breakout-action`
 
-### Signal band text action
-No box. On intent a blurred band of colour grows from behind the label far past the text.
+### Signal band action
+A quiet, filled plate encloses each menu choice. On intent a band of colour projects past the plate while its edges and label stay legible.
 - **Where:** title-screen-style menus with 2–5 choices, hero secondary actions, quiet nav.
 - **Rule:** the label barely changes (colour only); the *field* carries the state.
 - **Current/selected** shows the band permanently (`aria-current`).
 - **Lineage:** `sh2r-main`, `silent-hill-2-2001-main-anatomy`, `ff7rebirth-difficulty-artwork`
 
 ### Exterior-marker row
-A menu row whose selection is a separate marker (arrow, sphere, diamond) outside its left edge, plus a fill band.
+A filled menu row with a separate disc or stamp outside its left edge to mark selection.
 Use one shared marker that travels rather than one per row (see [navigation.md](navigation.md)).
 - **Lineage:** `hi-fi-rush-main-menu-anatomy`, `batman-arkham-asylum-main-menu-anatomy`, `dbfz-brush-scene-options`, `ff16-scene-dialogue-choice`
 - Patterns: `detached-ink-comet`, `satellite-caption-rig`
 
 ### Keycap secondary
-Quiet plaque with its keyboard shortcut hanging below. Only show a key if the shortcut really works;
-declare it with `aria-keyshortcuts` and ignore it while the user types in a field.
+Set a working shortcut inside the plaque beside the action when it helps someone use the interface repeatedly.
+Declare it with `aria-keyshortcuts` and ignore it while the user types in a field.
 - **Where:** dialogs, editors, media players, multi-step flows ("Back", "Skip", "Next").
 
 ### Hold to confirm
@@ -85,7 +85,7 @@ The label is engraved on an object that moves (a stamp, lever or latch) for appr
 
 | State | Trigger | Must show | Notes |
 | --- | --- | --- | --- |
-| Rest | none | Authored silhouette even at rest | Not a plain rounded rectangle |
+| Rest | none | Visible, styled container around the whole label | Includes secondary actions and links presented as buttons |
 | Intent | `:hover` (pointer) and `:focus-visible` (keyboard) | Same art for both | Keyboard users get the full composition |
 | Pressed | `:active`, pointer down, key down | Compression, fill or darker plate | Visible within 1 frame |
 | Selected / current | `aria-current`, `aria-pressed`, `aria-selected` | Persistent, different from intent | Survives pointer leaving |
@@ -122,8 +122,8 @@ The label is engraved on an object that moves (a stamp, lever or latch) for appr
 ## Checklist
 
 - [ ] One primary action per view, visibly the largest control, in an anchored position.
-- [ ] Rest state already has an authored silhouette.
-- [ ] Intent shows art beyond the box; exit is a different gesture from entry.
+- [ ] Every action has a visible plate before interaction. Its label stays free of arrows and underlines.
+- [ ] Intent is visible. Any exterior art has a job, such as identifying the selected action or showing its progress.
 - [ ] Target box never changes; exterior art is `pointer-events: none`; projection space reserved.
 - [ ] Hover and focus-visible share the art; pressed, selected, disabled and busy are all defined.
 - [ ] Reduced motion keeps the final silhouette; nothing travels.

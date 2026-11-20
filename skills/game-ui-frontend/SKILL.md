@@ -9,6 +9,10 @@ A game gives someone a reason to act and makes the consequence visible. Start wi
 came to do. Study how a game handles an equivalent decision, then design the website's own space,
 controls and feedback around its subject.
 
+Use the user's brief and this skill as the design authority throughout the site. Set aside conventional
+AI website styling. Choose a game interaction that fits the visitor's task and use the site's own subject
+to decide how it looks. If a detail serves neither the task nor the subject, leave it out.
+
 All paths below are relative to this skill's directory. Run scripts with the skill's **absolute** path
 from the user's project directory. With `skills use`, resolve paths from the temporary supporting directory
 provided in the prompt. Read the research, role prompts and templates from that directory. Keep the skill
@@ -31,7 +35,32 @@ Verify the resulting journey in the browser when implementation is requested.
 
 Before composing either design, use [From a website brief to an art direction](references/art-direction.md).
 Explain the visitor’s decision, what they see on arrival, what exploring reveals, and which action commits.
-Carry the project’s own subject through the art and controls. Keep decorative numbering and filler microcopy out of the interface.
+Carry the project’s own subject through the art and controls.
+
+## Title screens and start menus
+
+For the opening of a game-led experience, use the [title-screen workflow](references/research/title-screens.md)
+before drawing the first viewport. Design an arrival scene, not a stock hero, and give its title, action
+menu and background separate jobs. Decide what the scene does while idle and what it does when someone
+focuses, chooses or returns. Start from a game moment that serves the brief; the
+[Signal Room demo](templates/title-screen.html) is one implementation, not a house style.
+
+## Buttons, type and detail
+
+Give every button a visible container at rest, including secondary actions, icon buttons and links styled
+as buttons. Enclose the label or icon in a filled surface or a complete border shaped to suit the project.
+For a print shop that could be an inked block with a paper edge. Change the fill, edge or depth for hover,
+press and selection. Keep arrows, chevrons and underlines off buttons in every state. Preserve a clear
+keyboard focus outline around the whole control.
+
+Say each thing once. One readable label can carry a choice or a whole section. Skip the oversized
+background word, tiny eyebrow and fine-print caption that all repeat the same idea. Put essential
+instructions, prices and errors beside the decision in readable body text, including on phones.
+
+Leave out ornamental slashes and padded numbers such as `/ WORK`, `PROJECT / 02` and `03 / 06`.
+Use an actual name like **Work**, or **Step 2 of 3** when someone is completing a real sequence.
+Keep the surface simple. Omit thick or hairline 3D strokes, stacked bevels and wireframe grids added
+just to fill space. A press bed can have a working rail. A flat, inked button already has a shape.
 
 ## Research, design and critique
 

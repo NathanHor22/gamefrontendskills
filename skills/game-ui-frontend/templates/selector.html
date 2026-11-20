@@ -8,9 +8,9 @@
 <style>
 /*
   Character-select anatomy for a project/product index:
-    stage   - large preview: oversized name behind, subject rising past its frame, detail shelf
+    stage   - large project artwork beside its title and credits
     roster  - compact, stable grid of native radio inputs (arrow keys for free)
-    marker  - a folded corner points to the preview; the gold seam marks the committed project
+    marker  - a red tab follows the preview; a gold frame marks the committed project
 */
 .select {
   display: grid;
@@ -33,26 +33,9 @@
   position: absolute;
   inset: 18% 6% 0;
   z-index: -2;
-  background:
-    repeating-linear-gradient(var(--angle), transparent 0 22px, #ffffff07 22px 24px),
-    linear-gradient(160deg, var(--tone, #3a2a5c), var(--c-scene-2));
+  background: linear-gradient(160deg, var(--tone, #3a2a5c), var(--c-scene-2));
   clip-path: polygon(0 var(--cut), var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%);
   transition: background var(--t-exit) linear;
-}
-.stage__name {
-  position: absolute;
-  top: 4%;
-  left: 2%;
-  z-index: -1;
-  margin: 0;
-  font: 900 var(--step-5)/0.85 var(--font-display);
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
-  color: color-mix(in srgb, var(--c-ink) 14%, transparent);
-  pointer-events: none;
-  white-space: nowrap;
-  max-width: 100%;
-  overflow: hidden;
 }
 /* The subject is drawn art that rises far above its frame: the drama of the screen. */
 .stage__subject {
@@ -69,39 +52,43 @@
   align-self: end;
   padding: var(--space-5);
   background: var(--c-plate);
-  border-left: 3px solid var(--c-accent);
 }
 .detail h2 { margin: 0 0 var(--space-1); font: 800 var(--step-3)/1 var(--font-display); text-transform: uppercase; }
 .detail__meta { display: grid; grid-template-columns: auto 1fr; gap: var(--space-1) var(--space-4); margin: var(--space-4) 0; }
 .detail__meta dt { color: var(--c-ink-muted); text-transform: uppercase; letter-spacing: 0.08em; }
 .detail__meta dd { margin: 0; }
 .detail summary {
-  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
   width: fit-content;
-  padding: var(--space-3) var(--space-2);
-  color: var(--c-accent);
+  min-height: var(--target-min);
+  max-width: 100%;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--c-accent);
+  background: var(--c-scene-2);
+  color: var(--c-ink);
   font: italic 800 var(--step-1)/1.2 var(--font-display);
+  list-style: none;
   cursor: pointer;
 }
-.detail summary::after {
+.detail summary::-webkit-details-marker { display: none; }
+.detail summary::before {
   content: "";
-  position: absolute;
-  inset: auto 0 4px;
-  height: 3px;
-  background: currentColor;
-  transform: scaleX(.2) skewX(-30deg);
-  transform-origin: left;
-  transition: transform var(--t-exit) var(--ease-exit);
-  pointer-events: none;
+  flex: 0 0 14px;
+  height: 14px;
+  background: linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat,
+              linear-gradient(currentColor, currentColor) center / 2px 100% no-repeat;
 }
-.detail summary:is(:hover, :focus-visible)::after, .detail details[open] summary::after {
-  transform: scaleX(1) skewX(-30deg);
-  transition: transform var(--t-enter) var(--ease-enter);
+.detail details[open] summary::before { background-size: 100% 2px, 0 0; }
+.detail summary:is(:hover, :focus-visible), .detail details[open] summary {
+  color: var(--c-accent-ink);
+  background: var(--c-accent);
 }
+.detail summary:active { background: var(--c-ink); }
 
 /* ---------- roster ---------- */
 .roster { grid-area: roster; border: 0; margin: 0; padding: 0; min-width: 0; }
-.roster legend { padding: 0; margin-bottom: var(--space-3); color: var(--c-ink-muted); font-size: var(--step--1); text-transform: uppercase; letter-spacing: 0.1em; }
 .roster__grid {
   position: relative;
   display: grid;
@@ -112,12 +99,11 @@
 .cell input { position: absolute; opacity: 0; width: 1px; height: 1px; }
 .cell label {
   position: relative;
+  isolation: isolate;
   display: grid;
   align-content: end;
   min-height: 88px;
-  padding: var(--space-2);
-  background: linear-gradient(170deg, var(--tone), var(--c-scene) 85%);
-  clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+  padding: var(--space-2) var(--space-4);
   color: var(--c-ink);
   font: 700 var(--step-0)/1.1 var(--font-display);
   letter-spacing: 0.06em;
@@ -126,14 +112,23 @@
   filter: saturate(0.55) brightness(0.8);
   transition: filter var(--t-exit) linear;
 }
+.cell label::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0 6px;
+  transform: skewX(-6deg);
+  background: linear-gradient(170deg, var(--tone), var(--c-scene) 85%);
+  border: 1px solid #76809a;
+  pointer-events: none;
+}
 .cell label:hover, .cell input:focus-visible + label, .cell input:checked + label {
   filter: none;
   transition: filter var(--t-enter) linear;
 }
-/* The clipped label can't show an outline, so the focus ring is drawn on the cell. */
 .cell:has(input:focus-visible) { outline: 3px solid var(--c-focus); outline-offset: 3px; }
 .cell input:disabled + label { cursor: not-allowed; filter: grayscale(1) brightness(0.55); }
-.cell input:checked + label { box-shadow: inset 0 -4px var(--c-accent); }
+.cell input:checked + label::before { border: 3px solid var(--c-accent); }
 .cell__icon { width: 32px; height: 34px; margin-bottom: 6px; stroke: currentColor; fill: none; stroke-width: 5; pointer-events: none; }
 .cell input:disabled + label::after {
   content: "";
@@ -151,8 +146,9 @@
   left: 0;
   z-index: 1;
   width: 22px;
-  height: 22px;
-  clip-path: polygon(0 0, 100% 0, 0 100%);
+  height: 8px;
+  margin: 7px 0 0 14px;
+  transform: skewX(-6deg);
   background: var(--c-signal);
   translate: var(--mx, 0px) var(--my, 0px);
   transition: translate var(--t-enter) var(--ease-enter);
@@ -175,7 +171,6 @@
     <div class="select" id="select">
       <div class="stage" aria-hidden="true">
         <div class="stage__frame"></div>
-        <p class="stage__name"></p>
         <div class="stage__subject"></div>
       </div>
 
@@ -204,7 +199,7 @@
 <script>
 const projects = [
   { id: "atlas", name: "Atlas", year: 2026, role: "Art direction", tone: "#3a2a5c", summary: "A route atlas for a touring exhibition.", shape: "M50 6 92 30 92 78 50 102 8 78 8 30Z" },
-  { id: "relay", name: "Relay", year: 2025, role: "Design & build", tone: "#123d4f", summary: "Live race telemetry for a cycling team.", shape: "M10 100 50 4 90 100 50 76Z" },
+  { id: "relay", name: "Relay", year: 2025, role: "Design & build", tone: "#123d4f", summary: "Live race telemetry for a cycling team.", shape: "M8 63H26L37 37L50 84L66 24L76 63H92" },
   { id: "ledger", name: "Ledger", year: 2025, role: "Interface design", tone: "#4a2a1a", summary: "A night-shift accounting tool with stamps.", shape: "M14 10H86V96H14ZM28 26H72M28 44H72M28 62H58" },
   { id: "signal", name: "Signal", year: 2024, role: "Motion", tone: "#1d3b2a", summary: "Identity system for a radio festival.", shape: "M50 54m-40 0a40 40 0 1 0 80 0a40 40 0 1 0 -80 0M50 54m-18 0a18 18 0 1 0 36 0a18 18 0 1 0 -36 0" },
   { id: "kiln", name: "Kiln", year: 2023, role: "Art direction", tone: "#5a1f2a", summary: "Ceramics studio shop and archive.", shape: "M20 100 30 20H70L80 100ZM30 20 50 4 70 20" },
@@ -214,7 +209,6 @@ const projects = [
 (function indexSelect(root) {
   const grid = root.querySelector(".roster__grid");
   const stage = root.querySelector(".stage");
-  const name = stage.querySelector(".stage__name");
   const subject = stage.querySelector(".stage__subject");
   const reduce = matchMedia("(prefers-reduced-motion: reduce)");
   let committed = projects[0];
@@ -259,11 +253,8 @@ const projects = [
     if (shown === p) return;
     shown = p;
     stage.style.setProperty("--tone", p.tone);
-    name.textContent = p.name;
-    subject.innerHTML = `<svg viewBox="0 0 100 108" role="presentation"><path d="${p.shape}" fill="none" stroke="#f4f1ea" stroke-width="3" stroke-linejoin="round"/>
-      <path d="${p.shape}" fill="${p.tone}" opacity="0.6" transform="translate(4 5)"/></svg>`;
+    subject.innerHTML = `<svg viewBox="0 0 100 108" role="presentation"><path d="${p.shape}" fill="none" stroke="#f4f1ea" stroke-width="3" stroke-linejoin="round"/></svg>`;
     swapIn(subject, { opacity: 0, translate: "0 28px" });
-    swapIn(name, { opacity: 0, translate: "-24px 0" });
     document.getElementById("detail-title").textContent = p.name;
     document.getElementById("detail-summary").textContent = p.summary;
     document.getElementById("detail-year").textContent = p.year;

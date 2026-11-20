@@ -8,7 +8,7 @@ and (3) place things on the page. Zone diagrams are desktop starting points, not
 Look evidence up with `node scripts/library.mjs show <id>`, or list everything for a screen type with
 `node scripts/library.mjs search --screen <type>`. Pattern ids are original web proposals, not game facts.
 
-Legend for diagrams: `■` focal subject, `▶` primary action, `≡` index/list, `·` utility perimeter,
+Legend for diagrams: `■` focal subject, `◆` primary or selected action, `≡` index/list, `·` utility perimeter,
 `▢` detail/preview pane, `~` scene/background that stays visible.
 
 ---
@@ -20,18 +20,18 @@ composition lesson in games: a wordmark or subject, very few choices, and atmosp
 
 ```
 ┌──────────────────────────────────────────────┐
-│ ·logo                         ·nav  ·nav  ·cta│  utility row: small, quiet
+│ ·logo                         ·nav  ·nav  ·cta│  needed utilities only
 │                                              │
-│      ■ ■ ■  OVERSIZED WORDMARK / SUBJECT     │  focal: 50–70% of the first viewport
+│      ■ ■ ■  FOCAL SUBJECT                    │  give the subject room
 │      ■ ■ ■                                   │
 │                                              │
-│   ▶ PRIMARY ACTION      secondary text link  │  1 primary, at most 1 secondary
+│   [PRIMARY ACTION]      [Secondary action]   │  1 primary, at most 1 secondary
 │ ~ ~ ~ ~ ~ scene / texture / image ~ ~ ~ ~ ~ ~│
 └──────────────────────────────────────────────┘
 ```
 
-- The menu sits *under* or *beside* the wordmark, small, with no box around each item. The wordmark
-  carries the identity; the choices stay quiet.
+- Set the menu under or beside the wordmark. Enclose each choice in a quiet, visible plate made from
+  the same material as the primary action. Give the primary a heavier edge or stronger fill.
 - The selected or primary item gets a field of light, colour or texture *outside its text*
   (a glow band, a mist band, a pigment smear). The label itself barely changes.
 - Leave large empty space. The empty space is part of the composition, not unused room.
@@ -49,21 +49,21 @@ Three proven placements:
 ```
 A. Left column over a scene            B. Bottom dock                    C. Typographic composition
 ┌─────────────────────────────┐       ┌─────────────────────────────┐   ┌─────────────────────────────┐
-│ ≡ ITEM                ■      │       │            ■                 │   │  ITEM        ■ ■            │
-│▶≡ ITEM (selected)     ■      │       │       ~ scene ~              │   │      ITEM ▶  ■ ■            │
-│ ≡ ITEM                ■      │       │   ┌─sub─┐                    │   │          ITEM               │
-│ ≡ ITEM                       │       │ ◇ ◆ ◇ ◇ ◇   ← icon dock      │   │              ITEM   ·count  │
-│ ·help text                   │       │ ·hints                       │   └─────────────────────────────┘
+│  [ITEM]               ■      │       │            ■                 │   │  [ITEM]      ■ ■            │
+│ ◆[ITEM]               ■      │       │       ~ scene ~              │   │     ◆[ITEM]  ■ ■            │
+│  [ITEM]               ■      │       │   ┌─sub─┐                    │   │          [ITEM]             │
+│  [ITEM]                      │       │ ◇ ◆ ◇ ◇ ◇   ← icon dock      │   │              [ITEM]         │
+│                              │       │                              │   └─────────────────────────────┘
 └─────────────────────────────┘       └─────────────────────────────┘
 ```
 
 - **A (left column)** suits sites with 4–7 destinations and a strong image. A narrow list sits over or
-  beside a large subject; a marker *outside* the selected row (arrow, bar, sphere) makes the selection.
+  beside a large subject. A marker outside the selected plate, such as a bar or sphere, shows the selection.
   Evidence: `hi-fi-rush-main-menu-anatomy`, `batman-arkham-asylum-main-menu-anatomy`, `msmr-main-menu-column`, `sifu-main-menu-anatomy`
 - **B (bottom dock)** suits apps and dashboards: large custom emblems in a row, with a submenu rising
   directly above the selected emblem. Evidence: `ggst-illustrated-mode-dock`, `pso2ngs-main-dock`
-- **C (typographic composition)** suits portfolios and editorial sites: menu words are the artwork,
-  oversized and arranged on a diagonal, with emphasis moving between words.
+- **C (typographic composition)** suits portfolios and editorial sites. Set readable destination names
+  on staggered plates. Move the emphasis to the selected plate while the others stay in reach.
   Evidence: `metaphor-menu-anatomy`, `colin-mcrae-rally-2-0-main-menu-anatomy`
 - Separate *art* from *utility*. A large portrait or subject owns the centre; small utility icons sit in
   a corner. Evidence: `tk8-main-menu-art-vs-utility`
@@ -79,11 +79,11 @@ This is the most transferable game screen for websites.
 
 ```
 ┌──────────────────────────────────────────────┐
-│ NAME OF SELECTED (huge, behind)              │
+│ SELECTED PROJECT                             │  one readable heading
 │        ■■■■  large preview / actor  ▢ detail │  preview: 50–65% of the area
 │        ■■■■                         ▢ meta   │
 │  ┌─┬─┬─┬─┬─┬─┬─┬─┐                           │
-│  │ │▶│ │ │ │ │ │ │  compact roster ≡         │  index: small, dense, stable
+│  │ │◆│ │ │ │ │ │ │  compact roster ≡         │  index: small, dense, stable
 │  └─┴─┴─┴─┴─┴─┴─┴─┘                           │
 └──────────────────────────────────────────────┘
 ```
@@ -92,7 +92,7 @@ This is the most transferable game screen for websites.
   Never resize the whole grid on hover. Evidence: `dbfz-preview-handoff-motion`, `gbvsr-portrait-ledger`
 - The preview subject may rise far beyond its cell or frame. That overflow is the drama.
   Evidence: `dbfz-perspective-roster`, `tokon-preview-selection-choreography`
-- Show identity at two scales: a small marked cell *and* a large name. Evidence: `tk8-slot-overlay-breaks-composition`
+- Mark the chosen cell and name the selection once in the readable detail heading. Evidence: `tk8-slot-overlay-breaks-composition`
 - Make availability states visible in the same geometry (locked, unknown, owned, new).
   Evidence: `apex-legends-legends-anatomy`, `honkai-star-rail-roster-anatomy`, `lego-marvel-roster-anatomy`
 - Tall portrait strips or plaques over the real scene beat a generic card grid.
@@ -108,7 +108,7 @@ Patterns: `registration-slip-selector`, `shutter-cut-project-link`, `poster-peel
 ┌──────────────────────────────────────────────┐
 │ HEADING FLAG                                 │
 │ ┌──────┐ ┌════════┐ ┌──────┐                 │  selected poster is taller AND wider,
-│ │ A    │ ║ B ▶    ║ │ C    │                 │  with an exterior contour
+│ │ A    │ ║ B ◆    ║ │ C    │                 │  with an exterior contour
 │ │      │ ║        ║ │      │                 │
 │ └──────┘ ╚════════╝ └──────┘                 │
 │ ▢ description shelf for the selected choice  │
@@ -117,7 +117,7 @@ Patterns: `registration-slip-selector`, `shutter-cut-project-link`, `poster-peel
 
 - Make each choice a different *world* (lettering, material, texture), not the same card in three accent colours.
   Evidence: `sf6-main-mode-three-typographic-worlds`
-- The selected option grows past its neighbours on both axes; a contour sits outside its edge.
+- A selected plate can grow past its neighbours or change its fill while the choices stay readable.
   Evidence: `forza-horizon-5-rally-mode-choice-anatomy`, `fc25-live-start-anatomy`, `forza-horizon-4-pre-race-anatomy`
 - Locked, incomplete and completed are distinct artwork states: monochrome with a lock footer,
   full colour, and gold coat with a check footer. Evidence: `forza-horizon-5-mode-state-sheet-anatomy`
@@ -132,16 +132,16 @@ Patterns: `registration-slip-selector`, `shutter-cut-project-link`, `poster-peel
 ┌──────────────────────────────────────────────┐
 │ ·tab ·tab ·TAB ·tab                ·currency │  slim top rail
 │ ·                                          · │
-│ ·        ■ hero subject / key metric       · │  perimeter utilities: icons, small labels
+│ ·        ■ hero subject / key metric       · │  keep only utilities needed here
 │ ·                                          · │
-│ ·icons                     ┌──────┐▶ START  │  main action: bottom-right, oversized,
+│ ·icons                     ┌──────┐[START]   │  main action: bottom-right, oversized,
 │                            └mode──┘          │  breaks out of the rail
 └──────────────────────────────────────────────┘
 ```
 
 - Primary action bottom-right, larger than anything else interactive, often breaking out of its rail.
   Evidence: `wild-rift-play-medallion`, `hok-interlocking-mode-start`, `mlbb-lobby-art-and-action`, `apex-legends-main-menu-anatomy`
-- Utilities live on the perimeter as free-standing icons. Evidence: `mlbb-2025-lobby-visual-rails`
+- Group needed utilities around the perimeter in compact, visible plates. Evidence: `mlbb-2025-lobby-visual-rails`
 - A "today" or task column with a large date heading works for work dashboards. Evidence: `fc25-career-hub-anatomy`
 - Unequal tile sizes on one stage: one large current item, smaller secondary ones. Evidence: `dirt-rally-2-0-hub-anatomy`, `forza-horizon-5-garage-anatomy`
 
@@ -159,7 +159,7 @@ Components: [panels.md](../components/panels.md).
 
 ## Settings and forms ← options (`settings`), name entry (`text_entry`)
 
-- Label and value in aligned columns; a separate side field explains the focused setting.
+- Align labels and values in columns. Use a shared side field when a setting has a consequence worth explaining.
   Evidence: `hi-fi-rush-options-anatomy`, `sh2r-setup`, `colin-mcrae-rally-2-0-options-anatomy`
 - The selected row brightens its text, marker *and* adjacent rules together.
 - Most of the screen can stay open. A small settings list on a large calm field reads as considered, not empty.
@@ -230,7 +230,7 @@ Read [the HUD and camera study](../research/hud-and-camera.md) to decide which f
 position, which should appear beside a choice, and what context a close crop removes.
 
 - Compact clusters at edges; the content (the "scene") owns the centre.
-- Step lists with completed lines filled and a detached marker pointing at the current line suit
+- Step lists with completed lines filled and a detached stamp beside the current line suit
   tutorials and checklists. Evidence: `tokon-training-step-stack`
 - Controls embedded in physical objects (stamps, racks) suit approval workflows. Evidence: `papers-please-stamp-anatomy`
 
@@ -238,11 +238,11 @@ position, which should appear beside a choice, and what context a close crop rem
 
 - A compact translucent command stack in a lower corner while the content stays dominant.
   Evidence: `ff7rebirth-tactical-overlay`, `p3r-battle-command-cluster`, `p4g-battle-command-stack`
-- Radial menus: sparse ticks and open brackets beat filled pie slices. Evidence: `alien-isolation-radial-anatomy`, `apex-legends-ping-menu-anatomy`
+- On a radial menu, enclose each command in a small plate. Reserve ticks and open brackets for the surrounding dial. Evidence: `alien-isolation-radial-anatomy`, `apex-legends-ping-menu-anatomy`
 
 ## Chat, guided questions ← dialogue (`dialogue`)
 
-- Only a few choices in a lower corner, a separate pointer cursor outside the selected strip.
+- Set a few choices on filled strips in a lower corner. A separate stamp can mark the selected strip.
   Evidence: `ff16-scene-dialogue-choice`
 - An organic speech shape with an outlined indicator. Evidence: `p3r-daily-life-dialogue`
 
@@ -255,8 +255,8 @@ Components: [feedback.md](../components/feedback.md).
 
 ## Head-to-head, launch hero ← versus (`versus`)
 
-- Two halves with deliberately different treatments, oversized lettering behind the subjects and a
-  narrow bright seam. Evidence: `tk8-versus-authored-illustration-layering`, `apex-legends-champion-squad-anatomy`
+- Give the two subjects distinct treatments and label each once where visitors compare them.
+  Evidence: `tk8-versus-authored-illustration-layering`, `apex-legends-champion-squad-anatomy`
 
 ## Route and section transitions ← transition (`transition`)
 

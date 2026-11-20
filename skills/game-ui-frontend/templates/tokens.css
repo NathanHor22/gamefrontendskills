@@ -20,11 +20,9 @@
   --font-display: "Bahnschrift", "Haettenschweiler", "Impact", "Arial Narrow Bold", sans-serif;
   --font-body: system-ui, "Segoe UI", Roboto, sans-serif;
   --font-mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
-  --step--1: clamp(0.78rem, 0.76rem + 0.1vw, 0.85rem);
-  --step-0: clamp(0.95rem, 0.92rem + 0.15vw, 1.05rem);
+  --step-0: clamp(1rem, 0.98rem + 0.15vw, 1.1rem);
   --step-1: clamp(1.2rem, 1.1rem + 0.5vw, 1.5rem);
-  --step-3: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
-  --step-5: clamp(3.2rem, 2rem + 6vw, 7.5rem);
+  --step-3: clamp(1.6rem, 1.4rem + 1vw, 2.25rem);
 
   /* geometry */
   --angle: -9deg;              /* the one dominant angle */

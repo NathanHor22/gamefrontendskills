@@ -31,28 +31,26 @@ covers web use.
 
 ## Scale
 
-Use a fluid scale with large jumps at the top. Games skip middle sizes; they have tiny labels and huge display.
+Start with readable body text. Size a single heading to identify the page or current selection and leave
+room for its subject and controls. Cut repeated eyebrows, card captions and decorative numbering.
 
 ```css
---step--1: clamp(0.78rem, 0.76rem + 0.1vw, 0.85rem);  /* labels, metadata */
---step-0:  clamp(0.95rem, 0.92rem + 0.15vw, 1.05rem); /* body */
+--step-0:  clamp(1rem, 0.98rem + 0.15vw, 1.1rem);     /* reading text, labels, useful metadata */
 --step-1:  clamp(1.2rem, 1.1rem + 0.5vw, 1.5rem);     /* menu items, buttons */
---step-3:  clamp(2rem, 1.5rem + 2.5vw, 3.5rem);       /* section titles */
---step-5:  clamp(3.2rem, 2rem + 6vw, 7.5rem);         /* hero / background lettering */
+--step-3:  clamp(1.6rem, 1.4rem + 1vw, 2.25rem);      /* section titles */
+--step-4:  clamp(2rem, 1.6rem + 2vw, 3rem);           /* page title */
 ```
 
-- Skip `--step-2` and `--step-4` on purpose; the gap creates hierarchy.
-- Background lettering can go larger (`15vw`+) because it's decorative (`aria-hidden`) and may crop.
+- Check the longest heading at phone width alongside the actions it introduces.
+- Remove giant background lettering and duplicated headings. Give required facts body size and contrast beside the choice they affect. Clear the tiny text bands from section footers.
 
 ## Type behaviours to borrow
 
 | Behaviour | How on the web | Notes |
 | --- | --- | --- |
 | Uppercase tracked labels | `text-transform: uppercase; letter-spacing: 0.06–0.12em` | Short labels only; never paragraphs |
-| Outlined background words | `color: transparent; -webkit-text-stroke: 2px …` | Decorative; `aria-hidden` |
 | Weight shift on selection | Variable font `font-variation-settings` or swap weight | Use `font-weight` changes with care: widths change, so reserve the width or use a variable font with stable widths |
-| Typographic slip on intent | Translate a label span 4–8px or reveal a duplicate offset copy | Never translate the link itself |
-| Cropped headline | `overflow: clip` on a decorative copy; real heading stays whole | Pattern: `typographic-slipstream-link` |
+| Typographic slip on intent | Translate a label span within its plate | Keep the link target fixed and the label fully readable |
 | Mixed lettering per destination | Different display treatment per section/mode | Keep the reading face constant |
 | Stamped / hand words | SVG lettering or a display face, used once per view | `mlbb-broadcast-result-type` |
 
@@ -60,7 +58,7 @@ Use a fluid scale with large jumps at the top. Games skip middle sizes; they hav
 
 - Body text: 16px minimum, line-height 1.4–1.6, measure 45–75ch, ≥ 4.5:1 contrast.
 - Never put long text in the display face or in uppercase.
-- Real headings are real `<h1>`–`<h3>` in order; decorative lettering is a separate `aria-hidden` element.
+- Use semantic headings in logical order. Print each heading once.
 - Test with the longest real strings and with a translation 30% longer.
 - Load fonts with `font-display: swap` and check layout when the fallback is showing (marker positions
   must recompute after fonts load; a `ResizeObserver` handles it).

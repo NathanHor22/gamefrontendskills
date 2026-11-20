@@ -40,7 +40,7 @@ For each page section, write one row:
 | Section | Screen type ([screen-map.md](../layout/screen-map.md)) | What it does now | What the game equivalent does better | Priority |
 | --- | --- | --- | --- | --- |
 | Hero | `title` | Centred H1 + two equal buttons | One focal subject, one primary action, quiet secondary | High |
-| Header nav | `main_menu` | Five links, underline on hover | Travelling marker, current page persistent | Medium |
+| Header nav | `main_menu` | Five links, underline on hover | Filled menu plates, a travelling stamp and a distinct current plate | Medium |
 | Projects | `character_select` | 3×N equal cards | Stable roster + large preview stage | High |
 
 Prioritise by (visitor impact × how generic it is now) ÷ effort. Fix the focal surfaces first (hero, primary

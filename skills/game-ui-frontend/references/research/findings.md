@@ -14,7 +14,7 @@ Study the stable action target, label, contour, exterior ornament, selection mar
 
 Metaphor uses oversized words as the menu composition; SF6 distinguishes destinations through visibly different lettering and material treatments; Tōkon borrows condensed mastheads, vertical spines, and production marks. Type can be the moving foreground rather than text pasted onto an animated rectangle.
 
-**Original website experiment:** a section name begins as a compact index label, resolves into an oversized cropped headline, then reveals the project content through the headline's negative space. Give exit a separate gesture, such as a narrow ink shutter traveling toward the index. Keep the readable semantic label intact while the decorative typographic treatment changes.
+**Original website experiment:** print the project name on a filled index tab. Selecting it opens a window in the adjacent print sheet and reveals the project image. Keep the tab name readable and the index in place while the image changes. On return, the window closes into the same paper edge.
 
 ### Give the whole page a material and spatial logic
 

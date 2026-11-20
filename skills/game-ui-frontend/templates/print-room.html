@@ -14,7 +14,7 @@
   h1, h2, p { margin: 0; }
   h1 { font: bold italic clamp(46px, 7vw, 104px)/.92 Georgia, serif; letter-spacing: -.08em; }
   h2 { font: bold clamp(25px, 3vw, 42px)/1 Georgia, serif; letter-spacing: -.05em; }
-  .workshop { display: grid; grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr); border-block: 2px solid var(--black); }
+  .workshop { display: grid; grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr); }
   figure { position: relative; overflow: hidden; margin: 0; align-self: stretch; background: #516c65; min-height: clamp(360px, 39vw, 580px); }
   #room { display: block; width: 100%; height: 100%; position: absolute; object-fit: cover; image-rendering: pixelated; }
   #room.operable { cursor: grab; touch-action: pan-y pinch-zoom; }
@@ -22,29 +22,40 @@
   #room[aria-hidden=true] { filter: brightness(.76); }
   #proof { position: absolute; inset: 4% 0; margin: auto; height: 92%; max-width: 90%; object-fit: contain; filter: drop-shadow(6px 10px 7px #152c2966); }
   #skip { position: absolute; top: 12px; right: 12px; }
-  aside { padding: clamp(20px, 3vw, 42px); border-left: 2px solid var(--black); background: #f8f1df; }
+  aside { padding: clamp(20px, 3vw, 42px); background: #f8f1df; }
   .step { display: grid; align-content: start; gap: 18px; }
   .step[hidden], [hidden] { display: none !important; }
   fieldset { margin: 0; padding: 0; border: 0; display: flex; flex-wrap: wrap; gap: 6px; }
   legend { width: 100%; padding: 0 0 7px; font-weight: 700; }
   .choice { position: relative; cursor: pointer; min-height: 44px; display: inline-flex; align-items: center; }
   .choice input { position: absolute; width: 1px; height: 1px; opacity: 0; }
-  .choice span { display: inline-flex; align-items: center; min-height: 44px; padding: 7px 10px; border-bottom: 2px solid #75827c; }
+  .choice span { display: inline-flex; align-items: center; min-height: 44px; padding: 7px 10px; border: 1px solid #52665d; background: #fdf8ed; }
+  .choice:is(:hover, :focus-within) span { border-color: var(--black); background: #ddd8c4; }
   .choice input:checked + span { border-color: var(--black); background: var(--black); color: var(--paper); }
   .choice input:focus-visible + span, :is(button,a,summary,input[type=range]):focus-visible { outline: 3px solid #176bbb; outline-offset: 3px; }
   .swatch::before { content: ""; width: .9em; height: .9em; margin-right: .45em; border: 1px solid currentColor; border-radius: 50%; background: var(--ink); }
-  summary { cursor: pointer; padding-block: 10px; width: fit-content; }
+  summary { display: inline-flex; align-items: center; gap: 10px; list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+  summary::before {
+    content: ""; flex: 0 0 12px; height: 12px;
+    background: linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat,
+                linear-gradient(currentColor, currentColor) center / 2px 100% no-repeat;
+  }
+  details[open] summary::before { background-size: 100% 2px, 0 0; }
   details label { display: block; margin-top: 5px; }
   input[type=range] { accent-color: var(--red); width: 100%; min-height: 44px; cursor: pointer; }
   button, a { font: inherit; }
-  .action, .plain { cursor: pointer; min-height: 44px; }
-  .action { position: relative; isolation: isolate; width: fit-content; max-width: 100%; color: #fff7de; background: none; border: 0; text-decoration: none; padding: 12px 24px; font-weight: bold; }
-  .action::before, .action::after { content: ""; position: absolute; z-index: -1; inset: 0; pointer-events: none; transform: skewX(-8deg); }
-  .action::before { background: var(--red); }
-  .action::after { z-index: -2; background: var(--black); translate: 3px 3px; transition: translate .13s ease-in; }
-  .action:is(:hover,:focus-visible)::after { translate: 8px 5px; transition-duration: .22s; }
-  .action:active::before { translate: 2px 2px; background: #762e24; }
-  .plain { border: 0; background: var(--paper); color: var(--black); padding: 6px 10px; text-decoration: underline; text-underline-offset: 3px; width: fit-content; }
+  .action { position: relative; isolation: isolate; width: fit-content; max-width: 100%; min-height: 44px; cursor: pointer; color: #fff7de; background: none; border: 0; text-decoration: none; padding: 12px 24px; font-weight: bold; }
+  .action::before { content: ""; position: absolute; z-index: -1; inset: 0; pointer-events: none; transform: skewX(-8deg); background: var(--red); transition: background-color .16s ease-out; }
+  .action:is(:hover,:focus-visible)::before { background: #842f24; }
+  .action:active::before { background: var(--black); }
+  .plain, summary {
+    width: fit-content; max-width: 100%; min-height: 44px; padding: 8px 14px;
+    border: 1px solid var(--black); background: var(--paper); color: var(--black);
+    font-weight: 700; cursor: pointer;
+  }
+  :is(.plain, summary):is(:hover, :focus-visible), details[open] summary { background: var(--black); color: var(--paper); }
+  :is(.plain, summary):active { background: #3e5148; color: white; }
   .pull-label { font-weight: bold; display: block; }
   .instruction { max-width: 32ch; }
   h2[tabindex]:focus { outline: none; }
@@ -52,10 +63,10 @@
     main { padding: 16px; } header { margin-block: 9px 15px; }
     .workshop { grid-template-columns: 1fr; }
     figure { min-height: 0; aspect-ratio: 3 / 2; }
-    aside { border: 0; border-top: 2px solid var(--black); padding: 20px 14px; }
+    aside { padding: 20px 14px; }
     .step { gap: 13px; }
   }
-  @media (prefers-reduced-motion: reduce) { *, *::after { transition: none !important; } }
+  @media (prefers-reduced-motion: reduce) { .action::before { transition: none; } }
 </style>
 </head>
 <body>
@@ -69,10 +80,9 @@
     </figure>
     <aside>
       <noscript>Enable JavaScript to operate the press and save your print.</noscript>
-      <section class="step" id="setup" aria-labelledby="choose-title">
-        <h2 id="choose-title" tabindex="-1">Make a print</h2>
+      <div class="step" id="setup">
         <fieldset>
-          <legend>Choose a plate</legend>
+          <legend id="choose-title" tabindex="-1">Choose a plate</legend>
           <label class="choice"><input type="radio" name="plate" value="heron" checked><span>Heron</span></label>
           <label class="choice"><input type="radio" name="plate" value="shoal"><span>Shoal</span></label>
           <label class="choice"><input type="radio" name="plate" value="arch"><span>Arch</span></label>
@@ -88,7 +98,7 @@
           <input type="range" id="offset" min="-20" max="20" value="0">
         </details>
         <button class="action" type="button" id="prepare">Set the screen</button>
-      </section>
+      </div>
       <section class="step" id="pull" aria-labelledby="pull-title" hidden>
         <h2 id="pull-title" tabindex="-1">Pull the ink</h2>
         <p class="instruction">Drag the squeegee across the sheet, or move the slider to transfer the second colour.</p>
@@ -380,7 +390,7 @@ function showStep(next) {
     byId("stroke").value = 0;
     inkCoverage = 0;
   }
-  byId(step).querySelector("h2").focus({ preventScroll: true });
+  byId(step).querySelector('[tabindex="-1"]').focus({ preventScroll: true });
   if (step === "pull" && matchMedia("(max-width: 740px)").matches) room.scrollIntoView({ block: "nearest" });
   moveCamera(views[step], 300);
 }

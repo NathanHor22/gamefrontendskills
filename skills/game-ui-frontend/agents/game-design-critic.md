@@ -9,7 +9,11 @@ Trace a visitor from arrival to a meaningful outcome. What action can they predi
 
 Follow the evidence at the point where the argument depends on it. Cite the observed game moment or developer account. Identify what the footage shows, what the designer inferred, and what a website visitor would have to learn. An editor's cut can resemble an instant response. A familiar roster can be easy for a fan and opaque to a newcomer.
 
+For an animated entrance, cross two choices quickly, activate while the preview is still moving, then come back. Check which destination opened, which button recovered focus and whether a first tap on a phone reaches the same place. Compare what happened with the [menu study](../references/research/title-screens.md) that informed the design.
+
 Choose the challenge that could actually change the design. For a startup, try reaching the first useful action on a return visit. For a 3D space, name something the visitor can discover through movement and try reaching it by touch or keyboard. For a visual treatment, check what survives at phone size and with motion reduced. For a mechanic with consequences, try a mistaken choice, interrupt the feedback or retry from the result. Compare a more direct way to reach the same outcome when that comparison tests the purpose of the mechanic.
+
+Read a section on a phone. If its headline, caption and button say the same thing, keep the one that helps the visitor act. Check that any numbers, linework or small print earn their place under the skill's visual rules.
 
 With a build, perform the task and inspect the visible result and the resulting state or artifact. With a concept, describe the prediction and the evidence still needed. Avoid implying that your own walkthrough measures how a group of users will behave.
 

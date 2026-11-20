@@ -25,8 +25,8 @@ toy plastic, VHS noise, printed ledger. The material decides edges, textures, co
 | Ledger / paperwork | Ruled lines, stamps | Paper fibre | Off-white, ink, red stamp | Slide, stamp, file away |
 | Night city | Neon outlines | Wet reflections, haze | Deep blue-black, warm signage | Flicker-free glow fades |
 
-Choose for the **content and audience**, not the reference game. A law firm can be "ledger"; a music festival
-can be "print production".
+Choose for the content and audience. Use only the traits the project calls for. A row of real figures may
+need a rule between columns. A festival ticket can read as printed paper from its flat colour and cut edge alone.
 
 ## Colour roles (tokens)
 

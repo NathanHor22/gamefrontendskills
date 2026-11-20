@@ -45,15 +45,17 @@ on exit. Services become three posters printed in different spot colours and let
 one is taller and wider.
 
 **B. Instrument panel.** Material: dark instrument glass, hairlines and tick rulers. Shapes: brackets, ticks,
-one amber sweep. Type: wide extended display plus a mono for data. Signature control: a bracketed action whose
+one amber sweep. Type: wide extended display plus a mono for data. Signature control: a glass key whose
 amber sweep crosses beyond the right bracket. Services as three gauges on one ruler.
 
 **C. Night signage.** Material: deep blue-black scene, warm sign light. Shapes: slanted plates at −9°, one
-red arrowhead marker. Signature control: the breakout primary from `templates/buttons.html`.
+red enamel disc beside the selected sign. Signature control: the breakout primary from `templates/buttons.html`.
 
 **Recommendation: A.** It suits "professional" better than B or C, stays bright and readable, and its
 material (print) maps naturally onto a studio's work. B risks reading as a monitoring dashboard; C is the most
 game-like and the least professional for this client.
+
+The three poster titles use the studio's service names, **Design**, **Development** and **Strategy**. Their order carries no meaning, so `/ 02` adds nothing to **Development**. Selecting its poster reveals what the studio builds, in body type beside the chosen poster. The heading appears once. **Start a project** sits on a flat spot-ink plate with a cut corner.
 
 ## 6. Chosen direction A: specification
 
@@ -67,9 +69,9 @@ game-like and the least professional for this client.
 --t-enter: 200ms; --t-exit: 140ms;
 ```
 
-**Placement (desktop):** hero wordmark left-aligned across 60% of the viewport; a three-item unboxed menu
+**Placement (desktop):** hero wordmark left-aligned across 60% of the viewport; a menu of three chamfered paper strips
 under it (`title`); primary action "Start a project" bottom-right of the hero; services stage below as three
-unequal posters with an explanation shelf under the row; nav top-right in small caps with a registration-dot
+unequal posters with a shared service description under the row; nav top-right on inked plates with a registration-dot
 marker. **Phone:** wordmark stacks, primary action becomes a full-width sticky bottom bar with the same crop
 marks, posters stack with the selected one first.
 

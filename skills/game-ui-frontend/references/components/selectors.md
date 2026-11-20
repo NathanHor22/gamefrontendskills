@@ -1,7 +1,6 @@
 # Selectors and indexes: rosters, grids, carousels, filters
 
-Working code: [templates/selector.html](../../templates/selector.html) (radio roster, travelling marker,
-subject preview and project details). Placement: [screen-map.md](../layout/screen-map.md#project--product--team-index--character-select-character_select).
+Working code: [templates/selector.html](../../templates/selector.html) (framed radio roster with a travelling red tab for preview and a gold frame around the committed choice). Placement: [screen-map.md](../layout/screen-map.md#project--product--team-index--character-select-character_select).
 
 For products or services, use the [character-select footage study](../research/character-select.md) to
 decide what each option communicates at thumbnail scale and what only its larger preview can explain.
@@ -51,8 +50,7 @@ Patterns: `registration-slip-selector`, `poster-peel-project`, `shutter-cut-proj
 
 - Start every swap from the *current on-screen state*: read `getComputedStyle` (opacity/translate), cancel the
   running animation, then animate from those values. Rapid browsing redirects instead of queueing.
-- Give subject, name and detail shelf different entries (subject rises, name slides, detail cross-fades)
-  and keep the roster still.
+- Swap the subject and its details while the roster stays still. Put the selected name in one legible detail heading.
 - Give comparison facts a consistent position on the shelf. Put details the visitor rarely compares behind
   a named disclosure. A fact belongs on the first screen if hiding it could change the visitor's choice.
 - Reduced motion: swap instantly; keep the marker position change, which is state rather than decoration.

@@ -11,4 +11,6 @@ Choose a camera, object, material and control from the site's subject. In a spat
 
 For direction requests, give the scene and the visitor's walkthrough using real labels. Identify which choices come from evidence and which are original. For implementation, inspect the project, build the shortest complete journey in its stack and exercise it through its normal entry point. The skill’s `templates/print-room.html` is an example of a working spatial loop. Select a different mechanism if the brief asks for a different outcome.
 
+Use the brief and the skill’s visual rules for the whole journey, including back, skip and retry. Show the choice once and let the change in the scene carry the feedback. A visitor should recognise each action before pointing at it.
+
 Hand the critic the visitor task, the proposed or working path, the effect you expect the mechanic to have, and the design decision you are least sure about.

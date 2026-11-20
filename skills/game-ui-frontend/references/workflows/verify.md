@@ -15,7 +15,14 @@ node scripts/verify.mjs <url|file> --selector "<css>" [--selector "<css>"] [--ma
 Pick selectors that match the **interactive element** (the `<a>`/`<button>`, or the wrapper containing a
 native input), one or two instances per component type. Always **look at the strips**: `states-strip.png`
 (rest, hover, interrupted, pressed, focus, reduced-motion hover, mobile), `enter-strip.png` and `exit-strip.png`.
-The script checks behaviour; you judge the art.
+
+## Review the rendered design
+
+- Start with the full desktop and phone screens. Trace the main layout and the first action back to the visitor's goal and the selected game study. If swapping in any other client’s name would leave the same hero, cards and call to action, redesign that screen around what this visitor came to do.
+- Inspect headings, card corners and navigation for standalone slashes, `/ 02`, `03 / SERVICES`, padded counters and repeated tiny labels. Include marks drawn by CSS or SVG that a text search misses. Remove each one whose loss would leave the visitor equally informed. Check that actual prices, quantities, named steps and error messages remain readable.
+- Read the page at phone width. Remove oversized background words and duplicated titles. Move useful text from tiny or low-contrast section footers to the choice it explains, at body size and contrast. Verify the real heading still fits with a long name.
+- Look for thick or thin 3D lines, stacked bevels, wireframes or connector trails. Identify what each helps the visitor locate, compare or operate. Remove ornamental linework and preserve the boundaries of controls, real route connections and visible focus rings.
+- Inspect every primary and secondary action at rest, on focus, on hover and when selected. The whole label sits inside a visible styled container from the start. Remove arrow icons, chevrons and underlines throughout, including those drawn beneath a label with a border or pseudo-element. Retain a visible keyboard focus ring around the control.
 
 ## Checks
 

@@ -63,11 +63,13 @@ If the menu only looks good on a massive monitor in a fancy studio, it’s getti
 
 [The three roles](skills/game-ui-frontend/agents/) · [Creative direction guide](skills/game-ui-frontend/references/art-direction.md) · [Print Room demo](skills/game-ui-frontend/templates/print-room.html)
 
-The research covers **112 game/edition profiles**, **251 visual observations from 112 reviewed images and 95 video sources**, and **24 original web interaction patterns**. Man’s done the homework, fam.
+The research covers **260 game/edition profiles**, **407 visual observations from 114 reviewed images and 100 video sources**, and **24 original web interaction patterns**. Man’s done the homework, fam.
 
 Fancy checking the footage yourself? The studies have timestamps and everything.
 
-[Start screens and menus](skills/game-ui-frontend/references/research/title-screens.md) · [Video studies](skills/game-ui-frontend/references/research/game-design-philosophy.md) · [Library commands](skills/game-ui-frontend/references/library.md)
+Want to know why that little arrow’s there, mate? Pick another room in the Picture House. The red pointer turns from the foyer, the rings move to the room you picked and you can turn over the object kept there. [Try the controls](skills/game-ui-frontend/templates/buttons.html) · [See the game footage behind them](skills/game-ui-frontend/references/research/target-and-menu-controls.md)
+
+[All 150 PSP clips](skills/game-ui-frontend/references/research/handheld-control-footage.md) · [Start screens and menus](skills/game-ui-frontend/references/research/title-screens.md) · [Video studies](skills/game-ui-frontend/references/research/game-design-philosophy.md) · [Library commands](skills/game-ui-frontend/references/library.md)
 
 ### Under the bonnet
 

@@ -187,6 +187,43 @@ test("the bundled library passes its own check", () => {
   assert.deepEqual(result.errors, []);
 });
 
+test("each PSP compilation chapter opens its own indexed control study", () => {
+  const p = paths();
+  const library = new Library({ bundled: JSON.parse(fs.readFileSync(path.join(p.data, "games.json"), "utf8")), vocab });
+  const video = "https://www.youtube.com/watch?v=AgKACS46XII";
+  const rows = ["handheld-control-footage.md", "handheld-control-footage-final.md"].flatMap((filename) =>
+    fs.readFileSync(path.join(p.skill, "references", "research", filename), "utf8")
+      .split(/\r?\n/).filter((line) => line.startsWith("| ["))
+      .map((line) => line.split("|").slice(1, -1).map((cell) => cell.trim())));
+  const clips = new Map();
+  for (const game of library.games()) {
+    for (const source of game.sources ?? []) {
+      if (source.url !== video) continue;
+      assert.ok(!clips.has(source.page_url), source.page_url);
+      const observations = game.observations.filter((o) => o.source_id === source.id);
+      clips.set(source.page_url, observations);
+    }
+  }
+  assert.equal(rows.length, 150);
+  assert.equal(clips.size, rows.length);
+  for (const [index, [playhead, title, observed, webUse]] of rows.entries()) {
+    const url = playhead.match(/\]\(([^)]+)\)/)[1];
+    const start = index * 6 + 1;
+    assert.equal(url, video + "&t=" + start + "s", title);
+    const chapter = clips.get(url)?.find((o) => o.observed === observed && o.website_translation === webUse);
+    assert.ok(chapter, title);
+    assert.equal(chapter.evidence_level, "video_frames", title);
+    const seconds = chapter.media_positions.map((position) => {
+      const [minutes, second] = position.split(":");
+      return Number(minutes) * 60 + Number(second);
+    });
+    assert.deepEqual(seconds, [start + 0.5, start + 2.5, start + 4.5], title);
+  }
+  assert.equal(resolve(library, "Budokai Tenkaichi Tag Team", 1)[0].id, "dragon-ball-z-tenkaichi-tag-team-psp");
+  assert.equal(show(library, "spider-man-ps1-rooftop-cues")[0].game, "spider-man-2000-ps1");
+  assert.equal(show(library, "peace-walker-surround-sector")[0].game, "metal-gear-solid-peace-walker-master-collection");
+});
+
 test("bundled lookups keep shipped observations and sources when the personal store replaces them", async (t) => {
   const home = fs.mkdtempSync(path.join(os.tmpdir(), "guf-bundled-"));
   t.after(() => fs.rmSync(home, { recursive: true, force: true }));

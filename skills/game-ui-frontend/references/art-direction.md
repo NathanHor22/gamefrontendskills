@@ -18,11 +18,13 @@ Use *Warframe*'s in-place preparation to inform how someone inspects and launche
 
 Before committing to a direction, change one fact from the brief. If changing which photos belong together or what the software produces leaves the same layout, gesture and result, revisit the interaction. Keep this test in the design process. The site itself only needs the words that help the visitor act.
 
+If customers choose which agent runs a job, study Kirby's rider screen. Moving through the grid reveals capabilities, choosing a rider changes the ready screen, and starting remains a separate action. Try those inputs on the site and inspect the queue after each. If the product always assigns its own agents, give the visitor control over the job inputs and let them inspect the resulting handoff. [Rider preview, selection and Ready](research/menus-relaxalax.md#what-the-desk-promises-and-what-it-actually-does)
+
 ## Choose a reference for a reason
 
 For a playable brief, start with the [game design philosophy](research/game-design-philosophy.md). Identify
 the visitor's verb, the rule that makes the choice meaningful, the visible result and what can be carried
-forward or tried again. The [print room](../templates/print-room.html) is a working example of a spatial
+forward or tried again. The [complete essay readings](research/essay-readings.md) connect each film to a decision it can help the visitor make. The [print room](../templates/print-room.html) is a working example of a spatial
 workbench with a startup and an exportable result.
 
 | If the brief depends on… | Study | Decide |
@@ -33,6 +35,7 @@ workbench with a startup and an exportable result.
 | A tactile PS1 scene or moving object | [Acerola’s rendering comparisons](research/ps1-rendering.md) | Which surface, light or moving edge should show the constraint? Which information must stay sharp? |
 | A particular early-2000s attitude | [Pumpo’s contrasting examples](research/early-2000s.md) | Which subject, material and rhythm belong to this audience and this product? |
 | An expressive command or a menu with a sense of place | [Persona’s composition](research/persona-composition.md) and [pause-menu study](research/pause-menus.md) | What joins the label to the subject, and what should survive opening and closing the menu? |
+| Knowing which object is selected or where to go | [Target, radar and command studies](research/target-and-menu-controls.md) and [150 handheld excerpts](research/handheld-control-footage.md) | Is the cue attached to the object, anchored to the viewport or shared by a row of choices? What happens to it when someone chooses a different destination or arrives? |
 | Balancing immersion with information | [GMTK’s HUD and camera studies](research/hud-and-camera.md) | What does the visitor need to read at a glance? How much surrounding context does this framing cost? |
 | Learning an unfamiliar action or recovering from failure | [Snoman’s NES critique](research/retro-friction.md) | Which cue tells someone what will happen? What useful work survives an unsuccessful attempt? |
 
@@ -41,7 +44,7 @@ Combine references where they solve different parts of the *same* problem. A ros
 ## Compose the direction
 
 - **Lead with the subject.** Name the real object, work sample or outcome that deserves the largest area. Give it a recognizable contour, crop and relationship to the title. A visitor should recognize the page’s purpose with the animation paused.
-- **Draw the button at rest.** Give every action, including secondary choices, a visible surface around its label. A flat ticket in the venue's ink colour can do the whole job. Keep arrows and underlines off the button in every state. Show focus with a clear ring and selection through the plate's shape or fill.
+- **Draw the button at rest.** Give every action, including secondary choices, a visible surface around its label. A flat ticket in the venue's ink colour can do the whole job. Keep its words clean. One cursor can pick a ticket out of the rack. A bearing belongs on a plan where it can actually point towards the chosen venue. Keep keyboard focus visible when it moves away from the booked ticket.
 - **Give lines a job.** A route line can connect two real destinations. An edge can show where a visitor can grab a tool. Omit ornamental thick or thin 3D lines, stacked bevels, wireframes and drifting connector trails used just to dress up a surface.
 - **Write the actual reads.** Name what is visible on arrival, what changes when a visitor examines one choice, and what a deliberate action opens. Price, availability, errors and consequences belong at the decision they affect. Move process notes and further detail behind clearly named links or disclosures.
 - **Remove decorative numbering and slashes.** Leave `/ 02`, `03 / SERVICES` and `01 / 03` off headings, cards and menu labels. Name the actual service, band or print. A real edition of 30 prints or “Step 2 of 3” during booking helps someone decide or finish a task. Drop tiny captions that repeat the title, label a section as a section, or invent a system status.

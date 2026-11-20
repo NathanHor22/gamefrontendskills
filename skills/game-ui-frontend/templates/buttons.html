@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Button archetypes</title>
+<title>Picture House Archive · Button studies</title>
 <link rel="stylesheet" href="tokens.css">
 <style>
 /*
@@ -194,6 +194,217 @@
 .hold .hold__fill { transition: transform var(--t-exit) var(--ease-exit); }
 .hold[data-armed="true"] { background: color-mix(in srgb, var(--c-signal) 25%, transparent); }
 
+/* The archive is an original web interpretation. Room coordinates drive the sight and its
+   bearing. The plate, pulse distance and turn timing belong to this site. */
+.archive {
+  --paper: #f7eac4;
+  --night: #142b2d;
+  --waypoint: #ff6957;
+  display: grid;
+  grid-template-columns: minmax(14rem, .9fr) minmax(17rem, 1fr);
+  gap: 1.5rem 4vw;
+  align-items: center;
+  max-width: 52rem;
+  margin-inline: auto;
+  padding: clamp(1rem, 4vw, 3rem);
+  color: var(--paper);
+  background: var(--night);
+  border-radius: 2px 2.5rem 2px 2px;
+}
+.archive h2, .object-tray h2 {
+  margin: 0;
+  font: 800 clamp(2rem, 5vw, 4rem)/.96 var(--font-display);
+  letter-spacing: -.035em;
+}
+.archive-stops { margin: 1.5rem 0 0; padding: 0; border: 0; min-width: 0; }
+.archive-stops legend { margin-bottom: .5rem; }
+.room-label {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  margin: .45rem 0 .45rem .6rem;
+  padding: .35rem 1.3rem;
+  color: var(--paper);
+  font: italic 700 1.25rem/1.2 var(--font-display);
+  cursor: pointer;
+}
+.room-label::before, .room-label::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+.room-label::before {
+  inset: 0;
+  background: #344d4e;
+  clip-path: polygon(.65rem 0,100% 0,calc(100% - .65rem) 100%,0 100%);
+  transition: transform 130ms ease-out;
+}
+.room-label::after {
+  width: .78rem;
+  height: 1.85rem;
+  left: -.65rem;
+  background: #ffbf5b;
+  transform: skewX(-12deg) scaleY(0);
+  transition: transform 110ms ease-in;
+}
+.room-label:has(:checked) { color: #192924; }
+.room-label:has(:checked)::before { background: var(--paper); }
+.room-label:has(:checked)::after { transform: skewX(-12deg) scaleY(1); }
+.room-label:is(:hover,:focus-within)::before { transform: translateX(4px); }
+.room-label:has(:focus-visible) { outline: 3px solid white; outline-offset: 3px; }
+.room-label:active::before { transform: translateX(1px); }
+.archive-plan { width: 100%; max-width: 24rem; justify-self: center; }
+.scope {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #0a1b1d;
+  box-shadow: 0 0 0 4px #526664;
+}
+.plan-ink { position: absolute; width: 100%; height: 100%; fill: none; pointer-events: none; }
+.map-pin, .sight {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: 44px;
+  height: 44px;
+  translate: -50% -50%;
+  border-radius: 50%;
+}
+.map-pin { border: 0; background: none; cursor: pointer; }
+.map-pin::before {
+  content: "";
+  position: absolute;
+  inset: 13px;
+  background: var(--paper);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px #0a1b1d;
+  pointer-events: none;
+  transition: transform 140ms ease-out;
+}
+.map-pin:is(:hover,:focus-visible)::before { transform: scale(1.25); }
+.map-pin:active::before { transform: scale(.9); }
+.sight {
+  pointer-events: none;
+  border: 2px solid #ffce70;
+  box-shadow: 0 0 0 2px #0a1b1d;
+  transition: left 230ms ease-out, top 230ms ease-out;
+}
+.sight::before { content: ""; position: absolute; inset: 3px; border: 1px solid #ffce70; border-radius: 50%; }
+.lock-jaws { position: absolute; inset: 0 -7px; }
+.lock-jaws::before, .lock-jaws::after {
+  content: "";
+  position: absolute;
+  width: 11px;
+  height: 13px;
+  left: 0;
+  top: calc(50% - 6.5px);
+  background: #ffce70;
+  clip-path: polygon(0 0,100% 50%,0 100%);
+}
+.lock-jaws::after { left: auto; right: 0; rotate: 180deg; }
+.sight-arm {
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  width: 32px;
+  height: 24px;
+  translate: -50% -50%;
+  transform: rotate(var(--bearing));
+  pointer-events: none;
+}
+.sight-arrow {
+  position: absolute;
+  width: 18px;
+  height: 17px;
+  left: calc(50% + 6px);
+  top: calc(50% - 8.5px);
+  background: linear-gradient(#ffa18b 50%, var(--waypoint) 50%);
+  clip-path: polygon(0 0,100% 50%,0 100%,22% 50%);
+}
+.archive-plan p { margin: .9rem 0 .7rem; text-align: center; }
+.inspect-plate {
+  position: relative;
+  isolation: isolate;
+  display: block;
+  width: 100%;
+  min-height: 52px;
+  border: 0;
+  padding: .65rem 1.35rem;
+  background: transparent;
+  color: #181e19;
+  cursor: pointer;
+  font: italic 800 1.35rem/1.15 var(--font-display);
+}
+.inspect-plate::before, .inspect-plate::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  inset: 0;
+  background: #ffbf5b;
+  clip-path: polygon(1.1rem 0,100% 0,calc(100% - 1.1rem) 100%,0 100%);
+}
+.inspect-plate::before { background: #ff6957; translate: -4px 4px; }
+.inspect-plate::after { transition: translate 150ms ease-in; }
+.inspect-plate:is(:focus-visible,:hover)::after { translate: 4px -3px; transition: translate 220ms var(--ease-enter); }
+.inspect-plate:active::after { translate: -3px 3px; }
+.object-tray {
+  width: min(30rem, calc(100% - 2rem));
+  max-height: calc(100% - 2rem);
+  overflow: auto;
+  border: 0;
+  padding: clamp(1rem, 4vw, 2rem);
+  background: #efe2bf;
+  color: #172b28;
+}
+.object-tray::backdrop { background: #071215e8; }
+.object-tray h2 { font-size: clamp(2rem, 5vw, 3rem); }
+.object-tray figure { margin: .75rem 0; }
+.object-stage { perspective: 650px; }
+.object-drawing {
+  display: block;
+  width: 100%;
+  max-height: 28vh;
+  aspect-ratio: 2 / 1;
+  color: #16413e;
+  transform-style: preserve-3d;
+  transition: transform 420ms cubic-bezier(.24,.68,.22,1);
+}
+.object-drawing[data-reverse] { transform: rotateY(180deg); }
+.object-face { position: absolute; inset: 0; backface-visibility: hidden; }
+.object-face:last-child { transform: rotateY(180deg); }
+.object-face svg { width: 100%; height: 100%; }
+.object-tray figcaption { min-height: 3em; margin-block: .5rem; }
+.tray-actions { display: flex; flex-wrap: wrap; gap: .65rem; }
+.tray-actions button {
+  min-height: 44px;
+  padding: .5rem 1.1rem;
+  background: #16413e;
+  color: white;
+  border: 2px solid #16413e;
+  border-radius: .75rem 2px;
+  font: 600 1rem/1.2 var(--font-body);
+  cursor: pointer;
+}
+.tray-actions button:last-child { background: #efe2bf; color: #16413e; }
+.tray-actions button:is(:hover,:focus-visible) { outline: 2px solid #16413e; outline-offset: 3px; }
+.tray-actions button:active { box-shadow: inset 0 0 0 2px #8a9280; }
+@media (max-width: 660px) {
+  .archive { grid-template-columns: minmax(0,1fr); }
+  .archive-plan { width: min(100%, 19rem); }
+  .archive-stops { margin-top: .85rem; }
+  .room-options { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .room-label { margin: 0 0 0 .4rem; padding: .45rem .75rem; font-size: 1.05rem; }
+  .room-label::after { width: .45rem; left: -.4rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .archive *, .archive *::before, .archive *::after, .object-drawing { transition: none !important; }
+}
+
 /* ---------- reduced motion: same art, no travel ---------- */
 @media (prefers-reduced-motion: reduce) {
   .breakout__emblem, .breakout:is(:hover, :focus-visible) .breakout__emblem { rotate: 0deg; }
@@ -209,6 +420,93 @@
 <body>
 <main class="demo-page">
   <h1 class="visually-hidden">Button archetypes</h1>
+
+  <section id="projection-archive" class="archive" aria-labelledby="archive-title">
+    <div>
+      <h2 id="archive-title">Picture House Archive</h2>
+      <fieldset class="archive-stops">
+        <legend>Choose a room</legend>
+        <div class="room-options">
+          <label class="room-label"><input class="visually-hidden" type="radio" name="room" value="booth" checked>Booth</label>
+          <label class="room-label"><input class="visually-hidden" type="radio" name="room" value="rewind">Rewind room</label>
+          <label class="room-label"><input class="visually-hidden" type="radio" name="room" value="stalls">Stalls</label>
+        </div>
+      </fieldset>
+    </div>
+    <div class="archive-plan">
+      <div class="scope" role="group" aria-label="Cinema floor plan">
+        <svg class="plan-ink" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+          <!-- The dotted foyer, paired doorways and curved rows of seats orient the bearing. -->
+          <path fill="#283e3d" d="M39 45h41v27h-9v9H39z M122 50h30v33h-30z M54 135q46-18 92 0l-12 28q-34-13-68 0z"/>
+          <g stroke="#9ba99a" stroke-width="2.2">
+            <path d="M40 83H35V42h49v31h-8m-16 10H49 M118 76V46h40v42h-24m-16-1v-4"/>
+            <path d="M53 133q47-22 94 0 M57 141q43-20 86 0 M61 149q39-17 78 0 M65 157q35-15 70 0"/>
+            <path d="M72 82v20l14 12m30-36v22l-11 12" stroke-dasharray="2 4"/>
+          </g>
+          <rect x="96" y="116" width="8" height="8" rx="1" fill="#f7eac4"/>
+        </svg>
+        <span class="sight" aria-hidden="true"><i class="lock-jaws"></i></span>
+        <span class="sight-arm" aria-hidden="true"><i class="sight-arrow"></i></span>
+      </div>
+      <p role="status" id="room-bearing"></p>
+      <button type="button" class="inspect-plate" id="inspect-object">Inspect aperture plate</button>
+    </div>
+    <dialog class="object-tray" aria-labelledby="object-title">
+      <h2 id="object-title"></h2>
+      <figure>
+        <div class="object-stage" aria-hidden="true">
+          <div class="object-drawing">
+            <div class="object-face"><svg viewBox="0 0 200 100"><use id="front-ink"/></svg></div>
+            <div class="object-face"><svg viewBox="0 0 200 100"><use id="back-ink"/></svg></div>
+          </div>
+        </div>
+        <figcaption id="object-note" aria-live="polite"></figcaption>
+      </figure>
+      <div class="tray-actions">
+        <button type="button" id="turn-object" aria-pressed="false">Show reverse</button>
+        <button type="button" id="return-plan">Back to floor plan</button>
+      </div>
+    </dialog>
+    <!-- Original object drawings. Each reverse exposes a different construction detail. -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <g id="plate-face">
+          <path fill="#817754" d="M31 69h130V24l9 5v52H36z"/>
+          <path fill="#cb9b4b" fill-rule="evenodd" d="M31 17h128l7 9v49H31z M56 30v31h82V30z"/>
+          <path fill="none" stroke="#564e36" stroke-width="3" d="M56 31h82v30 M39 67h17"/>
+        </g>
+        <g id="plate-back">
+          <path fill="#a5793c" fill-rule="evenodd" d="M35 23h128v53H28V31z M53 32v32h80V32z"/>
+          <path fill="#615237" d="M35 23h126v8H35z M34 68h128v9H34z"/>
+          <g fill="#33392d"><circle cx="43" cy="39" r="3"/><circle cx="149" cy="59" r="3"/></g>
+        </g>
+        <g id="block-face">
+          <path fill="#3e5351" d="M26 44l20-13h116l12 11v34H26z"/>
+          <path fill="#a8ada0" d="M26 42l17-14h119l12 14z"/>
+          <path stroke="#213c39" stroke-width="3" d="M34 38h132 M95 31v45 M92 43h8"/>
+          <g fill="#d4c69e"><circle cx="63" cy="36" r="2"/><circle cx="73" cy="36" r="2"/><circle cx="127" cy="36" r="2"/></g>
+        </g>
+        <g id="block-back">
+          <path fill="#69746b" d="M29 30h135l7 9v32H29z"/>
+          <g fill="#293d3b"><rect x="38" y="38" width="11" height="23" rx="4"/><rect x="148" y="38" width="11" height="23" rx="4"/></g>
+          <path fill="#c4b687" d="M63 44h51v9H63z"/>
+        </g>
+        <g id="reel-face">
+          <ellipse cx="102" cy="56" rx="71" ry="30" fill="#536966"/>
+          <ellipse cx="100" cy="48" rx="71" ry="30" fill="#9baea1"/>
+          <ellipse cx="100" cy="48" rx="61" ry="23" fill="none" stroke="#617b73" stroke-width="2"/>
+          <path fill="#f2db94" d="M62 41l74-5 2 15-73 7z"/>
+          <path stroke="#594936" stroke-width="2" d="M71 47l30-3"/>
+        </g>
+        <g id="reel-back">
+          <ellipse cx="100" cy="52" rx="70" ry="30" fill="#708981"/>
+          <g fill="none" stroke="#3a5550" stroke-width="2">
+            <ellipse cx="100" cy="52" rx="52" ry="21"/><ellipse cx="100" cy="52" rx="38" ry="14"/>
+          </g>
+        </g>
+      </defs>
+    </svg>
+  </section>
 
   <section class="demo-section" aria-label="Primary action">
     <a class="breakout" href="#start">
@@ -243,12 +541,127 @@
 </main>
 
 <script>
+// A paper reconstruction of a cinema. All coordinates are on the same 0..100 floor plan.
+// The foyer is the bearing's origin; the labelled menu and map pins select the same room.
+{
+  const rooms = [
+    { id: "booth", room: "Booth", x: 30, y: 30, object: "Aperture plate", drawing: "plate",
+      front: "The brass window masks the edges of the projected picture.",
+      back: "Two raised rails stand proud of the reverse. Between them the film has room to pass." },
+    { id: "rewind", room: "Rewind room", x: 69, y: 34, object: "Splice block", drawing: "block",
+      front: "Pins hold the film over the cutting slot where two ends meet.",
+      back: "Two dark feet grip the bench while the strip is cut." },
+    { id: "stalls", room: "Stalls", x: 54, y: 78, object: "Reel can", drawing: "reel",
+      front: "The strip of masking tape on the lid identifies the reel.",
+      back: "Turn the can over and you can see the two pressed rings that stiffen the base." }
+  ];
+  const archive = document.querySelector(".archive");
+  const scope = archive.querySelector(".scope");
+  const sight = scope.querySelector(".sight");
+  const jaws = sight.querySelector(".lock-jaws");
+  const arm = scope.querySelector(".sight-arm");
+  const arrow = arm.querySelector(".sight-arrow");
+  const radios = [...archive.querySelectorAll('input[name="room"]')];
+  const bearing = archive.querySelector("#room-bearing");
+  const inspect = archive.querySelector("#inspect-object");
+  const tray = archive.querySelector(".object-tray");
+  const drawing = tray.querySelector(".object-drawing");
+  const note = tray.querySelector("#object-note");
+  const turn = tray.querySelector("#turn-object");
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+  let selected;
+  let pulses = [];
+  let returning = false;
+
+  function selectRoom(room) {
+    if (selected === room) return;
+    selected = room;
+    radios.find(radio => radio.value === room.id).checked = true;
+    scope.querySelectorAll(".map-pin").forEach(pin => pin.setAttribute("aria-pressed", String(pin.value === room.id)));
+    sight.style.setProperty("--x", room.x + "%");
+    sight.style.setProperty("--y", room.y + "%");
+    const degrees = Math.atan2(room.y - 60, room.x - 50) * 180 / Math.PI;
+    arm.style.setProperty("--bearing", degrees + "deg");
+    const compass = ["east", "south-east", "south", "south-west", "west", "north-west", "north", "north-east"];
+    bearing.textContent = "From the foyer, head " + compass[(Math.round(degrees / 45) + 8) % 8] + ".";
+    inspect.textContent = "Inspect " + room.object.toLowerCase();
+    pulses.forEach(animation => animation.cancel());
+    if (!reduced.matches) {
+      pulses = [
+        jaws.animate([{ transform: "scaleX(1.22)" }, { transform: "scaleX(1)" }],
+          { duration: 440, iterations: 2, easing: "ease-out" }),
+        arrow.animate([{ opacity: .6 }, { opacity: 1 }],
+          { duration: 370, iterations: 2, easing: "ease-in-out" })
+      ];
+    }
+  }
+  reduced.addEventListener("change", () => { if (reduced.matches) pulses.forEach(animation => animation.cancel()); });
+
+  rooms.forEach(room => {
+    const pin = document.createElement("button");
+    pin.type = "button";
+    pin.className = "map-pin";
+    pin.value = room.id;
+    pin.setAttribute("aria-label", "Locate " + room.room);
+    pin.style.setProperty("--x", room.x + "%");
+    pin.style.setProperty("--y", room.y + "%");
+    pin.addEventListener("click", () => selectRoom(room));
+    scope.append(pin);
+    radios.find(radio => radio.value === room.id).addEventListener("change", () => selectRoom(room));
+  });
+  selectRoom(rooms[0]);
+
+  function showFace(reverse) {
+    drawing.toggleAttribute("data-reverse", reverse);
+    turn.setAttribute("aria-pressed", String(reverse));
+    note.textContent = reverse ? selected.back : selected.front;
+  }
+  turn.addEventListener("click", () => showFace(!drawing.hasAttribute("data-reverse")));
+
+  function syncObject() {
+    returning = false;
+    const room = rooms.find(entry => location.hash === "#object-" + entry.id);
+    if (room) {
+      selectRoom(room);
+      tray.querySelector("#object-title").textContent = room.object;
+      tray.querySelector("#front-ink").setAttribute("href", "#" + room.drawing + "-face");
+      tray.querySelector("#back-ink").setAttribute("href", "#" + room.drawing + "-back");
+      showFace(false);
+      if (!tray.open) tray.showModal();
+    } else if (tray.open) {
+      tray.close();
+      inspect.focus();
+    }
+  }
+  inspect.addEventListener("click", () => {
+    history.pushState({ fromArchive: true }, "", "#object-" + selected.id);
+    syncObject();
+  });
+  function returnToPlan() {
+    if (returning) return;
+    if (history.state?.fromArchive) {
+      returning = true;
+      history.back();
+    }
+    else {
+      const url = new URL(location.href);
+      url.hash = "";
+      history.replaceState(history.state, "", url);
+      syncObject();
+    }
+  }
+  tray.querySelector("#return-plan").addEventListener("click", returnToPlan);
+  tray.addEventListener("cancel", event => { event.preventDefault(); returnToPlan(); });
+  window.addEventListener("hashchange", syncObject);
+  syncObject();
+}
+
 const status = document.getElementById("status");
 const say = (text) => { status.textContent = text; };
 
 // Real shortcuts for the keycap actions, ignored while typing.
 document.addEventListener("keydown", (e) => {
-  if (e.metaKey || e.ctrlKey || e.altKey || e.target.closest("input, textarea, select, [contenteditable]")) return;
+  if (e.metaKey || e.ctrlKey || e.altKey || e.target.closest("input, textarea, select, [contenteditable], #projection-archive")) return;
   const btn = document.querySelector(`[data-shortcut="${e.key.toLowerCase()}"]`);
   if (btn) { btn.click(); btn.focus(); }
 });

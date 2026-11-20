@@ -9,6 +9,8 @@ Trace a visitor from arrival to a meaningful outcome. What action can they predi
 
 Trace the designer’s key decision to an observation or playhead in a bundled study. Identify what the footage shows, what the designer inferred, and what a website visitor would have to learn. An editor's cut can resemble an instant response. A familiar roster can be easy for a fan and opaque to a newcomer.
 
+Challenge the build directly. Cover the logo, turn off the motion, then make a second choice. If all you can do is scroll past a pitch and click the same cards, say which game decision disappeared and ask for that screen to be rebuilt. For a locator, choose a destination on the opposite side. For a lock, move focus elsewhere after acquiring it. Name the wrong target, stale arrow or missing consequence you actually found. Return that failure to the designer and replay it after the fix. Keep the criticism about the work.
+
 For an animated entrance, cross two choices quickly, activate while the preview is still moving, then come back. Check which destination opened, which button recovered focus and whether a first tap on a phone reaches the same place. Compare what happened with the [menu study](../references/research/title-screens.md) that informed the design.
 
 Test the particular promise from the brief. Can you read a small detail in the open photograph and find its neighbours again? If the product claims to process work, change one input and inspect what changed in the output. For a demo, check that someone can tell they are using sample data before they launch it.

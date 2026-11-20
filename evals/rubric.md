@@ -39,8 +39,9 @@ these answers just as well as a hanging board.
 
 A direction that would suit an unrelated startup after a colour change scores 0 on criterion 4.
 
-For criterion 6, check secondary actions as well as the main one. Button arrows, chevrons or underlines
-keep the design from earning full marks. For criterion 4, look for choices grounded in the brief and
+For criterion 6, check secondary actions as well as the main one. Decorative chevrons, suffix arrows and underlined
+labels count against the design. Change the selected target and check a functional arrow's position or bearing.
+Its owner should still be clear with animation off. For criterion 4, look for choices grounded in the brief and
 the skill. A decorative `02 / 03`, a giant heading repeated in tiny footer text, or thick or thin 3D
 lines with no purpose all count against the direction. Check that essential text is easy to read on a phone.
 

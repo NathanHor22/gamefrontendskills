@@ -511,6 +511,7 @@ export function renderCatalog(lib) {
     `${s.games} game/edition profiles, ${s.games_with_visual_study} with visual study, ${s.visual_observations} visual observations, ${s.reviewed_image_sources} reviewed image sources, ${s.reviewed_video_sources} reviewed video sources, ${s.original_web_patterns} original web patterns. Selected research, not an exhaustive catalogue.`,
     "",
     "Use `node scripts/library.mjs show --bundled <id>` for any id below.",
+    "Under each edition, expand the study notes to read what the control or scene does and a proposed website use. The evidence column identifies stills and sequences. Playheads refer to the recording.",
     "",
     "## By screen type",
     "",
@@ -533,6 +534,16 @@ export function renderCatalog(lib) {
         const src = (g.sources ?? []).find((x) => x.id === o.source_id);
         const link = src ? `[${mdEscape(src.title ?? src.id)}](${src.page_url ?? src.url})` : "";
         lines.push(`| \`${o.id}\` ${mdEscape(o.screen_label ?? "")} | \`${o.screen}\` | ${o.evidence_level}, ${o.confidence} | ${link} |`);
+      }
+      const studies = obs.filter((o) => isText(o.observed));
+      if (studies.length) {
+        lines.push("", "<details><summary>Read the control and scene studies</summary>", "");
+        for (const o of studies) {
+          const times = o.media_positions?.join(", ");
+          lines.push(`**${mdEscape(o.screen_label || o.screen)}**${times ? ` (${times})` : ""}. ${mdEscape(o.observed)}`, "");
+          if (o.website_translation) lines.push(`*Website use.* ${mdEscape(o.website_translation)}`, "");
+        }
+        lines.push("</details>");
       }
       lines.push("");
     } else {

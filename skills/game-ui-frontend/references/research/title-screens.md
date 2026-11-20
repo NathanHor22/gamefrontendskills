@@ -6,6 +6,8 @@ dismiss a logo, wait for a cinematic or guess what **Start** means before reachi
 
 ## Which menu should you study?
 
+Start with [Stryxo’s main-menu study](main-menus-stryxo.md) when designing the identity of a first visit and the usefulness of a return. Follow the sound, place and persistent choice separately. [NakeyJakey’s title-screen study](title-screens-nakeyjakey.md) examines what an invitation or optional toy does before someone starts. [RelaxAlax’s two menu studies](menus-relaxalax.md) follow the command into the submenu and show how a physical object can organise its information. Choose the case that matches the task. A returning listener could open a specific minute immediately while a new listener hears a recording only after choosing Play.
+
 | Design question | Evidence to inspect | Decision for the website |
 | --- | --- | --- |
 | How can someone browse without disturbing a place? | In the original *Life is Strange* PC recording, pointer movement enlarges successive handwritten choices while the coast holds its framing. Backing through settings replaces the available words over the same view. [Life is Strange study](life-is-strange-title.md) | Keep the scene running independently of the controls. Give each action a visible surface and put the emphasis inside it. |

@@ -1,10 +1,13 @@
 # Buttons and actions
 
-Working code: [templates/buttons.html](../../templates/buttons.html) (breakout primary, signal band, keycap
-secondary, hold-to-confirm). Verify any button with
+In the [Picture House Archive](../../templates/buttons.html), select a room, follow the foyer bearing and turn over the object kept there. The page also includes a breakout primary, signal band, keycap and hold-to-confirm. Verify any button with
 `node scripts/verify.mjs <page> --selector "<css>"`.
 
 ## What games teach about buttons
+
+Look up the exact game in the [edition catalogue](../research/catalog.md#by-game). For the PSP compilation, use the [timecoded game list](../research/handheld-control-footage.md). An in-world prompt offers a different design lesson from a menu button. Identify what accepts the input, what merely reports state and what changes elsewhere on the screen. Where a clip shows only play, use its visible cue for that job and cite a menu study for the button itself.
+
+For a single moving cursor, target ring, bearing, radar or object with depth, see the [close studies and original reconstructions](../research/target-and-menu-controls.md). Sketch the quiet pose and the acquired pose side by side. Mark the fixed hit area, the object the art attaches to, its pivot and the part that takes the input. Switch directly from one choice to another, confirm, then come back. Captured playheads establish the order of visible states. Choose web durations against the actual travel distance and label length.
 
 For a *Persona 3 Reload* brief, study how the combat words sit across a disc and how the pause menu layers
 a figure with a diagonal field. Choose a project-specific object whose edge the verb can share. The

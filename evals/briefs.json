@@ -70,6 +70,12 @@
     "must": ["maps checkout to confirmation/results", "keeps forms accessible", "uses a ceremony for success without blocking", "verifies keyboard and reduced motion"]
   },
   {
+    "id": "two-rooms-one-indicator",
+    "workflow": "build",
+    "prompt": "Make a listening-room menu for our sound exhibition. Arrivals stand at the centre. The field recordings are in the west room and the tape loops are in the east room. Let me find either room, lock it in and open its programme. I like PSP lock-ons and Persona buttons.",
+    "must": ["both named rooms are operable on first tap and by keyboard", "moving between east and west updates a shared cue in the correct direction", "browsing does not silently change a committed choice", "the opened programme belongs to the chosen room", "reduced motion keeps both direction and identity legible", "critic challenges the selected target and reports the observed result"]
+  },
+  {
     "id": "single-component",
     "workflow": "improve",
     "prompt": "Only redesign the hero button on our homepage.",

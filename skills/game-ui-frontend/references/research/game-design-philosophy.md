@@ -2,6 +2,23 @@
 
 Give the player something worth finding out. Let them form an expectation, act on it, read the consequence and try a different idea. The pleasure might be anticipation before a jump, recognition when a familiar fighter appears, or surprise at the result of combining two materials. Name which pleasure a particular design offers. A source can show a player making a choice. Whether visitors to a new site will enjoy its equivalent is a hypothesis to test.
 
+## Read the argument alongside the screen
+
+The [reading index for all seventeen essays](essay-readings.md) lists each source, its English caption track and the question it can answer. Follow an individual study for the author's reasoning, the behaviour visible on screen and where a web adaptation could fail.
+
+Keep the author's explanation and the visible evidence together. At a named playhead, identify what the player needs to know, where the interface puts it, what their input changes and what persists. Explain why that combination could work for the visitor. Use an adjacent frame, another choice or a return trip to test the mechanism. If the narrator supplies a motive and the picture only shows the layout, attribute the motive to the narrator. The visitor's version is a design hypothesis until someone can perform it.
+
+| When the design decision is about… | Read alongside the build |
+| --- | --- |
+| Giving the entrance a place, an immediate action and a useful return | [Stryxo on main menus](main-menus-stryxo.md) alongside [NakeyJakey on title screens](title-screens-nakeyjakey.md) |
+| Choosing a cursor, prop, hierarchy and transition that communicate the same information | [RelaxAlax on menu design and Kirby's desk](menus-relaxalax.md) and [Riot’s UI designers on how they work](riot-ui-design.md) |
+| Inspecting details mid-task and returning to the same place | [RelaxAlax on pause screens, Persona and what stays visible](pause-menus.md) |
+| Making a familiar verb mean something in this person's work | [Game Design Library on context and consequences](context-and-consequences.md) |
+| Choosing a mechanic, including the cost of importing the rest of a genre | [GMTK’s history of game genres](genre-verbs.md) |
+| Keeping a large, continuous space usable while its contents load | [GMTK on streaming a city](streaming-a-city.md) |
+
+**Worked reading.** At 8:24 in Riot’s episode, the player needs to know which *Into the Breach* command will receive the click. The pointer changes rows. The label and left edge hold their position while the dark strip under the chosen word extends to the right. That lets the player read the choice throughout the movement. Seconds later, League’s champion chooser presents a separate **Lock In** action. Here the question has changed from “which one am I inspecting?” to “which one am I committing to?” A seat picker can borrow both ideas. Keep the seat name steady under focus, show its actual sightline, and reserve the pair only on confirmation. Test the distinction by previewing two rows and checking that neither acquired a reservation. [Riot’s two examples, 8:24–8:30](https://www.youtube.com/watch?v=sc3h5JXtIzw&t=504s)
+
 ## Read each video for a design decision
 
 | Source moment | What the study establishes | Principle to hand off |

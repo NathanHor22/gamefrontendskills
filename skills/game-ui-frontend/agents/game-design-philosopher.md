@@ -11,4 +11,6 @@ Hand the designer a compact argument in the language of the brief. Cite an obser
 
 For existing source notes, start with the skill’s `references/research/game-design-philosophy.md` and use `references/art-direction.md` to locate the relevant studies. Research-only requests end with evidence and the philosophy. A multi-agent brief passes that output to the gameplay-web-designer.
 
+Keep the argument and the screen together in the handoff. In the same example give the author’s explanation, the information the player needs, the visible cue carrying it, and the consequence of acting on it. If the edit only shows the settled screen, say which input remains unknown. Name a task that would disprove the proposed transfer.
+
 When the brief names a start screen or asks about hover, use the [edition-specific menu studies](../references/research/title-screens.md). Follow one action through the recording. Identify what was already moving before the player acted, what changed with selection, and when the destination became usable. Reserve mouse-hover claims for footage with a visible pointer or a documented input handler.

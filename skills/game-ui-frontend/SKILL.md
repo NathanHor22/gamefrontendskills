@@ -74,29 +74,31 @@ request that bundled study by name or identify the nearest studied analogue.
 | --- | --- |
 | "Improve my site / page / component" (existing code or URL) | [workflows/improve.md](references/workflows/improve.md) |
 | "Build my website with this", a named game, or a game-like opening for an existing project | [workflows/build.md](references/workflows/build.md) |
-| "Give me a creative direction" or "study these videos" | [Art direction](references/art-direction.md) routes the brief to source moments. Give the requested design or analysis. |
+| "Give me a creative direction" or "study these videos" | [Art direction](references/art-direction.md) routes a brief to a game moment. The [essay reading index](references/research/essay-readings.md) links all seventeen arguments to their footage, caveats and website decisions. |
 | "Research this game" or "add this footage to the library" | [workflows/research.md](references/workflows/research.md) |
 | Check that controls behave (after any UI change) | [workflows/verify.md](references/workflows/verify.md) |
 
-Compare rendered directions when the person asks to explore options. For a build request, choose a
-direction from the brief and follow it through to the working destination. Use the
-[art-direction guide](references/art-direction.md) for how to translate a documented choice into original work.
+Compare rendered directions when asked for options. For a build, follow the chosen direction to its working destination.
 
 ## Title screens and start menus
 
-For the opening of a game-led experience, use the [title-screen workflow](references/research/title-screens.md)
-before drawing the first viewport. Design an arrival scene, not a stock hero, and give its title, action
-menu and background separate jobs. Decide what the scene does while idle and what it does when someone
-focuses, chooses or returns. Start from a game moment that serves the brief; the
-[Signal Room demo](templates/title-screen.html) is one implementation, not a house style.
+Use the [title-screen workflow](references/research/title-screens.md) and [Stryxo’s main-menu study](references/research/main-menus-stryxo.md) before drawing the opening.
+Give the first visit a recognisable place and an immediately usable action. Decide what moves while idle, on focus, on choosing and on return.
+Restore the actual item where the work supports resuming. A deliberate bookmark survives further browsing. A shared address opens its stated destination.
+Let sound be a choice. Test the entrance in silence. The [design studies](references/research/game-design-philosophy.md#read-the-argument-alongside-the-screen) pair each author’s argument with the information, input and visible consequence. [Signal Room opening](templates/title-screen.html)
 
 ## Buttons, type and detail
 
 Give every button a visible container at rest, including secondary actions, icon buttons and links styled
 as buttons. Enclose the label or icon in a filled surface or a complete border shaped to suit the project.
 For a print shop that could be an inked block with a paper edge. Change the fill, edge or depth for hover,
-press and selection. Keep arrows, chevrons and underlines off buttons in every state. Preserve a clear
-keyboard focus outline around the whole control.
+press and selection. Leave decorative arrows, chevron suffixes and underlines off labels. A game cursor can
+point at the current choice, a ring can acquire an object and a bearing can direct someone to a place.
+Give the indicator a real target. Change targets during the build and check that it follows the right one.
+Keep the hit box still and the keyboard focus outline visible. For a named game, find its control in the
+[edition catalogue](references/research/catalog.md#by-game), the [PSP footage](references/research/handheld-control-footage.md)
+or the [close studies](references/research/target-and-menu-controls.md). Rebuild the relationship between
+the command, the selected subject and the next screen with the site's own art and content.
 
 Say each thing once. One readable label can carry a choice or a whole section. Skip the oversized
 background word, tiny eyebrow and fine-print caption that all repeat the same idea. Put essential

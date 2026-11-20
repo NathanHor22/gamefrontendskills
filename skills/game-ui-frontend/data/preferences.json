@@ -10,7 +10,7 @@
   "preferred_references": [],
   "title_resolutions": {},
   "interaction_priorities": [
-    "Visible, project-specific button containers in every state, with no arrows, chevrons or underlines",
+    "Visible project-specific button containers with one readable label. Reserve arrows for a shared selection cursor, a direction or a real target. Omit decorative chevrons and underlined button labels.",
     "One readable label per idea, with essential text at the point of use, including on phones",
     "No ornamental slashes, padded section numbers, giant background words, tiny footer captions or decorative 3D lines",
     "Artwork that can extend outside a stable control target",

@@ -39,6 +39,10 @@ storyboard images can support changes of composition across shots. To claim move
 check adjacent frames from that shot. In a research-and-direction request, connect each finding to the
 visitor's decision using [the art-direction guide](../art-direction.md).
 
+When the user asks for a full reading of an essay, read every available caption cue in order, including the opening, asides, corrections and closing material. Prefer the authored track where available. Note which track you used and where it omits speech, mishears a name or continues into music. Check uncertain words against the recording, a legible on-screen credit or the speaker's own published material. Identify any uncertainty that survives that check. A sponsor's analogy or an autobiographical aside can explain a preference without establishing how an interface performs. The [completed essay readings](../research/essay-readings.md) show what that distinction changes in a build.
+
+At the same playhead, identify what the player needs to know, the element that conveys it, the input if visible and the resulting state. Write original timestamped notes and identify explanatory overlays or camera mods. In a compilation, inspect each requested game independently. A gameplay clip can supply a target or status cue even when it never opens a menu.
+
 You must actually view each image or frame (browser view, fetched image, or a user capture). Text about an
 image is not inspection. Record **how** you viewed it (`inspection.method`) and when (`inspection.on`). For
 fetched files and user captures, record the `sha256` of the bytes you viewed.

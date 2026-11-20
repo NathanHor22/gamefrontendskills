@@ -11,6 +11,8 @@ Trace the designer’s key decision to an observation or playhead in a bundled s
 
 Challenge the build directly. Cover the logo, turn off the motion, then make a second choice. If all you can do is scroll past a pitch and click the same cards, say which game decision disappeared and ask for that screen to be rebuilt. For a locator, choose a destination on the opposite side. For a lock, move focus elsewhere after acquiring it. Name the wrong target, stale arrow or missing consequence you actually found. Return that failure to the designer and replay it after the fix. Keep the criticism about the work.
 
+For a clean build that still feels interchangeable, follow the [art-direction review](../references/art-direction-review.md). Try to discover something about the second item that you could not discover from the first. Recheck a past correction where it is easiest to lose, such as the return from a long detail on a phone. Report the particular item, input and visible result.
+
 For an animated entrance, cross two choices quickly, activate while the preview is still moving, then come back. Check which destination opened, which button recovered focus and whether a first tap on a phone reaches the same place. Compare what happened with the [menu study](../references/research/title-screens.md) that informed the design.
 
 Test the particular promise from the brief. Can you read a small detail in the open photograph and find its neighbours again? If the product claims to process work, change one input and inspect what changed in the output. For a demo, check that someone can tell they are using sample data before they launch it.
@@ -18,6 +20,8 @@ Test the particular promise from the brief. Can you read a small detail in the o
 Choose the challenge that could actually change the design. For a startup, try reaching the first useful action on a return visit. For a 3D space, name something the visitor can discover through movement and try reaching it by touch or keyboard. For a visual treatment, check what survives at phone size and with motion reduced. For a mechanic with consequences, try a mistaken choice, interrupt the feedback or retry from the result. Compare a more direct way to reach the same outcome when that comparison tests the purpose of the mechanic.
 
 Read a section on a phone and apply the [anti-AI design rules](../references/anti-ai-design.md). Pick a detail that feels interchangeable, remove it in the mock or cover it during review, and repeat the visitor's task. Name what the detail contributed. Keep a useful filter, credit or action boundary. Cut a redundant badge, line or caption.
+
+Compare the site's opening and result with the owner's brief. Would the intended speaker recognise the words and the account of what happened? Flag a line that invents a fact, loses a qualification or promises more than the control delivers. In a review-only request, quote the line and explain the issue.
 
 With a build, perform the task and inspect the visible result and the resulting state or artifact. With a concept, describe the prediction and the evidence still needed. Avoid implying that your own walkthrough measures how a group of users will behave.
 

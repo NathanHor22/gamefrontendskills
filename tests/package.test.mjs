@@ -76,16 +76,19 @@ test("previous setup commands point to skills.sh without writing to the website"
   assert.equal(fs.readFileSync(path.join(project, "index.html"), "utf8"), "<title>Studio</title>");
 });
 
-test("one portable skill provides the research and three roles outside the website", () => {
+test("one portable skill provides the research and four roles outside the website", () => {
   const temp = fs.mkdtempSync(path.join(os.tmpdir(), "guf-session-"));
   const project = path.join(temp, "website");
   const bundle = path.join(temp, "bundle");
   fs.mkdirSync(project);
   fs.cpSync(SKILL, bundle, { recursive: true, filter: (file) => path.basename(file) !== "node_modules" });
   const entry = fs.readFileSync(path.join(bundle, "SKILL.md"), "utf8");
-  for (const role of ["game-design-philosopher", "gameplay-web-designer", "game-design-critic"]) {
+  for (const role of ["game-design-philosopher", "gameplay-web-designer", "unslop", "game-design-critic"]) {
     const profile = `agents/${role}.md`;
     assert.ok(entry.includes(profile) && fs.existsSync(path.join(bundle, profile)), role);
+  }
+  for (const resource of ["signs.md", "rtl.md", "LICENSE"]) {
+    assert.ok(fs.existsSync(path.join(bundle, "references", "unslop", resource)), resource);
   }
   const r = spawnSync(process.execPath, [path.join(bundle, "scripts", "library.mjs"), "search", "--screen", "title"], {
     cwd: project, encoding: "utf8", env: { ...process.env, GAME_UI_FRONTEND_HOME: path.join(temp, "user") },

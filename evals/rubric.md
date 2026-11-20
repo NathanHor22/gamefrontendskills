@@ -39,6 +39,10 @@ these answers just as well as a hanging board.
 
 A direction that would suit an unrelated startup after a colour change scores 0 on criterion 4.
 
+For a build, inspect the sequence of edits. Did Unslop see the first usable screen before the designer repeated it elsewhere? Trace one repair, or a specific reason to keep the screen, through to a replay when the destination was ready. Check that the replay exercised the visitor's actual choice and result. An inline pass can supply the same evidence when delegation is unavailable.
+
+For the quiet bindery, supply a clean page with two accessible sample selectors that currently change only a sentence about the binding. Either sample should initially be easy to select. After the pass, hide the explanatory sentence and try both samples. Can you tell what each binding does at the fold? Try again with reduced motion. A change of colour, heading or card layout alone leaves the original problem intact. Let the designer invent how to show the difference.
+
 For criterion 6, check secondary actions as well as the main one. Decorative chevrons, suffix arrows and underlined
 labels count against the design. Change the selected target and check a functional arrow's position or bearing.
 Its owner should still be clear with animation off. For criterion 4, look for choices grounded in the brief and

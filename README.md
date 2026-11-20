@@ -57,11 +57,11 @@ The skill lives in a temporary folder outside your repo. npm might keep a cached
 
 Say you want a character-select portfolio.
 
-The **philosopher** studies how a fighting game handles its roster. The **designer** gives each project a slot. Then the **critic** pulls up and asks the real question: can someone pick a project with one thumb while the night bus is taking corners like it’s auditioning for *Fast & Furious: Peckham Drift*?
+The **philosopher** studies how a fighting game handles its roster. The **designer** gives each project a slot. **Unslop** gets in as soon as that screen works. If every slot glows and you can’t tell which one you’ve picked, it sorts the glow, then tries another project on a phone. The **critic** still wants to know whether you can pick one with your thumb while the night bus is taking corners like it’s auditioning for *Fast & Furious: Peckham Drift*.
 
 If the menu only looks good on a massive monitor in a fancy studio, it’s getting sent back to the training ground.
 
-[The three roles](skills/game-ui-frontend/agents/) · [Creative direction guide](skills/game-ui-frontend/references/art-direction.md) · [Print Room demo](skills/game-ui-frontend/templates/print-room.html)
+[The four roles](skills/game-ui-frontend/agents/) · [Creative direction guide](skills/game-ui-frontend/references/art-direction.md) · [Print Room demo](skills/game-ui-frontend/templates/print-room.html)
 
 The research covers **260 game/edition profiles**, **407 visual observations from 114 reviewed images and 100 video sources**, and **24 original web interaction patterns**. Man’s done the homework, fam.
 

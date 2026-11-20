@@ -1,5 +1,11 @@
 [
   {
+    "id": "quiet-bindery-creative-review",
+    "workflow": "improve",
+    "prompt": "I bind sketchbooks for people who draw across the fold. Moss opens flat. Ochre springs partly shut. My sample page is tidy, but I'd like people to discover what the difference feels like before they pick one. Keep it quiet.",
+    "must": ["uses the two supplied binding behaviours as the visitor's comparison", "changes the existing interaction so someone can inspect the fold and discover the difference in the work itself", "gives the same material comparison to keyboard, phone and reduced-motion visitors", "keeps the owner’s facts and the selected sample through the interaction", "replays both samples and checks that the difference is visible in the result"]
+  },
+  {
     "id": "first-time-theatre",
     "workflow": "build",
     "prompt": "I want you to build my website with this skill.",

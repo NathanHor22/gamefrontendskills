@@ -105,6 +105,9 @@ the command, the selected subject and the next screen with the site's own art an
 Say each thing once. One readable label can carry a choice or a whole section. Skip the oversized
 background word, tiny eyebrow and fine-print caption that all repeat the same idea. Put essential
 instructions, prices and errors beside the decision in readable body text, including on phones.
+Use the [bundled No AI Slop editor](references/no-ai-slop/editor.md) when writing or revising visitor-facing copy.
+Follow the [website narrative pass](references/anti-ai-design.md#keep-the-owners-voice) to carry the owner's
+words, facts and point of view from the first screen to the result. Keep familiar action labels clear.
 
 Leave out ornamental slashes and padded numbers such as `/ WORK`, `PROJECT / 02` and `03 / 06`.
 Use an actual name like **Work**, or **Step 2 of 3** when someone is completing a real sequence.
@@ -115,12 +118,10 @@ just to fill space. A press bed can have a working rail. A flat, inked button al
 
 For a game-led experience, give the [game design philosopher](agents/game-design-philosopher.md) the brief and
 relevant bundled studies. For an explicit research request, include the supplied sources instead.
-Pass its findings to the [gameplay web designer](agents/gameplay-web-designer.md), then ask the
-[design critic](agents/game-design-critic.md) to challenge the direction or play the built journey. Pass the
-critic's strongest objection back to the designer and verify the change. Use the relevant role alone for a
-research-only, transfer-only or review request. When the runtime supports delegation, pass each role
-prompt and the absolute temporary skill path to a separate general subagent in the session.
-When working alone, apply the profiles in sequence and identify the review as a self-review.
+Pass its findings to the [gameplay web designer](agents/gameplay-web-designer.md). On builds and redesigns,
+invoke the [Unslop agent](agents/unslop.md) at the first working screen and again when the destination or a shared control changes. Give it the visitor task and files it can repair. Use the [art-direction review](references/art-direction-review.md) to check whether the visitor can experience the detail the owner cares about. Integrate the fixes before reusing that surface.
+Ask the [design critic](agents/game-design-critic.md) to challenge the direction or play the built journey. Resolve and retest its strongest objection. Use the relevant role alone for a research-only, transfer-only or review request.
+When delegation is available, give each role's prompt and the absolute skill path to a separate general subagent. Otherwise perform the same passes inline at those milestones and identify the self-review.
 
 ## Tools
 

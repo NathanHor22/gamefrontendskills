@@ -38,6 +38,10 @@ These examples illustrate authored geometry, physical or spatial metaphors, deta
 
 ## Rights and original contributions
 
+The [build-time Unslop agent](skills/game-ui-frontend/agents/unslop.md) adapts Damir Sokolovsky's [Unslop workflow](https://github.com/heydamir/unslop/tree/620163eedb3529d9cd23a3994ed8d287d06f760d) for in-progress, game-led websites. The adaptation and the bundled [signs](skills/game-ui-frontend/references/unslop/signs.md) and [right-to-left guidance](skills/game-ui-frontend/references/unslop/rtl.md) carry the [CC BY 4.0 license](skills/game-ui-frontend/references/unslop/LICENSE).
+
+Peter Yang's [No AI Slop](https://github.com/petergyang/no-ai-slop/tree/000650b156983f5159695b441477f4e63b25dc85/skills/no-ai-slop) provides the bundled [copy editor](skills/game-ui-frontend/references/no-ai-slop/editor.md) and [editorial checks](skills/game-ui-frontend/references/no-ai-slop/eval.md). Both ship with [their MIT license](skills/game-ui-frontend/references/no-ai-slop/LICENSE).
+
 The repository's MIT license covers its original code, instructions, analytical writing, and original website proposals. It does not grant rights to linked game assets, website assets, characters, fonts, video, trademarks, or third-party source material. Names identify research subjects and their sources. Use original or appropriately permitted artwork when implementing a design.
 
 If a credit, edition, or observation needs correction, include the affected record ID and supporting source in an issue or pull request. Preserve the distinction between observed appearance, observed motion, source-defined behavior, inference, and a newly proposed website interaction.

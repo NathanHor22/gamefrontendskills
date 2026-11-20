@@ -19,6 +19,8 @@ Draw the screen first with one object selected. Show where the visitor is, what 
 
 ## Let the start screen do useful work
 
+Once the first control works with real or representative content, hand its screen to the [Unslop agent](../../agents/unslop.md) before propagating the pattern to other pages. Supply the visitor's task, route or local file, selected game moment and editable files. Resume that role when the destination is wired so it can verify the selection, outcome and return together.
+
 Compose the first viewport around something that belongs to this particular site. Give the visitor one readily identifiable action on a visibly shaped button. Choose what can move while they linger, what reacts to browsing, and what changes only when they commit. Spend the strongest transition on a meaningful change of context. A compulsory “Press Start” that simply reveals a conventional homepage adds a click.
 
 Follow one item all the way through. Which performance did they choose? Do the venue and times on the destination belong to that show? Can they come back, pick the other show and get its details? Carry the same subject, selection and control language through the requested pages. Source the wider design from the bundled studies too. Keep forms, reading and navigation straightforward wherever they already serve the visitor.
